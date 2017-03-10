@@ -2,8 +2,11 @@
 
 from flask import Flask,Response
 import json
+from login import appLogin
 
 app = Flask(__name__)
+
+app.register_blueprint(appLogin)
 
 @app.route("/api/hello")
 def hello():
@@ -25,3 +28,5 @@ def name():
 
 if __name__ == "__main__":
 	app.run(debug=True)
+
+
