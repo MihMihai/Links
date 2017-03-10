@@ -1,17 +1,19 @@
 #!/usr/bin/python3
 
 from flask import Blueprint,Response
+from flask import request
+import json
 import MySQLdb
 
 #how to retrieve parameters depending on request type:
 #email = request.form.get("email") -- if request is POST
 #email = request.args.get("email") -- if request is GET
 
-appSignup = Blueprint('api',__name__)
+appSignup = Blueprint('api_signup',__name__)
 
-@appSignup.route("/api/signup") #methods=['POST']
-def signup()
-	#db = MySQLdb.connect(host="86.120.51.218",user="root",passwd="QAZxsw1234",db="linksdb")
+@appSignup.route("/api/signup",methods=['POST']) #methods=['POST']
+def signup():
+	db = MySQLdb.connect(host="86.120.51.218",port=80,user="root",passwd="QAZxsw1234",db="linksdb")
 	
 	email = request.form.get("email")
 	password = request.form.get("password")
@@ -19,6 +21,7 @@ def signup()
 	birthday_date = request.form.get("birthday_date")
 	
 	response = {}
+	response["status"] = 'ok'
 	response["email"] = email
 	response["password"] = password
 	response["name"] = name
@@ -30,5 +33,5 @@ def signup()
 	#cur.execute(query)
 	
 	
-	#db.close();
+	db.close()
 	return Response(json.dumps(response),mimetype="application/json")
