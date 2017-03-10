@@ -1,4 +1,4 @@
-#!/usr/bin/phyton3
+#!/usr/bin/python3
 from flask import Blueprint
 
 appLogin = Blueprint('api',__name__)

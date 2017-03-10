@@ -3,10 +3,12 @@
 from flask import Flask,Response
 import json
 from login import appLogin
+from signup import appSignup
 
 app = Flask(__name__)
 
 app.register_blueprint(appLogin)
+app.register_blueprint(appSignup)
 
 @app.route("/api/hello")
 def hello():
