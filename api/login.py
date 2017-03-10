@@ -3,6 +3,25 @@ from flask import Blueprint
 
 appLogin = Blueprint('api_login',__name__)
 
-@appLogin.route("/api/login")
+@appLogin.route("/api/login", methods =['POST']) #methods=['POST']
 def login():
-	return "heei Mihaai"
+	
+	db= MySQLdb.connect(host="86.120.51.218",user="root", passwd="QAZxsw1234", db="linksdb")
+
+	email = request.form.get("email")
+	password = request.form.get("password")
+	
+	#query =  "SELECT EMAIL, PASSWORD FROM USERS WHERE EMAIL= %s AND PASSWORD = %s" % (email, password)
+	
+	#cursor = db.cursor()
+	
+	cursor.execute("SELECT VERSION()")
+	
+	data = cursor.fetchone()
+
+	# disconnect from server
+	db.close()
+	
+	return "Database version : %s " % data
+
+	
