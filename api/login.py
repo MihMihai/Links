@@ -8,21 +8,29 @@ appLogin = Blueprint('api_login',__name__)
 def login():
 	
 	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
-
+	
+	status = "error";
 	email = request.form.get("email")
 	password = request.form.get("password")
 	
-	#query =  "SELECT EMAIL, PASSWORD FROM USERS WHERE EMAIL= %s AND PASSWORD = %s" % (email, password)
+	query =  "SELECT EMAIL, PASSWORD FROM USERS WHERE EMAIL= %s AND PASSWORD = %s" % (email, password)
 	
 	cursor = db.cursor()
+	try:
 	
-	cursor.execute("SELECT VERSION()")
+		cursor.execute(query)
 	
-	data = cursor.fetchone()
-
+		data = cursor.fetchone()
+	
+		if data != "None"
+			status = "ok"
+	
+	except:
+		print "Error: unable to execute"
+		
 	# disconnect from server
 	db.close()
 	
-	return "Database version : %s " % data
+	return status
 
 	
