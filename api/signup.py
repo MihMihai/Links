@@ -27,11 +27,12 @@ def signup():
 	response["name"] = name
 	response["birthday_date"] = birthday_date
 	
-	query = "INSERT INTO USERS (EMAIL,PASSWORD,NAME,BIRTHDAY_DATE) VALUES(%s,%s,%s,%s)" % (email, password, name, birthday_date)
-	
+	query = "INSERT INTO users (email,password,name,birthday_date) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'))" % (email, password, name, birthday_date)
+
 	cur = db.cursor()
 	cur.execute(query)
+	db.commit()
 	
 	
 	db.close()
-	return Response(json.dumps(response),mimetype="application/json")
+	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")

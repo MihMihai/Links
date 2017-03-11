@@ -9,25 +9,20 @@ def login():
 	
 	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
 	
-	status = "error";
+	status = "error"
 	email = request.form.get("email")
 	password = request.form.get("password")
 	
-	query =  "SELECT EMAIL, PASSWORD FROM USERS WHERE EMAIL= %s AND PASSWORD = %s" % (email, password)
+	query =  "SELECT email, password FROM users WHERE email='%s' AND password ='%s'" % (email, password)
 	
 	cursor = db.cursor()
-	try:
+	cursor.execute(query)
 	
-		cursor.execute(query)
+	data = cursor.fetchone()
 	
-		data = cursor.fetchone()
+	if data != None:
+		status = "ok"
 	
-		if data != "None"
-			status = "ok"
-	
-	except:
-		print "Error: unable to execute"
-		
 	# disconnect from server
 	db.close()
 	
