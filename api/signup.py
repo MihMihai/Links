@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-from flask import Blueprint,Response
-from flask import request
+from flask import Blueprint,Response,request
+from datetime import datetime
 import json
 import MySQLdb
 
@@ -18,21 +18,37 @@ def signup():
 	email = request.form.get("email")
 	password = request.form.get("password")
 	name = request.form.get("name")
-	birthday_date = request.form.get("birthday_date")
+	birthday_date = request.form.get("birth_day") + "-" + request.form_get("birth_month") + "-" + request.form.get("birth_year")
+	birth_date = datetime.strptime(birth_date,'%d-%m-%Y')
+	birthday_date = birth_date.strftime('%Y-%m-%d')
+	
 	
 	response = {}
-	response["status"] = 'ok'
-	response["email"] = email
-	response["password"] = password
-	response["name"] = name
-	response["birthday_date"] = birthday_date
 	
-	query = "INSERT INTO users (email,password,name,birthday_date) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'))" % (email, password, name, birthday_date)
-
+	
 	cur = db.cursor()
-	cur.execute(query)
-	db.commit()
 	
+	queryCheckUser = "SELECT * FROM users WHERE email='%s'" % (email)
 	
+	cur.execute(queryCheckUser)
+	data = cur.fetchone()
+	
+	if(data != None)
+		query = "INSERT INTO users (email,password,name,birthday_date) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'))" % (email, password, name, birthday_date)
+	
+		cur.execute(query)
+		db.commit()
+		
+		response["status"] = 'ok'
+		response["email"] = email
+		response["password"] = password
+		response["name"] = name
+		response["birthday_date"] = birthday_date
+		
+		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 	db.close()
+	
+	response["status_code"] = 401
+	response["error"] = "Email already taken"
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
+	
