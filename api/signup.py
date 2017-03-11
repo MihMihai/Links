@@ -13,7 +13,7 @@ appSignup = Blueprint('api_signup',__name__)
 
 @appSignup.route("/api/signup",methods=['POST']) #methods=['POST']
 def signup():
-	db = MySQLdb.connect(host="86.120.51.218",port=80,user="root",passwd="QAZxsw1234",db="linksdb")
+	db = MySQLdb.connect(host="localhost",user="root",passwd="QAZxsw1234",db="linksdb")
 	
 	email = request.form.get("email")
 	password = request.form.get("password")
@@ -27,10 +27,10 @@ def signup():
 	response["name"] = name
 	response["birthday_date"] = birthday_date
 	
-	#query = "INSERT INTO USERS (EMAIL,PASSWORD,NAME,BIRTHDAY_DATE) VALUES(%s,%s,%s,%s)" % (email, password, name, birthday_date)
+	query = "INSERT INTO USERS (EMAIL,PASSWORD,NAME,BIRTHDAY_DATE) VALUES(%s,%s,%s,%s)" % (email, password, name, birthday_date)
 	
-	#cur = db.cursor()
-	#cur.execute(query)
+	cur = db.cursor()
+	cur.execute(query)
 	
 	
 	db.close()
