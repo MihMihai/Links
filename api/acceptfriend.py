@@ -38,7 +38,7 @@ def acceptFriend():
 		response["status_code"] = 401
 		return Response(json.dumps(response,sort_keys=True), mimetype="application/json"),401
 
-	friendshipId = request.form.get("requestID")
+	friendshipId = request.form.get("friendship_id")
 	if friendshipId == None:
 		response["error"] = "Bad parameters"
 		response["description"] = "Please provide a friendship id"

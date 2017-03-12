@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-  <meta charset="utf-8">
-  <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-  <link href="css/animate.min.css" rel="stylesheet" type="text/css" />
-  <link href="css/header-1-home.css" rel="stylesheet" type="text/css" />
-  <link href="css/header-2-home.css" rel="stylesheet" type="text/css" />
-  <link href="css/header.css" rel="stylesheet" type="text/css" />
-  <link href="css/footer.css" rel="stylesheet" type="text/css" />
-  <link href="css/navbar.css" rel="stylesheet" type="text/css" />
-  <link href="css/services.css" rel="stylesheet" type="text/css" />
+	
+	<meta charset="utf-8">
+	<meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/animate.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/header-1-home.css" rel="stylesheet" type="text/css" />
+	<link href="css/header-2-home.css" rel="stylesheet" type="text/css" />
+	<link href="css/header.css" rel="stylesheet" type="text/css" />
+	<link href="css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="css/navbar.css" rel="stylesheet" type="text/css" />
+	<link href="css/services.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/modal.css">
 
+	<script src="js/jQuery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="js/waypoints.min.js" type="text/javascript"></script>
 
-  <script src="js/jQuery-2.1.4.min.js"></script>
-  <script src="js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="js/waypoints.min.js" type="text/javascript"></script>
+	<script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
+
+	<script src="libraries/p5.js" type="text/javascript"></script>
+    <script src="libraries/p5.dom.js" type="text/javascript"></script>
+    <script src="js/sketch.js" type="text/javascript"></script>
+    <script src="js/vehicle.js" type="text/javascript"></script>
+
+	<script>
+		window.onload = function(){
+			$('.modal').on('hidden.bs.modal', function(){
+				$(this).find('form')[0].reset();
+			});
+		}
+	</script>
+
+	<style>
+      
+        
+        canvas {
+            vertical-align: top;
+        }
+    </style>
 
 </head>
 
@@ -26,134 +50,304 @@
 <body>
 
 
-  <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    
-    <a class="navbar-brand"> Links </a>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
 
-    <ul class="menu">
-      <li>
-          <button class="btn btn-success">Sign in</button>
-          <button class="btn btn-success">Sign up</button>
-      <li>
+			<h1 class="navbar-brand"> Links </h1>
 
-      
-    </ul>
-    </div>
-  </nav>
+			<ul class="menu">
+				<li>
+					<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#login">Login</button>
 
-  <header id="header-wrapper">
-  <header id="header-carousel" class="header-two">
-  </header>
-
-  <header id="header-content" [class.show]="sliderReady" class="header-two">
-    <div class="container">
-      <div class="content">
-
-        <div class="row">
-          <h1 class="name revealOnScroll" data-animation="fadeInDown"><img src="1.png"></h1>
-         
-
-        </div>
+					<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#register">Register</button>
+				</li>
 
 
-        <div class="row">
-          <div class="col-lg-10 col-lg-offset-1 hidden-xs">
-            <div class="logos">
-              <img src="1.png" class="img-responsive" alt=""/>		 
-               </div>
-          </div>
-        </div>
+			</ul>
 
-      </div>
-    </div>
-  </header>
-</header>
+			
+		</div>
+	</nav>
 
-<section id="services" class="services">
-  <div class="container text-center">
+	<div id="canvas-holder">
+		
+	</div>
 
-    <div class="row">
-      <div class="col-lg-12">
-      
+	<section id="services" class="services">
+		<div class="container text-center">
 
-        <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="features one">
-		    <span class="fa-stack fa-3x">
-			 <i class="fa fa-circle fa-stack-2x"></i>
-			 <i class="fa fa-code fa-stack-1x fa-inverse"></i>
-			</span>
-              <h4>Why Links</h4>
-            </div>
-            <div class="spacer">
-              <p>Great app</p>
-              <p><b>Over 2,000 people connected</b></p>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="features two">
-		    <span class="fa-stack fa-3x">
-			 <i class="fa fa-circle fa-stack-2x"></i>
-			 <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
-			</span>
-              <h4>Why Links</h4>
-            </div>
-            <div class="spacer">
-              <p>Reviewed in top 5 of app around the world</p>
-              <p><b>Over 5 continents connected</b></p>
-            </div> 
-        </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="features three">
-		    <span class="fa-stack fa-3x">
-			 <i class="fa fa-circle fa-stack-2x"></i>
-			 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-			</span>
-              <h4>Why Links</h4>
-            </div>
-            <div class="spacer">
-              <p>Simple, efficient, awesome</p>
-              <p><b>"The best app of 2017"</b></p>
-            </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
+			<div class="row">
+				<div class="col-lg-12">
 
 
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="features one">
+							<span class="fa-stack fa-3x">
+								<i class="fa fa-circle fa-stack-2x"></i>
+								<i class="fa fa-code fa-stack-1x fa-inverse"></i>
+							</span>
+							<h4>Why Links</h4>
+						</div>
+						<div class="spacer">
+							<p>Great app</p>
+							<p><b>Over 2,000 people connected</b></p>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="features two">
+							<span class="fa-stack fa-3x">
+								<i class="fa fa-circle fa-stack-2x"></i>
+								<i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+							</span>
+							<h4>Why Links</h4>
+						</div>
+						<div class="spacer">
+							<p>Reviewed in top 5 of app around the world</p>
+							<p><b>Over 5 continents connected</b></p>
+						</div> 
+					</div>
+
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="features three">
+							<span class="fa-stack fa-3x">
+								<i class="fa fa-circle fa-stack-2x"></i>
+								<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+							</span>
+							<h4>Why Links</h4>
+						</div>
+						<div class="spacer">
+							<p>Simple, efficient, awesome</p>
+							<p><b>"The best app of 2017"</b></p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+		<!-- Trigger the modal with a button -->
+
+
+		<!-- Register -->
+		<div class="modal fade" id="register" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Register</h3>
+					</div>
+					<div class="modal-body">
+						<form data-toggle="validator" role="form" action="http://86.120.51.218/api/signup" method="post">
+							<div class="form-group">
+								<label for="register_name"><span class="glyphicon glyphicon-user"></span> Name:</label>
+								<input type="text" class="form-control" name="name" id="register_name" placeholder="Enter name" required>
+							</div>
+							<div class="form-group">
+								<label for="register_email"><span class="glyphicon glyphicon-envelope"></span> Email:</label>
+								<input type="email" class="form-control" name="email" id="register_email" placeholder="Enter email" data-error="Invalid email" required>
+								<div class="help-block with-errors"></div>
+							</div>
+							<div class="form-group">
+								<label for="register_password"><span class="glyphicon glyphicon-lock"></span> Password:</label>
+								<div class="row">
+									<div class="form-group col-xs-6">
+										<input type="password" class="form-control" name="password" data-minlength="6" id="register_password" placeholder="Enter password" required>
+										<span class="help-block">Minimum 6 characters!</span>
+									</div>
+									<div class="form-group col-xs-6">
+										<input type="password" class="form-control" id="register_password2" placeholder="Enter password again"  data-match="#register_password" data-match-error="Passwords doesn't match!" placeholder="Confirm" required>
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label><span class="glyphicon glyphicon-calendar"></span> Date of birth:</label>
+									<div class="row">
+										<div class="form-group col-xs-3">
+											<label for="birthDay">Day</label>
+											<select class="form-control" name="birth_day" id="birthDay" required>
+												<option value="">None</option>
+												<option>1</option> 
+												<option>2</option>
+												<option>3</option>
+												<option>4</option> 
+												<option>5</option> 
+												<option>6</option> 
+												<option>7</option> 
+												<option>8</option> 
+												<option>9</option> 
+												<option>10</option>
+												<option>11</option> 
+												<option>12</option> 
+												<option>13</option> 
+												<option>14</option> 
+												<option>15</option> 
+												<option>16</option> 
+												<option>17</option>
+												<option>18</option>
+												<option>19</option>
+												<option>20</option>
+												<option>21</option>
+												<option>22</option>
+												<option>23</option>
+												<option>24</option>
+												<option>25</option>
+												<option>26</option>
+												<option>27</option>
+												<option>28</option>
+												<option>29</option>
+												<option>30</option>
+												<option>31</option>
+											</select>
+										</div>
+										<div class="form-group col-xs-5">
+											<label for="birthMonth">Month</label>
+											<select class="form-control" name="birth_month" id="birthMonth" required>
+												<option value="">None</option>
+												<option>January</option> 
+												<option>February</option> 
+												<option>March</option> 
+												<option>April</option> 
+												<option>May</option> 
+												<option>June</option> 
+												<option>July</option> 
+												<option>August</option> 
+												<option>September</option> 
+												<option>October</option> 
+												<option>November</option>
+												<option>December</option>
+											</select>
+										</div>
+										<div class="form-group col-xs-4">
+											<label for="birthYear">Year</label>
+											<select class="form-control" name="birth_year" id="birthYear" required>
+												<option value="">None</option>
+												<option>1970</option> 
+												<option>1971</option> 
+												<option>1972</option>
+												<option>1973</option> 
+												<option>1974</option> 
+												<option>1975</option> 
+												<option>1976</option>  
+												<option>1977</option>
+												<option>1978</option> 
+												<option>1979</option> 
+
+												<option>1980</option> 
+												<option>1981</option> 
+												<option>1982</option> 
+												<option>1983</option> 
+												<option>1984</option>
+												<option>1985</option>
+												<option>1986</option> 
+												<option>1987</option>
+												<option>1988</option>
+												<option>1989</option> 
+
+												<option>1990</option>
+												<option>1991</option> 
+												<option>1992</option> 
+												<option>1993</option> 
+												<option>1994</option>
+												<option>1995</option> 
+												<option>1996</option> 
+												<option>1997</option> 
+												<option>1998</option> 
+												<option>1999</option> 
+
+												<option>2000</option> 
+												<option>2001</option> 
+												<option>2002</option> 
+												<option>2003</option> 
+												<option>2004</option> 
+												<option>2005</option> 
+												<option>2006</option> 
+												<option>2007</option> 
+												<option>2008</option> 
+												<option>2009</option> 
+
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="submit" value="Register" class="btn btn-success btn-block btn-lg">
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Login -->
+		<div class="modal fade" id="login" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Login</h3>
+					</div>
+					<div class="modal-body">
+						<form data-toggle="validator" role="form" action="http://86.120.51.218/api/login" method="post">
+							<div class="form-group">
+								<label for="login_email"><span class="glyphicon glyphicon-envelope"></span> Email:</label>
+								<input type="email" name="email" class="form-control" id="login_email" placeholder="Enter email" required>
+							</div>
+							<div class="form-group">
+								<label for="login_password"><span class="glyphicon glyphicon-lock"></span> Password:</label>
+								<input type="password" name="password" class="form-control" id="login_password" placeholder="Enter password" required>
+							</div>
+							<div class="form-group">
+								<input type="submit" value="Login" class="btn btn-success btn-block btn-lg">
+							</div>
+							<div class="checkbox">
+								<label><input type="checkbox" id="remember_me" name="remember_me" value="remember">Remember me</label>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<a href="#">Forgot password?</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	
 </body>
 
 
 
 <footer>
-  <div class="footer">
-    <div class="container">
-      <div class="row">
+	<div class="footer">
+		<div class="container">
+			<div class="row">
 
-        <div class="col-md-4 col-sm-6 text-left">
-          <h4 class="heading no-margin">About Us</h4>
-          <hr class="mint">
-          <p>Ceva blaaa bla bla bla cevaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-          <p>Altceva bla bla blaaaaaaaaaaaa</p>
-        </div>
+				<div class="col-md-4 col-sm-6 text-left">
+					<h4 class="heading no-margin">About Us</h4>
+					<hr class="mint">
+					<p>Ceva blaaa bla bla bla cevaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+					<p>Altceva bla bla blaaaaaaaaaaaa</p>
+				</div>
 
-       
-        <div class="col-md-3 col-sm-6 text-left">
-          <h4 class="heading no-margin">Other Services</h4>
-          <hr class="mint">
-          <div class="no-padding">
-            <a href="https://github.com/MihMihai/Links/tree/frontend">Privacy Policy</a>
-            <a href="https://github.com/MihMihai/Links/tree/frontend">Terms & Conditions</a>
-          </div>
-        </div>
 
-      
-  </div>
+				<div class="col-md-3 col-sm-6 text-left">
+					<h4 class="heading no-margin">Other Services</h4>
+					<hr class="mint">
+					<div class="no-padding">
+						<a href="https://github.com/MihMihai/Links/tree/frontend">Privacy Policy</a>
+						<a href="https://github.com/MihMihai/Links/tree/frontend">Terms & Conditions</a>
+					</div>
+				</div>
 
-</footer>
 
-</html>
+			</div>
+
+		</footer>
+
+		</html>
