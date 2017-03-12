@@ -1,0 +1,87 @@
+
+.articles {
+  background: #fff;
+  width: 100%;
+  padding-bottom: 20px;
+}
+.articles div.col-md-4{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.articles .container-fluid{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.articles .container-fluid li{
+  padding-left: 0;
+  padding-right: 0;
+  list-style: none;
+}
+
+.articles .tint{
+  position: relative;
+  float: left;
+  cursor: pointer;
+  background-color: #3F3D48;
+  width: 100%;
+}
+
+.articles .tint .featured-thumbnail{
+  position: relative;
+  opacity: 0.3;
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.articles .tint .featured-thumbnail img{
+  width: 100%;
+}
+
+.articles .featured-titles{
+  text-align: center;
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 100%;
+}
+
+.articles .featured-titles h6{
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+.articles .featured-titles h6 a{
+  text-decoration: none;
+  color: #fff;
+}
+
+.articles .featured-titles hr{
+  border: 1px solid #F16078;
+  width: 30%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.articles .featured-titles p.blog-title a{
+  text-decoration: none;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 16px;
+  color: #fff;
+  line-height: 24px;
+  padding-top: 10px;
+  max-width: 70%;
+  margin: 0 auto;
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.articles .featured-titles p.blog-title a:hover{
+  text-decoration: none;
+  color: #fff !important;
+}

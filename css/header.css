@@ -1,0 +1,169 @@
+
+html, body {
+  overflow-x: hidden;
+  text-align: left;
+  -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+ -webkit-text-size-adjust: 100%;
+}
+
+/* ------------------------------------------------------------------- */
+/* Typography
+---------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  color: #2C3E50;
+  letter-spacing: 1px;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { 
+  font-weight: inherit; 
+}
+
+h1 { font-size: 30px; line-height: 54px; }
+h2 { font-size: 24px; line-height: 48px; }
+h3 { font-size: 22px; line-height: 44px; }
+h4 { font-size: 18px; line-height: 36px; }
+h5 { font-size: 16px; line-height: 28px; }
+h6 { font-size: 14px; line-height: 24px; }
+
+
+hr.mint { 
+  background: #16A085;
+  border: 0;
+  width: 100px;
+  height: 3px;
+  clear: both;
+}
+
+p { 
+  font-family: 'Varela Round', sans-serif;
+  line-height: 24px;
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   Header Styles
+   ========================================================================== */ 
+
+header h1.name {
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+  font-size: 65px;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+header p.temp {
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+header h1.hire {
+  color: #ffffff;
+  font-family: 'Varela Round', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+/* -------------------------------- */
+/* Header Buttons
+----------------------------------- */
+
+header .form-row { 
+  margin-bottom: 135px; 
+  font-size: 0; 
+  line-height: 0; 
+  text-align: center;
+  font-family: 'Varela Round', sans-serif;
+}
+
+header .form-row .radio-left,
+header .form-row .radio-right { 
+  display: inline-block; 
+}
+
+header .form-row .radio-left a,
+header .form-row .radio-right a { 
+  display: block; 
+  width: 210px; 
+  height: 50px; 
+  padding-top: 20px;  
+  font-size: 14px; 
+  line-height: 17px; 
+  color: #fff; 
+  text-transform: uppercase; 
+  cursor: pointer; 
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  text-align: center;
+  margin-right: 10px;
+}
+
+header .form-row .radio-left a { 
+  background: #16A085; 
+  border-radius: 36px; 
+}
+
+header .form-row .radio-right a { 
+  background: #2C3E50; 
+  border-radius: 36px; 
+}
+
+header .form-row a:hover { 
+  text-decoration: none !important; 
+  color: #fff !important;
+}
+
+header .form-row .radio-left a:hover { 
+  background: #0de5ab !important; 
+}
+
+header .form-row .radio-right a:hover { 
+  background: #34495E !important; 
+}
+
+img{
+  vertical-align: middle;
+  max-width: 100%;
+  border: 0;
+}
+
+header .logos {
+  width: 100%;
+  bottom: -50px;
+  position: absolute;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------- */
+/* Media Queries for Home Page
+---------------------------------------------------------------------- */
+@media only screen and (max-width: 991px){
+	header .logos {
+	  bottom: -10px;
+	}
+}
+@media only screen and (max-width: 768px){
+	.header-one .content {
+	  margin-top: 140px;
+	}   
+	.header-two .content {
+	  margin-top: 180px;
+	}
+    header h1.name {
+     font-size: 30px;
+    }
+    header h1.hire {
+     font-size: 24px;
+    }
+	header .form-row .radio-left a,
+	header .form-row .radio-right a { 
+	  margin-bottom: 10px;  
+	}	  	
+}
