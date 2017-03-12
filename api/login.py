@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Blueprint,Response,request
+from flask import Blueprint,Response,request #,redirect,url_for,render_template
 import MySQLdb
 import json
 
@@ -34,6 +34,10 @@ def login():
 
 	# disconnect from server
 	db.close()
-	return Response(json.dumps(response, sort_keys=True), mimetype="application/json")
 
-	
+	#return redirect(urlfor("api_login.chat"))
+	return Response(json.dumps(response, sort_keys=True), mimetype="application/json"),401
+
+#@appLogin.route("/chat")
+#def chat():
+#	return render_template("index2.html")

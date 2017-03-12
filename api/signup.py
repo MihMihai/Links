@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Blueprint,Response,request,redirect,url_for,render_template
+from flask import Blueprint,Response,request
 from datetime import datetime
 import json
 import MySQLdb
@@ -43,17 +43,10 @@ def signup():
 		#response["email"] = email
 		#response["name"] = name
 		#response["birthday_date"] = birthday_date
-		
-		return redirect(url_for("api_signup.chat"))
 
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 	db.close()
 	
 	response["status_code"] = 401
 	response["error"] = "Email already taken"
-	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
-	
-
-@appSignup.route("/chat")
-def chat():
-	return render_template("index2.html")
+	return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
