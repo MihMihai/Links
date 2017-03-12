@@ -22,6 +22,11 @@
 
 	<script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
 
+	<script src="libraries/p5.js" type="text/javascript"></script>
+    <script src="libraries/p5.dom.js" type="text/javascript"></script>
+    <script src="js/sketch.js" type="text/javascript"></script>
+    <script src="js/vehicle.js" type="text/javascript"></script>
+
 	<script>
 		window.onload = function(){
 			$('.modal').on('hidden.bs.modal', function(){
@@ -29,6 +34,14 @@
 			});
 		}
 	</script>
+
+	<style>
+      
+        
+        canvas {
+            vertical-align: top;
+        }
+    </style>
 
 </head>
 
@@ -56,33 +69,9 @@
 		</div>
 	</nav>
 
-	<header id="header-wrapper">
-		<header id="header-carousel" class="header-two">
-		</header>
-
-		<header id="header-content" [class.show]="sliderReady" class="header-two">
-			<div class="container">
-				<div class="content">
-
-					<div class="row">
-						<h1 class="name revealOnScroll" data-animation="fadeInDown"><img src="1.png"></h1>
-
-
-					</div>
-
-
-					<div class="row">
-						<div class="col-lg-10 col-lg-offset-1 hidden-xs">
-							<div class="logos">
-								<img src="1.png" class="img-responsive" alt=""/>		 
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</header>
-	</header>
+	<div id="canvas-holder">
+		
+	</div>
 
 	<section id="services" class="services">
 		<div class="container text-center">
