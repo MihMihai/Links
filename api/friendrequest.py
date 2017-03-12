@@ -33,15 +33,23 @@ def friendRequest():
 	
 	if data != None:
 		uid2=data[0]
-		status = "ok"
-		curdate = time.strftime("%Y-%m-%d")
-		query = "INSERT INTO friendships (user_1,user_2,date,status) VALUES('%i','%i',str_to_date('%s','%%Y-%%m-%%d') ,'%i')" % (uid1, uid2,curdate, 0)
+		query = "SELECT * FROM friendships WHERE user_1 = '%d' AND user_2 = '%d'" %(uid1,uid2)
 		cursor.execute(query)
-		db.commit()
-		response["status"] = status
+		row = cursor.fetchone()
+		if row != None:
+			status = "ok"
+			curdate = time.strftime("%Y-%m-%d")
+			query = "INSERT INTO friendships (user_1,user_2,date,status) VALUES('%d','%d',str_to_date('%s','%%Y-%%m-%%d') ,'%d')" % (uid1, uid2,curdate, 0)
+			cursor.execute(query)
+			db.commit()
+			response["status"] = status
+		else:
+			response["error"] = "Request already sent"
+			response["status_code"] = 400
 	else:
 		response["error"] = "Invalid email"
 		response["status_code"] = 400
-
+		
+	
 	db.close()
 	return Response(json.dumps(response, sort_keys=True),mimetype="application/json")
