@@ -5,12 +5,14 @@ import json
 from login import appLogin
 from signup import appSignup
 from friendrequest import appFriendRequest
+from acceptfriend import appAcceptFriend
 
 app = Flask(__name__)
 
 app.register_blueprint(appLogin)
 app.register_blueprint(appSignup)
 app.register_blueprint(appFriendRequest)
+app.register_blueprint(appAcceptFriend)
 
 @app.route("/api/hello")
 def hello():
