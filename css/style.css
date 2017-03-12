@@ -1,0 +1,33 @@
+body{
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+span.active {
+  background-color:gray;
+}
+
+.navbar-brand>img {
+  max-height: 20px;
+}
+/*styles for home content only*/
+.name>img {
+  max-height: 60px;
+}
+
+#header-wrapper {
+  position: relative;
+}
+
+#header-content {
+  position: absolute;
+  top: 0;
+  height: 480px;
+
+  opacity: 0;
+  transition: .5s ease-in-out all;
+}
+
+#header-content.show {
+  opacity: 1 !important;
+}
