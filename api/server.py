@@ -7,6 +7,7 @@ from signup import appSignup
 from friendrequest import appFriendRequest
 from acceptfriend import appAcceptFriend
 from removefriend import appRemoveFriend
+from friendrequests import appFriendRequests
 
 app = Flask(__name__)
 
@@ -15,6 +16,7 @@ app.register_blueprint(appSignup)
 app.register_blueprint(appFriendRequest)
 app.register_blueprint(appAcceptFriend)
 app.register_blueprint(appRemoveFriend)
+app.register_blueprint(appFriendRequests)
 
 @app.route("/api/hello")
 def hello():
