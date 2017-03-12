@@ -1,0 +1,200 @@
+
+html, body {
+  overflow-x: hidden;
+  text-align: left;
+  -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+ -webkit-text-size-adjust: 100%;
+}
+
+/* ------------------------------------------------------------------- */
+/* Typography
+---------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  color: #2C3E50;
+  letter-spacing: 1px;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { 
+  font-weight: inherit; 
+}
+
+h1 { font-size: 30px; line-height: 54px; }
+h2 { font-size: 24px; line-height: 48px; }
+h3 { font-size: 22px; line-height: 44px; }
+h4 { font-size: 18px; line-height: 36px; }
+h5 { font-size: 16px; line-height: 28px; }
+h6 { font-size: 14px; line-height: 24px; }
+
+
+hr.mint { 
+  background: #16A085;
+  border: 0;
+  width: 100px;
+  height: 3px;
+  clear: both;
+}
+
+p { 
+  font-family: 'Varela Round', sans-serif;
+  line-height: 24px;
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   Footer Section
+   ========================================================================== */   	
+.footer {
+  padding: 60px 30px;
+  background: #1D2026;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+}
+
+.footer p {
+  color: #899797;
+  font-weight: 300;
+}
+
+.footer h4{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: #fff;
+}
+
+.footer .text-left > hr {
+  margin-left: 0 !important;
+}
+
+.footer a {
+  font-family: 'Varela Round', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  display: block;
+  margin: 10px 0;
+  color: #899797;
+  text-decoration: none;
+}
+
+.footer a:hover{
+  color:#fff !important;
+}
+
+/* ==========================================================================
+   Made Section
+   ========================================================================== */
+.made {
+  padding: 40px 0;
+  background-color: #fff;
+}
+
+.made h4.made-with-love {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: #8A9CA0 !important;
+}
+
+.made p.made-with-love-1 {
+  font-family: 'Varela Round', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #8A9CA0 !important;
+}   
+
+/* ==========================================================================
+   Bottom Footer Section
+   ========================================================================== */
+.main-footer {
+  color:#fff;
+  background: #2C3E50;
+  padding-top: 20px;
+}
+
+#main-footer p{
+  margin: 10px 0;
+  letter-spacing: 0px;
+}
+
+#main-footer i.logo{
+  font-size: 40px;
+  line-height:40px;
+}
+
+.social-links {
+  list-style:none;
+  margin:0;
+  padding:0;
+  margin-bottom:20px;
+}
+
+.social-links li{
+  display:inline-block;
+  margin:0 5px;
+  border-radius: 0px;
+  box-shadow:0 4px 0 transparent;
+}
+
+.social-links li a {
+  display:block;
+  color:#fff;
+  color:rgba(255,255,255,0.3);
+  font-size:18px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  text-align:center;
+  background:rgba(0,0,0,0.2);
+  border-radius: 0px;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+}
+
+.social-links li a:hover {
+  color:#fff !important;
+  background:#37BC9B;
+}
+
+.main-footer .text-right a{
+  text-decoration: none;
+  color:#37BC9B;
+}
+
+.main-footer .text-right a:hover{
+  color:#fff !important;
+}
+
+#scrollup {
+  background: url("../img/arrow.png") no-repeat 0px 0px;
+  display: none;
+  text-decoration: none;
+  position: fixed;
+  bottom: 14px;
+  right: 3%;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  border: none;
+  text-indent: 100%;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px){
+    /* Footer Section Media Queries */
+	#main-footer [class*=row],
+    #main-footer .text-right{
+     text-align:center;
+    }
+	#scrollup {
+	width: 50px;
+	height: 30px;
+    }
+}
