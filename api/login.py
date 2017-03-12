@@ -10,7 +10,6 @@ def login():
 	
 	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
 	
-	status = "error"
 	response ={}
 
 	#get the info from request
@@ -28,12 +27,10 @@ def login():
 	data = cursor.fetchone()
 	
 	if data != None:
-		status = "ok"
-	
-	#update json
-	response["status"] = status
-	response["email"] = email
-	response["password"] = password
+		response["status"] = 'ok'
+	else:
+		response["error"] = 'Invalid email or password'
+		response["status_code"] = 401
 
 	# disconnect from server
 	db.close()

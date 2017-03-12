@@ -1,0 +1,66 @@
+
+.divpack{
+	display:inline-block;
+	vertical-align:top;
+	padding:10px;
+	border:1px solid #d3d3d3;
+}
+#cerinta{
+	
+	height:290px;
+	width:300px;
+	
+	padding-bottom:5px;
+
+	
+}
+
+#ui{
+	width:300px;
+	height:305px;
+	margin-bottom:5px;
+	
+	
+}
+
+body{
+	background: linear-gradient(to bottom right, #ccffff, #003566);
+	font-family: verdana;
+    word-wrap:break-word;
+}
+
+#input{
+	
+	margin-top:5px;
+	width :300px;
+    height:260px;
+	background-color:rgba(25, 50,77,0.4);
+	font-size:large;
+	color:white;
+}
+
+#inputA{
+	margin-top:5px;
+	width :300px;
+	background-color:rgba(25, 50,77,0.4);
+	margin-bottom:5px;
+	font-family: verdana;
+	color:white;
+}
+#myCanvas{
+	display:inline-block;
+	border:1px solid #d3d3d3;
+	background-color:white;
+	margin-left:15%;
+	margin-top:10%;
+	
+}
+footer{
+	text-align:right;
+	margin-bottom:0;
+	vertical-align:bottom;
+	display:block;
+	padding:5px;
+	float:right;
+	
+}

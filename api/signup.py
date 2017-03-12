@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Blueprint,Response,request
+from flask import Blueprint,Response,request,redirect,url_for,render_template
 from datetime import datetime
 import json
 import MySQLdb
@@ -18,8 +18,9 @@ def signup():
 	email = request.form.get("email")
 	password = request.form.get("password")
 	name = request.form.get("name")
-	birthday_date = request.form.get("birth_day") + "-" + request.form_get("birth_month") + "-" + request.form.get("birth_year")
-	birth_date = datetime.strptime(birth_date,'%d-%m-%Y')
+	birthday_date = request.form.get("birth_day") + "-" + request.form.get("birth_month") + "-" + request.form.get("birth_year")
+
+	birth_date = datetime.strptime(birthday_date,'%d-%B-%Y')
 	birthday_date = birth_date.strftime('%Y-%m-%d')
 	
 	
@@ -33,18 +34,18 @@ def signup():
 	cur.execute(queryCheckUser)
 	data = cur.fetchone()
 	
-	if(data != None)
+	if data == None:
 		query = "INSERT INTO users (email,password,name,birthday_date) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'))" % (email, password, name, birthday_date)
-	
 		cur.execute(query)
 		db.commit()
-		
+
 		response["status"] = 'ok'
-		response["email"] = email
-		response["password"] = password
-		response["name"] = name
-		response["birthday_date"] = birthday_date
+		#response["email"] = email
+		#response["name"] = name
+		#response["birthday_date"] = birthday_date
 		
+		return redirect(url_for("api_signup.chat"))
+
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 	db.close()
 	
@@ -52,3 +53,7 @@ def signup():
 	response["error"] = "Email already taken"
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 	
+
+@appSignup.route("/chat")
+def chat():
+	return render_template("index2.html")
