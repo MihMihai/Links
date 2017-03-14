@@ -4,6 +4,7 @@ var canvas;
 
 function preload() {
     font = loadFont('js/Roboto-Black.ttf');
+    
 }
 
 function windowResized() {
