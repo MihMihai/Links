@@ -52,6 +52,7 @@ def signup():
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 	db.close()
 
+	response["description"] = "Email already taken"
 	response["status_code"] = 401
-	response["error"] = "Email already taken"
+	response["error"] = "Invalid email"
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
