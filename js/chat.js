@@ -4,11 +4,11 @@ window.onload = function(){
 	$.ajax({
 		method: "GET",
 		url: "http://188.27.105.45/api/profile",
-		headers: {access_token: localStorage.TOKEN},
+		headers: {Authorization: localStorage.TOKEN},
 		dataType: "json",
-		succes:  function(data){
+		success:  function(data){
 			$("#profile_name").html(data.name);
-			console.log(data);
+			console.log(data.name);
 		}
 	});
 }
