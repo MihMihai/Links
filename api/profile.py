@@ -46,7 +46,7 @@ def friendRequests():
 	
 	response['name']=data[0]
 	response['email']=data[1]
-	response['birthday']=data[2]
+	response['birthday_date']=data[2].strftime('%Y-%m-%d')
 	response['status']='ok'
 	
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
