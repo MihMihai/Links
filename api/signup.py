@@ -43,7 +43,11 @@ def signup():
 	data = cur.fetchone()
 
 	if data == None:
-		query = "INSERT INTO users (email,password,name,birthday_date) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'))" % (email, password, name, birthday_date)
+		chatToken = str(encode_chat_token(email))
+		chatToken = chatToken[2:]
+		chatToken = chatToken[:len(chatToken)-1]
+		
+		query = "INSERT INTO users (email,password,name,birthday_date,chat_token) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'),'%s')" % (email, password, name, birthday_date,chatToken)
 		cur.execute(query)
 		db.commit()
 
@@ -56,3 +60,20 @@ def signup():
 	response["status_code"] = 401
 	response["error"] = "Invalid email"
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+	
+	
+def encode_chat_token(email):
+	#this may throw an exception if file doesn't exist
+	f = open('server.conf','r')
+	key = f.readline()
+
+	try:
+		payload = {
+			'em': email
+		}
+		return jwt.encode(payload,
+			key,
+			algorithm = 'HS256'
+		)
+	except Exception as e:
+		return e
