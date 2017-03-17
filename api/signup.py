@@ -4,6 +4,7 @@ from flask import Blueprint,Response,request
 from datetime import datetime
 import json
 import MySQLdb
+import jwt
 
 #how to retrieve parameters depending on request type:
 #email = request.form.get("email") -- if request is POST
