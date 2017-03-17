@@ -33,7 +33,14 @@ def signup():
 
 	birthday_date = birth_day + "-" + birth_month + "-" + birth_year
 
-	birth_date = datetime.strptime(birthday_date,'%d-%B-%Y')
+	try:
+		birth_date = datetime.strptime(birthday_date,'%d-%B-%Y')
+	except:
+		response["error"] = "Invalid date"
+		response["description"] = "Bad format for date. It should be %d for Day, %B for Month, %Y for Year"
+		response["status_code"] = 400
+		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),400
+
 	birthday_date = birth_date.strftime('%Y-%m-%d')
 
 	cur = db.cursor()
@@ -47,7 +54,7 @@ def signup():
 		chatToken = str(encode_chat_token(email))
 		chatToken = chatToken[2:]
 		chatToken = chatToken[:len(chatToken)-1]
-		
+
 		query = "INSERT INTO users (email,password,name,birthday_date,chat_token) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'),'%s')" % (email, password, name, birthday_date,chatToken)
 		cur.execute(query)
 		db.commit()
@@ -61,8 +68,8 @@ def signup():
 	response["status_code"] = 401
 	response["error"] = "Invalid email"
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
-	
-	
+
+
 def encode_chat_token(email):
 	#this may throw an exception if file doesn't exist
 	f = open('server.conf','r')
