@@ -7,8 +7,6 @@ import MySQLdb
 import time
 import jwt
 
-#appChat = Blueprint('api_chat',__name__)
-
 @socketio.on('join', namespace='/chat')
 def on_join(data):
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
