@@ -10,7 +10,6 @@ appLogout = Blueprint('api_logout',__name__)
 def logout():
 	userToken = request.headers.get("Authorization")
 	response={}
-	#changed to LX
 
 	if userToken == None:
 		response["error"] = "Request does not contain an access token"
