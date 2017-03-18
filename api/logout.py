@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Blueprint,Response,request
+from flask import Blueprint,Response,request,redirect,url_for
 import MySQLdb
 import json
 import jwt
@@ -40,5 +40,6 @@ def logout():
 	cursor.execute(query)
 	db.commit()
 	db.close()
-	response["status"] = 'ok'
-	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
+	return redirect(url_for('home'))
+#	response["status"] = 'ok'
+#	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")

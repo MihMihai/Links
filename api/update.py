@@ -59,11 +59,11 @@ def update():
 		query = "UPDATE users SET name = '%s', birthday_date = str_to_date('%s','%%Y-%%m-%%d') WHERE auth_token = '%s'" % (name,birthday_date,userToken)
 		cursor.execute(query)
 		db.commit()
-	if passw != None:
+	if passw != None and passw != '':
 		query = "UPDATE users SET password = '%s' WHERE auth_token = '%s'" % (passw,userToken)
 		cursor.execute(query)
 		db.commit()
-	if name != None:
+	if name != None and name != '':
 		query = "UPDATE users SET name = '%s' WHERE auth_token = '%s'" % (name,userToken)
 		cursor.execute(query)
 		db.commit()
