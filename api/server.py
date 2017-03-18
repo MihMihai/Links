@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Flask,
+from flask import Flask
 from flask_socketio import SocketIO
 import json
 from login import appLogin

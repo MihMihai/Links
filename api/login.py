@@ -51,6 +51,7 @@ def login():
 	db.commit()
 	db.close()
 
+	#redirect(url_for("api_chat.chat"))
 	return Response(json.dumps(response, sort_keys=True), mimetype="application/json")
 
 def encode_auth_token(user_id):
