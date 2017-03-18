@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Blueprint,Response,request #,redirect,url_for,render_template
+from flask import Blueprint,Response,request,redirect,url_for #,render_template
 import MySQLdb
 import json
 import jwt
@@ -51,7 +51,7 @@ def login():
 	db.commit()
 	db.close()
 
-	#redirect(url_for("api_chat.chat"))
+	#return redirect(url_for("chat"))
 	return Response(json.dumps(response, sort_keys=True), mimetype="application/json")
 
 def encode_auth_token(user_id):
