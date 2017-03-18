@@ -26,6 +26,7 @@ window.onload = function(){
 		dataType: "json",
 		success:  function(data){
 			localStorage.removeItem('TOKEN');
+			window.location = "/";
 		}
 		});
 	});

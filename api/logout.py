@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Blueprint,Response,request,redirect,url_for
+from flask import Blueprint,Response,request,redirect,url_for,render_template
 import MySQLdb
 import json
 import jwt
@@ -31,7 +31,7 @@ def logout():
 		response["error"] = "Invalid token"
 		response["description"] = "Invalid token"
 		response["status_code"] = 401
-		return Reponse(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
 	query = " UPDATE users SET auth_token = null WHERE ID = '%s'" % (userAcc["sub"])
 
@@ -40,6 +40,5 @@ def logout():
 	cursor.execute(query)
 	db.commit()
 	db.close()
-	return redirect(url_for('home'))
-#	response["status"] = 'ok'
-#	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
+	response["status"] = 'ok'
+	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
