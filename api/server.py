@@ -10,6 +10,7 @@ from acceptfriend import appAcceptFriend
 from removefriend import appRemoveFriend
 from friendrequests import appFriendRequests
 from profile import appProfile
+from update import appUpdate
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -21,6 +22,7 @@ app.register_blueprint(appAcceptFriend)
 app.register_blueprint(appRemoveFriend)
 app.register_blueprint(appFriendRequests)
 app.register_blueprint(appProfile)
+app.register_blueprint(appUpdate)
 
 @app.route("/api/hello")
 def hello():
