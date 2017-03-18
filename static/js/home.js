@@ -32,6 +32,7 @@ window.onload = function(){
 				$.post("http://188.27.105.45/api/login", {email: $("#login_email").val(), password: $("#login_password").val()}, function(data){
 					localStorage.setItem("TOKEN",data["access_token"]);
 					console.log(localStorage.TOKEN);
+					window.location.replace("file:///E:/Links/chat.html");
 				}, "json")
 				.fail(function() {
 					$("#login_error").html("<p style='color:red;'>Invalid email or password!</p>");
@@ -47,6 +48,7 @@ window.onload = function(){
 				$.post("http://188.27.105.45/api/signup", {name:$("#register_name").val(), email: $("#register_email").val(), password: $("#register_password").val(),
 					birth_day: $("#birthDay").find(":selected").text(),birth_month: $("#birthMonth").find(":selected").text(),birth_year: $("#birthYear").find(":selected").text()}, function(data){
 					console.log(data);
+					$('#register').modal('hide');
 				}, "json")
 				.fail(function() {
 					$("#register_mail_error").html("<p style='color:red;'>This email is already taken!</p>");
