@@ -1,11 +1,20 @@
 #!/usr/bin/python3
 from flask_socketio import join_room, leave_room, send
 from flask import Blueprint, Response, request
-from server import socketio
+from flask_socketio import SocketIO,emit,send,join_room,leave_room
 import json
 import MySQLdb
 import time
 import jwt
+from server import app
+
+#appChat = Blueprint('api_chat',__name__)
+
+socketio = SocketIO(app)
+
+@socketio.on('connect',namespace='/chat')
+def connect():
+	emit('message','Saluuuuut')
 
 @socketio.on('join', namespace='/chat')
 def on_join(data):
