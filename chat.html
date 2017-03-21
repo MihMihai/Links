@@ -185,7 +185,7 @@
 
 			</div>
 		</div>
-
+		<!--Change Pass Modal-->
 		<div class="modal fade" id="changePass" role="dialog">
 			<div class="modal-dialog">
 
@@ -193,7 +193,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h3 class="modal-title">Update Account</h3>
+						<h3 class="modal-title">Change Password</h3>
 					</div>
 					<div class="modal-body">
 						<form data-toggle="validator" role="form" id="form_password">
@@ -201,11 +201,11 @@
 								<label for="settings_password"><span class="glyphicon glyphicon-lock"></span> Password:</label>
 								<div class="row">
 									<div class="form-group col-xs-6">
-										<input type="password" class="form-control" name="password" data-minlength="6" id="settings_password" placeholder="Enter new password">
+										<input type="password" class="form-control" name="password" data-minlength="6" id="settings_password" placeholder="Enter new password" required>
 										<span class="help-block">Minimum 6 characters!</span>
 									</div>
 									<div class="form-group col-xs-6">
-										<input type="password" class="form-control" id="settings_password2" placeholder="Enter password again"  data-match="#settings_password" data-match-error="Passwords doesn't match!" >
+										<input type="password" class="form-control" id="settings_password2" placeholder="Enter password again"  data-match="#settings_password" data-match-error="Passwords doesn't match!" required>
 										<div class="help-block with-errors"></div>
 									</div>
 								</div>
