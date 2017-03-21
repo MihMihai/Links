@@ -49,7 +49,7 @@ window.onload = function(){
 			dataType: "json",
 			success:  function(data){
 				localStorage.removeItem('TOKEN');
-				window.location.replace("http://linkspeople.ddns.net");
+				window.location.replace("http://linkspeople.ddns.net/");
 			}
 		});
 	});
