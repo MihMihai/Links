@@ -49,6 +49,7 @@ p {
 .services {
   padding: 30px 0 50px;
   background: #2C3E50;
+  cursor: pointer;
 }
 
 .services h3 {
