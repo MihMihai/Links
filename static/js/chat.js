@@ -6,8 +6,7 @@ window.onload = function(){
 	$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
 		console.log(message);
-		 socket.emit('my event', {data: message});
-
+		socket.emit('message', message);
 	});
 
 	 socket.on('connect', function() {
