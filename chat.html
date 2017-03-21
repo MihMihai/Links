@@ -2,6 +2,7 @@
 <html lang="">
 <head>
 
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
 	<meta charset="utf-8">
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
 	<link rel="stylesheet" type="text/css" href="static/css/style.css">
@@ -9,6 +10,7 @@
 	<link href="static/css/services.css" rel="stylesheet" type="text/css" />
 	<link href="static/css/navbar.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="static/css/modal.css">
+	<link rel="stylesheet" href="static/css/chat.css">
 	<script src="static/js/jQuery-2.1.4.min.js"></script>
 	<script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
 
@@ -47,7 +49,15 @@
 			
 		</nav>
 		
-		
+
+		<section>
+			<div>
+				
+				<button type="button" class="btn .btn-info" id="buton"> Click meeeeee </button>
+				<input type="text" id="inputBox">
+				<input type="text" id="showBox"></textarea>
+			</div>
+		</section>
 		
 		
 		<!--Settings Modal-->
@@ -218,6 +228,9 @@
 				</div>
 			</div>
 		</div>
+
+
+
 
 
 	</body>	

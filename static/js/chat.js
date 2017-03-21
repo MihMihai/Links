@@ -1,4 +1,27 @@
 window.onload = function(){
+
+
+	var socket = io.connect('http://188.27.105.45/chat');
+	
+	$("#buton").click(function(){
+		var message = document.getElementById("inputBox").value;
+		console.log(message);
+		 socket.emit('my event', {data: message});
+
+	});
+
+	 socket.on('connect', function() {
+        socket.emit('my event', {data: 'I\'m connected!'});
+    });
+
+	socket.on('message',function(msg) {
+		console.log(msg);
+
+		 document.getElementById("showBox").value = msg;
+	});
+
+
+
 	var months = [ "January", "February", "March", "April", "May", "June", 
 	"July", "August", "September", "October", "November", "December" ];
 	console.log(localStorage.TOKEN);
@@ -70,5 +93,7 @@ window.onload = function(){
 			});
 		}
 	});
+
+	
 }
 
