@@ -7,6 +7,9 @@ import MySQLdb
 import time
 import jwt
 from server import app
+import eventlet
+
+eventlet.monkey_patch()
 
 #appChat = Blueprint('api_chat',__name__)
 
@@ -14,7 +17,11 @@ socketio = SocketIO(app)
 
 @socketio.on('connect',namespace='/chat')
 def connect():
-	emit('message','Saluuuuut')
+	emit('msg server','Saluuuuut')
+
+@socketio.on('msg user',namespace='/chat')
+def message(msg):
+	emit('msg server','Da')
 
 @socketio.on('join', namespace='/chat')
 def on_join(data):
@@ -58,3 +65,9 @@ def handle_json(jsonData):
 		#from:[the person who sent the message as string],
 		#message:[the message to be sent as string]
 	#}
+
+@socketio.on_error_default
+def default_error_handler(e):
+	wr = open('socketio-error.log','a')
+	wr.write(str(e) + " pare rau\n")
+	wr.close()

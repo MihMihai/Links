@@ -1,21 +1,20 @@
 window.onload = function(){
 
 
-	var socket = io.connect('http://188.27.105.45/chat');
+	var socket = io.connect("http://188.27.105.45/chat");
 	
 	$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
 		console.log(message);
-		socket.emit('message', message);
+		socket.emit("msg user", "tralalala");
 	});
 
-	 socket.on('connect', function() {
-        socket.emit('my event', {data: 'I\'m connected!'});
-    });
+//	 socket.on("connect", function() {
+//        socket.emit("my event", {data: 'I\'m connected!'});
+//    });
 
-	socket.on('message',function(msg) {
+	socket.on("msg server",function(msg) {
 		console.log(msg);
-
 		 document.getElementById("showBox").value = msg;
 	});
 

@@ -14,6 +14,9 @@ from profile import appProfile
 from update import appUpdate
 from logout import appLogout
 #from chat import appChat
+#import eventlet
+
+#eventlet.monkey_patch()
 
 app = Flask(__name__,template_folder='/var/www/html',static_folder='/var/www/html/static')
 #cors = CORS(app,resources={r"/*":{"origins":"*"}})
@@ -55,11 +58,6 @@ def home():
 @app.route("/chat")
 def chat():
 	return render_template("chat.html")
-
-#@socketio.on('connect',namespace='/chat')
-#def connect():
-#	emit('message',"Saluuuuuuut")
-
 
 @app.route("/js/Roboto-Black.ttf")
 def sendFont():
