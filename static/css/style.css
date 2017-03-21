@@ -1,9 +1,5 @@
 
-html{
-	overflow:hidden;
-}
 body{
-  overflow:auto;
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
 }
