@@ -20,34 +20,51 @@ window.onload = function(){
 	
 	$("#logout").click(function(){
 		$.ajax({
-		method: "POST",
-		url: "http://188.27.105.45/api/logout",
-		headers: {Authorization: localStorage.TOKEN},
-		dataType: "json",
-		success:  function(data){
-			localStorage.removeItem('TOKEN');
-			window.location = "/";
-		}
+			method: "POST",
+			url: "http://188.27.105.45/api/logout",
+			headers: {Authorization: localStorage.TOKEN},
+			dataType: "json",
+			success:  function(data){
+				localStorage.removeItem('TOKEN');
+			}
 		});
 	});
 	
-	$('#form_settings').validator().on('submit', function (event) {
+	$('#form_update').validator().on('submit', function (event) {
 		if (event.isDefaultPrevented()) {
 			// handle the invalid form...
-			} else {
+		} else {
 			event.preventDefault();
 			$.ajax({
 				method: "POST",
 				url: "http://188.27.105.45/api/update",
 				headers: {Authorization: localStorage.TOKEN},
-				data: {name: $("#settings_name").val(), password: $("#settings_password").val(),
+				data: {name: $("#settings_name").val(),
 				birth_day: $("#birthDay").find(":selected").text(),birth_month: $("#birthMonth").find(":selected").text(),birth_year: $("#birthYear").find(":selected").text()},
+				dataType: "json",
+				success:  function(data){
+					$('#settings').modal('hide');
+					$("#profile_name").html($("#settings_name").val());
+				}
+			});
+		}
+	});
+
+	$('#form_password').validator().on('submit', function (event) {
+		if (event.isDefaultPrevented()) {
+			// handle the invalid form...
+		} else {
+			event.preventDefault();
+			$.ajax({
+				method: "POST",
+				url: "http://188.27.105.45/api/update",
+				headers: {Authorization: localStorage.TOKEN},
+				data: {password: $("#settings_password").val()}
 				dataType: "json",
 				success:  function(data){
 					$("#settings_password").val("");
 					$("#settings_password2").val("");
 					$('#settings').modal('hide');
-					$("#profile_name").html($("#settings_name").val());
 				}
 			});
 		}
