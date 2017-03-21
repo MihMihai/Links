@@ -26,6 +26,7 @@ window.onload = function(){
 			dataType: "json",
 			success:  function(data){
 				localStorage.removeItem('TOKEN');
+				window.location.replace("http://linkspeople.ddns.net");
 			}
 		});
 	});
@@ -43,7 +44,7 @@ window.onload = function(){
 				birth_day: $("#birthDay").find(":selected").text(),birth_month: $("#birthMonth").find(":selected").text(),birth_year: $("#birthYear").find(":selected").text()},
 				dataType: "json",
 				success:  function(data){
-					$('#settings').modal('hide');
+					$('#updateAccount').modal('hide');
 					$("#profile_name").html($("#settings_name").val());
 				}
 			});
@@ -59,12 +60,12 @@ window.onload = function(){
 				method: "POST",
 				url: "http://188.27.105.45/api/update",
 				headers: {Authorization: localStorage.TOKEN},
-				data: {password: $("#settings_password").val()}
+				data: {password: $("#settings_password").val()},
 				dataType: "json",
 				success:  function(data){
 					$("#settings_password").val("");
 					$("#settings_password2").val("");
-					$('#settings').modal('hide');
+					$('#changePass').modal('hide');
 				}
 			});
 		}
