@@ -49,6 +49,7 @@ window.onload = function(){
 			dataType: "json",
 			success:  function(data){
 				localStorage.removeItem('TOKEN');
+				window.location.replace("http://linkspeople.ddns.net");
 			}
 		});
 	});
@@ -66,7 +67,7 @@ window.onload = function(){
 				birth_day: $("#birthDay").find(":selected").text(),birth_month: $("#birthMonth").find(":selected").text(),birth_year: $("#birthYear").find(":selected").text()},
 				dataType: "json",
 				success:  function(data){
-					$('#settings').modal('hide');
+					$('#updateAccount').modal('hide');
 					$("#profile_name").html($("#settings_name").val());
 				}
 			});
@@ -87,7 +88,7 @@ window.onload = function(){
 				success:  function(data){
 					$("#settings_password").val("");
 					$("#settings_password2").val("");
-					$('#settings').modal('hide');
+					$('#changePass').modal('hide');
 				}
 			});
 		}
