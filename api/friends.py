@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from Flask import Blueprint, Response, request
+from flask import Blueprint, Response, request
 import json
 import MySQLdb
 import jwt
@@ -50,10 +50,11 @@ def friends():
 	user1Id = cursor.fetchone()[0]
 	#user1Db[0] = userId
 
-	queryFriends = "SELECT id, user_1, user_2 FROM frienships WHERE (user_1 = '%s' OR user_2 = '%s') AND status = 1 " % (user1Id,user1Id) 
+	queryFriends = "SELECT id, user_1, user_2 FROM friendships WHERE (user_1 = '%s' OR user_2 = '%s') AND status = 1 " % (user1Id,user1Id) 
 	cursor.execute(queryFriends)	
 	friendData = cursor.fetchall()
 	
+
 	#check if user has friends
 	if cursor.rowcount == 0:
 		response["status"] = 'ok'
@@ -65,37 +66,40 @@ def friends():
 	friendsId = {}
 	
 	#need to check in friendData which of user 1 and 2 is the friend
-	#row[0] -fid, row[1] -u1, row[2] - u2
+	#row[0] -friendshipid, row[1] -u1, row[2] - u2
 	for row in friendData:
 		if row[1] != user1Id:
 			friendsId[str(row[0])] = row[1]
 		else:
 			friendsId[str(row[0])] = row[2]
+	
 
 	#do the BIG query
-	query = "SELECT id, name, email from users WHERE "
+	query = "SELECT f.id, u.name, u.email FROM  users u JOIN friendships f ON u.id = f.user_1 OR u.id = f.user_2 WHERE "
 	i = 1
-	for uid in friendsId:
-		if len(friendsId) == i:
-			query += "id = '%d'" % (uid)
+	for fid in friendsId:
+		if i == 1:
+			i = 0
+			query += "u.id = '%s' " % (friendsId[fid])
 		else:
-			query += "id = '%d' or " % (uid)
-	
+			query += "or u.id = '%s' " % (friendsId[fid])
+
 	cursor.execute(query)
 	friendsDb = cursor.fetchall()
+		
 
-	friends = {}
+	friends = []
 	#get friends using friend ids
 	
-	#data[0] - uid, data[1] - name, data[2] - email
+	#data[0] - fid, data[1] - name, data[2] - email
 	for data in friendsDb:
 		friend = {}
-		friend["friendship_id"] = friendsId[data[0]]
+		friend["friendship_id"] = friendsId[str(data[0])]
 		friend["name"] = data[1]
 		friend["email"] = data[2]
 		friends.append(friend)
 	
-	response[status] = 'ok'
+	response["status"] = 'ok'
 	response["friends"] = friends
 	response["total"] = len(friends) 
 	
