@@ -17,12 +17,23 @@ socketio = SocketIO(app)
 
 @socketio.on('connect',namespace='/chat')
 def connect():
-	emit('msg server','Saluuuuut')
+	emit('msg server','Salut')
 
 @socketio.on('msg user',namespace='/chat')
 def message(msg):
-	emit('msg server','Da')
-
+	dict = json.loads(msg)
+	to = dict['to']
+	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+	query = "SELECT chat_token FROM users WHERE email = '%s' " % (to)
+	cursor = db.cursor()
+	cursor.execute(query)
+	data = cursor.fetchone()
+	chatToken = data[0]
+	db.close()
+	del dict['to']
+	send(json.dumps(dict, room = chatToken))
+	
+	
 @socketio.on('join', namespace='/chat')
 def on_join(data):
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
