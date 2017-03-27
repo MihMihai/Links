@@ -13,6 +13,8 @@ from friendrequests import appFriendRequests
 from profile import appProfile
 from update import appUpdate
 from logout import appLogout
+from friends import appFriends
+#from forgotpassword import appForgotPassword
 #from chat import appChat
 #import eventlet
 
@@ -31,21 +33,23 @@ app.register_blueprint(appFriendRequests)
 app.register_blueprint(appProfile)
 app.register_blueprint(appUpdate)
 app.register_blueprint(appLogout)
+app.register_blueprint(appFriends)
+#app.register_blueprint(appForgotPassword)
 #app.register_blueprint(appChat)
 
-@app.route("/api/hello")
-def hello():
-	user = {}
-	user["Nume"] = "Andrei"
-	user["Varsta"] = 20
-	user["Facultate"] = 'Ongoing'
-	user["Master"] = 'False'
-
-	studii = ["Gradinita","Scoala Generala","Liceu","Facultate"];
-	user["studii"] = studii
-
-	userJson = json.dumps(user)
-	return Response(userJson,mimetype='application/json')
+#@app.route("/api/hello")
+#def hello():
+#	user = {}
+#	user["Nume"] = "Andrei"
+#	user["Varsta"] = 20
+#	user["Facultate"] = 'Ongoing'
+#	user["Master"] = 'False'
+#
+#	studii = ["Gradinita","Scoala Generala","Liceu","Facultate"];
+#	user["studii"] = studii
+#
+#	userJson = json.dumps(user)
+#	return Response(userJson,mimetype='application/json')
 
 @app.route("/api/name")
 def name():

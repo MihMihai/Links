@@ -2,11 +2,15 @@ window.onload = function(){
 
 
 	var socket = io.connect("http://188.27.105.45/chat");
-	
+
 	$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
 		console.log(message);
-		socket.emit("msg user", "tralalala");
+		//var jsonMsg = JSON.parse("{\"to\":\"server\",\"from\":\"user\",\"msg\":\"tralalala\"}");
+		var jsonObj = {"to":"mihai@android.com","from":"user","msg":"tralalala"};
+		var jsonMsg = JSON.stringify(jsonObj);
+		socket.emit("msg user", jsonMsg);
+		//socket.emit("msg user", jsonMsg);
 	});
 
 //	 socket.on("connect", function() {
