@@ -39,21 +39,22 @@ def removeFriend():
 		response["status_code"] = 401
 		return Response(json.dumps(response, sort_keys = True), mimetype = "application/json"), 401
 
-	friendshipID = int( request.form.get("friendship_id"))
+	friendshipIdString = request.form.get("friendship_id")
 
-	if friendshipID == None:
+	if friendshipIdString == None:
 		response["error"] = "Invalid friendship ID"
 		response["description"] = "Please provide an ID"
 		response["status_code"] = 400
 		return Response(json.dumps(response, sort_keys=True), mimetype="application/json"),400
 
+	friendshipID = int(friendshipIdString)
 	uid1= int(userAcc["sub"])
 
 	query = "SELECT * FROM friendships WHERE (user_1 = '%d' OR user_2='%d') AND id='%d' " % (uid1,uid1, friendshipID)
 	cursor= db.cursor()
 	cursor.execute(query)
 	data = cursor.fetchone()
-	
+
 	if data != None:
 		query = "DELETE FROM friendships WHERE (user_1='%d' OR user_2='%d') AND id= '%d'" %(uid1,uid1,friendshipID)
 		cursor.execute(query)
