@@ -48,7 +48,7 @@ def encode_auth_token(user_id):
 	#this may throw an exception if file doesn't exist
 	f = open('server.conf','r')
 	key = f.readline()
-
+a
 	try:
 
 		payload = {
