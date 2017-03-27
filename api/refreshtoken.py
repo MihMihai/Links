@@ -9,9 +9,9 @@ appRefresh = Blueprint('api_refreshtoken',__name__)
 @appRefresh.route('/api/refresh_token', methods=['GET'])
 def refreshToken():
 	response = {}
-	
+
 	userToken = request.headers.get()
-	
+
 	try:
 		userAcc = jwt.decode(userToken)
 	except jwt.ExpiredSignatureError:
@@ -21,11 +21,11 @@ def refreshToken():
 		response["description"] = "Invalid token"
 		response["status_code"] = 401
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
-	
+
 	query = "SELECT id FROM users WHERE auth_token = '%s'" % (userToken)
-	
+
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
-	
+
 	cursor = db.cursor()
 	cursor.execute(query)
 	data = cursor.fetchone()
@@ -42,13 +42,13 @@ def refreshToken():
 		response["description"] = "No user found with the token provided"
 		response["status_code"] = 401
 		return Response(jsom.dumps(response,sort_keys=True),mimetype="application/json"),401
-		
+
 
 def encode_auth_token(user_id):
 	#this may throw an exception if file doesn't exist
 	f = open('server.conf','r')
 	key = f.readline()
-a
+
 	try:
 
 		payload = {
