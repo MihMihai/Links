@@ -38,6 +38,18 @@ window.onload = function(){
 			$("#birthYear option:contains("+ birthDate[0] + ")").attr('selected', 'selected');
 		}
 	});
+
+	$.ajax({
+		method: "GET",
+		url: "http://188.27.105.45/api/friends",
+		headers: {Authorization: localStorage.TOKEN},
+		dataType: "json",
+		success:  function(data){
+			for(let i=0;i<data.friends.length;i++){
+				createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+			}
+		}
+	});
 	
 	$("#logout").click(function(){
 		$.ajax({
