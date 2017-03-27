@@ -51,7 +51,7 @@ def friends():
 	#user1Db[0] = userId
 
 	queryFriends = "SELECT id, user_1, user_2 FROM friendships WHERE (user_1 = '%s' OR user_2 = '%s') AND status = 1 " % (user1Id,user1Id) 
-	cursor.execute(queryFriends)	
+	cursor.execute(queryFriends)
 	friendData = cursor.fetchall()
 	
 
@@ -74,8 +74,12 @@ def friends():
 			friendsId[str(row[0])] = row[2]
 	
 
+
 	#do the BIG query
-	query = "SELECT f.id, u.name, u.email FROM  users u JOIN friendships f ON u.id = f.user_1 OR u.id = f.user_2 WHERE "
+	query = """SELECT f.id, u.name, u.email
+		 FROM  users u JOIN friendships f
+		 ON ( (u.id = f.user_1 AND f.user_2 = '%s') OR (u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)
+ 	WHERE """ % (user1Id,user1Id)
 	i = 1
 	for fid in friendsId:
 		if i == 1:
@@ -83,10 +87,13 @@ def friends():
 			query += "u.id = '%s' " % (friendsId[fid])
 		else:
 			query += "or u.id = '%s' " % (friendsId[fid])
+	
 
 	cursor.execute(query)
 	friendsDb = cursor.fetchall()
-		
+	
+	#debugging purposes	
+	#return Response(json.dumps(friendsDb,sort_keys=True),mimetype="application/json")
 
 	friends = []
 	#get friends using friend ids
