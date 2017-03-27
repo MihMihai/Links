@@ -5,6 +5,10 @@ window.onload = function(){
 	$('.modal').on('hidden.bs.modal', function(){
 		$(this).find('form')[0].reset();
 	});
+
+	$("#forgot_pass").click(function(){
+		window.location.replace("http://linkspeople.ddns.net/forgot-password/");
+	});
 	
 	/*login_button = document.getElementById("login_button").onclick = function(){
 		event.preventDefault();
@@ -32,7 +36,7 @@ window.onload = function(){
 				$.post("http://188.27.105.45/api/login", {email: $("#login_email").val(), password: $("#login_password").val()}, function(data){
 					localStorage.setItem("TOKEN",data["access_token"]);
 					console.log(localStorage.TOKEN);
-					window.location.replace("http://linkspeople.ddns.net/chat");
+					window.location.replace("http://linkspeople.ddns.net/chat/");
 				}, "json")
 				.fail(function() {
 					$("#login_error").html("<p style='color:red;'>Invalid email or password!</p>");
