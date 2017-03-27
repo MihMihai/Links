@@ -5,6 +5,10 @@ window.onload = function(){
 	$('.modal').on('hidden.bs.modal', function(){
 		$(this).find('form')[0].reset();
 	});
+
+	$("#forgot_pass").click(function(){
+		window.location.replace("http://linkspeople.ddns.net/forgot_password");
+	});
 	
 	/*login_button = document.getElementById("login_button").onclick = function(){
 		event.preventDefault();

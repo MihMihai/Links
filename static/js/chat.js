@@ -2,11 +2,15 @@ window.onload = function(){
 
 
 	var socket = io.connect("http://188.27.105.45/chat");
-	
+
 	$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
 		console.log(message);
-		socket.emit("msg user", "tralalala");
+		//var jsonMsg = JSON.parse("{\"to\":\"server\",\"from\":\"user\",\"msg\":\"tralalala\"}");
+		var jsonObj = {"to":"mihai@android.com","from":"user","msg":"tralalala"};
+		var jsonMsg = JSON.stringify(jsonObj);
+		socket.emit("msg user", jsonMsg);
+		//socket.emit("msg user", jsonMsg);
 	});
 
 //	 socket.on("connect", function() {
@@ -36,6 +40,18 @@ window.onload = function(){
 			$("#birthDay option:contains("+ birthDate[2] + ")").attr('selected', 'selected');
 			$("#birthMonth option:contains("+ months[parseInt(birthDate[1])-1] + ")").attr('selected', 'selected');
 			$("#birthYear option:contains("+ birthDate[0] + ")").attr('selected', 'selected');
+		}
+	});
+
+	$.ajax({
+		method: "GET",
+		url: "http://188.27.105.45/api/friends",
+		headers: {Authorization: localStorage.TOKEN},
+		dataType: "json",
+		success:  function(data){
+			for(let i=0;i<data.friends.length;i++){
+				createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+			}
 		}
 	});
 	

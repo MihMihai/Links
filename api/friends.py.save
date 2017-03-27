@@ -51,10 +51,9 @@ def friends():
 	#user1Db[0] = userId
 
 	queryFriends = "SELECT id, user_1, user_2 FROM friendships WHERE (user_1 = '%s' OR user_2 = '%s') AND status = 1 " % (user1Id,user1Id) 
-	cursor.execute(queryFriends)
+	cursor.execute(queryFriends)	
 	friendData = cursor.fetchall()
 	
-
 	#check if user has friends
 	if cursor.rowcount == 0:
 		response["status"] = 'ok'
@@ -62,7 +61,7 @@ def friends():
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 	
 	#store friend ids in array as we find them in db data
-	#array of tuples (fid, id)
+SELECT f.id, u.name, u.email FROM  users u JOIN friendships f ON u.id = f.user_1 OR u.id = f.user_2 WHERE	#array of tuples (fid, id)
 	friendsId = {}
 	
 	#need to check in friendData which of user 1 and 2 is the friend
@@ -72,14 +71,9 @@ def friends():
 			friendsId[str(row[0])] = row[1]
 		else:
 			friendsId[str(row[0])] = row[2]
-	
-
 
 	#do the BIG query
-	query = """SELECT f.id, u.name, u.email
-		 FROM  users u JOIN friendships f
-		 ON ( (u.id = f.user_1 AND f.user_2 = '%s') OR (u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)
- 	WHERE """ % (user1Id,user1Id)
+	query = "SELECT f.id, u.name, u.email FROM  users u JOIN friendships f ON u.id = f.user_1 OR u.id = f.user_2 WHERE "
 	i = 1
 	for fid in friendsId:
 		if i == 1:
@@ -87,21 +81,19 @@ def friends():
 			query += "u.id = '%s' " % (friendsId[fid])
 		else:
 			query += "or u.id = '%s' " % (friendsId[fid])
-	
 
 	cursor.execute(query)
 	friendsDb = cursor.fetchall()
 	
-	#debugging purposes	
-	#return Response(json.dumps(friendsDb,sort_keys=True),mimetype="application/json")
+	return Response(json.dumps(friendsDb,sort_keys=True),mimetype = "application/json")	
 
-	friends = []
+	friends = {}
 	#get friends using friend ids
 	
 	#data[0] - fid, data[1] - name, data[2] - email
 	for data in friendsDb:
 		friend = {}
-		friend["friendship_id"] = str(data[0])
+		friend["friendship_id"] = friendsId[data[0]]
 		friend["name"] = data[1]
 		friend["email"] = data[2]
 		friends.append(friend)
