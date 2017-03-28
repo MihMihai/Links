@@ -1,3 +1,8 @@
+function Message(msg,sender){
+	this.msg = msg;
+	this.sender = sender;
+}
+
 function createMessage(message, sender){
 	let mesaj = $("<p>"+message+"</p>");
 	let messageDiv = $("<div class='chat-body clearfix'></div>");
@@ -5,5 +10,6 @@ function createMessage(message, sender){
 	messageDiv.append(mesaj);
 	li.append(messageDiv);
 	$("#messages").append(li);
+
 }
 
