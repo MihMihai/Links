@@ -47,6 +47,6 @@ function remove(name,friendshipId){
 }
 
 function connectToChat(name,friendshipId){
-	$("#friendName").text("name");
+	$("#friendName").text(name);
 	currentUser = friendshipId;
 }
