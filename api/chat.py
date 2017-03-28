@@ -15,40 +15,52 @@ eventlet.monkey_patch()
 
 socketio = SocketIO(app)
 
-@socketio.on('connect',namespace='/chat')
-def connect():
-	emit('msg server','Saluuuuut')
+#@socketio.on('connect',namespace='/chat')
+#def connect():
+#	emit('msg server','Salut')
 
 @socketio.on('msg user',namespace='/chat')
 def message(msg):
-	emit('msg server','Da')
+	dict = json.loads(str(msg))
+	to = dict['to']
+	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+	query = "SELECT chat_token FROM users WHERE email = '%s' " % (str(to))
+	cursor = db.cursor()
+	cursor.execute(query)
+	data = cursor.fetchone()
+	chatToken = data[0]
+	db.close()
+	dict.pop('to')
+	#del dict['to']
+	emit('msg server',json.dumps(dict), room=chatToken)
+	#emit('msg server', json.dumps(dict))
 
 @socketio.on('join', namespace='/chat')
 def on_join(data):
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
 	email = data['email']
-	query = "Select chat_token FROM users WHERE email = '%s' " % (email)
-	cursor=db.cursor()
+	query = "SELECT chat_token FROM users WHERE email = '%s' " % (email)
+	cursor = db.cursor()
 	cursor.execute(query)
 	token = cursor.fetchone()
 	room = token[0]
 	db.close()
 	join_room(room)
-	send(email + ' has entered the room.', room=room)
+	emit('msg server',email + ' has entered the room.', room=room)
 
 
 @socketio.on('leave', namespace='/chat')
 def on_leave(data):
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
 	email = data['email']
-	query = "Select chat_token FROM users WHERE email = '%s' " % (email)
-	cursor=db.cursor()
+	query = "SELECT chat_token FROM users WHERE email = '%s' " % (email)
+	cursor = db.cursor()
 	cursor.execute(query)
 	token = cursor.fetchone()
 	room = token[0]
 	db.close()
 	leave_room(room)
-	send(email + ' has left the room.', room=room)
+	emit('msg server',email + ' has left the room.', room=room)
 
 @socketio.on('json')
 def handle_json(jsonData):

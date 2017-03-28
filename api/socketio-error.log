@@ -1,1 +1,22 @@
 messageFromUser() takes 0 positional arguments but 1 was given pare rau
+Expecting value: line 1 column 1 (char 0) pare rau
+Expecting value: line 1 column 1 (char 0) pare rau
+the JSON object must be str, not 'dict' pare rau
+the JSON object must be str, not 'dict' pare rau
+the JSON object must be str, not 'dict' pare rau
+'NoneType' object is not subscriptable pare rau
+the JSON object must be str, not 'dict' pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+send() takes 1 positional argument but 2 were given pare rau
+send() takes 1 positional argument but 2 were given pare rau
+send() takes 1 positional argument but 2 were given pare rau
+send() takes 1 positional argument but 2 were given pare rau
