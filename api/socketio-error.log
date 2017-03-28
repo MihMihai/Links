@@ -16,3 +16,7 @@ the JSON object must be str, not 'dict' pare rau
 'NoneType' object is not subscriptable pare rau
 'NoneType' object is not subscriptable pare rau
 'NoneType' object is not subscriptable pare rau
+send() takes 1 positional argument but 2 were given pare rau
+send() takes 1 positional argument but 2 were given pare rau
+send() takes 1 positional argument but 2 were given pare rau
+send() takes 1 positional argument but 2 were given pare rau
