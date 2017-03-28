@@ -1,75 +1,85 @@
+var currentFriend;
 window.onload = function(){
 
 
-	var socket = io.connect("http://188.27.105.45/chat");
-
-	$("#buton").click(function(){
+	let socket = io.connect("http://188.27.105.45/chat");
+	socket.emit("join",{"email":localStorage.EMAIL});
+	
+	/*$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
 		console.log(message);
-		//var jsonMsg = JSON.parse("{\"to\":\"server\",\"from\":\"user\",\"msg\":\"tralalala\"}");
-		var jsonObj = {"to":"mihai@android.com","from":"user","msg":"tralalala"};
-		var jsonMsg = JSON.stringify(jsonObj);
-		socket.emit("msg user", jsonMsg);
-		//socket.emit("msg user", jsonMsg);
-	});
+		socket.emit("msg user", "tralalala");
+	});*/
 
 //	 socket.on("connect", function() {
 //        socket.emit("my event", {data: 'I\'m connected!'});
 //    });
 
-	socket.on("msg server",function(msg) {
-		console.log(msg);
-		 document.getElementById("showBox").value = msg;
-	});
+socket.on("msg server",function(msg) {
+	console.log(msg);
+});
 
+//send message
+//friend is a hashmap of friends, the key is friendship_id, and it has email and name
+$("#sendMessageButton").click(function(){
+	if(!(/^\s*$/.test($("#messageInputBox").val()))){
+		createMessage($("#messageInputBox").val(),"right");
+		let jsonObj = {"to":friend[currentFriend].email,"from":localStorage.EMAIL,"msg":$("#messageInputBox").val()};
+		let jsonString = JSON.stringify(jsonObj);
+		socket.emit("msg user", jsonString);
+		$("#messageInputBox").val("");
+	}
 
+})
 
-	var months = [ "January", "February", "March", "April", "May", "June", 
-	"July", "August", "September", "October", "November", "December" ];
-	console.log(localStorage.TOKEN);
-	
+var months = [ "January", "February", "March", "April", "May", "June", 
+"July", "August", "September", "October", "November", "December" ];
+console.log(localStorage.TOKEN);
+
+$.ajax({
+	method: "GET",
+	url: "http://188.27.105.45/api/profile",
+	headers: {Authorization: localStorage.TOKEN},
+	dataType: "json",
+	success:  function(data){
+		$("#profile_name").html(data.name);
+		$("#settings_name").val(data.name);
+		var birthDate = data.birthday_date.split("-");
+		$("#birthDay option:contains("+ birthDate[2] + ")").attr('selected', 'selected');
+		$("#birthMonth option:contains("+ months[parseInt(birthDate[1])-1] + ")").attr('selected', 'selected');
+		$("#birthYear option:contains("+ birthDate[0] + ")").attr('selected', 'selected');
+	}
+});
+
+$.ajax({
+	method: "GET",
+	url: "http://188.27.105.45/api/friends",
+	headers: {Authorization: localStorage.TOKEN},
+	dataType: "json",
+	success:  function(data){
+		for(let i=0;i<data.friends.length;i++){
+			friend[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
+			createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+
+		}
+	}
+});
+
+$("#logout").click(function(){
 	$.ajax({
-		method: "GET",
-		url: "http://188.27.105.45/api/profile",
+		method: "POST",
+		url: "http://188.27.105.45/api/logout",
 		headers: {Authorization: localStorage.TOKEN},
 		dataType: "json",
 		success:  function(data){
-			$("#profile_name").html(data.name);
-			$("#settings_name").val(data.name);
-			var birthDate = data.birthday_date.split("-");
-			$("#birthDay option:contains("+ birthDate[2] + ")").attr('selected', 'selected');
-			$("#birthMonth option:contains("+ months[parseInt(birthDate[1])-1] + ")").attr('selected', 'selected');
-			$("#birthYear option:contains("+ birthDate[0] + ")").attr('selected', 'selected');
+			localStorage.removeItem('TOKEN');
+			window.location.replace("http://linkspeople.ddns.net/");
 		}
 	});
+});
 
-	$.ajax({
-		method: "GET",
-		url: "http://188.27.105.45/api/friends",
-		headers: {Authorization: localStorage.TOKEN},
-		dataType: "json",
-		success:  function(data){
-			for(let i=0;i<data.friends.length;i++){
-				createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
-			}
-		}
-	});
-	
-	$("#logout").click(function(){
-		$.ajax({
-			method: "POST",
-			url: "http://188.27.105.45/api/logout",
-			headers: {Authorization: localStorage.TOKEN},
-			dataType: "json",
-			success:  function(data){
-				localStorage.removeItem('TOKEN');
-				window.location.replace("http://linkspeople.ddns.net/");
-			}
-		});
-	});
-	
-	$('#form_update').validator().on('submit', function (event) {
-		if (event.isDefaultPrevented()) {
+$('#form_update').validator().on('submit', function (event) {
+	if (event.isDefaultPrevented()) {
 			// handle the invalid form...
 		} else {
 			event.preventDefault();
@@ -88,8 +98,8 @@ window.onload = function(){
 		}
 	});
 
-	$('#form_password').validator().on('submit', function (event) {
-		if (event.isDefaultPrevented()) {
+$('#form_password').validator().on('submit', function (event) {
+	if (event.isDefaultPrevented()) {
 			// handle the invalid form...
 		} else {
 			event.preventDefault();
@@ -108,6 +118,6 @@ window.onload = function(){
 		}
 	});
 
-	
+
 }
 
