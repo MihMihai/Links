@@ -1,3 +1,9 @@
+const friends = {};
+
+function Friend(name, email){
+	this.name = name;
+	this.email = email;
+}
 function createFriend(imgSrc,name,friendshipId){
 	var h6 = $("<h6></h6>").text(name);
 	var button = $("<button type='button' class='close pull-right clearfix'>&times;</button>");
@@ -18,6 +24,9 @@ function createFriend(imgSrc,name,friendshipId){
 	a.append(span);
 	a.append(h6);
 	a.append(button);
+	a.click(function(){
+		connectToChat(name,friendshipId);
+	})
 	$("#friends-list").prepend(a);
 }
 
@@ -35,4 +44,9 @@ function remove(name,friendshipId){
 			}
 		});
 	}
+}
+
+function connectToChat(name,friendshipId){
+	$("#friendName").text("name");
+	currentUser = friendshipId;
 }
