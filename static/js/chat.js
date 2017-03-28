@@ -16,7 +16,19 @@ window.onload = function(){
 //    });
 
 socket.on("msg server",function(msg) {
-	console.log(msg);
+	try{
+		let obj = JSON.parse(msg);
+		let email = obj.from;
+		let mesaj = obj.msg;
+		friends[findFriendshipIdByEmail(email)].messages.push(new Message(mesaj,"left"));
+		if(currentFriend == findFriendshipIdByEmail(email))
+			createMessage(mesaj,"left");
+
+	}
+	catch(e){
+		console.log("ERROR");
+	}
+
 });
 
 //send message
@@ -27,6 +39,7 @@ $("#sendMessageButton").click(function(){
 		let jsonObj = {"to":friends[currentFriend].email,"from":localStorage.EMAIL,"msg":$("#messageInputBox").val()};
 		let jsonString = JSON.stringify(jsonObj);
 		socket.emit("msg user", jsonString);
+		friends[currentFriend].messages.push(new Message($("#messageInputBox").val(),"right"));
 		$("#messageInputBox").val("");
 	}
 
@@ -60,7 +73,6 @@ $.ajax({
 		for(let i=0;i<data.friends.length;i++){
 			friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
 			createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
-
 		}
 	}
 });
