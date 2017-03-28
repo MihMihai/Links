@@ -24,6 +24,9 @@ function createFriend(imgSrc,name,friendshipId){
 	a.append(span);
 	a.append(h6);
 	a.append(button);
+	a.click(function(){
+		connectToChat(name,friendshipId);
+	})
 	$("#friends-list").prepend(a);
 }
 
@@ -41,4 +44,9 @@ function remove(name,friendshipId){
 			}
 		});
 	}
+}
+
+function connectToChat(name,friendshipId){
+	$("#friendName").text("name");
+	currentUser = friendshipId;
 }
