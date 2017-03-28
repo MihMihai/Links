@@ -3,6 +3,14 @@ const friends = {};
 function Friend(name, email){
 	this.name = name;
 	this.email = email;
+	this.messages = [];
+}
+function findFriendshipIdByEmail(email){
+	for(var key in friends){
+		if (friends[key].email == email)
+			return key;
+	}
+	return;
 }
 function createFriend(imgSrc,name,friendshipId){
 	var h6 = $("<h6></h6>").text(name);
@@ -47,6 +55,17 @@ function remove(name,friendshipId){
 }
 
 function connectToChat(name,friendshipId){
+	document.getElementById("sendMessageButton").disabled = false;
+	document.getElementById("messageInputBox").disabled = false;
 	$("#friendName").text(name);
 	currentFriend = friendshipId;
+	$("#messages").html("");
+	loadMessagesInChatBox(friendshipId);
+
+}
+
+function loadMessagesInChatBox(friendshipId){
+	for(let i=0;i<friends[friendshipId].messages.length;i++){
+		createMessage(friends[friendshipId].messages[i].msg,friends[friendshipId].messages[i].sender)
+	}
 }
