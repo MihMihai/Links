@@ -76,7 +76,7 @@ def friends():
 
 
 	#do the BIG query
-	query = """SELECT f.id, u.name, u.email, u.online
+	query = """SELECT f.id, u.name, u.email, u.auth_token
 		 FROM  users u JOIN friendships f
 		 ON ( (u.id = f.user_1 AND f.user_2 = '%s') OR (u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)
  	WHERE """ % (user1Id,user1Id)
@@ -105,7 +105,7 @@ def friends():
 		friend["name"] = data[1]
 		friend["email"] = data[2]
 		if data[3] != None:
-			friend["online"] = data[3]
+			friend["online"] = 1
 		else:
 			friend["online"] = 0
 		friends.append(friend)
