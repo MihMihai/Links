@@ -24,10 +24,10 @@ def message(msg):
 	dict = json.loads(str(msg))
 	to = dict['to']
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
-	
+
 	if 'random' in dict:
 		randomToken = dict['random_token']
-		
+
 		try:
 			userAcc = jwt.decode(randomToken)
 		except jwt.ExpiredSignatureError:
@@ -40,16 +40,16 @@ def message(msg):
 			response["description"] = "Invalid token"
 			response["status_code"] = 401
 			return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
-		
+
 		query = "SELECT chat_token FROM users WHERE id = '%s' " % (userAcc['sub'])
 	else:
 		query = "SELECT chat_token FROM users WHERE email = '%s' " % (str(to))
-	
+
 	cursor = db.cursor()
 	cursor.execute(query)
 	data = cursor.fetchone()
 	chatToken = data[0]
-	
+
 	if 'random' in dict:
 		dict.pop('random')
 		query = "SELECT id FROM users WHERE email = '%s'" % (dict['from'])
@@ -61,7 +61,7 @@ def message(msg):
 		dict['from'] = fromUserToken
 	else:
 		dict.pop('to')
-	
+
 	#del dict['to']
 	emit('msg server',json.dumps(dict), room=chatToken)
 	#emit('msg server', json.dumps(dict))
