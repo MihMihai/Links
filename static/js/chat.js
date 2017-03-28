@@ -24,7 +24,7 @@ socket.on("msg server",function(msg) {
 $("#sendMessageButton").click(function(){
 	if(!(/^\s*$/.test($("#messageInputBox").val()))){
 		createMessage($("#messageInputBox").val(),"right");
-		let jsonObj = {"to":friend[currentFriend].email,"from":localStorage.EMAIL,"msg":$("#messageInputBox").val()};
+		let jsonObj = {"to":friends[currentFriend].email,"from":localStorage.EMAIL,"msg":$("#messageInputBox").val()};
 		let jsonString = JSON.stringify(jsonObj);
 		socket.emit("msg user", jsonString);
 		$("#messageInputBox").val("");
@@ -58,7 +58,7 @@ $.ajax({
 	dataType: "json",
 	success:  function(data){
 		for(let i=0;i<data.friends.length;i++){
-			friend[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
+			friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
 			createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
 
 		}
