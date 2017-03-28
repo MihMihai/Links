@@ -75,6 +75,11 @@ def on_join(data):
 	cursor.execute(query)
 	token = cursor.fetchone()
 	room = token[0]
+
+	query = "UPDATE users SET online=1 WHERE email = '%s'" % (email)
+	cursor.execute(query)
+	db.commit()
+
 	db.close()
 	join_room(room)
 	emit('msg server',email + ' has entered the room.', room=room)
@@ -89,6 +94,11 @@ def on_leave(data):
 	cursor.execute(query)
 	token = cursor.fetchone()
 	room = token[0]
+
+	query = "UPDATE users SET online=null WHERE email='%s'" % (email)
+	cursor.execute(query)
+	db.commit()
+
 	db.close()
 	leave_room(room)
 	emit('msg server',email + ' has left the room.', room=room)
