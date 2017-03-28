@@ -1,3 +1,9 @@
+const friends = {};
+
+function Friend(name, email){
+	this.name = name;
+	this.email = email;
+}
 function createFriend(imgSrc,name,friendshipId){
 	var h6 = $("<h6></h6>").text(name);
 	var button = $("<button type='button' class='close pull-right clearfix'>&times;</button>");

@@ -46,7 +46,9 @@ window.onload = function(){
 		dataType: "json",
 		success:  function(data){
 			for(let i=0;i<data.friends.length;i++){
+				friend[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
 				createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+
 			}
 		}
 	});
