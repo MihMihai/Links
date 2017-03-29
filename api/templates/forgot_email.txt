@@ -6,3 +6,5 @@ Access this link right here to set up a new one.
 
 http://linkspeople.ddns.net/reset_link?token=$[TOKEN]
 
+Regards,
+Links Team
