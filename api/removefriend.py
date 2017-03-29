@@ -66,14 +66,14 @@ def removeFriend():
 		response["status_code"] = 400
 		return Response(json.dumps(response, sort_keys=True), mimetype="application/json"),400
 
-	query = "SELECT user_1, user_2 FROM messages WHERE id = '%d' " % (friendshipID)
+	query = "SELECT user_1, user_2 FROM friendships WHERE id = '%d' " % (friendshipID)
 	cursor.execute(query)
 	data = cursor.fetchone()
 
 	if data != None:
 		uid1 = data[0]
 		uid2 = data[1]
-		query = " DELETE FROM messages WHERE (user_1 = '%d' AND user_2 = '%d' )" % (uid1, uid2)
+		query = " DELETE FROM messages WHERE ((user_1 = '%d' AND user_2 = '%d' ) OR ( user_1 = '%d' AND user_2 = '%d')) " % (uid1, uid2, uid2, uid1)
 		cursor.execute(query)
 		db.commit()
 	
