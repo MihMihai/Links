@@ -1,4 +1,4 @@
-Hello, $[USER_NAME] !
+Hello, $USER_NAME !
 
 Someone ( Probably you ) has decided that you don't longer want this account and that it should be deleted.
 
@@ -6,7 +6,7 @@ Please access the link below in order to complete your request.
 
 Be advised that the generated link is only available for 24 hours.
 
-http://linkspeople.ddns.net/delete_link?token=$[TOKEN]
+http://linkspeople.ddns.net/delete_link?token=$TOKEN
 
 Regards,
 Links Team

@@ -10,10 +10,10 @@ import MySQLdb
 import jwt
 import smtplib
 
-appForgotPassword = Blueprint('api_deleteaccount',__name__)
+appDeleteAccount = Blueprint('api_deleteaccount',__name__)
 
-@app.route("/api/delete_account",methods = ['POST'])
-def forgotPassword():
+@appDeleteAccount.route("/api/delete_account",methods = ['POST'])
+def deleteAccount():
 
 	#store credentials for Links Email
 	LinksEmail = "linkspeople.chat@gmail.com"
@@ -37,15 +37,17 @@ def forgotPassword():
 
 
 	#get user name based on email
-	query = "SELECT name FROM users WHERE email = %s" % (userEmail)
+	query = "SELECT name FROM users WHERE email = '%s'" % (userEmail)
+	
+	#return query
 	cursor = db.cursor()
-	cursor.execute()
+	cursor.execute(query)
 
 	
 	userName= cursor.fetchone()[0]
 
 	#check if given email is registered, so in db
-	if userData == None:
+	if userName == None:
 		response["error"] = "Invalid email"
 		response["description"] = "There is no user registered with this email"
 		response['status_code'] = 401
@@ -60,7 +62,7 @@ def forgotPassword():
 
 
 	#we generate the token based on user Mail
-	deleteToken = str(encode_chat_token(email))
+	deleteToken = str(encode_chat_token(userEmail))
 
 	#why not just auth_token[2:len(auth_token) - 1] ?? 
 
@@ -70,42 +72,34 @@ def forgotPassword():
 	#add the token in db for security reason
 	#when a user accesses the link, we will check if the token is there
 	#if it isn't, it means that it was used already
-	query = "UPDATE users SET delete_token = %s WHERE email = %s" %(deleteToken,userEmail)
+	query = "UPDATE users SET delete_token = '%s' WHERE email = '%s'" %(deleteToken,userEmail)
 	cursor = db.cursor()
 	cursor.execute(query)
 	db.commit()
 
 	#substitute values in template message for customized email
 	message = message_template.substitute(USER_NAME = userName, TOKEN = deleteToken)
-
-	#set up smtp object to send email
-	mailServer = smtplib.SMTP(host = "smtp.gmail.com", port = "587")
+	
+	mailServer = smtplib.SMTP ( 'smtp.gmail.com', 587)
 	mailServer.starttls()
+	mailServer.login(LinksEmail, LinksPassword)
 
-	# need to find which are these:
-	mailServer.login(LinksEmail,LinksPassword)
-
-	#create a mail
 	mail = MIMEMultipart()
-
-	#set up parameters
 	mail['From'] = LinksEmail
 	mail['To'] = userEmail
-	mail['Subject'] = "Links People Account Removal"
+	mail['Subject'] = "LinksPeople Account Removal"
+	mail.attach(MIMEText( message, 'plain'))
 
-	#add message body
-	mail.attach(MIMEText(message,'plain'))
-
-	#send mail
-	mailServer.send_message(mail)
-
+	mailServer.sendmail(LinksEmail, userEmail, mail.as_string())
+	
 	#tidy up
 	db.close()
 	mailServer.quit()
+	
 
 	response['status'] = "ok"
 
-	return Respone(json.dumps(response,sort_keys = True), mimetype = "application/json")
+	return Response(json.dumps(response,sort_keys = True), mimetype = "application/json")
 
 def encode_chat_token(email):
 	#this may throw an exception if file doesn't exist
