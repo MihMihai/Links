@@ -10,6 +10,7 @@ function createMessage(message, sender){
 	messageDiv.append(mesaj);
 	li.append(messageDiv);
 	$("#messages").append(li);
-
+	var chatBox = document.getElementById("chat_box");
+	chatBox.scrollTop = chatBox.scrollHeight;
 }
 
