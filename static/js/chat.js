@@ -87,6 +87,8 @@ $.ajax({
 	}
 });
 
+getAllMessagesRequest();
+
 $("#logout").click(function(){
 	socket.emit("leave",{"email":localStorage.EMAIL});
 	$.ajax({
@@ -166,4 +168,22 @@ function sendMessage(socket){
 		friends[currentFriend].messages.push(new Message($("#messageInputBox").val(),"right"));
 		$("#messageInputBox").val("");
 	}
+}
+
+function getAllMessagesRequest(){
+	$.ajax({
+		method: "GET",
+		url: "http://188.27.105.45/api/messages",
+		headers: {Authorization: localStorage.TOKEN},
+		dataType: "json",
+		success:  function(data){
+			for(let index = 0; index< data.conversations.length;index++){
+				let friendshipID = findFriendshipIdByEmail(data.conversations[index].with);
+				for(let j = 0; j< data.conversations[index].messages.length;j++)
+					friends[friendshipID].messages.push(new Message(data.conversations[index].messages[j].message,
+						data.conversations[index].messages[j].sender));
+			}
+
+		}
+	});
 }

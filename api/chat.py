@@ -63,11 +63,11 @@ def message(msg):
 		dict.pop('to')
 	
 	#STORE MESSAGES INTO DB
-	query = "SELECT id FROM users WHERE email = '%s'" % (to)
+	query = "SELECT id FROM users WHERE email = '%s'" % (dict['from'])
 	cursor.execute(query)
 	data = cursor.fetchone()
 	uid1 = data[0]
-	query = "SELECT id FROM users WHERE email = '%s'" % (dict["from"])
+	query = "SELECT id FROM users WHERE email = '%s'" % (to)
 	cursor.execute(query)
 	data = cursor.fetchone()
 	uid2 = data[0]
