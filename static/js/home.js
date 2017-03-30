@@ -37,7 +37,7 @@ window.onload = function(){
 					localStorage.setItem("TOKEN",data["access_token"]);
 					localStorage.setItem("EMAIL",$("#login_email").val());
 					console.log(localStorage.TOKEN);
-					window.location.replace("C:/Users/Bogdan/Documents/Programming/Links/chat.html");
+					window.location.replace("http://linkspeople.ddns.net/forgot_password/chat");
 				}, "json")
 				.fail(function() {
 					$("#login_error").html("<p style='color:red;'>Invalid email or password!</p>");
