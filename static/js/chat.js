@@ -1,6 +1,9 @@
 var currentFriend;
+var months = [ "January", "February", "March", "April", "May", "June", 
+"July", "August", "September", "October", "November", "December" ];
 window.onload = function(){
-
+	
+	setInterval(refreshTokenRequest,45000);
 
 	let socket = io.connect("http://188.27.105.45/chat");
 	socket.emit("join",{"email":localStorage.EMAIL});
@@ -20,9 +23,20 @@ socket.on("msg server",function(msg) {
 		let obj = JSON.parse(msg);
 		let email = obj.from;
 		let mesaj = obj.msg;
-		friends[findFriendshipIdByEmail(email)].messages.push(new Message(mesaj,"left"));
-		if(currentFriend == findFriendshipIdByEmail(email))
+		let friendshipID = findFriendshipIdByEmail(email);
+		friends[friendshipID].messages.push(new Message(mesaj,"left"));
+		if(currentFriend == friendshipID)
 			createMessage(mesaj,"left");
+		//create message notification in friends list
+		else if(!(messagesNotificationsIntervals.hasOwnProperty(friendshipID))){
+			messagesNotificationsIntervals[friendshipID] = setInterval(function(){
+				createMessageNotification(friendshipID);
+				setTimeout(function(){
+					removeMessageNotification(friendshipID);
+				},500);
+			},1000);
+			
+		}
 
 	}
 	catch(e){
@@ -33,21 +47,17 @@ socket.on("msg server",function(msg) {
 
 //send message
 //friend is a hashmap of friends, the key is friendship_id, and it has email and name
+//sendMessage is declared after window.onload
 $("#sendMessageButton").click(function(){
-	if(!(/^\s*$/.test($("#messageInputBox").val()))){
-		createMessage($("#messageInputBox").val(),"right");
-		let jsonObj = {"to":friends[currentFriend].email,"from":localStorage.EMAIL,"msg":$("#messageInputBox").val()};
-		let jsonString = JSON.stringify(jsonObj);
-		socket.emit("msg user", jsonString);
-		friends[currentFriend].messages.push(new Message($("#messageInputBox").val(),"right"));
-		$("#messageInputBox").val("");
-	}
+	sendMessage(socket);
+});
 
-})
+$("#messageInputBox").keypress(function(event){
+	if(event.keyCode === 13)
+		sendMessage(socket);
+});
 
-var months = [ "January", "February", "March", "April", "May", "June", 
-"July", "August", "September", "October", "November", "December" ];
-console.log(localStorage.TOKEN);
+
 
 $.ajax({
 	method: "GET",
@@ -134,3 +144,26 @@ $('#form_password').validator().on('submit', function (event) {
 
 }
 
+function refreshTokenRequest(){
+	$.ajax({
+		method: "GET",
+		url: "http://188.27.105.45/api/refresh_token",
+		headers: {Authorization: localStorage.TOKEN},
+		dataType: "json",
+		success:  function(data){
+			localStorage.TOKEN = data.access_token;
+
+		}
+	});
+}
+
+function sendMessage(socket){
+	if(!(/^\s*$/.test($("#messageInputBox").val()))){
+		createMessage($("#messageInputBox").val(),"right");
+		let jsonObj = {"to":friends[currentFriend].email,"from":localStorage.EMAIL,"msg":$("#messageInputBox").val()};
+		let jsonString = JSON.stringify(jsonObj);
+		socket.emit("msg user", jsonString);
+		friends[currentFriend].messages.push(new Message($("#messageInputBox").val(),"right"));
+		$("#messageInputBox").val("");
+	}
+}

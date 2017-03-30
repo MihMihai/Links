@@ -108,6 +108,47 @@ def on_leave(data):
 	leave_room(room)
 	emit('msg server',email + ' has left the room.', room=room)
 
+
+@socketio.on('friend request', namespace='/chat')
+def friend_request(data):
+	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+	
+	query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(data['email'])
+	cursor.execute(query)
+	userId = cursor.fetchone()
+	query = "SELECT id,email,name FROM users WHERE chat_token = '%s'" % (data['chat_token'])
+	cursor.execute(query)
+	user1 = cursor.fetchone()
+	uid1 = user1[0]
+	email = user1[1]
+	name = user1[2]
+	
+	if userId != None:
+		uid2 = userId[0]
+		room = userId[1]
+		query = "SELECT * FROM friendships WHERE (user_1 = '%d' AND user_2 = '%d') OR (user_1 = '%d' AND user_2 = '%d')" %(uid1,uid2,uid2,uid1)
+		cursor.execute(query)
+		row = cursor.fetchone()
+		if row == None:
+			curdate = time.strftime("%Y-%m-%d")
+			query = "INSERT INTO friendships (user_1,user_2,date,status) VALUES('%d','%d',str_to_date('%s','%%Y-%%m-%%d') ,'%d')" % (uid1, uid2,curdate, 0)
+			cursor.execute(query)
+			db.commit()
+			
+			frReqDict = {}
+			frReqDict['from'] = email
+			frReqDict['name'] = name
+			emit('new friend request',json.dumps(dict),room=room)
+		else:
+			room = data['chat_token']
+			emit('bad friend request','Request already sent',room=room)
+	else:
+		room = data['chat_token']
+		emit('bad friend request','Invalid email',room=room)
+		
+	db.close()
+	
+	
 @socketio.on('json')
 def handle_json(jsonData):
 	data = json.loads(jsonData)
