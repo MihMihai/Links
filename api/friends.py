@@ -12,9 +12,9 @@ appFriends = Blueprint('api_friends',__name__)
 def friends():
 
 	response = {}
-	
+
 	db = MySQLdb.connect(host = "localhost",user ="root", passwd = "QAZxsw1234", db="linksdb")
-	
+
 	#get authorization token for user, used to prevent spamming or unwanted access
 	user1Token = request.headers.get("Authorization")
 
@@ -41,11 +41,11 @@ def friends():
 		response["description"] = "Invalid token"
 		response["status_code"] = 401
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
-	
+
 	query = "SELECT id FROM users WHERE auth_token ='%s' " % (user1Token)
 	cursor = db.cursor()
 	cursor.execute(query)
-	
+
 	#get current user from db
 	user1Id = cursor.fetchone()[0]
 	#user1Db[0] = userId
@@ -53,18 +53,18 @@ def friends():
 	queryFriends = "SELECT id, user_1, user_2 FROM friendships WHERE (user_1 = '%s' OR user_2 = '%s') AND status = 1 " % (user1Id,user1Id) 
 	cursor.execute(queryFriends)
 	friendData = cursor.fetchall()
-	
+
 
 	#check if user has friends
 	if cursor.rowcount == 0:
 		response["status"] = 'ok'
 		response["total"] = 0
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
-	
+
 	#store friend ids in array as we find them in db data
 	#array of tuples (fid, id)
 	friendsId = {}
-	
+
 	#need to check in friendData which of user 1 and 2 is the friend
 	#row[0] -friendshipid, row[1] -u1, row[2] - u2
 	for row in friendData:
@@ -72,11 +72,11 @@ def friends():
 			friendsId[str(row[0])] = row[1]
 		else:
 			friendsId[str(row[0])] = row[2]
-	
+
 
 
 	#do the BIG query
-	query = """SELECT f.id, u.name, u.email
+	query = """SELECT f.id, u.name, u.email, u.auth_token
 		 FROM  users u JOIN friendships f
 		 ON ( (u.id = f.user_1 AND f.user_2 = '%s') OR (u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)
  	WHERE """ % (user1Id,user1Id)
@@ -87,28 +87,32 @@ def friends():
 			query += "u.id = '%s' " % (friendsId[fid])
 		else:
 			query += "or u.id = '%s' " % (friendsId[fid])
-	
+
 
 	cursor.execute(query)
 	friendsDb = cursor.fetchall()
-	
-	#debugging purposes	
+
+	#debugging purposes
 	#return Response(json.dumps(friendsDb,sort_keys=True),mimetype="application/json")
 
 	friends = []
 	#get friends using friend ids
-	
+
 	#data[0] - fid, data[1] - name, data[2] - email
 	for data in friendsDb:
 		friend = {}
 		friend["friendship_id"] = str(data[0])
 		friend["name"] = data[1]
 		friend["email"] = data[2]
+		if data[3] != None:
+			friend["online"] = 1
+		else:
+			friend["online"] = 0
 		friends.append(friend)
-	
+
 	response["status"] = 'ok'
 	response["friends"] = friends
-	response["total"] = len(friends) 
-	
+	response["total"] = len(friends)
+
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
-	
+

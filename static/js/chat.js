@@ -88,6 +88,7 @@ $.ajax({
 });
 
 $("#logout").click(function(){
+	socket.emit("leave",{"email":localStorage.EMAIL});
 	$.ajax({
 		method: "POST",
 		url: "http://188.27.105.45/api/logout",
