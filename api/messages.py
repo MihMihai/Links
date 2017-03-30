@@ -64,7 +64,9 @@ def messages():
 	conversations = []
 	for ID in friendIDs:
 		conversation = {}
-		conversation ['with'] = ID
+		query = "SELECT email from users WHERE id = '%d'" % (ID[0])
+		cursor.execute(query)
+		conversation ['with'] = cursor.fetchone()[0] 
 		query = "Select user_1, message, time_sent FROM messages WHERE (user_1 = '%d' and user_2 = '%d') or (user_1 = '%d' and user_2 = '%d')" % (uid1,ID[0], ID[0], uid1)
 		cursor.execute(query)
 		conversation['total'] = cursor.rowcount
