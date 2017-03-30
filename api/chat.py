@@ -61,6 +61,19 @@ def message(msg):
 		dict['from'] = fromUserToken
 	else:
 		dict.pop('to')
+	
+	#STORE MESSAGES INTO DB
+	query = "SELECT id FROM users WHERE email = '%s'" % (to)
+	cursor.execute(query)
+	data = cursor.fetchone()
+	uid1 = data[0]
+	query = "SELECT id FROM users WHERE email = '%s'" % (dict["from"])
+	cursor.execute(query)
+	data = cursor.fetchone()
+	uid2 = data[0]
+	query = "INSERT INTO messages (user_1, user_2, message) VALUES('%i','%i','%s')" % (uid1, uid2, str(dict["msg"]))
+	cursor.execute(query)
+	db.commit()
 
 	#del dict['to']
 	emit('msg server',json.dumps(dict), room=chatToken)
