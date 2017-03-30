@@ -61,6 +61,7 @@ function connectToChat(name,friendshipId){
 	currentFriend = friendshipId;
 	$("#messages").html("");
 	loadMessagesInChatBox(friendshipId);
+	removeNotificationInterval(friendshipId);
 
 }
 
