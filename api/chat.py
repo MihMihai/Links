@@ -163,9 +163,11 @@ def accept_friend_request(data):
 	if userId != None:
 		uid2 = userId[0]
 		room = userId[1]
-		query = "SELECT * FROM friendships WHERE (user_1 = '%d' AND user_2 = '%d')" %(uid2,uid1)
+		if data['status'] == 1:
+			query = "UPDATE table friendships SET status = 1 WHERE (user_1 = '%d' AND user_2 = '%d')" %(uid2,uid1)
+		else:
+			query = "DELETE from friendships WHERE (user_1 = '%d' AND user_2 = '%d')" % (uid2,uid1)
 		cursor.execute(query)
-		row = cursor.fetchone()
 		
 		frReqDict = {}
 		frReqDict['from'] = email
