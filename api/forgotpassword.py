@@ -12,7 +12,7 @@ import smtplib
 
 appForgotPassword = Blueprint('api_forgotpassword',__name__)
 
-@app.route("/api/forgot_password",methods = ['POST'])
+@appForgotPassword.route("/api/forgot_password",methods = ['POST'])
 def forgotPassword():
 
 	#store credentials for Links Email
@@ -37,15 +37,15 @@ def forgotPassword():
 
 
 	#get user name based on email
-	query = "SELECT name FROM users WHERE email = %s" % (userEmail)
+	query = "SELECT name FROM users WHERE email = '%s'" % (userEmail)
 	cursor = db.cursor()
-	cursor.execute()
+	cursor.execute(query)
 
 	
 	userName= cursor.fetchone()[0]
 
 	#check if given email is registered, so in db
-	if userData == None:
+	if userName == None:
 		response["error"] = "Invalid email"
 		response["description"] = "There is no user registered with this email"
 		response['status_code'] = 401
@@ -60,7 +60,7 @@ def forgotPassword():
 
 
 	#we generate the token based on user Mail
-	resetToken = str(encode_chat_token(email))
+	resetToken = str(encode_chat_token(userEmail))
 
 	#why not just auth_token[2:len(auth_token) - 1] ?? 
 
@@ -70,13 +70,13 @@ def forgotPassword():
 	#add the token in db for security reason
 	#when a user accesses the link, we will check if the token is there
 	#if it isn't, it means that it was used already
-	query = "UPDATE users SET reset_token = %s WHERE email = %s" %(resetToken,userEmail)
+	query = "UPDATE users SET reset_pass_token = '%s' WHERE email = '%s'" %(resetToken,userEmail)
 	cursor = db.cursor()
 	cursor.execute(query)
 	db.commit()
 
 	#substitute values in template message for customized email
-	message = message_template.substitute(USER_NAME = userName, TOKEN = resetToken)
+	message = message_template.substitute(USER_NAME = "userName", TOKEN = "resetToken")
 
 	#set up smtp object to send email
 	mailServer = smtplib.SMTP(host = "smtp.gmail.com", port = "587")
