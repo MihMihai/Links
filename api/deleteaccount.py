@@ -24,7 +24,30 @@ def deleteAccount():
 
 	#connect to db
 	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
+	
+	userToken = request.headers.get("Authorization")
+	if userToken == None:
+		response["error"] = "Request does not contain an access token"
+		response["description"] =  "Authorization required"
+		response["status_code"] = 401
+		return Response(json.dumps(response, sort_keys=True), mimetype = "application/json"),401
 
+	f = open('server.conf','r')
+	key = f.readline()
+
+	try:
+		userAcc = jwt.decode(userToken,key)
+	except jwt.ExpiredSignatureError:
+		response["error"] = "Invalid Token"
+		response["description"] = "Token has expired"
+		response["status_code"] = 401
+		return Response(json.dumps(response, sort_keys = True), mimetype = "application/json"), 401
+	except jwt.InvalidTokenError:
+		response["error"] = "Invalid token"
+		response["description"] = "Invalid token"
+		response["status_code"] = 401
+		return Response(json.dumps(response, sort_keys = True), mimetype = "application/json"), 401
+		
 	#get email from request
 	userEmail = request.form.get("email")
 
