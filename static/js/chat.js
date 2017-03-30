@@ -11,8 +11,8 @@ window.onload = function(){
 	/*$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
 		console.log(message);
-		socket.emit("msg user", "tralalala");
 	});*/
+
 
 //	 socket.on("connect", function() {
 //        socket.emit("my event", {data: 'I\'m connected!'});

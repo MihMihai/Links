@@ -25,3 +25,11 @@ send() takes 1 positional argument but 2 were given pare rau
 'email' pare rau
 >>>>>>> 02c93bdc10199b674933370b6542f1ff342e1102
 'email' pare rau
+'email' pare rau
+'email' pare rau
+'email' pare rau
+name 'cursor' is not defined pare rau
+name 'cursor' is not defined pare rau
+'email' pare rau
+(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table friendships SET status = 1 WHERE (user_1 = '22' AND user_2 = '39')' at line 1") pare rau
+name 'email' is not defined pare rau

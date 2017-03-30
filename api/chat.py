@@ -61,7 +61,7 @@ def message(msg):
 		dict['from'] = fromUserToken
 	else:
 		dict.pop('to')
-	
+
 	#STORE MESSAGES INTO DB
 	query = "SELECT id FROM users WHERE email = '%s'" % (dict['from'])
 	cursor.execute(query)
@@ -112,7 +112,8 @@ def on_leave(data):
 @socketio.on('friend request', namespace='/chat')
 def friend_request(data):
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
-	
+	cursor = db.cursor()
+
 	query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(data['email'])
 	cursor.execute(query)
 	userId = cursor.fetchone()
@@ -122,7 +123,7 @@ def friend_request(data):
 	uid1 = user1[0]
 	email = user1[1]
 	name = user1[2]
-	
+
 	if userId != None:
 		uid2 = userId[0]
 		room = userId[1]
@@ -134,52 +135,54 @@ def friend_request(data):
 			query = "INSERT INTO friendships (user_1,user_2,date,status) VALUES('%d','%d',str_to_date('%s','%%Y-%%m-%%d') ,'%d')" % (uid1, uid2,curdate, 0)
 			cursor.execute(query)
 			db.commit()
-			
+
 			frReqDict = {}
 			frReqDict['from'] = email
 			frReqDict['name'] = name
-			emit('new friend request',json.dumps(dict),room=room)
+			emit('new friend request',json.dumps(frReqDict),room=room)
 		else:
 			room = data['chat_token']
 			emit('bad friend request','Request already sent',room=room)
 	else:
 		room = data['chat_token']
 		emit('bad friend request','Invalid email',room=room)
-		
+
 	db.close()
 
 @socketio.on('response friend request',namespace='/chat')
 def accept_friend_request(data):
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
-	
+	cursor = db.cursor()
+
 	query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(data['email'])
 	cursor.execute(query)
 	userId = cursor.fetchone()
-	query = "SELECT id FROM users WHERE chat_token = '%s'" % (data['chat_token'])
+	query = "SELECT id,email FROM users WHERE chat_token = '%s'" % (data['chat_token'])
 	cursor.execute(query)
 	user1 = cursor.fetchone()
 	uid1 = user1[0]
-	
+
 	if userId != None:
 		uid2 = userId[0]
 		room = userId[1]
 		if data['status'] == 1:
-			query = "UPDATE table friendships SET status = 1 WHERE (user_1 = '%d' AND user_2 = '%d')" %(uid2,uid1)
+			query = "UPDATE friendships SET status = 1 WHERE (user_1 = '%d' AND user_2 = '%d')" %(uid2,uid1)
 		else:
 			query = "DELETE from friendships WHERE (user_1 = '%d' AND user_2 = '%d')" % (uid2,uid1)
 		cursor.execute(query)
-		
+		db.commit()
+
 		frReqDict = {}
-		frReqDict['from'] = email
+		frReqDict['from'] = user1[1]
 		frReqDict['status'] = data['status']
-		emit('status friend request',json.dumps(dict),room=room)
+		emit('status friend request',json.dumps(frReqDict),room=room)
 	else: #not needed
 		room = data['chat_token']
 		emit('bad friend request','Invalid email',room=room)
-		
+
 	db.close()
-	
-	
+
+
 @socketio.on('json')
 def handle_json(jsonData):
 	data = json.loads(jsonData)
