@@ -12,7 +12,7 @@ import smtplib
 
 appForgotPassword = Blueprint('api_forgotpassword',__name__)
 
-@app.route("/api/forgot_password",methods = ['POST'])
+@appForgotPassword.route("/api/forgot_password",methods = ['POST'])
 def forgotPassword():
 
 	#store credentials for Links Email
@@ -79,7 +79,7 @@ def forgotPassword():
 	message = message_template.substitute(USER_NAME = userName, TOKEN = resetToken)
 
 	#set up smtp object to send email
-	mailServer = smtplib.SMTP(host = "smtp.gmail.com", port = "587")
+	mailServer = smtplib.SMTP("smtp.gmail.com",587)
 	mailServer.starttls()
 
 	# need to find which are these:
@@ -97,7 +97,7 @@ def forgotPassword():
 	mail.attach(MIMEText(message,'plain'))
 
 	#send mail
-	mailServer.send_message(mail)
+	mailServer.sendmail(LinksEmail,userEmail,mail.as_string())
 
 	#tidy up
 	db.close()
