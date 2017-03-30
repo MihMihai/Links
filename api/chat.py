@@ -147,6 +147,35 @@ def friend_request(data):
 		emit('bad friend request','Invalid email',room=room)
 		
 	db.close()
+
+@socketio.on('response friend request',namespace='/chat')
+def accept_friend_request(data):
+	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+	
+	query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(data['email'])
+	cursor.execute(query)
+	userId = cursor.fetchone()
+	query = "SELECT id FROM users WHERE chat_token = '%s'" % (data['chat_token'])
+	cursor.execute(query)
+	user1 = cursor.fetchone()
+	uid1 = user1[0]
+	
+	if userId != None:
+		uid2 = userId[0]
+		room = userId[1]
+		query = "SELECT * FROM friendships WHERE (user_1 = '%d' AND user_2 = '%d')" %(uid2,uid1)
+		cursor.execute(query)
+		row = cursor.fetchone()
+		
+		frReqDict = {}
+		frReqDict['from'] = email
+		frReqDict['status'] = data['status']
+		emit('status friend request',json.dumps(dict),room=room)
+	else: #not needed
+		room = data['chat_token']
+		emit('bad friend request','Invalid email',room=room)
+		
+	db.close()
 	
 	
 @socketio.on('json')
