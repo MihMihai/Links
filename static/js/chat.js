@@ -37,6 +37,8 @@ socket.on("msg server",function(msg) {
 			},1000);
 			
 		}
+		$(document.getElementById("friends-list").getElementsByTagName("a")[0]).before($("#"+friendshipID));
+		
 
 	}
 	catch(e){
@@ -89,7 +91,7 @@ $.ajax({
 	}
 });
 
-getAllMessagesRequest();
+setTimeout(getAllMessagesRequest,200);
 
 $("#logout").click(function(){
 	socket.emit("leave",{"email":localStorage.EMAIL});

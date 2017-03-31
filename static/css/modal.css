@@ -1,3 +1,11 @@
+.modal-open {
+  position: absolute;
+  width: 100%;
+  overflow: visible;
+  overflow-y:scroll;
+  padding-right: 0!important;
+}
+
 .modal-header{
 	background-color: #2C3E50;
 	border-radius: 4px;
@@ -8,4 +16,5 @@
 	text-align:center;
 	color:white;
 }
+
 
