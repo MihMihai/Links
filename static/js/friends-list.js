@@ -27,10 +27,11 @@ function createFriend(imgSrc,name,friendshipId){
 	var span = $("<span class='chat-img pull-left'></span>");
 	span.append(img);
 	var a = $("<a id="+friendshipId+" href='#'' class='list-group-item'></a>");
-
+	let notificationMessage = $("<span class='glyphicon glyphicon-envelope messageNotification'></span>");
 	span.append(img);
 	a.append(span);
 	a.append(h6);
+	a.append(notificationMessage);
 	a.append(button);
 	a.click(function(){
 		connectToChat(name,friendshipId);

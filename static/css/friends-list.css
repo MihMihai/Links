@@ -50,3 +50,7 @@
 .panel-body>.list-group>a>h6{
 	margin:auto;
 }
+
+.messageNotification{
+	visibility: hidden;
+}

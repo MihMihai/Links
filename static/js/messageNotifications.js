@@ -2,15 +2,17 @@ const messagesNotificationsIntervals = {};
 
 function createMessageNotification(friendshipID){
 	let friend = document.getElementById(friendshipID);
-	let heading = friend.getElementsByTagName("h6");
-	$(heading).after("<span class='glyphicon glyphicon-envelope'></span>");
-	//heading[0].innerHTML += "<span class='glyphicon glyphicon-envelope'></span>";
+	let messageNotifications = friend.getElementsByClassName("messageNotification");
+	messageNotifications[0].style.visibility = "visible";
+	
+
+	
 }
 
 function removeMessageNotification(friendshipID){
 	let friend = document.getElementById(friendshipID);
-	let spans = friend.getElementsByTagName("span");
-	$(spans[1]).remove();
+	let messageNotifications = friend.getElementsByClassName("messageNotification");
+	messageNotifications[0].style.visibility = "hidden";
 	
 }
 

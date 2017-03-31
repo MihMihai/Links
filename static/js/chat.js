@@ -11,8 +11,8 @@ window.onload = function(){
 	/*$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
 		console.log(message);
-		socket.emit("msg user", "tralalala");
 	});*/
+
 
 //	 socket.on("connect", function() {
 //        socket.emit("my event", {data: 'I\'m connected!'});
@@ -37,6 +37,8 @@ socket.on("msg server",function(msg) {
 			},1000);
 			
 		}
+		$(document.getElementById("friends-list").getElementsByTagName("a")[0]).before($("#"+friendshipID));
+		
 
 	}
 	catch(e){
@@ -80,12 +82,16 @@ $.ajax({
 	headers: {Authorization: localStorage.TOKEN},
 	dataType: "json",
 	success:  function(data){
-		for(let i=0;i<data.friends.length;i++){
-			friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
-			createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+		if(data.total > 0){
+			for(let i=0;i<data.friends.length;i++){
+				friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
+				createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+			}
 		}
 	}
 });
+
+setTimeout(getAllMessagesRequest,200);
 
 $("#logout").click(function(){
 	socket.emit("leave",{"email":localStorage.EMAIL});
@@ -166,4 +172,23 @@ function sendMessage(socket){
 		friends[currentFriend].messages.push(new Message($("#messageInputBox").val(),"right"));
 		$("#messageInputBox").val("");
 	}
+}
+
+function getAllMessagesRequest(){
+	$.ajax({
+		method: "GET",
+		url: "http://188.27.105.45/api/messages",
+		headers: {Authorization: localStorage.TOKEN},
+		dataType: "json",
+		success:  function(data){
+			if(data.total > 0){
+				for(let index = 0; index< data.conversations.length;index++){
+					let friendshipID = findFriendshipIdByEmail(data.conversations[index].with);
+					for(let j = 0; j< data.conversations[index].messages.length;j++)
+						friends[friendshipID].messages.push(new Message(data.conversations[index].messages[j].message,
+							data.conversations[index].messages[j].sender));
+				}
+			}
+		}
+	});
 }
