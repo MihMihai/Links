@@ -23,17 +23,17 @@ def delete():
 	query = "SELECT id FROM users WHERE delete_token = '%s' " % (deleteToken)
 	cursor = db.cursor()
 	cursor.execute(query)
-	uid = cursor.fetchone()[0]
-	
+	uid = cursor.fetchone()
+
 	if uid == None: 
 		return render_template("delete_failed.html")
-	
+	uid = uid[0]
 	query = "DELETE FROM messages WHERE user_1 = '%d' OR user_2 = '%d' " % (uid, uid)
-	db.execute(query)
+	cursor.execute(query)
 	query = "DELETE FROM friendships WHERE user_1 ='%d' OR user_2 = '%d' " %(uid, uid)
-	db.execute(query)
+	cursor.execute(query)
 	query = "DELETE FROM users WHERE id = '%d' "  %(uid)
-	db.execute(query)
+	cursor.execute(query)
 	db.commit()
 	
 	return render_template("delete_successful.html")

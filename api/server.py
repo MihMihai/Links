@@ -21,6 +21,7 @@ from randomchat import appRandomChat
 #import eventlet
 from deleteaccount import appDeleteAccount
 from messages import appMessages
+from delete import appDelete
 #eventlet.monkey_patch()
 
 app = Flask(__name__,template_folder='/var/www/html',static_folder='/var/www/html/static')
@@ -43,6 +44,7 @@ app.register_blueprint(appRandomChat)
 #app.register_blueprint(appChat)
 app.register_blueprint(appDeleteAccount)
 app.register_blueprint(appMessages)
+app.register_blueprint(appDelete)
 
 #@app.route("/api/hello")
 #def hello():
