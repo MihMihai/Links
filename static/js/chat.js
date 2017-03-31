@@ -80,9 +80,11 @@ $.ajax({
 	headers: {Authorization: localStorage.TOKEN},
 	dataType: "json",
 	success:  function(data){
-		for(let i=0;i<data.friends.length;i++){
-			friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
-			createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+		if(data.total > 0){
+			for(let i=0;i<data.friends.length;i++){
+				friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
+				createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+			}
 		}
 	}
 });
@@ -177,13 +179,14 @@ function getAllMessagesRequest(){
 		headers: {Authorization: localStorage.TOKEN},
 		dataType: "json",
 		success:  function(data){
-			for(let index = 0; index< data.conversations.length;index++){
-				let friendshipID = findFriendshipIdByEmail(data.conversations[index].with);
-				for(let j = 0; j< data.conversations[index].messages.length;j++)
-					friends[friendshipID].messages.push(new Message(data.conversations[index].messages[j].message,
-						data.conversations[index].messages[j].sender));
+			if(data.total > 0){
+				for(let index = 0; index< data.conversations.length;index++){
+					let friendshipID = findFriendshipIdByEmail(data.conversations[index].with);
+					for(let j = 0; j< data.conversations[index].messages.length;j++)
+						friends[friendshipID].messages.push(new Message(data.conversations[index].messages[j].message,
+							data.conversations[index].messages[j].sender));
+				}
 			}
-
 		}
 	});
 }
