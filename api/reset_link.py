@@ -15,8 +15,8 @@ def resetLink():
 	if resetToken == '':
 		response["error"] = "Invalid reset token"
 		response["description"] = "Missing reset token"
-		response["status_code"] = 400
-		return Response(json.dumps(response,sort_keys = True), mimetype = "application/json"), 400
+		response["status_code"] = 401
+		return Response(json.dumps(response,sort_keys = True), mimetype = "application/json"), 401
 
 	return render_template("reset_password.html")
 	

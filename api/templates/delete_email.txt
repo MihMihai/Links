@@ -4,9 +4,9 @@ Someone ( Probably you ) has decided that you don't longer want this account and
 
 Please access the link below in order to complete your request. 
 
-Be advised that the generated link is only available for 24 hours.
+You will be missed on our community.
 
-http://linkspeople.ddns.net/delete_link?token=$TOKEN
+http://linkspeople.ddns.net/delete?token=$TOKEN
 
 Regards,
 Links Team

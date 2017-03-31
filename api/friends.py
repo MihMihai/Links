@@ -59,6 +59,7 @@ def friends():
 	if cursor.rowcount == 0:
 		response["status"] = 'ok'
 		response["total"] = 0
+		response["friends"] = []
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 
 	#store friend ids in array as we find them in db data
