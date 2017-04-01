@@ -58,6 +58,7 @@ def messages():
 	if talks == 0:
 		response["status"] = 'ok'
 		response["total"] = 0
+		response["conversations"] = []
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 	
 	#Go get some messages

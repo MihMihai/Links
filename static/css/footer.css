@@ -1,6 +1,5 @@
 
 html, body {
-  overflow-x: hidden;
   text-align: left;
   -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
  -webkit-text-size-adjust: 100%;
