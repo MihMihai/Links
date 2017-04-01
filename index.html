@@ -47,7 +47,11 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<p class="navbar-text">Links</p>
+				<p class="navbar-text">Links &nbsp
+					{% if current_user.is_authenticated %}
+						{{current_user.name}}
+					{% endif %}
+				</p>
 			</div>
 
 
@@ -286,7 +290,7 @@
 					<h3 class="modal-title">Login</h3>
 				</div>
 				<div class="modal-body">
-					<form role="form" data-toggle="validator" id="form_login">
+					<form role="form" action="http://linkspeople.ddns.net/api/login" method="post" data-toggle="validator" id="form_login">
 						<div class="form-group">
 							<label for="login_email"><span class="glyphicon glyphicon-envelope"></span> Email:</label>
 							<input type="email" name="email" class="form-control" id="login_email" placeholder="Enter email" required>

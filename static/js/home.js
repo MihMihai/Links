@@ -28,7 +28,7 @@ window.onload = function(){
 			alert( "error" );
 		});};*/
 		
-		$('#form_login').validator().on('submit', function (event) {
+/*		$('#form_login').validator().on('submit', function (event) {
 			if (event.isDefaultPrevented()) {
 				// handle the invalid form...
 			} else {
@@ -37,13 +37,14 @@ window.onload = function(){
 					localStorage.setItem("TOKEN",data["access_token"]);
 					localStorage.setItem("EMAIL",$("#login_email").val());
 					console.log(localStorage.TOKEN);
-					window.location.replace("http://linkspeople.ddns.net/chat");
+					window.location.replace("http://linkspeople.ddns.net/login");
+					
 				}, "json")
 				.fail(function() {
 					$("#login_error").html("<p style='color:red;'>Invalid email or password!</p>");
 				});
 			}
-		});
+		});*/
 		
 		$('#form_register').validator().on('submit', function (event) {
 			if (event.isDefaultPrevented()) {

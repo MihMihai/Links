@@ -19,7 +19,11 @@ def login():
 	#get the info from request
 	email = request.form.get("email")
 	password = request.form.get("password")
-	rememberMe = request.form.get("remember_me")
+
+	if "remember_me" in request.form:
+		rememberMe = True
+	else:
+		rememberMe = False
 
 	#SQL cmd
 	query =  "SELECT id,name,email, password FROM users WHERE email='%s' AND password ='%s'" % (email, password)
@@ -32,13 +36,12 @@ def login():
 	data = cursor.fetchone()
 
 	if data != None:
-#		user = User(data[0],data[1],data[2])
+		user = User(data[0],data[1],data[2])
 		response["status"] = 'ok'
-
-#		if rememberMe == "true":
-#			login_user(user,remember = True)
-#		else:
-#			login_user(user)
+		if rememberMe:
+			login_user(user,remember=True)
+		else:
+			login_user(user)
 	else:
 		response["error"] = 'Invalid email or password'
 		response["status_code"] = 401
@@ -60,8 +63,8 @@ def login():
 	db.commit()
 	db.close()
 
-	#return redirect(url_for("chat"))
-	return Response(json.dumps(response, sort_keys=True), mimetype="application/json")
+	return redirect("/chat")
+#	return Response(json.dumps(response, sort_keys=True), mimetype="application/json")
 
 def encode_auth_token(user_id):
 	#this may throw an exception if file doesn't exist

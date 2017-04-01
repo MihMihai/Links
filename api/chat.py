@@ -2,6 +2,7 @@
 from flask_socketio import join_room, leave_room, send
 from flask import Blueprint, Response, request
 from flask_socketio import SocketIO,emit,send,join_room,leave_room
+from flask_login import current_user
 import json
 import MySQLdb
 import time
@@ -15,9 +16,20 @@ eventlet.monkey_patch()
 
 socketio = SocketIO(app)
 
-#@socketio.on('connect',namespace='/chat')
-#def connect():
-#	emit('msg server','Salut')
+@socketio.on('connect',namespace='/chat')
+def connect():
+	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+	cursor = db.cursor()
+
+	query = "SELECT auth_token FROM users WHERE email = '%s'" % (current_user.email)
+	cursor.execute(query)
+	data = cursor.fetchone()
+
+	details = {}
+	details["access_token"] = data[0]
+	details["email"] = current_user.email
+
+	emit('details',json.dumps(details))
 
 @socketio.on('msg user',namespace='/chat')
 def message(msg):

@@ -14,9 +14,13 @@ window.onload = function(){
 	});*/
 
 
-//	 socket.on("connect", function() {
-//        socket.emit("my event", {data: 'I\'m connected!'});
-//    });
+	 socket.on("details", function(data) {
+        	let obj = JSON.parse(data);
+		localStorage.setItem("TOKEN",obj.access_token);
+                localStorage.setItem("EMAIL",obj.email);
+                console.log(localStorage.TOKEN);
+
+   	 });
 
 socket.on("msg server",function(msg) {
 	try{
