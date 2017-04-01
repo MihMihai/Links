@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 
 from flask import Flask, render_template,Response,send_from_directory
+from flask_login import LoginManager
 #from flask_socketio import SocketIO,emit
 #from flask_cors import CORS
 import json
+import User
 from login import appLogin
 from signup import appSignup
 from friendrequest import appFriendRequest
@@ -24,6 +26,10 @@ from messages import appMessages
 #eventlet.monkey_patch()
 
 app = Flask(__name__,template_folder='/var/www/html',static_folder='/var/www/html/static')
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 #cors = CORS(app,resources={r"/*":{"origins":"*"}})
 #socketio = SocketIO(app)
 
@@ -58,9 +64,10 @@ app.register_blueprint(appMessages)
 #	userJson = json.dumps(user)
 #	return Response(userJson,mimetype='application/json')
 
-@app.route("/api/name")
-def name():
-	return "Ahoi marinari!!"
+@login_manager.user_loader
+def load_user(user_id):
+	return User.get(user_id)
+
 
 @app.route("/")
 def home():

@@ -33,7 +33,7 @@ window.onload = function(){
 				// handle the invalid form...
 			} else {
 				event.preventDefault();
-				$.post("http://188.27.105.45/api/login", {email: $("#login_email").val(), password: $("#login_password").val()}, function(data){
+				$.post("http://188.27.105.45/api/login", {email: $("#login_email").val(), password: $("#login_password").val(), remember_me: $("#remember_me").is(":checked")}, function(data){
 					localStorage.setItem("TOKEN",data["access_token"]);
 					localStorage.setItem("EMAIL",$("#login_email").val());
 					console.log(localStorage.TOKEN);

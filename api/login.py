@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 from flask import Blueprint,Response,request,redirect,url_for #,render_template
+from flask_login import login_user
 import MySQLdb
 import json
 import jwt
 import datetime
+import User
 
 appLogin = Blueprint('api_login',__name__)
 
@@ -12,14 +14,15 @@ def login():
 
 	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
 
-	response ={}
+	response = {}
 
 	#get the info from request
 	email = request.form.get("email")
 	password = request.form.get("password")
+	rememberMe = request.form.get("remember_me")
 
 	#SQL cmd
-	query =  "SELECT id,email, password FROM users WHERE email='%s' AND password ='%s'" % (email, password)
+	query =  "SELECT id,name,email, password FROM users WHERE email='%s' AND password ='%s'" % (email, password)
 
 	#execute SQL cmd
 	cursor = db.cursor()
@@ -27,9 +30,14 @@ def login():
 
 	#retrieve DB answer
 	data = cursor.fetchone()
-
+	
 	if data != None:
+		user = User(data[0],data[1],data[2])
 		response["status"] = 'ok'
+		if rememberMe == "true":
+			login_user(user,remember = True)
+		else:
+			login_user(user)
 	else:
 		response["error"] = 'Invalid email or password'
 		response["status_code"] = 401
