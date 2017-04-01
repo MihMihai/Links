@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 from flask import Blueprint,Response,request,redirect,url_for #,render_template
-from flask_login import login_user
+from flask_login import login_user,current_user
 import MySQLdb
 import json
 import jwt
 import datetime
-import User
+from User import *
 
 appLogin = Blueprint('api_login',__name__)
 
@@ -30,14 +30,15 @@ def login():
 
 	#retrieve DB answer
 	data = cursor.fetchone()
-	
+
 	if data != None:
-		user = User(data[0],data[1],data[2])
+#		user = User(data[0],data[1],data[2])
 		response["status"] = 'ok'
-		if rememberMe == "true":
-			login_user(user,remember = True)
-		else:
-			login_user(user)
+
+#		if rememberMe == "true":
+#			login_user(user,remember = True)
+#		else:
+#			login_user(user)
 	else:
 		response["error"] = 'Invalid email or password'
 		response["status_code"] = 401
