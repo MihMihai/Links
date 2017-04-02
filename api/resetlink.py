@@ -7,10 +7,9 @@ import MySQLdb
 
 appResetLink = Blueprint('api_resetlink',__name__)
 
-@appResetLink.route("/reset_link")
+@appResetLink.route("/reset_link",methods=['GET'])
 def resetLink():
 
-	return "Asdasdas"
 	#get reset token from url
 	resetToken = request.args.get("token")
 	if resetToken == '':
