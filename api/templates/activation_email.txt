@@ -1,0 +1,14 @@
+Hello, $USER_NAME !
+
+Thanks for signing up to keep in touch with your friends on Links.
+
+In order for you to access your account, please click the activation link below. 
+
+Activation link: 
+
+http://linkspeople.ddns.net/activate?token=$TOKEN
+
+Now you're all set. Start adding your friends and have fun!
+
+Regards,
+Links Team
