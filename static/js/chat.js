@@ -19,10 +19,11 @@ window.onload = function(){
 			localStorage.setItem("TOKEN",obj.access_token);
 			localStorage.setItem("EMAIL",obj.email);
 			console.log(localStorage.TOKEN);
-			
+
 			socket.emit("join",{"email":localStorage.EMAIL});
 			getProfile();
 			getFriends();
+			setTimeout(getAllMessagesRequest,200);
 
    	 });
 
@@ -69,7 +70,6 @@ $("#messageInputBox").keypress(function(event){
 
 ///////
 
-setTimeout(getAllMessagesRequest,200);
 
 $("#logout").click(function(){
 	socket.emit("leave",{"email":localStorage.EMAIL});
