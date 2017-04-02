@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Blueprint,Response,request,redirect,url_for #,render_template
+from flask import Blueprint,Response,request,redirect,url_for ,render_template
 from flask_login import login_user,current_user
 import MySQLdb
 import json
@@ -26,7 +26,7 @@ def login():
 		rememberMe = False
 
 	#SQL cmd
-	query =  "SELECT id,name,email, password FROM users WHERE email='%s' AND password ='%s'" % (email, password)
+	query =  "SELECT id, name, active  FROM users WHERE email='%s' AND password ='%s'" % (email, password)
 
 	#execute SQL cmd
 	cursor = db.cursor()
@@ -34,9 +34,12 @@ def login():
 
 	#retrieve DB answer
 	data = cursor.fetchone()
-
+	
 	if data != None:
-		user = User(data[0],data[1],data[2])
+		user = User(data[0],data[1],email)
+		active = data[2]
+		if(active = 0)
+			return render_template("account_NotVerified.html")
 		response["status"] = 'ok'
 		if rememberMe:
 			login_user(user,remember=True)
