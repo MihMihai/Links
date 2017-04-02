@@ -43,14 +43,16 @@ def forgotPassword():
 	
 	return Response(json.dumps(response),mimetype="application/json")
 	
-	userName= cursor.fetchone()[0]
+	userData = cursor.fetchone()
 
 	#check if given email is registered, so in db
-	if userName == None:
+	if userData == None:
 		response["error"] = "Invalid email"
 		response["description"] = "There is no user registered with this email"
 		response['status_code'] = 401
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+
+	userName = userData[0]
 
 	#set up message body
 
@@ -77,7 +79,7 @@ def forgotPassword():
 	db.commit()
 
 	#substitute values in template message for customized email
-	message = message_template.substitute(USER_NAME = "userName", TOKEN = "resetToken")
+	message = message_template.substitute(USER_NAME = userName, TOKEN = resetToken)
 
 	#set up smtp object to send email
 	mailServer = smtplib.SMTP("smtp.gmail.com",587)
@@ -106,7 +108,7 @@ def forgotPassword():
 
 	response['status'] = "ok"
 
-	return Respone(json.dumps(response,sort_keys = True), mimetype = "application/json")
+	return Response(json.dumps(response,sort_keys = True), mimetype = "application/json")
 
 def encode_chat_token(email):
 	#this may throw an exception if file doesn't exist
