@@ -40,7 +40,7 @@ def resetPassword():
 
 
 	#make the query to update password in database
-	query = "UPDATE users SET password = '%s' WHERE reset_pass_token = '%s' " % (password, resetToken)
+	query = "UPDATE users SET password = '%s' WHERE reset_pass_token = '%s' " % (password, dbToken)
 
 	#commit the query
 	cursor = db.cursor()
@@ -50,7 +50,7 @@ def resetPassword():
 
 	#clear the reset token in db for security reason : 
 	# be sure that another access on the same link will not reset the pw
-	query = "UPDATE users SET reset_pass_token = '%s' WHERE reset_pass_token = '%s' " %("",resetToken)
+	query = "UPDATE users SET reset_pass_token = '%s' WHERE reset_pass_token = '%s' " %("",dbToken)
 	cursor.execute(query)
 	db.commit()
 	
