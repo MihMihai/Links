@@ -41,8 +41,6 @@ def forgotPassword():
 	cursor = db.cursor()
 	cursor.execute(query)
 	
-	return Response(json.dumps(response),mimetype="application/json")
-	
 	userData = cursor.fetchone()
 
 	#check if given email is registered, so in db
