@@ -6,7 +6,7 @@ window.onload = function(){
 	setInterval(refreshTokenRequest,45000);
 
 	let socket = io.connect("http://188.27.105.45/chat");
-	socket.emit("join",{"email":localStorage.EMAIL});
+	
 	
 	/*$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
@@ -16,9 +16,13 @@ window.onload = function(){
 
 	 socket.on("details", function(data) {
         	let obj = JSON.parse(data);
-		localStorage.setItem("TOKEN",obj.access_token);
-                localStorage.setItem("EMAIL",obj.email);
-                console.log(localStorage.TOKEN);
+			localStorage.setItem("TOKEN",obj.access_token);
+			localStorage.setItem("EMAIL",obj.email);
+			console.log(localStorage.TOKEN);
+			
+			socket.emit("join",{"email":localStorage.EMAIL});
+			getProfile();
+			getFriends();
 
    	 });
 
@@ -63,37 +67,7 @@ $("#messageInputBox").keypress(function(event){
 		sendMessage(socket);
 });
 
-
-
-$.ajax({
-	method: "GET",
-	url: "http://188.27.105.45/api/profile",
-	headers: {Authorization: localStorage.TOKEN},
-	dataType: "json",
-	success:  function(data){
-		$("#profile_name").html(data.name);
-		$("#settings_name").val(data.name);
-		var birthDate = data.birthday_date.split("-");
-		$("#birthDay option:contains("+ birthDate[2] + ")").attr('selected', 'selected');
-		$("#birthMonth option:contains("+ months[parseInt(birthDate[1])-1] + ")").attr('selected', 'selected');
-		$("#birthYear option:contains("+ birthDate[0] + ")").attr('selected', 'selected');
-	}
-});
-
-$.ajax({
-	method: "GET",
-	url: "http://188.27.105.45/api/friends",
-	headers: {Authorization: localStorage.TOKEN},
-	dataType: "json",
-	success:  function(data){
-		if(data.total > 0){
-			for(let i=0;i<data.friends.length;i++){
-				friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
-				createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
-			}
-		}
-	}
-});
+///////
 
 setTimeout(getAllMessagesRequest,200);
 
@@ -152,6 +126,40 @@ $('#form_password').validator().on('submit', function (event) {
 	});
 
 
+}
+
+function getProfile() {
+	$.ajax({
+		method: "GET",
+		url: "http://188.27.105.45/api/profile",
+		headers: {Authorization: localStorage.TOKEN},
+		dataType: "json",
+		success:  function(data){
+			$("#profile_name").html(data.name);
+			$("#settings_name").val(data.name);
+			var birthDate = data.birthday_date.split("-");
+			$("#birthDay option:contains("+ birthDate[2] + ")").attr('selected', 'selected');
+			$("#birthMonth option:contains("+ months[parseInt(birthDate[1])-1] + ")").attr('selected', 'selected');
+			$("#birthYear option:contains("+ birthDate[0] + ")").attr('selected', 'selected');
+		}
+	});
+}
+
+function getFriends() {
+	$.ajax({
+		method: "GET",
+		url: "http://188.27.105.45/api/friends",
+		headers: {Authorization: localStorage.TOKEN},
+		dataType: "json",
+		success:  function(data){
+			if(data.total > 0){
+				for(let i=0;i<data.friends.length;i++){
+					friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
+					createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+				}
+			}
+		}
+	});
 }
 
 function refreshTokenRequest(){
