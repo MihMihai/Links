@@ -5,8 +5,8 @@ window.onload = function(){
 	
 	setInterval(refreshTokenRequest,45000);
 
-	let socket = io.connect("http://188.27.105.45/chat");
-	
+//	let socket = io.connect("http://188.27.105.45/chat");
+	let socket = io.connect("http://linkspeople.ddns.net/chat");
 	
 	/*$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
@@ -73,7 +73,7 @@ $("#messageInputBox").keypress(function(event){
 
 $("#logout").click(function(){
 	socket.emit("leave",{"email":localStorage.EMAIL});
-	$.ajax({
+	/*$.ajax({
 		method: "POST",
 		url: "http://188.27.105.45/api/logout",
 		headers: {Authorization: localStorage.TOKEN},
@@ -82,7 +82,7 @@ $("#logout").click(function(){
 			localStorage.removeItem('TOKEN');
 			window.location.replace("http://linkspeople.ddns.net/");
 		}
-	});
+	});*/
 });
 
 $('#form_update').validator().on('submit', function (event) {

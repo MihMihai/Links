@@ -36,7 +36,7 @@ def friendRequests():
 		response["error"] = "Invalid token"
 		response["description"] = "Invalid token"
 		response["status_code"] = 401
-		return Reponse(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
 	query = " SELECT name, email, birthday_date,chat_token FROM users where ID = '%s'" % (userAcc["sub"])
 

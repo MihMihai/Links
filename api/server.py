@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Flask, render_template,Response,send_from_directory
+from flask import Flask, render_template,Response,send_from_directory,redirect
 from flask_login import LoginManager, login_required, current_user
 import json
 from User import *
@@ -89,6 +89,10 @@ def home():
 	f = open('remember_testing.log','a')
 	f.write(current_user.name + " " + current_user.email + "\n")
 	f.close()
+
+	if current_user.name != "Anonymous":
+		return redirect("/chat")
+
 	return render_template("index.html")
 
 @app.route("/chat")
