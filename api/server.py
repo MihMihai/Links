@@ -18,7 +18,7 @@ from refreshtoken import appRefresh
 from randomchat import appRandomChat
 from forgotpassword import appForgotPassword
 from resetlink import appResetLink
-from resetpassword import appResetPassword
+#from resetpassword import appResetPassword
 #from chat import appChat
 #import eventlet
 from deleteaccount import appDeleteAccount
@@ -55,7 +55,7 @@ app.register_blueprint(appRefresh)
 app.register_blueprint(appRandomChat)
 app.register_blueprint(appForgotPassword)
 app.register_blueprint(appResetLink)
-app.register_blueprint(appResetPassword)
+#app.register_blueprint(appResetPassword)
 app.register_blueprint(appDeleteAccount)
 app.register_blueprint(appMessages)
 app.register_blueprint(appDelete)
