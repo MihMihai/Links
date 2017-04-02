@@ -40,7 +40,8 @@ def forgotPassword():
 	query = "SELECT name FROM users WHERE email = '%s'" % (userEmail)
 	cursor = db.cursor()
 	cursor.execute(query)
-
+	
+	return Response(json.dumps(response),mimetype="application/json")
 	
 	userName= cursor.fetchone()[0]
 
