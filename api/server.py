@@ -22,6 +22,7 @@ from randomchat import appRandomChat
 from deleteaccount import appDeleteAccount
 from messages import appMessages
 from delete import appDelete
+from activate import appActivate
 #from loginuser import appUserLogin
 #eventlet.monkey_patch()
 
@@ -54,6 +55,7 @@ app.register_blueprint(appRandomChat)
 app.register_blueprint(appDeleteAccount)
 app.register_blueprint(appMessages)
 app.register_blueprint(appDelete)
+app.register_blueprint(appActivate)
 #app.register_blueprint(appUserLogin)
 
 #@app.route("/api/hello")
