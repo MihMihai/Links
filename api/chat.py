@@ -25,6 +25,10 @@ def connect():
 	cursor.execute(query)
 	data = cursor.fetchone()
 
+	f = open('socketio-error.log','a')
+	f.write(query + "\n")
+	f.close()
+
 	details = {}
 	details["access_token"] = data[0]
 	details["email"] = current_user.email

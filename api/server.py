@@ -75,7 +75,7 @@ app.register_blueprint(appActivate)
 @login_manager.user_loader
 def load_user(user_id):
 	f = open('remember_testing.log','a')
-	f.write('in server main file')
+	f.write('in server main file\n')
 	f.close()
 	return User.get(user_id)
 
