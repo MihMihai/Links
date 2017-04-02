@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 from flask_login import UserMixin, AnonymousUserMixin
-import MySQLdb
 
 class User(UserMixin):
 	def __init__(self,id,name,email,active=True):
@@ -43,4 +42,3 @@ class User(UserMixin):
 
 class Anonymous(AnonymousUserMixin):
 	name = u"Anonymous"
-	email = u"anonymous@gues.com"
