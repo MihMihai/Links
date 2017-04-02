@@ -47,8 +47,15 @@ def friends():
 	cursor.execute(query)
 
 	#get current user from db
-	user1Id = cursor.fetchone()[0]
-	#user1Db[0] = userId
+	user1Data = cursor.fetchone()
+	#user1Data[0] -- id
+
+	if user1Data == None : 
+		response["status"] = 'Invalid token'
+		response["description"] = 'Token is not registered to any user'
+		response["status_code"] = 401
+		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+	user1Id = userData[0]
 
 	queryFriends = "SELECT id, user_1, user_2 FROM friendships WHERE (user_1 = '%s' OR user_2 = '%s') AND status = 1 " % (user1Id,user1Id) 
 	cursor.execute(queryFriends)
@@ -76,7 +83,7 @@ def friends():
 
 
 
-	#do the BIG query
+	#get name and email for each friend, with friendship_id and auth_token ( to check if friend is online or not)
 	query = """SELECT f.id, u.name, u.email, u.auth_token
 		 FROM  users u JOIN friendships f
 		 ON ( (u.id = f.user_1 AND f.user_2 = '%s') OR (u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)
