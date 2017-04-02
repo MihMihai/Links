@@ -74,10 +74,10 @@ def signup():
 		
 		#get template text for email, open file
 		with open('templates/activation_email.txt', 'r', encoding='utf-8') as template_file:
-	        template_file_content = template_file.read()
+			template_file_content = template_file.read()
 		message_template = Template(template_file_content)
-		
-		query = "UPDATE users SET validationToken_token = '%s' WHERE email = '%s'" %(validationToken,email)
+
+		query = "UPDATE users SET validation_token = '%s' WHERE email = '%s'" %(validationToken,email)
 		cur.execute(query)
 		db.commit()
 		
