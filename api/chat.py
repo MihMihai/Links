@@ -16,6 +16,10 @@ eventlet.monkey_patch()
 
 socketio = SocketIO(app)
 
+@app.route('/test')
+def testing():
+	return current_user.name
+
 @socketio.on('connect',namespace='/chat')
 def connect():
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
@@ -26,7 +30,7 @@ def connect():
 	data = cursor.fetchone()
 
 	f = open('socketio-error.log','a')
-	f.write(query + "\n")
+	f.write(current_user.email + "\n")
 	f.close()
 
 	details = {}

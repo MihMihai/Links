@@ -123,3 +123,103 @@ SELECT auth_token FROM users WHERE email = 'anonymous@gues.com'
 'NoneType' object is not subscriptable pare rau
 SELECT auth_token FROM users WHERE email = 'anonymous@gues.com'
 'NoneType' object is not subscriptable pare rau
+SELECT auth_token FROM users WHERE email = 'mihai@android.com'
+SELECT auth_token FROM users WHERE email = 'mihai@android.com'
+SELECT auth_token FROM users WHERE email = 'mihai@android.com'
+SELECT auth_token FROM users WHERE email = 'mihai@android.com'
+SELECT auth_token FROM users WHERE email = 'mihai@android.com'
+Mihai
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+Anonymous
+'NoneType' object is not subscriptable pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+name 'user_email' is not defined pare rau
+mihai@android.com
+mihai@android.com
+mihai@android.com
+mihai@android.com
+bogdanalexandrescu96@gmail.com
+mihai@android.com
+mihai@android.com
+bogdanalexandrescu96@gmail.com
+mihai@android.com
+bogdanalexandrescu96@gmail.com
+mihai@android.com
+mihai@android.com
+mihai@android.com
+mihai@android.com
+bogdanalexandrescu96@gmail.com
+bogdanalexandrescu96@gmail.com
+bogdanalexandrescu96@gmail.com
+bogdanalexandrescu96@gmail.com
+bogdanalexandrescu96@gmail.com
+bogdanalexandrescu96@gmail.com
+bogdanalexandrescu96@gmail.com
+ghido@ghido.com
+ghidome@gmail.com
+mihai@android.com
+ghidome@gmail.com
+mihai@android.com
+mihai@android.com
+mihai@android.com
+ghidome@gmail.com
+mihai@android.com
+mihai@android.com
+mihai@android.com
+ghidome@gmail.com
+mihai@android.com
+mihai@android.com
+ghidome@gmail.com
+mihai@android.com
+mihai@android.com
+ghidome@gmail.com
+mihai@android.com
+mihai@android.com
+ghidome@gmail.com
+mihai@android.com
+ghidome@gmail.com
+mihai@android.com
+mihai@android.com
+ghidome@gmail.com
+mihai@android.com
+ghidome@gmail.com
+mihai@android.com
+mihai@android.com
+mihai@android.com
+mihai@android.com
+mihai@android.com
+mihai@android.com
