@@ -1,10 +1,10 @@
-Hello, $[USER_NAME] !
+Hello, $USER_NAME !
 
 It seems like you have forgotten your password.Don't worry, we got you covered.
 
 Access this link right here to set up a new one.
 
-http://linkspeople.ddns.net/reset_link?token=$[TOKEN]
+http://linkspeople.ddns.net/reset_link?token=$TOKEN
 
 Regards,
 Links Team

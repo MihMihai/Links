@@ -42,15 +42,16 @@ def forgotPassword():
 	cursor.execute(query)
 
 	
-	userName= cursor.fetchone()[0]
+	nameData = cursor.fetchone()
 
 	#check if given email is registered, so in db
-	if userName == None:
+	if nameData == None:
 		response["error"] = "Invalid email"
 		response["description"] = "There is no user registered with this email"
 		response['status_code'] = 401
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
+	userName = data[0]
 	#set up message body
 
 	#get template text for email, open file
@@ -105,7 +106,7 @@ def forgotPassword():
 
 	response['status'] = "ok"
 
-	return Respone(json.dumps(response,sort_keys = True), mimetype = "application/json")
+	return Response(json.dumps(response,sort_keys = True), mimetype = "application/json")
 
 def encode_chat_token(email):
 	#this may throw an exception if file doesn't exist
