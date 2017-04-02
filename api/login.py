@@ -34,11 +34,11 @@ def login():
 
 	#retrieve DB answer
 	data = cursor.fetchone()
-	
+
 	if data != None:
 		user = User(data[0],data[1],email)
 		active = data[2]
-		if(active = 0)
+		if active == 0:
 			return render_template("account_NotVerified.html")
 		response["status"] = 'ok'
 		if rememberMe:

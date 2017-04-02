@@ -2,12 +2,12 @@ var currentFriend;
 var months = [ "January", "February", "March", "April", "May", "June", 
 "July", "August", "September", "October", "November", "December" ];
 window.onload = function(){
-	
+
 	setInterval(refreshTokenRequest,45000);
 
 //	let socket = io.connect("http://188.27.105.45/chat");
 	let socket = io.connect("http://linkspeople.ddns.net/chat");
-	
+
 	/*$("#buton").click(function(){
 		var message = document.getElementById("inputBox").value;
 		console.log(message);
