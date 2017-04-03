@@ -33,6 +33,7 @@ def login():
 
 	if data != None:
 #		user = User(data[0],data[1],data[2])
+		active = data[2]
 		if active == 0:
 			return render_template("account_NotVerified.html")
 		response["status"] = 'ok'
