@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from flask_socketio import join_room, leave_room, send
 from flask import Blueprint, Response, request
-from flask_socketio import SocketIO,emit,send,join_room,leave_room
+from flask_socketio import SocketIO,emit,send,join_room,leave_room,disconnect
 from flask_login import current_user
 import json
 import MySQLdb
@@ -22,22 +22,26 @@ def testing():
 
 @socketio.on('connect',namespace='/chat')
 def connect():
-	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
-	cursor = db.cursor()
 
-	query = "SELECT auth_token FROM users WHERE email = '%s'" % (current_user.email)
-	cursor.execute(query)
-	data = cursor.fetchone()
+	if not current_user.is_authenticated:
+		disconnect()
+	else:
+		db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+		cursor = db.cursor()
 
-	f = open('socketio-error.log','a')
-	f.write(current_user.email + "\n")
-	f.close()
+		query = "SELECT auth_token FROM users WHERE email = '%s'" % (current_user.email)
+		cursor.execute(query)
+		data = cursor.fetchone()
 
-	details = {}
-	details["access_token"] = data[0]
-	details["email"] = current_user.email
+		f = open('socketio-error.log','a')
+		f.write(current_user.email + "\n")
+		f.close()
 
-	emit('details',json.dumps(details))
+		details = {}
+		details["access_token"] = data[0]
+		details["email"] = current_user.email
+
+		emit('details',json.dumps(details))
 
 @socketio.on('msg user',namespace='/chat')
 def message(msg):
@@ -123,6 +127,17 @@ def on_leave(data):
 	cursor.execute(query)
 	token = cursor.fetchone()
 	room = token[0]
+	
+	query = """SELECT u.chat_token
+		 FROM  users u JOIN friendships f
+		 ON ( (u.id = f.user_1 AND f.user_2 = '%s') OR (u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)
+ 	WHERE """ % (current_user.id,current_user.id)
+	
+	cursor.execute(query)
+	friendsChatToken = data.fetchall()
+	
+	for row in friendsChatToken:
+		emit('user logout',current_user.name + ' has logged out.',room=row[0])
 
 	db.close()
 	leave_room(room)
