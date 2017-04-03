@@ -67,7 +67,7 @@ def deleteAccount():
 	cursor.execute(query)
 
 	
-	userData = cursor.fetchone()
+	userData= cursor.fetchone()
 
 	#check if given email is registered, so in db
 	if userData == None:
@@ -76,9 +76,7 @@ def deleteAccount():
 		response['status_code'] = 401
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
-	#get user name
-	userName = userData[0]	
-
+	userName = userData[0]
 	#set up message body
 
 	#get template text for email, open file

@@ -22,6 +22,7 @@ from randomchat import appRandomChat
 from deleteaccount import appDeleteAccount
 from messages import appMessages
 from delete import appDelete
+from activate import appActivate
 #eventlet.monkey_patch()
 
 app = Flask(__name__,template_folder='/var/www/html',static_folder='/var/www/html/static')
@@ -52,6 +53,7 @@ app.register_blueprint(appRandomChat)
 app.register_blueprint(appDeleteAccount)
 app.register_blueprint(appMessages)
 app.register_blueprint(appDelete)
+app.register_blueprint(appActivate)
 
 #@app.route("/api/hello")
 #def hello():

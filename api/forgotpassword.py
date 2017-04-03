@@ -40,18 +40,18 @@ def forgotPassword():
 	query = "SELECT name FROM users WHERE email = '%s'" % (userEmail)
 	cursor = db.cursor()
 	cursor.execute(query)
-
 	
-	nameData = cursor.fetchone()
+	userData = cursor.fetchone()
 
 	#check if given email is registered, so in db
-	if nameData == None:
+	if userData == None:
 		response["error"] = "Invalid email"
 		response["description"] = "There is no user registered with this email"
 		response['status_code'] = 401
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
-	userName = data[0]
+	userName = userData[0]
+
 	#set up message body
 
 	#get template text for email, open file
@@ -77,7 +77,7 @@ def forgotPassword():
 	db.commit()
 
 	#substitute values in template message for customized email
-	message = message_template.substitute(USER_NAME = "userName", TOKEN = "resetToken")
+	message = message_template.substitute(USER_NAME = userName, TOKEN = resetToken)
 
 	#set up smtp object to send email
 	mailServer = smtplib.SMTP("smtp.gmail.com",587)

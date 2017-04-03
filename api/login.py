@@ -22,7 +22,7 @@ def login():
 	rememberMe = request.form.get("remember_me")
 
 	#SQL cmd
-	query =  "SELECT id,name,email, password FROM users WHERE email='%s' AND password ='%s'" % (email, password)
+	query =  "SELECT id, name, active  FROM users WHERE email='%s' AND password ='%s'" % (email, password)
 
 	#execute SQL cmd
 	cursor = db.cursor()
@@ -33,8 +33,9 @@ def login():
 
 	if data != None:
 #		user = User(data[0],data[1],data[2])
+		if active == 0:
+			return render_template("account_NotVerified.html")
 		response["status"] = 'ok'
-
 #		if rememberMe == "true":
 #			login_user(user,remember = True)
 #		else:
