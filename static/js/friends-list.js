@@ -71,3 +71,19 @@ function loadMessagesInChatBox(friendshipId){
 		createMessage(friends[friendshipId].messages[i].msg,friends[friendshipId].messages[i].sender)
 	}
 }
+
+function searchInFriendsList(){
+	let name = $("#searchFriendInput").val().trim().toLowerCase();
+	let friends = document.getElementById("friends-list").getElementsByTagName("a");
+
+	for(let index = 0; index < friends.length; index++){
+		let friend = friends[index].getElementsByTagName("h6");
+		let friendName = friend[0].innerText;
+		if(friendName.toLowerCase().indexOf(name)==-1)
+			friends[index].style.display = "none";
+		else 
+			friends[index].style.display = "flex";
+	}
+
+
+}

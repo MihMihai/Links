@@ -91,6 +91,8 @@ $.ajax({
 	}
 });
 
+document.getElementById("searchFriendInput").addEventListener("input",searchInFriendsList);
+
 setTimeout(getAllMessagesRequest,200);
 
 $("#logout").click(function(){
