@@ -1,11 +1,12 @@
 var currentFriend;
 var months = [ "January", "February", "March", "April", "May", "June", 
 "July", "August", "September", "October", "November", "December" ];
+var ip = "5.12.214.251";
 window.onload = function(){
 	
 	setInterval(refreshTokenRequest,45000);
 
-	let socket = io.connect("http://5.12.214.251/chat");
+	let socket = io.connect("http://" + ip + "/chat");
 	socket.emit("join",{"email":localStorage.EMAIL});
 	
 	/*$("#buton").click(function(){
@@ -63,7 +64,7 @@ $("#messageInputBox").keypress(function(event){
 
 $.ajax({
 	method: "GET",
-	url: "http://188.27.105.45/api/profile",
+	url: "http://" + ip + "/api/profile",
 	headers: {Authorization: localStorage.TOKEN},
 	dataType: "json",
 	success:  function(data){
@@ -78,7 +79,7 @@ $.ajax({
 
 $.ajax({
 	method: "GET",
-	url: "http://188.27.105.45/api/friends",
+	url: "http://" + ip + "/api/friends",
 	headers: {Authorization: localStorage.TOKEN},
 	dataType: "json",
 	success:  function(data){
@@ -99,7 +100,7 @@ $("#logout").click(function(){
 	socket.emit("leave",{"email":localStorage.EMAIL});
 	$.ajax({
 		method: "POST",
-		url: "http://188.27.105.45/api/logout",
+		url: "http://" + ip + "/api/logout",
 		headers: {Authorization: localStorage.TOKEN},
 		dataType: "json",
 		success:  function(data){
@@ -116,7 +117,7 @@ $('#form_update').validator().on('submit', function (event) {
 			event.preventDefault();
 			$.ajax({
 				method: "POST",
-				url: "http://188.27.105.45/api/update",
+				url: "http://" + ip + "/api/update",
 				headers: {Authorization: localStorage.TOKEN},
 				data: {name: $("#settings_name").val(),
 				birth_day: $("#birthDay").find(":selected").text(),birth_month: $("#birthMonth").find(":selected").text(),birth_year: $("#birthYear").find(":selected").text()},
@@ -136,7 +137,7 @@ $('#form_password').validator().on('submit', function (event) {
 			event.preventDefault();
 			$.ajax({
 				method: "POST",
-				url: "http://188.27.105.45/api/update",
+				url: "http://" + ip + "/api/update",
 				headers: {Authorization: localStorage.TOKEN},
 				data: {password: $("#settings_password").val()},
 				dataType: "json",
@@ -155,7 +156,7 @@ $('#form_password').validator().on('submit', function (event) {
 function refreshTokenRequest(){
 	$.ajax({
 		method: "GET",
-		url: "http://188.27.105.45/api/refresh_token",
+		url: "http://" + ip + "/api/refresh_token",
 		headers: {Authorization: localStorage.TOKEN},
 		dataType: "json",
 		success:  function(data){
@@ -179,7 +180,7 @@ function sendMessage(socket){
 function getAllMessagesRequest(){
 	$.ajax({
 		method: "GET",
-		url: "http://188.27.105.45/api/messages",
+		url: "http://" + ip + "/api/messages",
 		headers: {Authorization: localStorage.TOKEN},
 		dataType: "json",
 		success:  function(data){
