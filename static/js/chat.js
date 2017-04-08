@@ -5,7 +5,7 @@ window.onload = function(){
 	
 	setInterval(refreshTokenRequest,45000);
 
-	let socket = io.connect("http://188.27.105.45/chat");
+	let socket = io.connect("http://5.12.214.251/chat");
 	socket.emit("join",{"email":localStorage.EMAIL});
 	
 	/*$("#buton").click(function(){
