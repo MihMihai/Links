@@ -1,4 +1,5 @@
 var currentFriend;
+var chat_token;
 var months = [ "January", "February", "March", "April", "May", "June", 
 "July", "August", "September", "October", "November", "December" ];
 var ip = "5.12.214.251";
@@ -9,15 +10,6 @@ window.onload = function(){
 	let socket = io.connect("http://" + ip + "/chat");
 	socket.emit("join",{"email":localStorage.EMAIL});
 	
-	/*$("#buton").click(function(){
-		var message = document.getElementById("inputBox").value;
-		console.log(message);
-	});*/
-
-
-//	 socket.on("connect", function() {
-//        socket.emit("my event", {data: 'I\'m connected!'});
-//    });
 
 socket.on("msg server",function(msg) {
 	try{
@@ -61,6 +53,24 @@ $("#messageInputBox").keypress(function(event){
 });
 
 
+var panelContent = document.getElementById("panelContent");
+
+var friendRequestsArray = [];
+
+ $("#addFriend").click(function(){
+
+	  AddFriend(socket,chat_token,friendRequestsArray,panelContent);
+	
+ });
+$("#friendRequests").click(function(){
+	 ViewFriendRequests(socket,chat_token,friendRequestsArray,panelContent);
+	 
+ });
+
+ $("#widgets").click(function(){
+	  Widgets(panelContent);
+ });
+
 
 $.ajax({
 	method: "GET",
@@ -74,8 +84,23 @@ $.ajax({
 		$("#birthDay option:contains("+ birthDate[2] + ")").attr('selected', 'selected');
 		$("#birthMonth option:contains("+ months[parseInt(birthDate[1])-1] + ")").attr('selected', 'selected');
 		$("#birthYear option:contains("+ birthDate[0] + ")").attr('selected', 'selected');
+		chat_token=data.chat_token;
 	}
 });
+
+$.ajax({
+			method: "GET",
+			url: "http://" + ip + "/api/friend_requests",
+			headers: {Authorization: localStorage.TOKEN},
+			dataType: "json",
+			success:  function(data){
+
+					if(data.total > 0){
+
+						for(let i=0;i<data.requests.length;i++){
+							friendRequestsArray.push(new Friend(data.requests[i].name,data.requests[i].email));
+						}}}
+		});
 
 $.ajax({
 	method: "GET",

@@ -11,23 +11,6 @@ window.onload = function(){
 		window.location.replace("http://linkspeople.ddns.net/forgot_password");
 	});
 	
-	/*login_button = document.getElementById("login_button").onclick = function(){
-		event.preventDefault();
-		$.post("http://188.27.105.45/api/login", {email: $("#login_email").val(), password: $("#login_password").val()}, function(data){
-		console.log(data);
-		}, "json")
-		.fail(function() {
-		alert( "error" );
-	});};
-	register_button = document.getElementById("register_button").onclick = function(event){
-		event.preventDefault();
-		$.post("http://188.27.105.45/api/signup", {name:$("#register_name").val(), email: $("#register_email").val(), password: $("#register_password").val(),
-			birth_day: $("#birthDay").find(":selected").text(),birth_month: $("#birthMonth").find(":selected").text(),birth_year: $("#birthYear").find(":selected").text()}, function(data){
-			console.log(data);
-		}, "json")
-		.fail(function() {
-			alert( "error" );
-		});};*/
 		
 		$('#form_login').validator().on('submit', function (event) {
 			if (event.isDefaultPrevented()) {
@@ -38,7 +21,7 @@ window.onload = function(){
 					localStorage.setItem("TOKEN",data["access_token"]);
 					localStorage.setItem("EMAIL",$("#login_email").val());
 					console.log(localStorage.TOKEN);
-					window.location.replace("http://linkspeople.ddns.net/chat");
+					window.location.replace("file:///D:/documente/GitHub/Links/chat.html");
 				}, "json")
 				.fail(function() {
 					$("#login_error").html("<p style='color:red;'>Invalid email or password!</p>");
