@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Blueprint,Response,request,redirect,url_for #,render_template
+from flask import Blueprint,Response,request,redirect,url_for,render_template
 from flask_login import login_user,current_user
 import MySQLdb
 import json
