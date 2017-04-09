@@ -136,9 +136,15 @@ def friend_request(data):
 			cursor.execute(query)
 			db.commit()
 
+
+			query = "SELECT id FROM friendships WHERE user_1 ='%d' AND user_2 = '%d'" % (uid1,uid2)
+			cursor.execute(query)
+			frId = cursor.fethcone()
+
 			frReqDict = {}
 			frReqDict['from'] = email
 			frReqDict['name'] = name
+			frReqDict['friendship_id'] = frId[0]
 			emit('new friend request',json.dumps(frReqDict),room=room)
 		else:
 			room = data['chat_token']
@@ -175,6 +181,12 @@ def accept_friend_request(data):
 		frReqDict = {}
 		frReqDict['from'] = user1[1]
 		frReqDict['status'] = data['status']
+		if data['status'] == 1:
+			query = "SELECT id FROM friendships WHERE user_1 = '%d' AND user_2 = '%d'" % (uid2,uid1)
+			cursor.execute(query)
+			frId = cursor.fetchone()
+			frReqDict['friendship_id'] = frId[0]
+
 		emit('status friend request',json.dumps(frReqDict),room=room)
 	else: #not needed
 		room = data['chat_token']
