@@ -31,15 +31,17 @@ def message(msg):
 		try:
 			userAcc = jwt.decode(randomToken)
 		except jwt.ExpiredSignatureError:
-			response["error"] = "Invalid token"
-			response["description"] = "Token has expired"
-			response["status_code"] = 401
-			return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+			pass
+#			response["error"] = "Invalid token"
+#			response["description"] = "Token has expired"
+#			response["status_code"] = 401
+#			return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 		except jwt.InvalidTokenError:
-			response["error"] = "Invalid token"
-			response["description"] = "Invalid token"
-			response["status_code"] = 401
-			return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+			pass
+#			response["error"] = "Invalid token"
+#			response["description"] = "Invalid token"
+#			response["status_code"] = 401
+#			return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
 		query = "SELECT chat_token FROM users WHERE id = '%s' " % (userAcc['sub'])
 	else:
@@ -62,20 +64,20 @@ def message(msg):
 	else:
 		dict.pop('to')
 
-	#STORE MESSAGES INTO DB
-	query = "SELECT id FROM users WHERE email = '%s'" % (dict['from'])
-	cursor.execute(query)
-	data = cursor.fetchone()
-	uid1 = data[0]
-	query = "SELECT id FROM users WHERE email = '%s'" % (to)
-	cursor.execute(query)
-	data = cursor.fetchone()
-	uid2 = data[0]
-	query = "INSERT INTO messages (user_1, user_2, message) VALUES('%i','%i','%s')" % (uid1, uid2, str(dict["msg"]))
-	cursor.execute(query)
-	db.commit()
+		#STORE MESSAGES INTO DB
+		query = "SELECT id FROM users WHERE email = '%s'" % (dict['from'])
+		cursor.execute(query)
+		data = cursor.fetchone()
+		uid1 = data[0]
+		query = "SELECT id FROM users WHERE email = '%s'" % (to)
+		cursor.execute(query)
+		data = cursor.fetchone()
+		uid2 = data[0]
+		query = "INSERT INTO messages (user_1, user_2, message) VALUES('%i','%i','%s')" % (uid1, uid2, str(dict["msg"]))
+		cursor.execute(query)
+		db.commit()
 
-	#del dict['to']
+	#db.close()
 	emit('msg server',json.dumps(dict), room=chatToken)
 	#emit('msg server', json.dumps(dict))
 

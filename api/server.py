@@ -7,7 +7,7 @@ from User import *
 from login import appLogin
 from signup import appSignup
 from friendrequest import appFriendRequest
-from acceptfriend import appAcceptFriend
+#from acceptfriend import appAcceptFriend
 from removefriend import appRemoveFriend
 from friendrequests import appFriendRequests
 from profile import appProfile
@@ -40,7 +40,7 @@ app = Flask(__name__,template_folder='/var/www/html',static_folder='/var/www/htm
 app.register_blueprint(appLogin)
 app.register_blueprint(appSignup)
 app.register_blueprint(appFriendRequest)
-app.register_blueprint(appAcceptFriend)
+#app.register_blueprint(appAcceptFriend)
 app.register_blueprint(appRemoveFriend)
 app.register_blueprint(appFriendRequests)
 app.register_blueprint(appProfile)
