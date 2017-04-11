@@ -141,7 +141,7 @@ def friend_request(data):
 
 			query = "SELECT id FROM friendships WHERE user_1 ='%d' AND user_2 = '%d'" % (uid1,uid2)
 			cursor.execute(query)
-			frId = cursor.fethcone()
+			frId = cursor.fetchone()
 
 			frReqDict = {}
 			frReqDict['from'] = email

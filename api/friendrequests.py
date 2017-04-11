@@ -38,7 +38,7 @@ def friendRequests():
 		return Reponse(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
 
-	query = "SELECT id,user_1 from friendships WHERE user_2='%s' and status=1" % (userAcc["sub"])
+	query = "SELECT id,user_1 from friendships WHERE user_2='%s' and status=0" % (userAcc["sub"])
 
 	cursor = db.cursor()
 	cursor.execute(query)
