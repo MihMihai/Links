@@ -2,13 +2,37 @@ var currentFriend;
 var chat_token;
 var months = [ "January", "February", "March", "April", "May", "June", 
 "July", "August", "September", "October", "November", "December" ];
+var friendRequestsArray = [];
 var ip = "5.12.214.251";
+var currentTab;
+
 window.onload = function(){
 	
 	setInterval(refreshTokenRequest,45000);
 
 	let socket = io.connect("http://" + ip + "/chat");
 	socket.emit("join",{"email":localStorage.EMAIL});
+	
+	$('#rightPanel>li>a').each(function() {
+		$(this).css("height","100%")
+			.css("color","white")
+			.css("margin",0); //scoate asta daca vrei spatiu intre tab-uri
+			//la hover trebuie pus: #428bca;
+	});
+	
+	var panelContent = document.getElementById("panelContent");
+	AddFriend(socket,chat_token,friendRequestsArray,panelContent);
+	currentTab = "#addFriend";
+	
+	
+	
+	/*createFriendRequestManager("Mihai","mihai@android.com",46);
+	createFriendRequestManager("Test","test@android.com",47);
+	createFriendRequestManager("Test","test@android.com",48);
+	createFriendRequestManager("Test","test@android.com",49);
+	createFriendRequestManager("Test","test@android.com",50);
+	createFriendRequestManager("Test","test@android.com",51);
+	createFriendRequestManager("Test","test@android.com",52);*/
 	
 
 socket.on("msg server",function(msg) {
@@ -40,6 +64,27 @@ socket.on("msg server",function(msg) {
 
 });
 
+socket.on("new friend request",function(msg){
+	try {
+		//alert("new friend request");
+		let obj = JSON.parse(msg);
+		let from = obj.from;
+		let name = obj.name;
+		let friendshipId = obj.friendship_id;
+		friendRequestsArray.push(new FriendReq(name, from,friendshipId));
+		if(currentTab == "#friendRequests")
+			createFriendRequestManager(name,from,friendshipId);
+	}
+	catch(e) {
+		console.log("ERROR");
+	}
+});
+
+socket.on("bad friend request",function(msg){
+	alert(msg);
+});
+
+
 //send message
 //friend is a hashmap of friends, the key is friendship_id, and it has email and name
 //sendMessage is declared after window.onload
@@ -53,9 +98,7 @@ $("#messageInputBox").keypress(function(event){
 });
 
 
-var panelContent = document.getElementById("panelContent");
 
-var friendRequestsArray = [];
 
  $("#addFriend").click(function(){
 
@@ -94,11 +137,9 @@ $.ajax({
 			headers: {Authorization: localStorage.TOKEN},
 			dataType: "json",
 			success:  function(data){
-
 					if(data.total > 0){
-
 						for(let i=0;i<data.requests.length;i++){
-							friendRequestsArray.push(new Friend(data.requests[i].name,data.requests[i].email));
+							friendRequestsArray.push(new FriendReq(data.requests[i].name,data.requests[i].email,data.requests[i].friendship_id));
 						}}}
 		});
 
