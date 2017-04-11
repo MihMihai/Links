@@ -22,7 +22,7 @@
 	<script src="static/js/friends-list.js" type="text/javascript"></script>
 	<script src="static/js/createMessage.js" type="text/javascript"></script>
 	<script src="static/js/messageNotifications.js" type="text/javascript"></script>
-	<!--<script src="static/js/friendsManager.js" type="text/javascript"></script>-->
+	<script src="static/js/friendsManager.js" type="text/javascript"></script>
 	<title>Links</title>
 	<style>
 		body{
@@ -122,7 +122,14 @@
 					</div>
 					<div class="col-md-4">
 						<div class="panel panel-default">
-						<div class="panel-heading">
+						
+						<ul id="rightPanel" class="nav nav-tabs" style="background-color: #2C3E50; display: flex; justify-content: center; height: 47.2px;">
+						  <li id="addFriend" role="presentation" class="active"><a href="#">Add friend</a></li>
+						  <li id="friendRequests" role="presentation"><a href="#">Friend Requests</a></li>
+						  <li id="widgets" role="presentation"><a href="#">Widgets</a></li>
+						</ul>
+						
+						<!--<div class="panel-heading">
 							<button class="btn btn-default" id="addFriend">
 									Add friend
 							</button>
@@ -133,7 +140,7 @@
 									Widgets
 							</button>
 							
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div id="panelContent">
 									
