@@ -165,7 +165,7 @@ def accept_friend_request(data):
 	query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(data['email'])
 	cursor.execute(query)
 	userId = cursor.fetchone()
-	query = "SELECT id,email FROM users WHERE chat_token = '%s'" % (data['chat_token'])
+	query = "SELECT id,email,name FROM users WHERE chat_token = '%s'" % (data['chat_token'])
 	cursor.execute(query)
 	user1 = cursor.fetchone()
 	uid1 = user1[0]
@@ -187,6 +187,7 @@ def accept_friend_request(data):
 			query = "SELECT id FROM friendships WHERE user_1 = '%d' AND user_2 = '%d'" % (uid2,uid1)
 			cursor.execute(query)
 			frId = cursor.fetchone()
+			frReqDict['name'] = user1[2]
 			frReqDict['friendship_id'] = frId[0]
 
 		emit('status friend request',json.dumps(frReqDict),room=room)
