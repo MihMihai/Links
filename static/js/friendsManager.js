@@ -103,14 +103,18 @@
 
 					var answer = confirm ("Are you want to accept the friend request?")
 					if (answer)
-						{
-							socket.emit("response friend request",{"chat_token":chat_token,"email":from, "status":1});
+					{
+						socket.emit("response friend request",{"chat_token":chat_token,"email":from, "status":1});
 
-							//createFriend("http://placehold.it/50/FA6F57/fff&text=ME",name,friendship_id);
+						createFriend("http://placehold.it/50/FA6F57/fff&text=ME",name,friendship_id);
 
-							panelContent.removeChild(friendreq);
-							friendRequestsArray.splice(friendRequestsArray.indexOf(new Friend(name, from)),1);
-						}
+						$("#" + friendship_id).remove();
+						//panelContent.removeChild(friendreq);
+						//friendRequestsArray.splice(friendRequestsArray.indexOf(new Friend(name, from)),1);
+						let posOfNewFriend = friendRequestsArray.map(friend => friend.email).indexOf(from);
+						friendRequestsArray.splice(posOfNewFriend,1);
+						friends[friendship_id] = new Friend(name,from);
+					}
 
 				});
 
@@ -120,8 +124,11 @@
 					if (answer)
 					{
 						socket.emit("response friend request",{"chat_token":chat_token,"email":from, "status":0});
-						panelContent.removeChild(friendreq);
-						friendRequestsArray.splice(friendRequestsArray.indexOf(new Friend(name, from)),1);
+						$("#" + friendship_id).remove();
+						//panelContent.removeChild(friendreq);
+						let posOfDeletedFriendReq = friendRequestsArray.map(friend => friend.email).indexOf(from);
+						friendRequestsArray.splice(posOfDeletedFriendReq,1);
+						//friendRequestsArray.splice(friendRequestsArray.indexOf(new Friend(name, from)),1);
 					}
 					
 				});

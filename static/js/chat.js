@@ -19,6 +19,16 @@ window.onload = function(){
 			.css("margin",0); //scoate asta daca vrei spatiu intre tab-uri
 			//la hover trebuie pus: #428bca;
 	});
+	/*$('#rightPanel>li>a').hover(function() {
+		if($(this).parent().attr('id') !== currentTab.substring(1))
+			$(this).css("background-color","#428bca");
+	},
+	function() {
+		if($(this).parent().attr('id') != currentTab.substring(1))
+			$(this).css("background-color","#2C3E50");
+		else
+			$(this).css("background-color","white");
+	});*/
 	
 	var panelContent = document.getElementById("panelContent");
 	AddFriend(socket,chat_token,friendRequestsArray,panelContent);
@@ -71,7 +81,7 @@ socket.on("new friend request",function(msg){
 		let from = obj.from;
 		let name = obj.name;
 		let friendshipId = obj.friendship_id;
-		friendRequestsArray.push(new FriendReq(name, from,friendshipId));
+		friendRequestsArray.push(new FriendReq(name,from,friendshipId));
 		if(currentTab == "#friendRequests")
 			createFriendRequestManager(name,from,friendshipId);
 	}
@@ -82,6 +92,19 @@ socket.on("new friend request",function(msg){
 
 socket.on("bad friend request",function(msg){
 	alert(msg);
+});
+
+socket.on("status friend request",function(msg) {
+	try  {
+		let obj = JSON.parse(msg);
+		if(obj.status == 1) {
+			friends[obj.friendship_id] = new Friend(obj.name,obj.from);
+			createFriend("http://placehold.it/50/FA6F57/fff&text=ME",obj.name,obj.friendship_id);
+		}
+	}
+	catch(e) {
+		console.log("ERROR -- status fr req");
+	}
 });
 
 
