@@ -83,7 +83,7 @@ socket.on("new friend request",function(msg){
 		let friendshipId = obj.friendship_id;
 		friendRequestsArray.push(new FriendReq(name,from,friendshipId));
 		if(currentTab == "#friendRequests")
-			createFriendRequestManager(name,from,friendshipId);
+			createFriendRequestManager(socket,name,from,friendshipId);
 	}
 	catch(e) {
 		console.log("ERROR");

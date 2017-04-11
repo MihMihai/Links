@@ -55,7 +55,7 @@
 
 				for(i=0;i<friendRequestsArray.length;i++)
 				{
-					createFriendRequestManager(friendRequestsArray[i].name,friendRequestsArray[i].email);
+					createFriendRequestManager(socket,friendRequestsArray[i].name,friendRequestsArray[i].email);
 				}
 
 				
@@ -93,7 +93,7 @@
 				$(panelContent).append(friendreq);
 			}
 			
-			function createFriendRequestManager(name,from,friendship_id)
+			function createFriendRequestManager(socket,name,from,friendship_id)
 			{
 				
 				createFriendRequest("http://placehold.it/50/FA6F57/fff&text=ME",name,friendship_id);

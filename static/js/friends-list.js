@@ -44,7 +44,7 @@ function remove(name,friendshipId){
 	if(result===true){
 		$.ajax({
 			method: "POST",
-			url: "http://188.27.105.45/api/remove_friend",
+			url: "http://" + ip + "/api/remove_friend",
 			headers: {Authorization: localStorage.TOKEN},
 			data: {friendship_id: friendshipId},
 			dataType: "json",
