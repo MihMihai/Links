@@ -10,6 +10,7 @@
 			   
 				$(currentTab).removeClass('active');
 				$(currentTab + ">a").css("color","white");
+									//.css("background-color","#2C3E50");
 				$('#addFriend').addClass('active');
 				$('#addFriend>a').css("color","black");
 				currentTab = '#addFriend';
@@ -44,6 +45,7 @@
 				
 				$(currentTab).removeClass('active');
 				$(currentTab + ">a").css("color","white");
+									//.css("background-color","#2C3E50");
 				$('#friendRequests').addClass('active');
 				$('#friendRequests>a').css("color","black");
 				currentTab = '#friendRequests';
@@ -140,6 +142,7 @@
 				
 				$(currentTab).removeClass('active');
 				$(currentTab + ">a").css("color","white");
+									//.css("background-color","#2C3E50");
 				$('#widgets').addClass('active');
 				$('#widgets>a').css("color","black");
 				currentTab = '#widgets';

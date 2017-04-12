@@ -19,13 +19,15 @@ window.onload = function(){
 			.css("margin",0); //scoate asta daca vrei spatiu intre tab-uri
 			//la hover trebuie pus: #428bca;
 	});
-	/*$('#rightPanel>li>a').hover(function() {
+	/*$('#rightPanel>li').hover(function() {
 		if($(this).parent().attr('id') !== currentTab.substring(1))
 			$(this).css("background-color","#428bca");
+		
 	},
 	function() {
-		if($(this).parent().attr('id') != currentTab.substring(1))
+		if($(this).parent().attr('id') !== currentTab.substring(1))
 			$(this).css("background-color","#2C3E50");
+		
 		else
 			$(this).css("background-color","white");
 	});*/
