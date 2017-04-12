@@ -8,14 +8,14 @@ from login import appLogin
 from signup import appSignup
 from friendrequest import appFriendRequest
 #from acceptfriend import appAcceptFriend
-from removefriend import appRemoveFriend
+#from removefriend import appRemoveFriend
 from friendrequests import appFriendRequests
 from profile import appProfile
 from update import appUpdate
 from logout import appLogout
 from friends import appFriends
 from refreshtoken import appRefresh
-from randomchat import appRandomChat
+#from randomchat import appRandomChat
 #from forgotpassword import appForgotPassword
 #from chat import appChat
 #import eventlet
@@ -41,14 +41,14 @@ app.register_blueprint(appLogin)
 app.register_blueprint(appSignup)
 app.register_blueprint(appFriendRequest)
 #app.register_blueprint(appAcceptFriend)
-app.register_blueprint(appRemoveFriend)
+#app.register_blueprint(appRemoveFriend)
 app.register_blueprint(appFriendRequests)
 app.register_blueprint(appProfile)
 app.register_blueprint(appUpdate)
 app.register_blueprint(appLogout)
 app.register_blueprint(appFriends)
 app.register_blueprint(appRefresh)
-app.register_blueprint(appRandomChat)
+#app.register_blueprint(appRandomChat)
 #app.register_blueprint(appForgotPassword)
 app.register_blueprint(appDeleteAccount)
 app.register_blueprint(appMessages)
