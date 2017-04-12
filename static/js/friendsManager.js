@@ -6,7 +6,7 @@
 	this.friendship_id=friendship_id;
 	}
 
-           function AddFriend(socket,chat_token,friendRequestsArray,panelContent) {
+           function AddFriend(socket,friendRequestsArray,panelContent) {
 			   
 				$(currentTab).removeClass('active');
 				$(currentTab + ">a").css("color","white");
@@ -41,7 +41,7 @@
 				});
 		   }
 
-            function ViewFriendRequests(socket, chat_token,friendRequestsArray,panelContent){
+            function ViewFriendRequests(socket,friendRequestsArray,panelContent){
 				
 				$(currentTab).removeClass('active');
 				$(currentTab + ">a").css("color","white");
@@ -57,7 +57,7 @@
 
 				for(i=0;i<friendRequestsArray.length;i++)
 				{
-					createFriendRequestManager(socket,friendRequestsArray[i].name,friendRequestsArray[i].email);
+					createFriendRequestManager(socket,friendRequestsArray[i].name,friendRequestsArray[i].email,friendRequestsArray[i].friendship_id);
 				}
 
 				
@@ -66,7 +66,7 @@
 			
 			function createFriendRequest(imgSrc,name,friendshipId){
 				var h6 = $("<h4></h4>").text(name);
-				var friendreq = $("<a id="+friendshipId+" href='#'' class='list-group-item'></a>");
+				var friendreq = $("<a id=fr"+friendshipId+" href='#'' class='list-group-item'></a>");
 				friendreq.css("display","flex")
 						.css("flex-direction","row")
 						.css("align-items","center")
@@ -108,9 +108,9 @@
 					{
 						socket.emit("response friend request",{"chat_token":chat_token,"email":from, "status":1});
 
-						createFriend("http://placehold.it/50/FA6F57/fff&text=ME",name,friendship_id);
+						createFriend(socket,"http://placehold.it/50/FA6F57/fff&text=ME",name,friendship_id);
 
-						$("#" + friendship_id).remove();
+						$("#fr" + friendship_id).remove();
 						//panelContent.removeChild(friendreq);
 						//friendRequestsArray.splice(friendRequestsArray.indexOf(new Friend(name, from)),1);
 						let posOfNewFriend = friendRequestsArray.map(friend => friend.email).indexOf(from);
@@ -126,7 +126,7 @@
 					if (answer)
 					{
 						socket.emit("response friend request",{"chat_token":chat_token,"email":from, "status":0});
-						$("#" + friendship_id).remove();
+						$("#fr" + friendship_id).remove();
 						//panelContent.removeChild(friendreq);
 						let posOfDeletedFriendReq = friendRequestsArray.map(friend => friend.email).indexOf(from);
 						friendRequestsArray.splice(posOfDeletedFriendReq,1);

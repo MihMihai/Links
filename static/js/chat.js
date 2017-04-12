@@ -7,12 +7,12 @@ var ip = "5.12.214.251";
 var currentTab;
 
 window.onload = function(){
-	
+
 	setInterval(refreshTokenRequest,45000);
 
 	let socket = io.connect("http://" + ip + "/chat");
 	socket.emit("join",{"email":localStorage.EMAIL});
-	
+
 	$('#rightPanel>li>a').each(function() {
 		$(this).css("height","100%")
 			.css("color","white")
@@ -31,13 +31,13 @@ window.onload = function(){
 		else
 			$(this).css("background-color","white");
 	});*/
-	
+
 	var panelContent = document.getElementById("panelContent");
-	AddFriend(socket,chat_token,friendRequestsArray,panelContent);
+	AddFriend(socket,friendRequestsArray,panelContent);
 	currentTab = "#addFriend";
-	
-	
-	
+
+
+
 	/*createFriendRequestManager("Mihai","mihai@android.com",46);
 	createFriendRequestManager("Test","test@android.com",47);
 	createFriendRequestManager("Test","test@android.com",48);
@@ -45,7 +45,7 @@ window.onload = function(){
 	createFriendRequestManager("Test","test@android.com",50);
 	createFriendRequestManager("Test","test@android.com",51);
 	createFriendRequestManager("Test","test@android.com",52);*/
-	
+
 
 socket.on("msg server",function(msg) {
 	try{
@@ -64,10 +64,10 @@ socket.on("msg server",function(msg) {
 					removeMessageNotification(friendshipID);
 				},500);
 			},1000);
-			
+
 		}
 		$(document.getElementById("friends-list").getElementsByTagName("a")[0]).before($("#"+friendshipID));
-		
+
 
 	}
 	catch(e){
@@ -101,11 +101,31 @@ socket.on("status friend request",function(msg) {
 		let obj = JSON.parse(msg);
 		if(obj.status == 1) {
 			friends[obj.friendship_id] = new Friend(obj.name,obj.from);
-			createFriend("http://placehold.it/50/FA6F57/fff&text=ME",obj.name,obj.friendship_id);
+			createFriend(socket,"http://placehold.it/50/FA6F57/fff&text=ME",obj.name,obj.friendship_id);
 		}
 	}
 	catch(e) {
 		console.log("ERROR -- status fr req");
+	}
+});
+
+socket.on("friend removed",function(msg) {
+	try {
+		let obj = JSON.parse(msg);
+		$("#" + obj.old_friendship_id).remove();
+		//msg.message also available here
+	}
+	catch(e) {
+		console.log("ERROR -- friend removed");
+	}
+});
+
+socket.on("bad remove friend", function(msg) {
+	try {
+		alert(msg); //change this!! to modal/popup
+	}
+	catch(e) {
+		console.log("ERROR -- bad remove friend");
 	}
 });
 
@@ -127,11 +147,11 @@ $("#messageInputBox").keypress(function(event){
 
  $("#addFriend").click(function(){
 
-	  AddFriend(socket,chat_token,friendRequestsArray,panelContent);
+	  AddFriend(socket,friendRequestsArray,panelContent);
 	
  });
 $("#friendRequests").click(function(){
-	 ViewFriendRequests(socket,chat_token,friendRequestsArray,panelContent);
+	 ViewFriendRequests(socket,friendRequestsArray,panelContent);
 	 
  });
 
@@ -177,7 +197,7 @@ $.ajax({
 		if(data.total > 0){
 			for(let i=0;i<data.friends.length;i++){
 				friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name,data.friends[i].email);
-				createFriend("http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
+				createFriend(socket,"http://placehold.it/50/FA6F57/fff&text=ME",data.friends[i].name,data.friends[i].friendship_id);
 			}
 		}
 	}
