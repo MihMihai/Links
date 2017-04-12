@@ -44,6 +44,7 @@ function remove(socket,name,friendshipId){
 	if(result===true){
 
 		socket.emit("remove friend",{"chat_token":chat_token,"friendship_id":friendshipId});
+		delete friends[friendshipId];
 
 /*		$.ajax({
 			method: "POST",
