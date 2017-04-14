@@ -72,63 +72,65 @@
 							<h3>Friends List</h3>
 						</div>
 						<div class="panel-body">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search a friend" id="searchFriendInput">
-								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
+							<button type="button" class="btn btn-success btn-lg btn-block" style="margin-bottom: 15px;">Get a random friend!</button>
+							<input type="text" class="form-control" placeholder="Search a friend" id="searchFriendInput" style="margin-bottom: 15px;">
+
+							<div class="list-group" id="random-list" style="margin:0; padding:0;">
+									<a href="#" class="list-group-item">
+										<span class="chat-img pull-left">
+											<img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle"/></span><h6>Marian Iancu</h6>
+											<button type="button" class="close pull-right clearfix">&times;</button>
+										</a>
+									</div>
+									<div class="list-group" id="friends-list" style="margin:0; padding:0;">
+										<!--<a href="#" class="list-group-item">
+											<span class="chat-img pull-left">
+												<img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle"/></span><h6>Marian Iancu</h6>
+												<button type="button" class="close pull-right clearfix">&times;</button>
+											</a>-->
+										</div>
+
+									</div>
+									<div class="panel-footer">
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-md-5">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 id="friendName">CHAT</h3>
+									</div>
+									<div class="panel-body" id="chat_box">
+										<ul class="chat" id="messages">
+											Select a friend and start chatting!!!
+
+
+
+										</ul>
+									</div>
+									<div class="panel-footer">
+										<div class="input-group">
+											<input type="text" class="form-control" placeholder="Send your message!"
+											id="messageInputBox" disabled>
+											<span class="input-group-btn">
+												<button class="btn btn-success" type="submit"
+												id="sendMessageButton" disabled>SEND</button>
+											</span>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="list-group" id="friends-list">
-								<!--<a href="#" class="list-group-item">
-									<span class="chat-img pull-left">
-										<img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle"/></span><h6>Marian Iancu</h6>
-										<button type="button" class="close pull-right clearfix">&times;</button>
-									</a>-->
+							<div class="col-md-4">
+								<div class="panel panel-default">
 
-								</div>
-							</div>
-							<div class="panel-footer">
-							</div>
-						</div>
+									<ul id="rightPanel" class="nav nav-tabs" style="background-color: #2C3E50; display: flex; justify-content: center; height: 47.2px;">
+										<li id="addFriend" role="presentation" class="active"><a href="#">Add friend</a></li>
+										<li id="friendRequests" role="presentation"><a href="#">Friend Requests</a></li>
+										<li id="widgets" role="presentation"><a href="#">Widgets</a></li>
+									</ul>
 
-					</div>
-
-					<div class="col-md-5">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 id="friendName">CHAT</h3>
-							</div>
-							<div class="panel-body" id="chat_box">
-								<ul class="chat" id="messages">
-									Select a friend and start chatting!!!
-									
-									
-									
-								</ul>
-							</div>
-							<div class="panel-footer">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Send your message!"
-									id="messageInputBox" disabled>
-									<span class="input-group-btn">
-										<button class="btn btn-success" type="submit"
-										id="sendMessageButton" disabled>SEND</button>
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="panel panel-default">
-						
-						<ul id="rightPanel" class="nav nav-tabs" style="background-color: #2C3E50; display: flex; justify-content: center; height: 47.2px;">
-						  <li id="addFriend" role="presentation" class="active"><a href="#">Add friend</a></li>
-						  <li id="friendRequests" role="presentation"><a href="#">Friend Requests</a></li>
-						  <li id="widgets" role="presentation"><a href="#">Widgets</a></li>
-						</ul>
-						
 						<!--<div class="panel-heading">
 							<button class="btn btn-default" id="addFriend">
 									Add friend
@@ -143,11 +145,11 @@
 						</div>-->
 						<div class="panel-body">
 							<div id="panelContent">
-									
+
 							</div>
 							
 						</div>
-							
+
 						<div class="panel-footer">
 						</div>
 					</div>

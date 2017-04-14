@@ -1,5 +1,4 @@
 var currentFriend;
-var chat_token;
 var months = [ "January", "February", "March", "April", "May", "June", 
 "July", "August", "September", "October", "November", "December" ];
 var friendRequestsArray = [];
@@ -172,7 +171,7 @@ $.ajax({
 		$("#birthDay option:contains("+ birthDate[2] + ")").attr('selected', 'selected');
 		$("#birthMonth option:contains("+ months[parseInt(birthDate[1])-1] + ")").attr('selected', 'selected');
 		$("#birthYear option:contains("+ birthDate[0] + ")").attr('selected', 'selected');
-		chat_token=data.chat_token;
+		localStorage.CHAT_TOKEN=data.chat_token;
 	}
 });
 
@@ -216,6 +215,8 @@ $("#logout").click(function(){
 		dataType: "json",
 		success:  function(data){
 			localStorage.removeItem('TOKEN');
+			localStorage.removeItem('CHAT_TOKEN');
+			localStorage.removeItem('EMAIL');
 			window.location.replace("http://linkspeople.ddns.net/");
 		}
 	});
@@ -285,6 +286,7 @@ function sendMessage(socket){
 		socket.emit("msg user", jsonString);
 		friends[currentFriend].messages.push(new Message($("#messageInputBox").val(),"right"));
 		$("#messageInputBox").val("");
+		$(document.getElementById("friends-list").getElementsByTagName("a")[0]).before($("#"+currentFriend));
 	}
 }
 
