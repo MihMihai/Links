@@ -14,8 +14,10 @@ function findFriendshipIdByEmail(email){
 }
 function createFriend(socket,imgSrc,name,friendshipId){
 	var h6 = $("<h6></h6>").text(name);
-	var button = $("<button type='button' class='close pull-right clearfix'>&times;</button>");
+	var button = $("#button_remove_friend");
 	button.click(function(event){
+		//personalize modal
+		$("#removeFriend.modal_title").text("Delete" + name + "?");
 		remove(socket,name,friendshipId);
 		event.stopPropagation();
 	});
@@ -40,8 +42,13 @@ function createFriend(socket,imgSrc,name,friendshipId){
 }
 
 function remove(socket,name,friendshipId){
-	let result = window.confirm("Are you sure you want to delete "+ name+"?");
-	if(result===true){
+	let confirm = false;
+
+	$("#form_remove").on("submit",function(){
+		confirm = true;
+	})
+
+	if(confirm===true){
 
 		socket.emit("remove friend",{"chat_token":localStorage.CHAT_TOKEN,"friendship_id":friendshipId});
 		delete friends[friendshipId];
