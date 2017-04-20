@@ -12,7 +12,9 @@ function findFriendshipIdByEmail(email){
 	}
 	return;
 }
-function createFriend(socket,imgSrc,name,friendshipId){
+// place is friends-list or random-list
+function createFriend(socket,imgSrc,name,friendshipId,place){
+	var friendsList = place || "friends-list";
 	var h6 = $("<h6></h6>").text(name);
 	var button = $("#button_remove_friend");
 	button.click(function(event){
@@ -38,7 +40,7 @@ function createFriend(socket,imgSrc,name,friendshipId){
 	a.click(function(){
 		connectToChat(name,friendshipId);
 	})
-	$("#friends-list").prepend(a);
+	$("#"+friendsList).prepend(a);
 }
 
 function remove(socket,name,friendshipId){
