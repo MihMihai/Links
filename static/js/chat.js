@@ -6,8 +6,8 @@ var friendRequestsArray = [];
 var ip = "86.121.87.213";
 var currentTab;
 
-<<<<<<< HEAD
-window.onload = function(){
+window.onload = function()
+{
 
 	setInterval(refreshTokenRequest,45000);
 
@@ -253,7 +253,7 @@ function refreshTokenRequest(){
 
 		}
 	});
-=======
+
 window.onload = function() {
 
     setInterval(refreshTokenRequest, 45000);
@@ -557,7 +557,7 @@ function refreshTokenRequest() {
 
         }
     });
->>>>>>> 71c2cb42f650a54d45508acc31de3f598d8911a6
+
 }
 
 function sendMessage(socket) {
@@ -592,7 +592,8 @@ function getAllMessagesRequest() {
         dataType: "json",
         success: function(data) {
             if (data.total > 0) {
-                for (let index = 0; index < data.conversations.length; index++) {
+                for (let index = 0; index < data.conversations.length; index++) 
+                {
                     let friendshipID = findFriendshipIdByEmail(data.conversations[index].with);
                     for (let j = 0; j < data.conversations[index].messages.length; j++)
                         friends[friendshipID].messages.push(new Message(data.conversations[index].messages[j].message,
@@ -601,5 +602,4 @@ function getAllMessagesRequest() {
             }
         }
     });
-}
-}
+}}}

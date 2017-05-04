@@ -173,7 +173,29 @@ function Widgets(panelContent) {
         panelContent.removeChild(panelContent.firstChild);
     }
 
+    
+    var container = $('<div id="container" style="min-height: 55vh; display: flex; align-items: center; justify-content: center; flex-direction: column;"></div>');
 
+    var locationInput = $('<input id="locatioValue" type="text" placeholder="Desired location for showing weather">');
+
+    $(locationInput).addClass("col-xs-12")
+        .addClass("form-control")
+        .css("margin-bottom", "30px");
+    var searchButton = $('<button type="button" class="btn btn-success btn-lg">Search</button>');
+
+
+    container.append(locationInput);
+    container.append($("<br>"));
+    container.append(searchButton);
+    $(panelContent).append(container);
+
+
+     searchButton.on('click', '', function() {
+        var value = $('#locationValue').val();
+        returnWeatherLocation(value);
+
+       
+     });
      function getLocation() 
     {
     if (navigator.geolocation)
@@ -182,15 +204,36 @@ function Widgets(panelContent) {
 
     function showPosition(position) 
     {
-         lat=position.coords.latitude;
-         long=position.coords.longitude;
          
-        $.ajax({
+         returnWeatherLatLong(position.coords.latitude,position.coords.longitude);
+       
+    }
+
+    function returnWeatherLatLong (lat, long)
+    {
+         $.ajax({
 	        method: "GET",
-	        url: "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&APPID=ac3ba0c132415bb20cef3bc050715601",
+	        url: "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&mode=html&APPID=ac3ba0c132415bb20cef3bc050715601",
 	        success: function(data)
             {
-                 console.log(data);
+                 //console.log(data);
+                var weather = document.createElement("p");
+                weather.innerHTML = data;
+                $(panelContent).append(weather);
+            }
+        });
+    }
+    function returnWeatherLocation(city)
+    {
+         $.ajax({
+	        method: "GET",
+	        url: "http://api.openweathermap.org/data/2.5/weather?q="+city+"&mode=html&APPID=ac3ba0c132415bb20cef3bc050715601",
+	        success: function(data)
+            {
+                 //console.log(data);
+                var weather = document.createElement('p');
+                weather.innerHTML = data;
+                $(panelContent).append(weather);
             }
         });
     }
