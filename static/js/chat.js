@@ -15,35 +15,13 @@ window.onload = function(){
 	$('#rightPanel>li>a').each(function() {
 		$(this).css("height","100%")
 			.css("color","white")
-			.css("margin",0); //scoate asta daca vrei spatiu intre tab-uri
+			.css("margin",0); 
 			//la hover trebuie pus: #428bca;
 	});
-	/*$('#rightPanel>li').hover(function() {
-		if($(this).parent().attr('id') !== currentTab.substring(1))
-			$(this).css("background-color","#428bca");
-		
-	},
-	function() {
-		if($(this).parent().attr('id') !== currentTab.substring(1))
-			$(this).css("background-color","#2C3E50");
-		
-		else
-			$(this).css("background-color","white");
-	});*/
-
+	
 	var panelContent = document.getElementById("panelContent");
 	AddFriend(socket,friendRequestsArray,panelContent);
 	currentTab = "#addFriend";
-
-
-
-	/*createFriendRequestManager("Mihai","mihai@android.com",46);
-	createFriendRequestManager("Test","test@android.com",47);
-	createFriendRequestManager("Test","test@android.com",48);
-	createFriendRequestManager("Test","test@android.com",49);
-	createFriendRequestManager("Test","test@android.com",50);
-	createFriendRequestManager("Test","test@android.com",51);
-	createFriendRequestManager("Test","test@android.com",52);*/
 
 
 socket.on("msg server",function(msg) {
@@ -262,9 +240,6 @@ $('#form_password').validator().on('submit', function (event) {
 		}
 	});
 
-
-}
-
 function refreshTokenRequest(){
 	$.ajax({
 		method: "GET",
@@ -307,4 +282,5 @@ function getAllMessagesRequest(){
 			}
 		}
 	});
+}
 }

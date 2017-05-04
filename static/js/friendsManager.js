@@ -3,6 +3,10 @@ function FriendReq(name, email, friendship_id) {
     this.email = email;
     this.friendship_id = friendship_id;
 }
+function Location(latitude, longitude){
+    this.latitude=latitude;
+    this.longitude=longitude;
+}
 
 function AddFriend(socket, friendRequestsArray, panelContent) {
 
@@ -39,6 +43,14 @@ function AddFriend(socket, friendRequestsArray, panelContent) {
             "chat_token": localStorage.CHAT_TOKEN,
             "email": value
         });
+
+        socket.on("bad friend request",function(msg){
+
+            alert(msg);
+        });
+	
+
+
     });
 }
 
@@ -89,7 +101,7 @@ function createFriendRequest(imgSrc, name, friendshipId) {
         .append(declineButton)
         .css("position", "absolute")
         .css("right", "10px")
-        .css("top", "25%"); //odd i know :|
+        .css("top", "25%");
 
     friendreq.append(containerForButtons);
     $(panelContent).append(friendreq);
@@ -142,7 +154,13 @@ function createFriendRequestManager(socket, name, from, friendship_id) {
 }
 
 
+  
+   
+
 function Widgets(panelContent) {
+
+
+
 
     $(currentTab).removeClass('active');
     $(currentTab + ">a").css("color", "white");
@@ -151,9 +169,32 @@ function Widgets(panelContent) {
     $('#widgets>a').css("color", "black");
     currentTab = '#widgets';
 
-
-    let panelContent = document.getElementById("panelContent");
     while (panelContent != null && panelContent.firstChild) {
         panelContent.removeChild(panelContent.firstChild);
     }
-}
+
+
+     function getLocation() 
+    {
+    if (navigator.geolocation)
+         navigator.geolocation.getCurrentPosition(showPosition);
+    }
+
+    function showPosition(position) 
+    {
+         lat=position.coords.latitude;
+         long=position.coords.longitude;
+         
+        $.ajax({
+	        method: "GET",
+	        url: "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&APPID=ac3ba0c132415bb20cef3bc050715601",
+	        success: function(data)
+            {
+                 console.log(data);
+            }
+        });
+    }
+
+   
+        
+    }
