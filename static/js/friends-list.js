@@ -30,6 +30,7 @@ function createFriend(socket,imgSrc,name,friendshipId,place){
 		src: ''+imgSrc,
 		alt: 'User Avatar',
 		class: 'img-circle'
+		
 	});
 	var span = $("<span class='chat-img pull-left'></span>");
 	span.append(img);

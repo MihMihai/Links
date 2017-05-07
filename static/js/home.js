@@ -22,7 +22,7 @@ window.onload = function(){
 					localStorage.setItem("EMAIL",$("#login_email").val());
 					console.log(localStorage.TOKEN);
 					//window.location.replace("http://linkspeople.ddns.net/chat");
-					window.location.replace("file:///D:/documente/GitHub/Links/chat.html");
+					window.location.replace("http://linkspeople.ddns.net/chat");
 				}, "json")
 				.fail(function() {
 					$("#login_error").html("<p style='color:red;'>Invalid email or password!</p>");
