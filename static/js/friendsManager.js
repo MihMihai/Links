@@ -155,7 +155,7 @@ function createFriendRequestManager(socket, name, from, friendship_id) {
 
 
   
-   
+var right = false; 
 
 function Widgets(panelContent) {
 
@@ -174,26 +174,37 @@ function Widgets(panelContent) {
     }
 
     
-    var container = $('<div id="container" style="min-height: 55vh; display: flex; align-items: center; justify-content: center; flex-direction: column;"></div>');
+    var container = $('<div id="container" style="min-height: 20vh; display: flex; align-items: center; justify-content: center; flex-direction: column;"></div>');
 
-    var locationInput = $('<input id="locatioValue" type="text" placeholder="Desired location for showing weather">');
-
-    $(locationInput).addClass("col-xs-12")
-        .addClass("form-control")
-        .css("margin-bottom", "30px");
+    var locationInput = $('<input id="locationValue" type="text" placeholder="Desired location for showing weather">');
+    var errorRed = $('<div id="weather_error" class="help-block with-errors"></div>');
+    $(locationInput).addClass("col-xs-12").addClass("form-control");
     var searchButton = $('<button type="button" class="btn btn-success btn-lg">Search</button>');
 
 
     container.append(locationInput);
     container.append($("<br>"));
+    container.append(errorRed);
     container.append(searchButton);
+    container.append($("<br>"));
     $(panelContent).append(container);
 
 
      searchButton.on('click', '', function() {
-        var value = $('#locationValue').val();
-        returnWeatherLocation(value);
 
+
+        var val = document.getElementById("locationValue").value;
+        returnWeatherLocation(val);
+
+        var $this = $(this);
+        var clickCount = ($this.data("click-count")||0) + 1;
+         $this.data("click-count", clickCount);
+        
+        if (clickCount > 1 && right === true) {
+            panelContent.removeChild(panelContent.lastChild);
+        }
+
+       
        
      });
      function getLocation() 
@@ -216,10 +227,17 @@ function Widgets(panelContent) {
 	        url: "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&mode=html&APPID=ac3ba0c132415bb20cef3bc050715601",
 	        success: function(data)
             {
-                 //console.log(data);
-                var weather = document.createElement("p");
-                weather.innerHTML = data;
-                $(panelContent).append(weather);
+                $("#weather_error").html("");
+                right = true;
+                var container = $('<div id="container" style="min-height: 20vh; display: flex; align-items: center; justify-content: center; flex-direction: column;"></div>');
+                var weather = document.createElement('div');
+                $(weather).appendTo(panelContent).html(data).css("font-size","x-large");
+        
+            },
+            error: function(){
+
+                     right = false;
+					$("#weather_error").html("<p style='color:red;'>Please insert a valid city! </p>");
             }
         });
     }
@@ -230,10 +248,15 @@ function Widgets(panelContent) {
 	        url: "http://api.openweathermap.org/data/2.5/weather?q="+city+"&mode=html&APPID=ac3ba0c132415bb20cef3bc050715601",
 	        success: function(data)
             {
-                 //console.log(data);
-                var weather = document.createElement('p');
-                weather.innerHTML = data;
-                $(panelContent).append(weather);
+                $("#weather_error").html("");
+                 right = true;
+                var container = $('<div id="container" style="min-height: 20vh; display: flex; align-items: center; justify-content: center; flex-direction: column;"></div>');
+                var weather = document.createElement('div');
+                $(weather).appendTo(panelContent).html(data).css("font-size","x-large");
+            },
+            error: function(){
+                     right = false;
+					$("#weather_error").html("<p style='color:red;'>Please insert a valid city! </p>");
             }
         });
     }
