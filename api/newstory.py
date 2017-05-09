@@ -95,7 +95,7 @@ def newStory() :
 	#return response
 	response['status_code'] = 200
 	response['status'] = "ok"
-
+	return Response(json.dumps(response, sort_keys=True), mimetype = 'application/json'),200
 
 
 
