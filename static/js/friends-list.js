@@ -12,10 +12,17 @@ function findFriendshipIdByEmail(email){
 	}
 	return;
 }
-function createFriend(socket,imgSrc,name,friendshipId){
+// place is friends-list or random-list
+function createFriend(socket,imgSrc,name,friendshipId,place){
+	var friendsList = place || "friends-list";
 	var h6 = $("<h6></h6>").text(name);
-	var button = $("<button type='button' class='close pull-right clearfix'>&times;</button>");
+	var button = $("#button_remove_friend").clone(true);
+	
 	button.click(function(event){
+		//personalize modal
+		$("#removeFriend.modal_title").text("Delete" + name + "?");
+
+		$("#removeFriend").modal("show");
 		remove(socket,name,friendshipId);
 		event.stopPropagation();
 	});
@@ -23,6 +30,7 @@ function createFriend(socket,imgSrc,name,friendshipId){
 		src: ''+imgSrc,
 		alt: 'User Avatar',
 		class: 'img-circle'
+		
 	});
 	var span = $("<span class='chat-img pull-left'></span>");
 	span.append(img);
@@ -36,15 +44,16 @@ function createFriend(socket,imgSrc,name,friendshipId){
 	a.click(function(){
 		connectToChat(name,friendshipId);
 	})
-	$("#friends-list").prepend(a);
+	$("#"+friendsList).prepend(a);
 }
 
 function remove(socket,name,friendshipId){
-	let result = window.confirm("Are you sure you want to delete "+ name+"?");
-	if(result===true){
+	$("#form_remove").on("submit",function(){
 
-		socket.emit("remove friend",{"chat_token":chat_token,"friendship_id":friendshipId});
+		socket.emit("remove friend",{"chat_token":localStorage.CHAT_TOKEN,"friendship_id":friendshipId});
 		delete friends[friendshipId];
+		$("#removeFriend").modal("hide");
+	});
 
 /*		$.ajax({
 			method: "POST",
@@ -56,7 +65,7 @@ function remove(socket,name,friendshipId){
 				$("#"+friendshipId).remove();
 			}
 		});*/
-	}
+	//}
 }
 
 function connectToChat(name,friendshipId){

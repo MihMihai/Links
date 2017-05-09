@@ -20,8 +20,9 @@ window.onload = function(){
 				$.post("http://" + ip + "/api/login", {email: $("#login_email").val(), password: $("#login_password").val(), remember_me: $("#remember_me").is(":checked")}, function(data){
 					localStorage.setItem("TOKEN",data["access_token"]);
 					localStorage.setItem("EMAIL",$("#login_email").val());
-					console.log(localStorage.TOKEN);
+					
 					window.location.replace("http://linkspeople.ddns.net/chat");
+					//window.location.replace("file:///D:/documente/GitHub/Links/chat.html");
 				}, "json")
 				.fail(function() {
 					$("#login_error").html("<p style='color:red;'>Invalid email or password!</p>");

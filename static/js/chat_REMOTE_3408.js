@@ -5,15 +5,46 @@ var months = ["January", "February", "March", "April", "May", "June",
 var friendRequestsArray = [];
 var ip = "86.121.87.213";
 var currentTab;
-var base64Image;
+
 window.onload = function() {
+
     setInterval(refreshTokenRequest, 45000);
 
-    let socket = io.connect("http://" + ip + "/chat");
+    var socket = io.connect("http://" + ip + "/chat");
     socket.emit("join", { "email": localStorage.EMAIL });
 
+    $('#rightPanel>li>a').each(function() {
+        $(this).css("height", "100%")
+            .css("color", "white")
+            .css("margin", 0); //scoate asta daca vrei spatiu intre tab-uri
+        //la hover trebuie pus: #428bca;
+    });
+    /*$('#rightPanel>li').hover(function() {
+    	if($(this).parent().attr('id') !== currentTab.substring(1))
+    		$(this).css("background-color","#428bca");
+    	
+    },
+    function() {
+    	if($(this).parent().attr('id') !== currentTab.substring(1))
+    		$(this).css("background-color","#2C3E50");
+    	
+    	else
+    		$(this).css("background-color","white");
+    });*/
+
+    var panelContent = document.getElementById("panelContent");
+    AddFriend(socket, friendRequestsArray, panelContent);
+    currentTab = "#addFriend";
 
 
+
+    /*createFriendRequestManager("Mihai","mihai@android.com",46);
+    createFriendRequestManager("Test","test@android.com",47);
+    createFriendRequestManager("Test","test@android.com",48);
+    createFriendRequestManager("Test","test@android.com",49);
+    createFriendRequestManager("Test","test@android.com",50);
+    createFriendRequestManager("Test","test@android.com",51);
+    createFriendRequestManager("Test","test@android.com",52);*/
 
     socket.on("random chat token", function(msg) {
         numberOfRandomFriends++;
@@ -74,21 +105,6 @@ window.onload = function() {
         }
 
     });
-
-
-
-    $('#rightPanel>li>a').each(function() {
-        $(this).css("height", "100%")
-            .css("color", "white")
-            .css("margin", 0);
-        //la hover trebuie pus: #428bca;
-    });
-
-    var panelContent = document.getElementById("panelContent");
-    AddFriend(socket, friendRequestsArray, panelContent);
-    currentTab = "#addFriend";
-
-
 
     socket.on("new friend request", function(msg) {
         try {
@@ -176,9 +192,8 @@ window.onload = function() {
         headers: { Authorization: localStorage.TOKEN },
         dataType: "json",
         success: function(data) {
-            $("#profile_name").text(data.name);
+            $("#profile_name").html(data.name);
             $("#settings_name").val(data.name);
-            $("#profile_image").attr('src', data.avatar);
             var birthDate = data.birthday_date.split("-");
             $("#birthDay option:contains(" + birthDate[2] + ")").attr('selected', 'selected');
             $("#birthMonth option:contains(" + months[parseInt(birthDate[1]) - 1] + ")").attr('selected', 'selected');
@@ -210,11 +225,8 @@ window.onload = function() {
             if (data.total > 0) {
                 for (let i = 0; i < data.friends.length; i++) {
                     friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name, data.friends[i].email);
-                    if (data.friends[i].avatar === undefined)
-                        createFriend(socket, "http://placehold.it/50/FA6F57/fff&text=ME", data.friends[i].name, data.friends[i].friendship_id);
-                    else createFriend(socket, data.friends[i].avatar, data.friends[i].name, data.friends[i].friendship_id);
+                    createFriend(socket, "http://placehold.it/50/FA6F57/fff&text=ME", data.friends[i].name, data.friends[i].friendship_id);
                 }
-
             }
         }
     });
@@ -239,18 +251,6 @@ window.onload = function() {
         });
     });
 
-    document.getElementById('settings_photo').addEventListener('change', function(e) {
-        var file = this.files[0];
-        file.height = '50';
-        file.width = '50';
-        var reader = new FileReader();
-        reader.onloadend = function() {
-            //console.log('RESULT', reader.result);
-            base64Image = reader.result;
-        };
-        reader.readAsDataURL(file);
-    });
-
     $('#form_update').validator().on('submit', function(event) {
         if (event.isDefaultPrevented()) {
             // handle the invalid form...
@@ -264,17 +264,12 @@ window.onload = function() {
                     name: $("#settings_name").val(),
                     birth_day: $("#birthDay").find(":selected").text(),
                     birth_month: $("#birthMonth").find(":selected").text(),
-                    birth_year: $("#birthYear").find(":selected").text(),
-                    avatar: base64Image
+                    birth_year: $("#birthYear").find(":selected").text()
                 },
                 dataType: "json",
                 success: function(data) {
                     $('#updateAccount').modal('hide');
                     $("#profile_name").html($("#settings_name").val());
-                    if(base64Image !==undefined){
-                         $("#profile_image").attr('src', base64Image);
-                    }
-                    base64Image = undefined;
                 }
             });
         }
@@ -301,7 +296,6 @@ window.onload = function() {
     });
 
 
-
 }
 
 function refreshTokenRequest() {
@@ -315,7 +309,6 @@ function refreshTokenRequest() {
 
         }
     });
-
 }
 
 function sendMessage(socket) {
