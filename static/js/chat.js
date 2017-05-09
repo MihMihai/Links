@@ -13,8 +13,6 @@ window.onload = function() {
     socket.emit("join", { "email": localStorage.EMAIL });
 
 
-
-
     socket.on("random chat token", function(msg) {
         numberOfRandomFriends++;
 
@@ -241,8 +239,8 @@ window.onload = function() {
 
     document.getElementById('settings_photo').addEventListener('change', function(e) {
         var file = this.files[0];
-        file.height = '50';
-        file.width = '50';
+        // file.height = '50';
+        //file.width = '50';
         var reader = new FileReader();
         reader.onloadend = function() {
             //console.log('RESULT', reader.result);
@@ -250,6 +248,7 @@ window.onload = function() {
         };
         reader.readAsDataURL(file);
     });
+
 
     $('#form_update').validator().on('submit', function(event) {
         if (event.isDefaultPrevented()) {
@@ -271,8 +270,9 @@ window.onload = function() {
                 success: function(data) {
                     $('#updateAccount').modal('hide');
                     $("#profile_name").html($("#settings_name").val());
-                    if(base64Image !==undefined){
-                         $("#profile_image").attr('src', base64Image);
+
+                    if (base64Image !== undefined) {
+                        $("#profile_image").attr('src', base64Image);
                     }
                     base64Image = undefined;
                 }
