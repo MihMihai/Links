@@ -1,8 +1,5 @@
 #!/usr/bin/python3
 
-# @params : text 
-# return status : "ok"
-
 from flask import Blueprint, Response, request
 
 import json

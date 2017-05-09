@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-#@param user_email
-#@return story_text, story_date
 from flask import Blueprint, Response, request
 
 import json
@@ -72,6 +70,12 @@ def story():
 	query = "SELECT text,feel,image,date FROM story WHERE user_id = '%d'" % (friendId)
 	cursor.execute(query)
 	story = cursor.fetchone()
+	
+	response['status_code'] = 200
+	response['status'] = "ok"
+
+	if story == None :
+		return Response(json.dumps(response,sort_keys = True),mimetype = 'application/json'), 200
 
 	#only return story parameters that are not null
 	text = story[0]
@@ -87,23 +91,8 @@ def story():
 		response['image'] = image
 
 	response['date'] = date
-
+	
 	return Response(json.dumps(response,sort_keys = True),mimetype = 'application/json'), 200
-
-
-
-
-
-
-
-
-
-
-
-	# get id for friendEmail
-	# check if friend id appeas in friendship of user and active
-
-	#if yes
 
 
 
