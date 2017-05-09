@@ -54,7 +54,7 @@ def friendRequests():
 	for row in data:
 		fRequests.append(row)
 
-	query = "SELECT name,email from users WHERE id='%d'" % (fRequests[0][1])
+	query = "SELECT name,email,avatar from users WHERE id='%d'" % (fRequests[0][1])
 	i = 0
 	for (id,uid) in fRequests:
 		if i == 0:
@@ -73,6 +73,14 @@ def friendRequests():
 		user["name"] = row[0]
 		user["email"] = row[1]
 		user["friendship_id"] = fRequests[i][0]
+		if row[2] != None:
+			avatarBase64 = str(row[2])
+			if avatarBase64[0] == 'b':
+				avatarBase64 = avatarBase64[1:]
+			if avatarBase64[0] == "'":
+				avatarBase64 = avatarBase64[1:]
+				avatarbase64 = avatarBase64[:len(avatarBase64)-1]
+			user["avatar"] = avatarBase64
 		i+=1
 		users.append(user)
 

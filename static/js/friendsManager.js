@@ -1,7 +1,8 @@
-function FriendReq(name, email, friendship_id) {
+function FriendReq(name, email, friendship_id, avatar) {
     this.name = name;
     this.email = email;
     this.friendship_id = friendship_id;
+    this.avatar = avatar;
 }
 function Location(latitude, longitude){
     this.latitude=latitude;
@@ -69,7 +70,7 @@ function ViewFriendRequests(socket, friendRequestsArray, panelContent) {
     }
 
     for (i = 0; i < friendRequestsArray.length; i++) {
-        createFriendRequestManager(socket, friendRequestsArray[i].name, friendRequestsArray[i].email, friendRequestsArray[i].friendship_id);
+        createFriendRequestManager(socket, friendRequestsArray[i].name, friendRequestsArray[i].email, friendRequestsArray[i].friendship_id,friendRequestsArray[i].avatar);
     }
 
 
@@ -107,9 +108,9 @@ function createFriendRequest(imgSrc, name, friendshipId) {
     $(panelContent).append(friendreq);
 }
 
-function createFriendRequestManager(socket, name, from, friendship_id) {
+function createFriendRequestManager(socket, name, from, friendship_id, avatar) {
 
-    createFriendRequest("http://placehold.it/50/FA6F57/fff&text=ME", name, friendship_id);
+    createFriendRequest(avatar, name, friendship_id);
 
     $('#btna' + friendship_id).on('click', '', function() {
 
@@ -121,7 +122,7 @@ function createFriendRequestManager(socket, name, from, friendship_id) {
                 "status": 1
             });
 
-            createFriend(socket, "http://placehold.it/50/FA6F57/fff&text=ME", name, friendship_id);
+            createFriend(socket, avatar, name, friendship_id);
 
             $("#fr" + friendship_id).remove();
             //panelContent.removeChild(friendreq);

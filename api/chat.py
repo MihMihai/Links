@@ -152,12 +152,13 @@ def friend_request(data):
 		cursor.execute(query)
 		userId = cursor.fetchone()
 
-	query = "SELECT id,email,name FROM users WHERE chat_token = '%s'" % (data['chat_token'])
+	query = "SELECT id,email,name,avatar FROM users WHERE chat_token = '%s'" % (data['chat_token'])
 	cursor.execute(query)
 	user1 = cursor.fetchone()
 	uid1 = user1[0]
 	email = user1[1]
 	name = user1[2]
+	avatar = user1[3]
 
 	if userId != None:
 		uid2 = userId[0]
@@ -180,6 +181,14 @@ def friend_request(data):
 			frReqDict['from'] = email
 			frReqDict['name'] = name
 			frReqDict['friendship_id'] = frId[0]
+			if avatar != None:
+				avatarBase64 = str(avatar)
+				if avatarBase64[0] == 'b':
+					avatarBase64 = avatarBase64[1:]
+				if avatarBase64[0] == "'":
+					avatarBase64 = avatarBase64[1:]
+					avatarBase64 = avatarBase64[:len(avatarBase64)-1]
+				frReqDict['avatar'] = avatarBase64
 			emit('new friend request',json.dumps(frReqDict),room=room)
 		else:
 			room = data['chat_token']
@@ -198,7 +207,7 @@ def accept_friend_request(data):
 	query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(data['email'])
 	cursor.execute(query)
 	userId = cursor.fetchone()
-	query = "SELECT id,email,name FROM users WHERE chat_token = '%s'" % (data['chat_token'])
+	query = "SELECT id,email,name,avatar FROM users WHERE chat_token = '%s'" % (data['chat_token'])
 	cursor.execute(query)
 	user1 = cursor.fetchone()
 	uid1 = user1[0]
@@ -222,6 +231,14 @@ def accept_friend_request(data):
 			frId = cursor.fetchone()
 			frReqDict['name'] = user1[2]
 			frReqDict['friendship_id'] = frId[0]
+			if user1[3] != None:
+				avatarBase64 = str(user1[3])
+				if avatarBase64[0] == 'b':
+					avatarBase64 = avatarBase64[1:]
+				if avatarBase64[0] == "'":
+					avatarBase64 = avatarBase64[1:]
+					avatarBase64 = avatarBase64[:len(avatarBase64)-1]
+				frReqDict['avatar'] = avatarBase64
 
 		emit('status friend request',json.dumps(frReqDict),room=room)
 	else: #not needed

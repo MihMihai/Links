@@ -97,9 +97,10 @@ window.onload = function() {
             let from = obj.from;
             let name = obj.name;
             let friendshipId = obj.friendship_id;
-            friendRequestsArray.push(new FriendReq(name, from, friendshipId));
+	    let avatar = obj.avatar;
+            friendRequestsArray.push(new FriendReq(name, from, friendshipId, avatar));
             if (currentTab == "#friendRequests")
-                createFriendRequestManager(socket, name, from, friendshipId);
+                createFriendRequestManager(socket, name, from, friendshipId, avatar);
         } catch (e) {
             console.log("ERROR");
         }
@@ -114,7 +115,7 @@ window.onload = function() {
             let obj = JSON.parse(msg);
             if (obj.status == 1) {
                 friends[obj.friendship_id] = new Friend(obj.name, obj.from);
-                createFriend(socket, "http://placehold.it/50/FA6F57/fff&text=ME", obj.name, obj.friendship_id);
+                createFriend(socket, obj.avatar, obj.name, obj.friendship_id);
             }
         } catch (e) {
             console.log("ERROR -- status fr req");
@@ -195,7 +196,7 @@ window.onload = function() {
         success: function(data) {
             if (data.total > 0) {
                 for (let i = 0; i < data.requests.length; i++) {
-                    friendRequestsArray.push(new FriendReq(data.requests[i].name, data.requests[i].email, data.requests[i].friendship_id));
+                    friendRequestsArray.push(new FriendReq(data.requests[i].name, data.requests[i].email, data.requests[i].friendship_id,data.requests[i].avatar));
                 }
             }
         }
