@@ -38,18 +38,33 @@ def friendRequests():
 		response["status_code"] = 401
 		return Reponse(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
-	query = " SELECT name, email, birthday_date,chat_token FROM users where ID = '%s'" % (userAcc["sub"])
+	query = " SELECT name, email, birthday_date,chat_token,avatar FROM users where id = '%s'" % (userAcc["sub"])
 
 	cursor = db.cursor()
 	cursor.execute(query)
 	data = cursor.fetchone()
 
-	response['name']=data[0]
-	response['email']=data[1]
-	response['birthday_date']=data[2].strftime('%Y-%m-%d')
-	response['chat_token'] = data[3]
-	response['status']='ok'
 	db.close()
-	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 
+	if data != None:
 
+		response['name']=data[0]
+		response['email']=data[1]
+		response['birthday_date']=data[2].strftime('%Y-%m-%d')
+		response['chat_token'] = data[3]
+
+		if data[4] != None:
+			avatarBase64 = str(data[4])
+			if avatarBase64[0] == 'b':
+				avatarBase64 = avatarBase64[1:]
+			if avatarBase64[0] == "'":
+				avatarBase64 = avatarBase64[1:]
+				avatarBase64 = avatarBase64[:len(avatarBase64)-1]
+			response['avatar'] = avatarBase64
+		response['status']='ok'
+		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
+	else:
+		response['error'] = "Bad token"
+		response['description'] = "Something went wrong. Please contact the developers and send them this id: " + userAcc["sub"]
+		response['status_code'] = 401
+		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401

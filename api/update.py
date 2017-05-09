@@ -41,6 +41,7 @@ def update():
 	birthMonth = request.form.get("birth_month")
 	birthYear = request.form.get("birth_year")
 	passw = request.form.get("password")
+	avatar = request.form.get("avatar")
 
 	db = MySQLdb.connect(host="localhost",user="root",passwd="QAZxsw1234",db="linksdb")
 	cursor = db.cursor()
@@ -65,6 +66,10 @@ def update():
 		db.commit()
 	if name != None and name != '':
 		query = "UPDATE users SET name = '%s' WHERE auth_token = '%s'" % (name,userToken)
+		cursor.execute(query)
+		db.commit()
+	if avatar != None:
+		query = "UPDATE users SET avatar = '%s' WHERE auth_token = '%s'" % (avatar,userToken)
 		cursor.execute(query)
 		db.commit()
 

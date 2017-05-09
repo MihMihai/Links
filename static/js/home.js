@@ -1,6 +1,6 @@
 var login_button;
 var register_button;
-var ip = "5.12.214.251";
+var ip = "86.121.87.213";
 
 window.onload = function(){
 	$('.modal').on('hidden.bs.modal', function(){

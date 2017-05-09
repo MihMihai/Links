@@ -6,6 +6,7 @@ import json
 import MySQLdb
 import time
 import jwt
+import random
 from server import app
 import eventlet
 
@@ -18,8 +19,11 @@ socketio = SocketIO(app)
 @socketio.on('msg user',namespace='/chat')
 def message(msg):
 	dict = json.loads(str(msg))
-	to = dict['to']
 	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+
+	f = open('socketio-error.log','a')
+	f.write(str(msg))
+	f.close()
 
 	if 'random' in dict:
 		randomToken = dict['random_token']
@@ -27,6 +31,11 @@ def message(msg):
 		f = open('server.conf','r')
 		key = f.readline()
 		f.close()
+
+#		f = open('socketio-error.log','a')
+#		f.write('rnd\n')
+#		f.close()
+
 
 		try:
 			userAcc = jwt.decode(randomToken,key)
@@ -45,6 +54,7 @@ def message(msg):
 
 		query = "SELECT chat_token FROM users WHERE id = '%s' " % (userAcc['sub'])
 	else:
+		to = dict['to']
 		query = "SELECT chat_token FROM users WHERE email = '%s' " % (str(to))
 
 	cursor = db.cursor()
@@ -57,7 +67,7 @@ def message(msg):
 		query = "SELECT id FROM users WHERE email = '%s'" % (dict['from'])
 		cursor.execute(query)
 		fromUserId = cursor.fetchone()
-		fromUserToken = str(encode_chat_token(fromUserId[0]))
+		fromUserToken = str(encode_random_token(fromUserId[0]))
 		fromUserToken = fromUserToken[2:]
 		fromUserToken = fromUserToken[:len(fromUserToken)-1]
 		dict['from'] = fromUserToken
@@ -300,7 +310,9 @@ def random_chat(data):
 
 	cursor = db.cursor()
 
-	query = "SELECT id FROM users where chat_token" % (data['chat_token'])
+	dict = json.loads(str(data))
+
+	query = "SELECT id FROM users where chat_token = '%s'" % (dict['chat_token'])
 	cursor.execute(query)
 	result = cursor.fetchone()
 	uid = result[0]
@@ -311,6 +323,7 @@ def random_chat(data):
 	userIdsRow = cursor.fetchall()
 
 	userIds = []
+
 
 	for row in userIdsRow:
 		userIds.append(row[0])
@@ -338,7 +351,11 @@ def random_chat(data):
 	result = cursor.fetchone()
 	roomR = result[0]
 
-	emit('random chat token',json.dumps(rnd),room=data['chat_token'])
+	f = open('socketio-error.log','a')
+	f.write('random user id: ' + str(randomId) + '\n')
+	f.close()
+
+	emit('random chat token',json.dumps(rnd),room=dict['chat_token'])
 	emit('random chat token',json.dumps(rndSender),room=roomR)
 
 	db.close()

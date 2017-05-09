@@ -46,8 +46,16 @@ def friends():
 	cursor = db.cursor()
 	cursor.execute(query)
 
+	user1Id = cursor.fetchone()
+
+	if user1Id == None:
+		response["error"] = "Invalid token"
+		response["description"] = "Authorization required"
+		response["status_code"] = 401
+		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+
 	#get current user from db
-	user1Id = cursor.fetchone()[0]
+	user1Id = user1Id[0]
 	#user1Db[0] = userId
 
 	queryFriends = "SELECT id, user_1, user_2 FROM friendships WHERE (user_1 = '%s' OR user_2 = '%s') AND status = 1 " % (user1Id,user1Id) 
@@ -77,7 +85,7 @@ def friends():
 
 
 	#do the BIG query
-	query = """SELECT f.id, u.name, u.email, u.auth_token
+	query = """SELECT f.id, u.name, u.email, u.avatar, u.auth_token
 		 FROM  users u JOIN friendships f
 		 ON ( (u.id = f.user_1 AND f.user_2 = '%s') OR (u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)
  	WHERE """ % (user1Id,user1Id)
@@ -106,6 +114,14 @@ def friends():
 		friend["name"] = data[1]
 		friend["email"] = data[2]
 		if data[3] != None:
+			avatarBase64 = str(data[3])
+			if avatarBase64[0] == 'b':
+				avatarBase64 = avatarBase64[1:]
+			if avatarBase64[0] == "'":
+				avatarBase64 = avatarBase64[1:]
+				avatarBase64 = avatarBase64[:len(avatarBase64)-1]
+			friend["avatar"] = avatarBase64
+		if data[4] != None:
 			friend["online"] = 1
 		else:
 			friend["online"] = 0

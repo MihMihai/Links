@@ -144,4 +144,579 @@ name 'friendshipIdString' is not defined pare rau
 {'email': 'andrei96v@gmail.com', 'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A'}{'email': 'mihai@android.com'}'chat_token' pare rau
 {'email': 'mihai@android.com'}'chat_token' pare rau
 {'email': 'mihai@android.com'}'chat_token' pare rau
-{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A', 'email': 'mihai@android.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A', 'email': 'mihai@android.com'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A'}{'email': 'andrei96v@gmail.com', 'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6Im1paGFpQHRlc3RpbmcuY29tIn0.QHbMKPRJboYP5GFghsWull8G0ikiAA_jl4RLfzJ2Ny8', 'email': 'mihai@android.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6Im1paGFpQHRlc3RpbmcuY29tIn0.QHbMKPRJboYP5GFghsWull8G0ikiAA_jl4RLfzJ2Ny8'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}
+{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A', 'email': 'mihai@android.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A', 'email': 'mihai@android.com'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImFuZHJlaTk2dkBnbWFpbC5jb20ifQ.wci12YxHiaO4leZmZRAllNmB1XFOyJr5gFVWTVYf36A'}{'email': 'andrei96v@gmail.com', 'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6Im1paGFpQHRlc3RpbmcuY29tIn0.QHbMKPRJboYP5GFghsWull8G0ikiAA_jl4RLfzJ2Ny8', 'email': 'mihai@android.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}{'email': 'mihai@android.com', 'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6Im1paGFpQHRlc3RpbmcuY29tIn0.QHbMKPRJboYP5GFghsWull8G0ikiAA_jl4RLfzJ2Ny8'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}{'email': 'test@android.com'}'chat_token' pare rau
+{'email': 'test@android.com'}'chat_token' pare rau
+friend_request() takes 1 positional argument but 2 were given pare rau
+friend_request() takes 1 positional argument but 2 were given pare rau
+friend_request() takes 1 positional argument but 2 were given pare rau
+friend_request() takes 1 positional argument but 2 were given pare rau
+{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Iml1bGlhb3RpbGlhMjZAeWFob28uY29tIn0.r0xrELzQLZN7XtVf51pj7lhusOpQsGpZLzFqXkBGcnk', 'email': 'iulia'}friend_request() takes 1 positional argument but 2 were given pare rau
+friend_request() takes 1 positional argument but 2 were given pare rau
+{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6Im1paGFpQHRlc3QuY29tIn0.kiJ6c6V7x0TmZ9311NEXsYUAuFZHcRUCSQHbtXy489E', 'email': 'iuliaotilia26@yahoo.com'}'email' pare rau
+not all arguments converted during string formatting pare rau
+not all arguments converted during string formatting pare rau
+not all arguments converted during string formatting pare rau
+not all arguments converted during string formatting pare rau
+not all arguments converted during string formatting pare rau
+not all arguments converted during string formatting pare rau
+not all arguments converted during string formatting pare rau
+not all arguments converted during string formatting pare rau
+not all arguments converted during string formatting pare rau
+not all arguments converted during string formatting pare rau
+string indices must be integers pare rau
+string indices must be integers pare rau
+string indices must be integers pare rau
+string indices must be integers pare rau
+string indices must be integers pare rau
+string indices must be integers pare rau
+string indices must be integers pare rau
+string indices must be integers pare rau
+string indices must be integers pare rau
+string indices must be integers pare rau
+in random chat
+string indices must be integers pare rau
+in random chat
+name 'random' is not defined pare rau
+dump() missing 1 required positional argument: 'fp' pare rau
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImJvZ2RhbmFsZXhhbmRyZXNjdTk2QGdtYWlsLmNvbSJ9.Jp53Pdue5Su6RmZmlF-shMUgDJGiI4SOcgWZgl7aRDE
+{"random_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIxLCJybmQiOjF9.iq6LVKhRWbRL5P27MMt9ub-pOixnT5qSP0TOtmjv9Fk"}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImJvZ2RhbmFsZXhhbmRyZXNjdTk2QGdtYWlsLmNvbSJ9.Jp53Pdue5Su6RmZmlF-shMUgDJGiI4SOcgWZgl7aRDE
+{"random_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsInJuZCI6MX0.RvaKULjP_O-kKHl9t5h7ppUi29A5FEE7XBqq1-B_A2g"}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImJvZ2RhbmFsZXhhbmRyZXNjdTk2QGdtYWlsLmNvbSJ9.Jp53Pdue5Su6RmZmlF-shMUgDJGiI4SOcgWZgl7aRDE
+{"random_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMzLCJybmQiOjF9.JlVYNkndwChldzDmCJ52Lc_pvLsKZJlKwetImqLztfc"}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImJvZ2RhbmFsZXhhbmRyZXNjdTk2QGdtYWlsLmNvbSJ9.Jp53Pdue5Su6RmZmlF-shMUgDJGiI4SOcgWZgl7aRDE
+{"random_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIxLCJybmQiOjF9.iq6LVKhRWbRL5P27MMt9ub-pOixnT5qSP0TOtmjv9Fk"}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImJvZ2RhbmFsZXhhbmRyZXNjdTk2QGdtYWlsLmNvbSJ9.Jp53Pdue5Su6RmZmlF-shMUgDJGiI4SOcgWZgl7aRDE
+{"random_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ1LCJybmQiOjF9.we2DcoBBI6dI_StHDxfOOBJBjSZUSGxaHUgkox90S4k"}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImJvZ2RhbmFsZXhhbmRyZXNjdTk2QGdtYWlsLmNvbSJ9.Jp53Pdue5Su6RmZmlF-shMUgDJGiI4SOcgWZgl7aRDE
+{"random_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI1LCJybmQiOjF9.a2tMA9Y1lep3BH49ury-wvSkpNj44BsO0jVOn4SEbBo"}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImJvZ2RhbmFsZXhhbmRyZXNjdTk2QGdtYWlsLmNvbSJ9.Jp53Pdue5Su6RmZmlF-shMUgDJGiI4SOcgWZgl7aRDE
+{"random_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMzLCJybmQiOjF9.JlVYNkndwChldzDmCJ52Lc_pvLsKZJlKwetImqLztfc"}
+Can't convert 'int' object to str implicitly pare rau
+random user id: 49
+random user id: 28
+random user id: 45
+random user id: 31
+random user id: 4
+random user id: 18
+random user id: 44
+random user id: 17
+random user id: 29
+random user id: 26
+random user id: 26
+random user id: 6
+random user id: 44
+random user id: 45
+random user id: 45
+random user id: 29
+random user id: 44
+random user id: 5
+random user id: 4
+random user id: 21
+random user id: 1
+random user id: 25
+random user id: 46
+random user id: 21
+random user id: 21
+random user id: 26
+random user id: 46
+random user id: 18
+random user id: 44
+random user id: 48
+random user id: 4
+random user id: 21
+random user id: 25
+random user id: 6
+random user id: 28
+random user id: 20
+random user id: 49
+random user id: 18
+random user id: 30
+random user id: 40
+random user id: 4
+random user id: 48
+random user id: 33
+random user id: 20
+random user id: 1
+random user id: 25
+random user id: 25
+random user id: 44
+random user id: 48
+random user id: 38
+random user id: 6
+random user id: 18
+random user id: 6
+random user id: 45
+random user id: 4
+random user id: 34
+random user id: 38
+random user id: 49
+random user id: 46
+random user id: 30
+random user id: 26
+random user id: 33
+random user id: 29
+random user id: 40
+random user id: 5
+random user id: 1
+random user id: 4
+random user id: 45
+random user id: 44
+random user id: 31
+random user id: 29
+random user id: 48
+random user id: 38
+random user id: 44
+random user id: 1
+random user id: 33
+random user id: 31
+random user id: 45
+random user id: 33
+random user id: 25
+random user id: 33
+random user id: 46
+random user id: 21
+random user id: 5
+random user id: 1
+random user id: 1
+random user id: 45
+random user id: 18
+random user id: 25
+random user id: 25
+random user id: 4
+random user id: 34
+random user id: 38
+random user id: 28
+random user id: 31
+random user id: 48
+random user id: 6
+random user id: 20
+random user id: 18
+random user id: 6
+random user id: 33
+random user id: 4
+random user id: 33
+random user id: 21
+random user id: 18
+random user id: 4
+random user id: 46
+random user id: 17
+random user id: 25
+random user id: 40
+random user id: 26
+random user id: 40
+random user id: 46
+random user id: 45
+random user id: 38
+random user id: 6
+random user id: 30
+random user id: 40
+random user id: 46
+random user id: 48
+random user id: 45
+random user id: 28
+random user id: 4
+random user id: 38
+random user id: 29
+random user id: 33
+random user id: 26
+random user id: 34
+random user id: 28
+random user id: 48
+random user id: 28
+random user id: 26
+random user id: 33
+random user id: 26
+random user id: 34
+random user id: 4
+random user id: 34
+random user id: 28
+random user id: 21
+'email' pare rau
+random user id: 25
+random user id: 29
+'to' pare rau
+'email' pare rau
+random user id: 45
+random user id: 49
+random user id: 30
+random user id: 26
+random user id: 23
+random user id: 44
+random user id: 17
+random user id: 26
+random user id: 20
+random user id: 36
+random user id: 45
+random user id: 6
+random user id: 34
+random user id: 26
+random user id: 46
+random user id: 18
+random user id: 26
+random user id: 37
+random user id: 21
+random user id: 44
+random user id: 31
+random user id: 45
+random user id: 26
+random user id: 30
+random user id: 28
+random user id: 48
+random user id: 23
+random user id: 4
+random user id: 17
+random user id: 1
+random user id: 40
+random user id: 23
+random user id: 18
+random user id: 46
+random user id: 22
+random user id: 19
+'to' pare rau
+'to' pare rau
+random user id: 40
+random user id: 45
+random user id: 34
+random user id: 34
+random user id: 29
+random user id: 20
+'to' pare rau
+random user id: 1
+random user id: 44
+random user id: 25
+random user id: 34
+random user id: 49
+random user id: 45
+random user id: 30
+random user id: 31
+random user id: 48
+random user id: 33
+random user id: 26
+random user id: 25
+random user id: 4
+random user id: 33
+random user id: 4
+random user id: 45
+random user id: 48
+random user id: 45
+random user id: 44
+random user id: 45
+random user id: 5
+random user id: 44
+random user id: 21
+random user id: 6
+random user id: 18
+random user id: 48
+random user id: 28
+random user id: 6
+random user id: 30
+random user id: 26
+random user id: 29
+'to' pare rau
+'to' pare rau
+'to' pare rau
+'to' pare rau
+random user id: 29
+'to' pare rau
+'to' pare rau
+random user id: 17
+random user id: 48
+random user id: 1
+random user id: 20
+random user id: 6
+random user id: 18
+random user id: 21
+random user id: 5
+random user id: 48
+random user id: 30
+random user id: 31
+random user id: 45
+random user id: 46
+random user id: 30
+random user id: 34
+random user id: 38
+random user id: 38
+random user id: 17
+random user id: 44
+random user id: 6
+random user id: 4
+random user id: 6
+random user id: 34
+random user id: 40
+random user id: 45
+random user id: 1
+random user id: 1
+random user id: 34
+random user id: 1
+random user id: 6
+random user id: 34
+random user id: 33
+random user id: 25
+random user id: 28
+random user id: 48
+random user id: 25
+random user id: 34
+random user id: 28
+random user id: 44
+random user id: 17
+random user id: 28
+random user id: 20
+random user id: 46
+random user id: 4
+random user id: 31
+random user id: 30
+random user id: 20
+random user id: 25
+random user id: 45
+random user id: 33
+random user id: 6
+random user id: 48
+random user id: 38
+random user id: 29
+'to' pare rau
+'to' pare rau
+{"from":"bogdanalexandrescu96@gmail.com","msg":"da"}'to' pare rau
+{"to":"mihai2@android.com","from":"bogdanalexandrescu96@gmail.com","msg":"da"}random user id: 28
+random user id: 26
+random user id: 25
+random user id: 18
+random user id: 18
+random user id: 6
+random user id: 38
+random user id: 34
+random user id: 40
+random user id: 18
+random user id: 4
+random user id: 1
+random user id: 40
+random user id: 34
+random user id: 21
+random user id: 31
+random user id: 1
+random user id: 40
+random user id: 40
+random user id: 45
+random user id: 1
+random user id: 29
+{"from":"marin@marin.roro","msg":"da"}'to' pare rau
+{"from":"bogdanalexandrescu96@gmail.com","msg":"da"}'to' pare rau
+{"from":"marin@marin.roro","msg":"da"}'to' pare rau
+random user id: 40
+random user id: 33
+random user id: 18
+random user id: 17
+random user id: 38
+random user id: 48
+random user id: 46
+random user id: 30
+random user id: 4
+random user id: 29
+{"from":"marin@marin.roro","msg":"da"}'to' pare rau
+{"from":"bogdanalexandrescu96@gmail.com","msg":"da"}'to' pare rau
+{"from":"bogdanalexandrescu96@gmail.com","msg":"da"}'to' pare rau
+{"from":"marin@marin.roro","msg":"da"}'to' pare rau
+random user id: 33
+random user id: 38
+random user id: 4
+random user id: 29
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE5LCJybmQiOjF9.W410ozQoMk_fhLhG5lV1S5h3hD-YtMV45SScfAju3v4","from":"marin@marin.roro","random":"1","msg":"da"}rnd
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE5LCJybmQiOjF9.W410ozQoMk_fhLhG5lV1S5h3hD-YtMV45SScfAju3v4","from":"marin@marin.roro","random":"1","msg":"da"}rnd
+random user id: 25
+random user id: 20
+random user id: 38
+random user id: 48
+random user id: 5
+random user id: 20
+random user id: 48
+random user id: 48
+random user id: 1
+random user id: 20
+random user id: 40
+random user id: 34
+random user id: 17
+random user id: 46
+random user id: 20
+random user id: 18
+random user id: 30
+random user id: 25
+random user id: 44
+random user id: 20
+random user id: 40
+random user id: 6
+random user id: 4
+random user id: 21
+random user id: 26
+random user id: 25
+random user id: 46
+random user id: 31
+random user id: 49
+random user id: 5
+random user id: 28
+random user id: 25
+random user id: 6
+random user id: 26
+random user id: 20
+random user id: 26
+random user id: 6
+random user id: 31
+random user id: 29
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE5LCJybmQiOjF9.W410ozQoMk_fhLhG5lV1S5h3hD-YtMV45SScfAju3v4","from":"marin@marin.roro","random":"1","msg":"da"}rnd
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI5LCJybmQiOjF9.OC3Qp0VLNJrsjWYro6iNdbe_6nBfgi204lN0ssJq2ro","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}rnd
+random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE5LCJybmQiOjF9.HjcHKwzIXvLwhOrLR0XpYTvLFHNaXQtAQODrBlJa8cQ","from":"marin@marin.roro","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE5LCJybmQiOjF9.HjcHKwzIXvLwhOrLR0XpYTvLFHNaXQtAQODrBlJa8cQ","from":"marin@marin.roro","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE5LCJybmQiOjF9.HjcHKwzIXvLwhOrLR0XpYTvLFHNaXQtAQODrBlJa8cQ","from":"marin@marin.roro","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI5LCJybmQiOjF9.OC3Qp0VLNJrsjWYro6iNdbe_6nBfgi204lN0ssJq2ro","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE5LCJybmQiOjF9.W410ozQoMk_fhLhG5lV1S5h3hD-YtMV45SScfAju3v4","from":"marin@marin.roro","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI5LCJybmQiOjF9.OC3Qp0VLNJrsjWYro6iNdbe_6nBfgi204lN0ssJq2ro","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI5LCJybmQiOjF9.OC3Qp0VLNJrsjWYro6iNdbe_6nBfgi204lN0ssJq2ro","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE5LCJybmQiOjF9.W410ozQoMk_fhLhG5lV1S5h3hD-YtMV45SScfAju3v4","from":"marin@marin.roro","random":"1","msg":"da"}random user id: 29
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI5LCJybmQiOjF9.OC3Qp0VLNJrsjWYro6iNdbe_6nBfgi204lN0ssJq2ro","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 29
+random user id: 29
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI5LCJybmQiOjF9.OC3Qp0VLNJrsjWYro6iNdbe_6nBfgi204lN0ssJq2ro","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE5LCJybmQiOjF9.W410ozQoMk_fhLhG5lV1S5h3hD-YtMV45SScfAju3v4","from":"marin@marin.roro","random":"1","msg":"dadada"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE5LCJybmQiOjF9.W410ozQoMk_fhLhG5lV1S5h3hD-YtMV45SScfAju3v4","from":"marin@marin.roro","random":"1","msg":"dadad"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI5LCJybmQiOjF9.OC3Qp0VLNJrsjWYro6iNdbe_6nBfgi204lN0ssJq2ro","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"dada"}random user id: 29
+random user id: 29
+random user id: 29
+random user id: 29
+random user id: 29
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI5LCJybmQiOjF9.OC3Qp0VLNJrsjWYro6iNdbe_6nBfgi204lN0ssJq2ro","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}random user id: 33
+random user id: 31
+random user id: 38
+random user id: 18
+random user id: 49
+random user id: 31
+random user id: 17
+random user id: 18
+random user id: 26
+random user id: 1
+random user id: 46
+random user id: 1
+random user id: 29
+random user id: 46
+random user id: 21
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE5LCJybmQiOjF9.HjcHKwzIXvLwhOrLR0XpYTvLFHNaXQtAQODrBlJa8cQ","from":"marin@marin.roro","random":"1","msg":"da"}{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"dada"}{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI5LCJybmQiOjF9.DOsHGIV2PicpUcWE3RsLDJI--4K5L-hieoU1yZrpck8","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"dada"}'chat_token' pare rau
+{'email': 'ghido@ghido.com'}'chat_token' pare rau
+'chat_token' pare rau
+{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'thido@thido.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'thido@thido.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'thido@thido.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'thido@thido.com'}{"to":"ghidome@gmail.com","from":"ghido@ghido.com","msg":"asda"}{"to":"ghidome@gmail.com","from":"ghido@ghido.com","msg":"as"}{"to":"thido@thido.com","from":"ghido@ghido.com","msg":"Heei, thido"}{"to":"ghidome@gmail.com","from":"ghido@ghido.com","msg":"Heei, MIhaai"}'email' pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"marian@gmail.com","msg":"sal cf"}{"to":"marian@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"da"}{"to":"marian@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"da"}{"to":"marian@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"dadada"}{"to":"marian@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"da"}{"to":"marian@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"dadada"}{"to":"marian@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"da"}{"to":"marian@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"da"}{"to":"marian@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"da"}random user id: 26
+random user id: 4
+random user id: 1
+'email' pare rau
+'email' pare rau
+'email' pare rau
+'email' pare rau
+'email' pare rau
+{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'ghido@vlad.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'thido@thido.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'ghidome@gmail.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'thido@thido.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'ghidome@gmail.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'ghido@ghido.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'thido@thido.com'}{'chat_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbSI6ImdoaWRvQGdoaWRvLmNvbSJ9.K6dTgp-8IpzF4NtPM6AoydNJQBQDjNgE9cAgZB06NaQ', 'email': 'ghidome@gmail.com'}{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"asdas"}{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"asda"}list.remove(x): x not in list pare rau
+{"to":"andrei96v@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"coaie"}{"to":"andrei96v@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"cf"}random user id: 29
+random user id: 30
+random user id: 20
+random user id: 6
+random user id: 44
+random user id: 40
+random user id: 38
+random user id: 49
+random user id: 5
+random user id: 48
+random user id: 6
+random user id: 38
+random user id: 20
+random user id: 33
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MjB9.AFokX9OBBtbARwGA3M-sSUPwFyO-2029OB6aI-l3Stg","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"dada"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MjB9.AFokX9OBBtbARwGA3M-sSUPwFyO-2029OB6aI-l3Stg","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"cf"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MjB9.AFokX9OBBtbARwGA3M-sSUPwFyO-2029OB6aI-l3Stg","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"cf"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MjB9.AFokX9OBBtbARwGA3M-sSUPwFyO-2029OB6aI-l3Stg","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"cf"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"bn u"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"PULA MEA IN GURA TA"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"BA CE MORTII MA_SII"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"FMM "}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"SA TE FUT IN PIZDA"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"ce mm"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"COAIEEEE"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MjB9.AFokX9OBBtbARwGA3M-sSUPwFyO-2029OB6aI-l3Stg","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"ba"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTl9.2A1JIdNBgFe4-ogihRsq6l0xQwtMRMmV4TIcnxRu4_U","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"dada"}random user id: 28
+random user id: 45
+random user id: 17
+random user id: 49
+random user id: 17
+random user id: 17
+random user id: 46
+random user id: 33
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MzN9.ibDtscUqrJxe0qjZYfpOwXf1hVaxTJg_4SPJTsfbAF0","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6Mjh9.zrvd5L08igMzfekyGvgUHoAi0C5woxb_0AA5fr3w_FU","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"d"}random user id: 6
+random user id: 18
+random user id: 21
+random user id: 45
+random user id: 29
+random user id: 34
+random user id: 45
+random user id: 34
+random user id: 34
+random user id: 31
+random user id: 17
+random user id: 40
+random user id: 17
+random user id: 26
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MjZ9.8aCqbb0RDZNHf8u77ma2aCwZMM_kFT5ypdzlT4o0_F0","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MzF9.q6EBQVNjWE_uzFsrwe8JqeauwYS7R40Pq0ds_v_Jb8w","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTh9.x9IiawDKIVamSLT11TiK8hyCY2fNmulogQTV_FlaTBk","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MTh9.x9IiawDKIVamSLT11TiK8hyCY2fNmulogQTV_FlaTBk","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"muie"}{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MjZ9.8aCqbb0RDZNHf8u77ma2aCwZMM_kFT5ypdzlT4o0_F0","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"dadada"}random user id: 28
+random user id: 45
+random user id: 1
+random user id: 17
+random user id: 5
+random user id: 20
+random user id: 46
+random user id: 31
+random user id: 44
+random user id: 6
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MzF9.q6EBQVNjWE_uzFsrwe8JqeauwYS7R40Pq0ds_v_Jb8w","from":"bogdanalexandrescu96@gmail.com","random":"1","msg":"da"}'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+'NoneType' object is not subscriptable pare rau
+{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Iml1bGlhb3RpbGlhMjZAeWFob28uY29tIn0.r0xrELzQLZN7XtVf51pj7lhusOpQsGpZLzFqXkBGcnk', 'email': 'london'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Iml1bGlhb3RpbGlhMjZAeWFob28uY29tIn0.r0xrELzQLZN7XtVf51pj7lhusOpQsGpZLzFqXkBGcnk', 'email': 'london'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Iml1bGlhb3RpbGlhMjZAeWFob28uY29tIn0.r0xrELzQLZN7XtVf51pj7lhusOpQsGpZLzFqXkBGcnk', 'email': 'London'}'email' pare rau
+'email' pare rau
+'email' pare rau
+'email' pare rau
