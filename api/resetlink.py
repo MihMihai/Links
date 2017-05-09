@@ -19,4 +19,4 @@ def resetLink():
 		return Response(json.dumps(response,sort_keys = True), mimetype = "application/json"), 401
 
 	return render_template("reset_password.html")
-	
+

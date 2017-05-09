@@ -341,9 +341,13 @@ def random_chat(data):
 
 	userIds = []
 
+#	f = open('socketio-error.log','a')
 
-	for row in userIdsRow:
-		userIds.append(row[0])
+#	for row in userIdsRow:
+#		userIds.append(row[0])
+#		f.write(str(row[0]) + " " )
+#	f.write('\n')
+#	f.close()
 
 	userIds.remove(uid)
 

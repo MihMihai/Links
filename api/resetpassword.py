@@ -15,10 +15,10 @@ def resetPassword():
 	#get the new password from request
 	#and the reset token
 	password = request.form.get("password")
-	resetToken = request.form.get("resetToken")
+	resetToken = request.headers.get("resetToken")
 
 	#chech if parameters are good
-	if password == None or resetToken == None: 
+	if password == None or resetToken == None:
 		response["error"] = "Bad paramaters"
 		response["description"] = "Missing paramaters"
 		response["status_code"] = 400
