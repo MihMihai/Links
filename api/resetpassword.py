@@ -15,7 +15,7 @@ def resetPassword():
 	#get the new password from request
 	#and the reset token
 	password = request.form.get("password")
-	resetToken = request.headers.get("resetToken")
+	resetToken = request.headers.get("Authorization")
 
 	#chech if parameters are good
 	if password == None or resetToken == None:
@@ -48,12 +48,12 @@ def resetPassword():
 	db.commit()
 
 
-	#clear the reset token in db for security reason : 
+	#clear the reset token in db for security reason :
 	# be sure that another access on the same link will not reset the pw
 	query = "UPDATE users SET reset_pass_token = '%s' WHERE reset_pass_token = '%s' " %("",dbToken)
 	cursor.execute(query)
 	db.commit()
-	
+
 	#close the db
 	db.close()
 
