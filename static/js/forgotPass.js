@@ -15,6 +15,10 @@
                       $('#response').text("An email has been sent to you!");
                       $("#forgot_email").val("");
                       console.log(data);
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                      $('#response').text("Try again! Maybe the email is not correct!");
+                      $("#forgot_email").val("");
                   }
               });
           }

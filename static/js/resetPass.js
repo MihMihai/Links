@@ -10,8 +10,9 @@
                   method: "POST",
                   url: "http://86.121.87.213/api/reset_password",
                   headers: {
-                      resetToken: url.substring(45, url.length);
-                  }
+                      Authorization: url.substring(45, url.length)
+                     
+                  },
                   data: {
                       password: $("#forgot_password").val()
                   },
