@@ -76,7 +76,7 @@ def newStory() :
 
 	#get current time
 	curdate = time.strftime("%Y-%m-%d %H:%M:%S")
-
+	response['date'] = curdate
 	
 
 	#check if user had a story posted
@@ -84,25 +84,27 @@ def newStory() :
 	cursor.execute(query)
 	storyPresent = cursor.fetchone()
 
-	add = True;
-	if (storyText == None or storyText == "" ) and \
-	(storyImage == None or storyImage == "") and (storyFeel == None or storyFeel == "") :
-		add = False;
+	add = True
+	if ( storyText == None or storyText == "" ) \
+	and (storyImage == None or storyImage == "") and (storyFeel == None or storyFeel == "") :
+		add = False
 
 	#if no story there
 	#insert new story in db
 	if storyPresent == None :
 		if add == True :
-			query = "INSERT INTO story (user_id, text, feel, image, date) VALUES ('%d', '%s', '%s') " \
-			% (userId, storyText, storyFeel, storyImage, curdate)	
+			query = "INSERT INTO story (user_id, text, feel, image, date) VALUES ('%d', '%s', '%s', '%s', '%s')" \
+			% (userId, storyText, storyFeel, storyImage, curdate)
 			cursor.execute(query)
-	#else update old story
+			db.commit()
+#else update old story
 	else :
-		if add == True : 
-			query = "UPDATE story SET text = '%s', text = '%s', feel = '%s', image = '%s', date = '%s' WHERE user_id = '%d'" \
+		if add == True :
+			query = "UPDATE story SET text = '%s', feel = '%s', image = '%s', date = '%s' WHERE user_id = '%d'" \
 			%(storyText, storyFeel, storyImage, curdate, userId)
 			cursor.execute(query)
-
+			db.commit()
+	db.close()
 	#return response
 	response['status'] = "ok"
 	return Response(json.dumps(response, sort_keys=True), mimetype = 'application/json'),200
