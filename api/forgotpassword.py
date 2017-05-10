@@ -61,7 +61,7 @@ def forgotPassword():
 
 
 	#we generate the token based on user Mail
-	resetToken = str(encode_chat_token(userEmail))
+	resetToken = str(encode_reset_token(userEmail))
 
 	#why not just auth_token[2:len(auth_token) - 1] ?? 
 
@@ -108,7 +108,7 @@ def forgotPassword():
 
 	return Response(json.dumps(response,sort_keys = True), mimetype = "application/json")
 
-def encode_chat_token(email):
+def encode_reset_token(email):
 	#this may throw an exception if file doesn't exist
 	f = open('server.conf','r')
 	key = f.readline()

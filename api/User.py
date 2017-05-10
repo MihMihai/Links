@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from flask_login import UserMixin, AnonymousUserMixin
+from db_handler import DbHandler
 
 class User(UserMixin):
 	def __init__(self,id,name,email,active=True):
@@ -39,6 +40,44 @@ class User(UserMixin):
 			return user
 		else:
 			return None
+			
+	def get_chat_token_from_id(id):
+		db = DbHandler.get_instance().get_connection()
+		query = "SELECT chat_token FROM users WHERE id = '%s' " % (id)
+		cursor = db.cursor()
+		cursor.execute(query)
+		data = cursor.fetchone()
+		return data[0]
+		
+	def get_chat_token_from_email(email):
+		db = DbHandler.get_instance().get_connection()
+		query = "SELECT chat_token FROM users WHERE email = '%s' " % (email)
+		cursor = db.cursor()
+		cursor.execute(query)
+		data = cursor.fetchone()
+		return data[0]
+		
+	def get_id_from_email(email):
+		db = DbHandler.get_instance().get_connection()
+		query = "SELECT id FROM users WHERE email = '%s' " % (email)
+		cursor = db.cursor()
+		cursor.execute(query)
+		data = cursor.fetchone()
+		return data[0]
+		
+	def get_id_and_chat_token_from_email(email):
+		db = DbHandler.get_instance().get_connection()
+		query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(email)
+		cursor.execute(query)
+		data = cursor.fetchone()
+		return data
+		
+	def get_id_email_name_avatar_from(chat_token):
+		db = DbHandler.get_instance().get_connection()
+		query = "SELECT id,email,name,avatar FROM users WHERE chat_token = '%s'" % (chat_token)
+		cursor.execute(query)
+		data = cursor.fetchone()
+		return data
 
 class Anonymous(AnonymousUserMixin):
 	name = u"Anonymous"
