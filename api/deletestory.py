@@ -1,17 +1,15 @@
 #!/usr/bin/python3
 
-from flask import Blueprint, Response, request
+from flask  import Blueprint, Response, request
 
-import json
 import jwt
+import json
 import MySQLdb
-import time
 
-appNewStory = Blueprint('api_newstory',__name__)
+appDeleteStory = Blueprint("api_deletestory",__name__)
 
-@appNewStory.route("/api/new_story",methods=['POST'])
-def newStory() :
-
+@appDeleteStory.route('/api/delete_story')
+def deleteStory() :
 
 	response = {}
 
@@ -51,7 +49,6 @@ def newStory() :
 	cursor.execute(query)
 	userData = cursor.fetchone()
 
-
 	#chech if token is assigned to user, so if query returned something
 	if userData == None : 
 		response['status'] = "Invalid token"
@@ -61,53 +58,8 @@ def newStory() :
 
 	userId = userData[0]
 
-	#get text for story
-	storyText = request.form.get('text')
-
-	#trim text
-	#textMax = 200
-	#storyText = storyText[:textMax]
-
-	#get story image
-	storyImage = request.form.get('image')
-
-	#get story status 
-	storyFeel = request.form.get('feel')
-
-	#get current time
-	curdate = time.strftime("%Y-%m-%d %H:%M:%S")
-
-	
-
-	#check if user had a story posted
-	query ="SELECT user_id FROM story WHERE user_id = '%d'" % (userId)
+	query = "DELETE FROM story WHERE user_id = '%d'" % (userId)
 	cursor.execute(query)
-	storyPresent = cursor.fetchone()
 
-	add = True;
-	if (storyText == None or storyText == "" ) and \
-	(storyImage == None or storyImage == "") and (storyFeel == None or storyFeel == "") :
-		add = False;
-
-	#if no story there
-	#insert new story in db
-	if storyPresent == None :
-		if add == True :
-			query = "INSERT INTO story (user_id, text, feel, image, date) VALUES ('%d', '%s', '%s') " \
-			% (userId, storyText, storyFeel, storyImage, curdate)	
-			cursor.execute(query)
-	#else update old story
-	else :
-		if add == True : 
-			query = "UPDATE story SET text = '%s', text = '%s', feel = '%s', image = '%s', date = '%s' WHERE user_id = '%d'" \
-			%(storyText, storyFeel, storyImage, curdate, userId)
-			cursor.execute(query)
-
-	#return response
-	response['status'] = "ok"
-	return Response(json.dumps(response, sort_keys=True), mimetype = 'application/json'),200
-
-
-
-
-
+	response['status'] = 200
+	return Response(json.dumps(response,sort_keys = True), mimetype = 'application/json'), 200

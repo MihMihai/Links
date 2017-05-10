@@ -42,9 +42,9 @@ def story():
 	
 	#get friend email and check it's validity
 	friendshipId = request.args.get('friendship_id')
-	if friendshipId == None or friendshipId == "":
-		response['error'] = "Invalid email"
-		response['description'] = "Please provide an email"
+	if friendshipId == None :
+		response['error'] = "Invalid friendship"
+		response['description'] = "Please provide a friendship id"
 		response['status_code'] = 400
 	return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'), 400
 
@@ -52,15 +52,32 @@ def story():
 	db = MySQLdb.connect(host = "localhost", user = "root", passwd="QAZxsw1234", db="linksdb")
 	cursor = db.cursor()
 
-	#get name of user
+	#get id of user
 	query = "SELECT id FROM users WHERE auth_token = '%s'" % (userToken)
 	cursor.execute(query)
-	userId = cursor.fetchone()
+	userData = cursor.fetchone()
+
+	#check if token is assigned to a user
+	if userData == None : 
+		response['status'] = "Invalid token"
+		response['description'] = "Token is not assigned to any user"
+		response['status_code'] = 401
+		return Response(json.dumps(response,sort_keys = True), mimetype = 'application/json'),401
+
+	userId = userData[0]
 
 	#get friend id by excluding user id
 	query = "SELECT user_1, user_2 from friendships WHERE id = '%d'" % (friendshipId)
 	cursor.execute(query)
 	ids = cursor.fetchone()
+
+
+	#check we have a friendship for specified friendship id
+	if ids == None : 
+		response['status'] = "No friendships found for this id"
+		response['description'] = "Please provide a valid friendship id"
+		response['status_code'] = 400
+		return Response(json.dumps(response,sort_keys = True), mimetype = 'application/json'), 400
 
 	if ids[0] == userId[0] :
 		friendId = ids[0]
@@ -71,7 +88,6 @@ def story():
 	cursor.execute(query)
 	story = cursor.fetchone()
 	
-	response['status_code'] = 200
 	response['status'] = "ok"
 
 	if story == None :
@@ -91,8 +107,5 @@ def story():
 		response['image'] = image
 
 	response['date'] = date
-	
+
 	return Response(json.dumps(response,sort_keys = True),mimetype = 'application/json'), 200
-
-
-
