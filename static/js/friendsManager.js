@@ -157,6 +157,7 @@ function createFriendRequestManager(socket, name, from, friendship_id, avatar) {
 
   
 var right = false; 
+var lastWeather = null;
 
 function Widgets(panelContent) {
 
@@ -173,6 +174,7 @@ function Widgets(panelContent) {
     while (panelContent != null && panelContent.firstChild) {
         panelContent.removeChild(panelContent.firstChild);
     }
+   
 
     
     var container = $('<div id="container" style="min-height: 20vh; display: flex; align-items: center; justify-content: center; flex-direction: column;"></div>');
@@ -191,10 +193,16 @@ function Widgets(panelContent) {
     $(panelContent).append(container);
 
 
+     if(lastWeather!=null) panelContent.append(lastWeather);
+
      searchButton.on('click', '', function() {
 
 
+
         var val = document.getElementById("locationValue").value;
+
+        document.getElementById("locationValue").value = "";
+
         returnWeatherLocation(val);
 
         var $this = $(this);
@@ -233,6 +241,7 @@ function Widgets(panelContent) {
                 var container = $('<div id="container" style="min-height: 20vh; display: flex; align-items: center; justify-content: center; flex-direction: column;"></div>');
                 var weather = document.createElement('div');
                 $(weather).appendTo(panelContent).html(data).css("font-size","x-large");
+                lastWeather=weather;
         
             },
             error: function(){
@@ -254,6 +263,7 @@ function Widgets(panelContent) {
                 var container = $('<div id="container" style="min-height: 20vh; display: flex; align-items: center; justify-content: center; flex-direction: column;"></div>');
                 var weather = document.createElement('div');
                 $(weather).appendTo(panelContent).html(data).css("font-size","x-large");
+                lastWeather=weather;
             },
             error: function(){
                      right = false;
