@@ -21,9 +21,11 @@ function createFriend(socket,imgSrc,name,friendshipId,place){
 	button.click(function(event){
 		//personalize modal
 		$("#removeFriend.modal_title").text("Delete" + name + "?");
-
+		if(place !== "random-list")
+			remove(socket,name,friendshipId,0);
+		else
+			remove(socket,name,0,friendshipId);
 		$("#removeFriend").modal("show");
-		remove(socket,name,friendshipId);
 		event.stopPropagation();
 	});
 	var img = $('<img />', {
@@ -47,13 +49,24 @@ function createFriend(socket,imgSrc,name,friendshipId,place){
 	$("#"+friendsList).prepend(a);
 }
 
-function remove(socket,name,friendshipId){
-	$("#form_remove").on("submit",function(){
-
-		socket.emit("remove friend",{"chat_token":localStorage.CHAT_TOKEN,"friendship_id":friendshipId});
-		delete friends[friendshipId];
-		$("#removeFriend").modal("hide");
-	});
+function remove(socket,name,friendshipId,random){
+	
+	if(random == 0) {		
+		$("#form_remove").off("submit");
+		$("#form_remove").on("submit",function(){
+			socket.emit("remove friend",{"chat_token":localStorage.CHAT_TOKEN,"friendship_id":friendshipId});
+			delete friends[friendshipId];
+			$("#removeFriend").modal("hide");
+		});
+	}
+	else {
+		$("#form_remove").off("submit");
+		$("#form_remove").on("submit",function(){
+			$("[id='" + random + "']").remove(); //Complicatii cu $("#" + random) :((
+			delete friends[random];
+			$("#removeFriend").modal("hide");
+		});
+	}
 
 /*		$.ajax({
 			method: "POST",

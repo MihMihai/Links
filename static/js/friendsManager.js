@@ -44,14 +44,6 @@ function AddFriend(socket, friendRequestsArray, panelContent) {
             "chat_token": localStorage.CHAT_TOKEN,
             "email": value
         });
-
-        socket.on("bad friend request",function(msg){
-
-            alert(msg);
-        });
-	
-
-
     });
 }
 
