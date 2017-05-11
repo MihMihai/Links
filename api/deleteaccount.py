@@ -4,9 +4,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from string import Template #templating email
 from flask import Blueprint, Response, request
+from db_handler import DbHandler
 
 import json
-import MySQLdb
 import jwt
 import smtplib
 
@@ -23,8 +23,10 @@ def deleteAccount():
 	response = {}
 
 	#connect to db
-	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
-	
+#	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
+
+
 	userToken = request.headers.get("Authorization")
 	if userToken == None:
 		response["error"] = "Request does not contain an access token"
@@ -47,7 +49,7 @@ def deleteAccount():
 		response["description"] = "Invalid token"
 		response["status_code"] = 401
 		return Response(json.dumps(response, sort_keys = True), mimetype = "application/json"), 401
-		
+
 	#get email from request
 	userEmail = request.form.get("email")
 
@@ -61,12 +63,12 @@ def deleteAccount():
 
 	#get user name based on email
 	query = "SELECT name FROM users WHERE email = '%s'" % (userEmail)
-	
+
 	#return query
 	cursor = db.cursor()
 	cursor.execute(query)
 
-	
+
 	userData= cursor.fetchone()
 
 	#check if given email is registered, so in db
@@ -88,7 +90,7 @@ def deleteAccount():
 	#we generate the token based on user Mail
 	deleteToken = str(encode_chat_token(userEmail))
 
-	#why not just auth_token[2:len(auth_token) - 1] ?? 
+	#why not just auth_token[2:len(auth_token) - 1] ??
 
 	deleteToken = deleteToken[2:]
 	deleteToken = deleteToken[:len(deleteToken) - 1]
@@ -103,7 +105,7 @@ def deleteAccount():
 
 	#substitute values in template message for customized email
 	message = message_template.substitute(USER_NAME = userName, TOKEN = deleteToken)
-	
+
 	mailServer = smtplib.SMTP ( 'smtp.gmail.com', 587)
 	mailServer.starttls()
 	mailServer.login(LinksEmail, LinksPassword)
@@ -115,11 +117,11 @@ def deleteAccount():
 	mail.attach(MIMEText( message, 'plain'))
 
 	mailServer.sendmail(LinksEmail, userEmail, mail.as_string())
-	
+
 	#tidy up
-	db.close()
+#	db.close()
 	mailServer.quit()
-	
+
 
 	response['status'] = "ok"
 

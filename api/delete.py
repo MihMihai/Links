@@ -3,11 +3,11 @@
 from flask import Blueprint, Response, request, render_template
 import json
 import jwt
-import MySQLdb
+from db_handler import DbHandler
 
 appDelete = Blueprint('api_delete',__name__)
 
-@appDelete.route("/delete", methods = ['GET']) 
+@appDelete.route("/delete", methods = ['GET'])
 def delete():
 
 	#get reset token from url
@@ -17,15 +17,16 @@ def delete():
 		response["description"] = "Missing delete token"
 		response["status_code"] = 401
 		return Response(json.dumps(response,sort_keys = True), mimetype = "application/json"), 401
-	
-	db = MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
-	
+
+#	db = MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
+
 	query = "SELECT id FROM users WHERE delete_token = '%s' " % (deleteToken)
 	cursor = db.cursor()
 	cursor.execute(query)
 	uid = cursor.fetchone()
 
-	if uid == None: 
+	if uid == None:
 		return render_template("delete_failed.html")
 	uid = uid[0]
 	query = "DELETE FROM messages WHERE user_1 = '%d' OR user_2 = '%d' " % (uid, uid)
@@ -35,6 +36,6 @@ def delete():
 	query = "DELETE FROM users WHERE id = '%d' "  %(uid)
 	cursor.execute(query)
 	db.commit()
-	
+
 	return render_template("delete_successful.html")
-	
+

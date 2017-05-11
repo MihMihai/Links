@@ -43,8 +43,6 @@ def friendRequests():
 	cursor.execute(query)
 	data = cursor.fetchone()
 
-	db.close()
-
 	if data != None:
 
 		response['name']=data[0]
