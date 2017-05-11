@@ -163,7 +163,7 @@ def friend_request(data):
 	if userId != None:
 		uid2 = userId[0]
 		room = userId[1]
-		query = "SELECT * FROM friendships WHERE (user_1 = '%d' AND user_2 = '%d') OR (user_1 = '%d' AND user_2 = '%d')" %(uid1,uid2,uid2,uid1)
+		query = "SELECT status FROM friendships WHERE (user_1 = '%d' AND user_2 = '%d') OR (user_1 = '%d' AND user_2 = '%d')" %(uid1,uid2,uid2,uid1)
 		cursor.execute(query)
 		row = cursor.fetchone()
 		if row == None:
@@ -192,7 +192,10 @@ def friend_request(data):
 			emit('new friend request',json.dumps(frReqDict),room=room)
 		else:
 			room = data['chat_token']
-			emit('bad friend request','Request already sent',room=room)
+			if row[0] == 0:
+				emit('bad friend request','Request already sent',room=room)
+			else:
+				emit('bad friend request','User is already linked to you',room=room)
 	else:
 		room = data['chat_token']
 		emit('bad friend request','Invalid email',room=room)
@@ -312,7 +315,13 @@ def remove_friend(data):
 				removed["message"] = 'Removed from friends'
 				emit('friend removed',json.dumps(removed),room=room)
 				emit('friend removed',json.dumps(removed),room=data['chat_token'])
+				f = open('socketio-error.log','a')
+				f.write('friend removed ' + str(friendshipID) + '\n')
+				f.close()
 			else:
+				f = open('socketio-error.log','a')
+				f.write('wrong fr id\n')
+				f.close()
 				emit('bad remove friend','Wrong friendship id',room=data['chat_token'])
 		else:
 			emit('bad remove friend','Invalid chat token',room=data['chat_token'])
@@ -343,13 +352,14 @@ def random_chat(data):
 
 #	f = open('socketio-error.log','a')
 
-#	for row in userIdsRow:
-#		userIds.append(row[0])
+	for row in userIdsRow:
+		userIds.append(row[0])
 #		f.write(str(row[0]) + " " )
 #	f.write('\n')
 #	f.close()
 
-	userIds.remove(uid)
+	if uid in userIds:
+		userIds.remove(uid)
 
 	randomId = random.choice(userIds)
 
