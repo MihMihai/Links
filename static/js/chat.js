@@ -6,13 +6,26 @@ var friendRequestsArray = [];
 var ip = "86.121.87.213";
 var currentTab;
 var base64Image;
+
+function updateFriendReq()
+{
+    if(friendRequestsArray.length > 0)
+     {
+        var number = friendRequestsArray.length.toString();
+        $("#friendRequests>a").text("Friend requests " + number );
+     }
+     else  $("#friendRequests>a").text("Friend requests");
+}
+
 window.onload = function() {
+
+    
+    updateFriendReq();
+
     setInterval(refreshTokenRequest, 45000);
 
     let socket = io.connect("http://" + ip + "/chat");
     socket.emit("join", { "email": localStorage.EMAIL });
-
-
 
 
     socket.on("random chat token", function(msg) {
@@ -97,8 +110,11 @@ window.onload = function() {
             let from = obj.from;
             let name = obj.name;
             let friendshipId = obj.friendship_id;
-	    let avatar = obj.avatar;
+	       let avatar = obj.avatar;
             friendRequestsArray.push(new FriendReq(name, from, friendshipId, avatar));
+
+            updateFriendReq();
+            
             if (currentTab == "#friendRequests")
                 createFriendRequestManager(socket, name, from, friendshipId, avatar);
         } catch (e) {
@@ -198,6 +214,7 @@ window.onload = function() {
                 for (let i = 0; i < data.requests.length; i++) {
                     friendRequestsArray.push(new FriendReq(data.requests[i].name, data.requests[i].email, data.requests[i].friendship_id,data.requests[i].avatar));
                 }
+                updateFriendReq();
             }
         }
     });
@@ -242,8 +259,8 @@ window.onload = function() {
 
     document.getElementById('settings_photo').addEventListener('change', function(e) {
         var file = this.files[0];
-        file.height = '50';
-        file.width = '50';
+        // file.height = '50';
+        //file.width = '50';
         var reader = new FileReader();
         reader.onloadend = function() {
             //console.log('RESULT', reader.result);
@@ -251,6 +268,7 @@ window.onload = function() {
         };
         reader.readAsDataURL(file);
     });
+
 
     $('#form_update').validator().on('submit', function(event) {
         if (event.isDefaultPrevented()) {
@@ -272,8 +290,9 @@ window.onload = function() {
                 success: function(data) {
                     $('#updateAccount').modal('hide');
                     $("#profile_name").html($("#settings_name").val());
-                    if(base64Image !==undefined){
-                         $("#profile_image").attr('src', base64Image);
+
+                    if (base64Image !== undefined) {
+                        $("#profile_image").attr('src', base64Image);
                     }
                     base64Image = undefined;
                 }
