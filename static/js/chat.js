@@ -6,7 +6,22 @@ var friendRequestsArray = [];
 var ip = "86.121.87.213";
 var currentTab;
 var base64Image;
+
+function updateFriendReq()
+{
+    if(friendRequestsArray.length > 0)
+     {
+        var number = friendRequestsArray.length.toString();
+        $("#friendRequests>a").text("Friend requests " + number );
+     }
+     else  $("#friendRequests>a").text("Friend requests");
+}
+
 window.onload = function() {
+
+    
+    updateFriendReq();
+
     setInterval(refreshTokenRequest, 45000);
 
     let socket = io.connect("http://" + ip + "/chat");
@@ -95,8 +110,11 @@ window.onload = function() {
             let from = obj.from;
             let name = obj.name;
             let friendshipId = obj.friendship_id;
-	    let avatar = obj.avatar;
+	       let avatar = obj.avatar;
             friendRequestsArray.push(new FriendReq(name, from, friendshipId, avatar));
+
+            updateFriendReq();
+            
             if (currentTab == "#friendRequests")
                 createFriendRequestManager(socket, name, from, friendshipId, avatar);
         } catch (e) {
@@ -196,6 +214,7 @@ window.onload = function() {
                 for (let i = 0; i < data.requests.length; i++) {
                     friendRequestsArray.push(new FriendReq(data.requests[i].name, data.requests[i].email, data.requests[i].friendship_id,data.requests[i].avatar));
                 }
+                updateFriendReq();
             }
         }
     });
