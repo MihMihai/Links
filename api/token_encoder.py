@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 
 import jwt
+import datetime
 
 def encode_auth_token(user_id):
 	#this may throw an exception if file doesn't exist
 	key = read_key_from_file()
 
-	try
+	try:
 
 		payload = {
 			'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0,seconds=300),
@@ -23,7 +24,7 @@ def encode_auth_token(user_id):
 def encode_chat_token(email):
 	#this may throw an exception if file doesn't exist
 	key = read_key_from_file()
-	
+
 	try:
 		payload = {
 			'em': email
@@ -50,14 +51,14 @@ def encode_random_token(id):
 		)
 	except Exception as e:
 		return e
-		
+
 def encode_reset_token(email):
 	#this may throw an exception if file doesn't exist
 	key = read_key_from_file()
-	
+
 	try:
 		payload = {
-			'em': email
+			'em': email,
 			'reset': 1
 		}
 		return jwt.encode(payload,
@@ -66,7 +67,7 @@ def encode_reset_token(email):
 		)
 	except Exception as e:
 		return e
-		
+
 def encode_delete_token(email):
 	#this may throw an exception if file doesn't exist
 	key = read_key_from_file()
