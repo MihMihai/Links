@@ -2,6 +2,7 @@
 from flask import Blueprint,Response,request,redirect,url_for,render_template
 from flask_login import login_user,current_user
 from db_handler import DbHandler
+import token_encoder
 import json
 import jwt
 import datetime
@@ -51,7 +52,7 @@ def login():
 	if "error" in response:
 		return Response(json.dumps(response, sort_keys=True), mimetype="application/json"),401
 
-	auth_token = str(encode_auth_token(data[0]))
+	auth_token = str(token_encoder.encode_auth_token(data[0]))
 	auth_token = auth_token[2:]
 	auth_token = auth_token[:len(auth_token)-1]
 	response["access_token"] = auth_token
@@ -63,25 +64,6 @@ def login():
 
 	#return redirect(url_for("chat"))
 	return Response(json.dumps(response, sort_keys=True), mimetype="application/json")
-
-def encode_auth_token(user_id):
-	#this may throw an exception if file doesn't exist
-	f = open('server.conf','r')
-	key = f.readline()
-
-	try:
-
-		payload = {
-			'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0,seconds=300),
-			'iat': datetime.datetime.utcnow(),
-			'sub': user_id
-		}
-		return jwt.encode(payload,
-			key,
-			algorithm = 'HS256'
-		)
-	except Exception as e:
-		return e
 
 #@appLogin.route("/chat")
 #def chat():

@@ -2,6 +2,7 @@
 from flask import Blueprint,Response,request,redirect,url_for,render_template
 from db_handler import DbHandler
 from error_response import ErrorResponse
+import token_encoder
 import json
 import jwt
 
@@ -15,8 +16,7 @@ def logout():
 	if userToken == None:
 		return ErrorResponse.authorization_required()
 
-	f = open('server.conf','r')
-	key = f.readline()
+	key = token_encoder.read_key_from_file()
 
 	try:
 		userAcc = jwt.decode(userToken,key)

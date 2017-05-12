@@ -4,6 +4,7 @@ from flask import Blueprint, Response, request
 from flask_socketio import SocketIO,emit,send,join_room,leave_room
 from db_handler import DbHandler
 from User import User
+import token_encoder
 import json
 import time
 import jwt
@@ -55,7 +56,7 @@ def message(msg):
 	if 'random' in dict:
 		dict.pop('random')
 		fromUserId = User.get_id_from_email(dict['from'])
-		fromUserToken = str(encode_random_token(fromUserId))
+		fromUserToken = str(token_encoder.encode_random_token(fromUserId))
 		fromUserToken = fromUserToken[2:]
 		fromUserToken = fromUserToken[:len(fromUserToken)-1]
 		dict['from'] = fromUserToken
@@ -318,14 +319,14 @@ def random_chat(data):
 
 	randomId = random.choice(userIds)
 
-	randomToken = str(encode_random_token(randomId))
+	randomToken = str(token_encoder.encode_random_token(randomId))
 	randomToken = randomToken[2:]
 	randomToken = randomToken[:len(randomToken)-1]
 
 	rnd = {}
 	rnd["random_token"] = randomToken
 
-	rndSenderToken = str(encode_random_token(uid))
+	rndSenderToken = str(token_encoder.encode_random_token(uid))
 	rndSenderToken = rndSenderToken[2:]
 	rndSenderToken = rndSenderToken[:len(rndSenderToken)-1]
 
@@ -350,38 +351,3 @@ def default_error_handler(e):
 	wr = open('socketio-error.log','a')
 	wr.write(str(e) + " pare rau\n")
 	wr.close()
-
-
-def encode_chat_token(id):
-	#this may throw an exception if file doesn't exist
-	f = open('server.conf','r')
-	key = f.readline()
-
-	try:
-		payload = {
-			'sub': id
-		}
-		return jwt.encode(payload,
-			key,
-			algorithm = 'HS256'
-		)
-	except Exception as e:
-		return e
-
-def encode_random_token(id):
-	#this may throw an exception if file doesn't exist
-	f = open('server.conf','r')
-	key = f.readline()
-	f.close()
-
-	try:
-		payload = {
-			'sub': id,
-			'rnd': 1
-		}
-		return jwt.encode(payload,
-			key,
-			algorithm = 'HS256'
-		)
-	except Exception as e:
-		return e

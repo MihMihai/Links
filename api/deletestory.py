@@ -4,6 +4,7 @@ from flask  import Blueprint, Response, request
 from db_handler import DbHandler
 from error_response import ErrorResponse
 
+import token_encoder
 import jwt
 import json
 
@@ -22,8 +23,7 @@ def deleteStory() :
 
 	#check user authentification
 
-	f = open('server.conf','r')
-	key = f.readline()
+	key = token_encoder.read_key_from_file()
 
 	try:
 		userAcc = jwt.decode(userToken,key)

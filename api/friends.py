@@ -3,6 +3,7 @@
 from flask import Blueprint, Response, request
 from db_handler import DbHandler
 from error_response import ErrorResponse
+import token_encoder
 import json
 import jwt
 
@@ -23,8 +24,7 @@ def friends():
 		return ErrorResponse.authorization_required()
 
 	#get key to code/decode the token
-	f = open('server.conf','r')
-	key = f.readline()
+	key = token_encoder.read_key_from_file()
 
 	#what is coding dictionary user1Acc
 	try:

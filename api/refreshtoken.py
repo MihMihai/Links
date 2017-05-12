@@ -5,6 +5,7 @@ from error_response import ErrorResponse
 import jwt
 import json
 import datetime
+import token_encoder
 
 appRefresh = Blueprint('api_refreshtoken',__name__)
 
@@ -17,9 +18,7 @@ def refreshToken():
 	if userToken == None:
 		return ErrorResponse.authorization_required()
 
-	f = open('server.conf')
-	key = f.readline()
-	f.close()
+	key = token_encoder.read_key_from_file()
 
 	userAcc = {}
 
@@ -40,7 +39,7 @@ def refreshToken():
 	else:
 		userId = userAcc['sub']
 
-	authToken = str(encode_auth_token(userId,key))
+	authToken = str(token_encoder.encode_auth_token(userId,key))
 	authToken = authToken[2:]
 	authToken = authToken[:len(authToken)-1]
 
@@ -54,24 +53,3 @@ def refreshToken():
 	response["access_token"] = authToken
 	response["status"] = 'ok'
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
-
-
-def encode_auth_token(user_id,key):
-	#this may throw an exception if file doesn't exist
-	#f = open('server.conf','r')
-	#key = f.readline()
-
-	try:
-
-		payload = {
-			'exp' : datetime.datetime.utcnow() +
-			datetime.timedelta(days=0,seconds=300),
-			'iat': datetime.datetime.utcnow(),
-			'sub': user_id
-		}
-		return jwt.encode(payload,
-			key,
-			algorithm = 'HS256'
-		)
-	except Exception as e:
-		return e

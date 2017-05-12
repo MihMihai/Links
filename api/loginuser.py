@@ -2,6 +2,7 @@
 
 from flask import request,Response,Blueprint,redirect
 from flask_login import login_user
+import token_encoder
 import MySQLdb
 import jwt
 from User import *
@@ -16,8 +17,7 @@ def appLoginUser():
 	if userToken == None:
 		return redirect("/")
 
-	f = open('server.conf','r')
-	key = f.readline()
+	key = token_encoder.read_key_from_file()
 
 	try:
 		userAcc = jwt.encode(userToken,key)

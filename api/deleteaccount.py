@@ -7,6 +7,7 @@ from flask import Blueprint, Response, request
 from db_handler import DbHandler
 from error_response import ErrorResponse
 
+import token_encoder
 import json
 import jwt
 import smtplib
@@ -31,8 +32,7 @@ def deleteAccount():
 	if userToken == None:
 		return ErrorResponse.authorization_required()
 
-	f = open('server.conf','r')
-	key = f.readline()
+	key = token_encoder.read_key_from_file()
 
 	try:
 		userAcc = jwt.decode(userToken,key)
@@ -79,7 +79,7 @@ def deleteAccount():
 
 
 	#we generate the token based on user Mail
-	deleteToken = str(encode_chat_token(userEmail))
+	deleteToken = str(token_encoder.encode_delete_token(userEmail))
 
 	#why not just auth_token[2:len(auth_token) - 1] ??
 
@@ -116,22 +116,5 @@ def deleteAccount():
 	response['status'] = "ok"
 
 	return Response(json.dumps(response,sort_keys = True), mimetype = "application/json")
-
-def encode_chat_token(email):
-	#this may throw an exception if file doesn't exist
-	f = open('server.conf','r')
-	key = f.readline()
-
-	try:
-		payload = {
-			'em': email
-		}
-		return jwt.encode(payload,
-			key,
-			algorithm = 'HS256'
-		)
-	except Exception as e:
-		return e
-
 
 
