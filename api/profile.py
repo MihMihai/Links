@@ -3,6 +3,7 @@
 from flask import Blueprint,Response,request
 import json
 import jwt
+import token_encoder
 from db_handler import DbHandler
 from error_response import ErrorResponse
 
@@ -19,8 +20,7 @@ def friendRequests():
 	if userToken == None:
 		return ErrorResponse.authorization_required()
 
-	f = open('server.conf','r')
-	key = f.readline()
+	key = token_encoder.read_key_from_file()
 
 	try:
 		userAcc = jwt.decode(userToken,key)

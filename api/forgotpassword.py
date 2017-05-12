@@ -6,6 +6,7 @@ from string import Template #templating email
 from flask import Blueprint, Response, request
 from db_handler import DbHandler
 
+import token_encoder
 import json
 import jwt
 import smtplib
@@ -61,7 +62,7 @@ def forgotPassword():
 
 
 	#we generate the token based on user Mail
-	resetToken = str(encode_reset_token(userEmail))
+	resetToken = str(token_encoder.encode_reset_token(userEmail))
 
 	#why not just auth_token[2:len(auth_token) - 1] ??
 
@@ -106,22 +107,5 @@ def forgotPassword():
 	response['status'] = "ok"
 
 	return Response(json.dumps(response,sort_keys = True), mimetype = "application/json")
-
-def encode_reset_token(email):
-	#this may throw an exception if file doesn't exist
-	f = open('server.conf','r')
-	key = f.readline()
-
-	try:
-		payload = {
-			'em': email
-		}
-		return jwt.encode(payload,
-			key,
-			algorithm = 'HS256'
-		)
-	except Exception as e:
-		return e
-
 
 

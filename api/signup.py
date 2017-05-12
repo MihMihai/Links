@@ -55,7 +55,7 @@ def signup():
 	data = cur.fetchone()
 
 	if data == None:
-		chatToken = str(encode_chat_token(email))
+		chatToken = str(token_encoder.encode_chat_token(email))
 		chatToken = chatToken[2:]
 		chatToken = chatToken[:len(chatToken)-1]
 
@@ -67,7 +67,7 @@ def signup():
 		LinksEmail = "linkspeople.chat@gmail.com"
 		LinksPassword = "Qw3R$mimaB*"
 
-		validationToken = str(encode_chat_token(email))
+		validationToken = str(token_encoder.encode_chat_token(email))
 		validationToken = validationToken[2:]
 		validationToken = validationToken[:len(validationToken)-1]
 
@@ -106,20 +106,3 @@ def signup():
 	response["status_code"] = 401
 	response["error"] = "Invalid email"
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
-
-
-def encode_chat_token(email):
-	#this may throw an exception if file doesn't exist
-	f = open('server.conf','r')
-	key = f.readline()
-
-	try:
-		payload = {
-			'em': email
-		}
-		return jwt.encode(payload,
-			key,
-			algorithm = 'HS256'
-		)
-	except Exception as e:
-		return e

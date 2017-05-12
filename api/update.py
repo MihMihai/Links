@@ -4,6 +4,7 @@ from flask import Response,request,Blueprint
 from db_handler import DbHandler
 from datetime import datetime
 from error_response import ErrorResponse
+import token_encoder
 import jwt
 import json
 
@@ -18,8 +19,7 @@ def update():
 	if userToken == None:
 		return ErrorResponse.authorization_required()
 
-	f = open('server.conf','r')
-	key = f.readline()
+	key = token_encoder.read_key_from_file()
 
 	try:
 		userAcc = jwt.decode(userToken,key)
