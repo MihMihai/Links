@@ -1,4 +1,5 @@
 const friends = {};
+var imageEndpoint = "http://linkspeople.ddns.net/image/";
 
 function Friend(name, email){
 	this.name = name;
