@@ -29,12 +29,17 @@ function createFriend(socket,imgSrc,name,friendshipId,place){
 		$("#removeFriend").modal("show");
 		event.stopPropagation();
 	});
+	var imageFriend;
+	if(place !== "random-list")
+		imageFriend = imageEndpoint + imgSrc;
+	else
+		imageFriend = imgSrc;
 	var img = $('<img />', {
-		src: '' + imageEndpoint + data.avatar + imgSrc, //imageEndpoint is declared in chat.js
+		src: '' + imageFriend, //imageEndpoint is declared in chat.js
 		alt: 'User Avatar',
 		class: 'img-circle'
-		
 	});
+
 	var span = $("<span class='chat-img pull-left'></span>");
 	span.append(img);
 	var a = $("<a id="+friendshipId+" href='#'' class='list-group-item'></a>");
