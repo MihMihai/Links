@@ -39,7 +39,7 @@ def refreshToken():
 	else:
 		userId = userAcc['sub']
 
-	authToken = str(token_encoder.encode_auth_token(userId,key))
+	authToken = str(token_encoder.encode_auth_token(userId))
 	authToken = authToken[2:]
 	authToken = authToken[:len(authToken)-1]
 

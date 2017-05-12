@@ -6,7 +6,6 @@ import json
 from User import *
 from login import appLogin
 from signup import appSignup
-from friendrequest import appFriendRequest
 from friendrequests import appFriendRequests
 from profile import appProfile
 from update import appUpdate
@@ -41,7 +40,6 @@ app = Flask(__name__,template_folder='/var/www/html',static_folder='/var/www/htm
 
 app.register_blueprint(appLogin)
 app.register_blueprint(appSignup)
-app.register_blueprint(appFriendRequest)
 app.register_blueprint(appFriendRequests)
 app.register_blueprint(appProfile)
 app.register_blueprint(appUpdate)
@@ -92,6 +90,10 @@ def chat():
 @app.route("/js/Roboto-Black.ttf")
 def sendFont():
 	return send_from_directory('/var/www/html/static/js','Roboto-Black.ttf')
+
+@app.route("/image/<avatar>")
+def get_avatar(avatar):
+	return send_from_directory('/var/www/avatars',avatar)
 
 if __name__ == "__main__":
 #	app.run(debug=True)

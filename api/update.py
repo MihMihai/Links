@@ -5,6 +5,7 @@ from db_handler import DbHandler
 from datetime import datetime
 from error_response import ErrorResponse
 import token_encoder
+import base64
 import jwt
 import json
 
@@ -61,7 +62,14 @@ def update():
 		cursor.execute(query)
 		db.commit()
 	if avatar != None:
-		query = "UPDATE users SET avatar = '%s' WHERE auth_token = '%s'" % (avatar,userToken)
+		if "jpeg" in avatar:
+			type = "jpeg"
+		else:
+			type = "png"
+		avatar = avatar[avatar.index(",") + 1:]
+		with open("/var/www/avatars/avatar" + str(userAcc["sub"]) + "." + type,'wb') as f:
+			f.write(base64.b64decode(avatar))
+		query = "UPDATE users SET avatar = '%s' WHERE auth_token = '%s'" % ("avatar" + str(userAcc["sub"]) + "." + type,userToken)
 		cursor.execute(query)
 		db.commit()
 
