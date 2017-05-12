@@ -3,7 +3,6 @@
 from flask import Blueprint, Response, request, render_template
 import json
 import jwt
-import MySQLdb
 
 appResetLink = Blueprint('api_resetlink',__name__)
 

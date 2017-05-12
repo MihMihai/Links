@@ -5,8 +5,8 @@ from email.mime.text import MIMEText
 from string import Template #templating email
 from flask import Blueprint,Response,request
 from datetime import datetime
+from db_handler import DbHandler
 import json
-import MySQLdb
 import jwt
 import smtplib
 
@@ -18,7 +18,7 @@ appSignup = Blueprint('api_signup',__name__)
 
 @appSignup.route("/api/signup",methods=['POST']) #methods=['POST']
 def signup():
-	db = MySQLdb.connect(host="localhost",user="root",passwd="QAZxsw1234",db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 
 	response = {}
 
@@ -96,13 +96,11 @@ def signup():
 		mailServer.sendmail(LinksEmail, email, mail.as_string())
 		
 		#tidy up
-		db.close()
 		mailServer.quit()
 		
 		response["status"] = 'ok'
 
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
-	db.close()
 
 	response["description"] = "Email already taken"
 	response["status_code"] = 401

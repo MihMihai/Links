@@ -1,7 +1,7 @@
 #!usr/bin/python3
 from flask import Blueprint, Response, request
+from db_handler import DbHandler
 import json
-import MySQLdb
 import jwt
 
 appResetPassword = Blueprint('api_resetpassword',__name__)
@@ -10,7 +10,7 @@ appResetPassword = Blueprint('api_resetpassword',__name__)
 def resetPassword():
 	response = {}
 
-	db = MySQLdb.connect(host="localhost",user="root",passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 
 	#get the new password from request
 	#and the reset token
@@ -53,9 +53,6 @@ def resetPassword():
 	query = "UPDATE users SET reset_pass_token = '%s' WHERE reset_pass_token = '%s' " %("",dbToken[0])
 	cursor.execute(query)
 	db.commit()
-
-	#close the db
-	db.close()
 
 	response["status"] = "ok"
 	#return response

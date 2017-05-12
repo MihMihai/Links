@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from flask import Blueprint,Response,request,redirect,url_for,render_template
 from flask_login import login_user,current_user
-import MySQLdb
+from db_handler import DbHandler
 import json
 import jwt
 import datetime
@@ -12,7 +12,7 @@ appLogin = Blueprint('api_login',__name__)
 @appLogin.route("/api/login", methods =['POST']) #methods=['POST']
 def login():
 
-	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
+	db= DbHandler.get_instance().get_connection()
 
 	response = {}
 
@@ -60,7 +60,6 @@ def login():
 
 	cursor.execute(query)
 	db.commit()
-	db.close()
 
 	#return redirect(url_for("chat"))
 	return Response(json.dumps(response, sort_keys=True), mimetype="application/json")

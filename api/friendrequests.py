@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 from flask import Blueprint,Response,request
+from db_handler import DbHandler
 import json
-import MySQLdb
 import jwt
 
 appFriendRequests = Blueprint('api_friendrequests',__name__)
@@ -11,7 +11,7 @@ appFriendRequests = Blueprint('api_friendrequests',__name__)
 def friendRequests():
 	response = {}
 
-	db = MySQLdb.connect(host="localhost",user="root",passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 
 	user1Token = request.headers.get("Authorization")
 

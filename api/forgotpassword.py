@@ -4,9 +4,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from string import Template #templating email
 from flask import Blueprint, Response, request
+from db_handler import DbHandler
 
 import json
-import MySQLdb
 import jwt
 import smtplib
 
@@ -23,7 +23,7 @@ def forgotPassword():
 	response = {}
 
 	#connect to db
-	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 
 	#get email from request
 	userEmail = request.form.get("email")
@@ -101,7 +101,6 @@ def forgotPassword():
 	mailServer.sendmail(LinksEmail,userEmail,mail.as_string())
 
 	#tidy up
-	db.close()
 	mailServer.quit()
 
 	response['status'] = "ok"

@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 from flask import Blueprint, Response, request
+from db_handler import DbHandler
 import json
-import MySQLdb
 import time
 import jwt
 
@@ -14,7 +14,7 @@ def removeFriend():
 
 	response = {}
 
-	db = MySQLdb.connect(host = "localhost", user = "root", passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 
 	user1Token = request.headers.get("Authorization")
 	if user1Token == None:
@@ -77,5 +77,4 @@ def removeFriend():
 		cursor.execute(query)
 		db.commit()
 	
-	db.close()
 	return Response(json.dumps(response, sort_keys=True),mimetype="application/json")

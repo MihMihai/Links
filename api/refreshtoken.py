@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from flask import Blueprint,request,Response
-import MySQLdb
+from db_handler import DbHandler
 import jwt
 import json
 import datetime
@@ -35,7 +35,7 @@ def refreshToken():
 		response["status_code"] = 401
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"), 401
 
-	db = MySQLdb.connect(host="localhost", user="root", passwd = "QAZxsw1234", db ="linksdb")
+	db = DbHandler.get_instance().get_connection()
 
 	if len(userAcc) == 0:
 		query = "SELECT id FROM users WHERE auth_token = '%s'" % (userToken)

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from flask import Blueprint,Response,request,redirect,url_for,render_template
-import MySQLdb
+from db_handler import DbHandler
 import json
 import jwt
 
@@ -35,10 +35,9 @@ def logout():
 
 	query = " UPDATE users SET auth_token = null WHERE ID = '%s'" % (userAcc["sub"])
 
-	db = MySQLdb.connect(host="localhost",user="root",passwd="QAZxsw1234", db= "linksdb")
+	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
 	cursor.execute(query)
 	db.commit()
-	db.close()
 	response["status"] = 'ok'
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")

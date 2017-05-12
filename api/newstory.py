@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 from flask import Blueprint, Response, request
+from db_handler import DbHandler
 
 import json
 import jwt
-import MySQLdb
 import time
 
 appNewStory = Blueprint('api_newstory',__name__)
@@ -43,7 +43,7 @@ def newStory() :
 		return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'), 401
 	
 	#connect to db
-	db = MySQLdb.connect(host = "localhost", user = "root", passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
 
 	#get user id
@@ -104,7 +104,6 @@ def newStory() :
 			%(storyText, storyFeel, storyImage, curdate, userId)
 			cursor.execute(query)
 			db.commit()
-	db.close()
 	#return response
 	response['status'] = "ok"
 	return Response(json.dumps(response, sort_keys=True), mimetype = 'application/json'),200

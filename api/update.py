@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 from flask import Response,request,Blueprint
+from db_handler import DbHandler
+from datetime import datetime
 import jwt
 import json
-import MySQLdb
-from datetime import datetime
 
 appUpdate = Blueprint('api_update',__name__)
 
@@ -43,7 +43,7 @@ def update():
 	passw = request.form.get("password")
 	avatar = request.form.get("avatar")
 
-	db = MySQLdb.connect(host="localhost",user="root",passwd="QAZxsw1234",db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
 
 	if birthDay != None and birthMonth != None and birthYear != None:
@@ -73,7 +73,6 @@ def update():
 		cursor.execute(query)
 		db.commit()
 
-	db.close()
 	response["status"] = 'ok'
 	return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 

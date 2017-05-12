@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 from flask  import Blueprint, Response, request
+from db_handler import DbHandler
 
 import jwt
 import json
-import MySQLdb
 
 appDeleteStory = Blueprint("api_deletestory",__name__)
 
@@ -41,7 +41,7 @@ def deleteStory() :
 		return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'), 401
 	
 	#connect to db
-	db = MySQLdb.connect(host = "localhost", user = "root", passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
 
 	#get user id
@@ -61,5 +61,5 @@ def deleteStory() :
 	query = "DELETE FROM story WHERE user_id = '%d'" % (userId)
 	cursor.execute(query)
 
-	response['status'] = 200
+	response['status'] = "ok"
 	return Response(json.dumps(response,sort_keys = True), mimetype = 'application/json'), 200
