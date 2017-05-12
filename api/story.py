@@ -2,6 +2,7 @@
 
 from flask import Blueprint, Response, request
 from db_handler import DbHandler
+from error_response import ErrorResponse
 
 import json
 import jwt
@@ -13,14 +14,11 @@ def story():
 
 	response = {}
 
-	#get user authentification 
+	#get user authentification
 
 	userToken = request.headers.get('Authorization')
 	if userToken == None:
-		response['error'] = "Request does not contain an access token"
-		response['description'] =  "Authorization required"
-		response['status_code'] = 401
-		return Response(json.dumps(response, sort_keys=True), mimetype = 'application/json'),401
+		return ErrorResponse.authorization_required()
 
 	#check user authentification
 
@@ -30,16 +28,10 @@ def story():
 	try:
 		userAcc = jwt.decode(userToken,key)
 	except jwt.ExpiredSignatureError:
-		response['error'] = "Invalid Token"
-		response['description'] = "Token has expired"
-		response['status_code'] = 401
-		return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'), 401
+		return ErrorResponse.token_expired()
 	except jwt.InvalidTokenError:
-		response['error'] = "Invalid token"
-		response['description'] = "Invalid token"
-		response['status_code'] = 401
-		return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'), 401
-	
+		return ErrorResponse.invalid_token()
+
 	#get friend email and check it's validity
 	friendshipId = request.args.get('friendship_id')
 	if friendshipId == None :
@@ -58,7 +50,7 @@ def story():
 	userData = cursor.fetchone()
 
 	#check if token is assigned to a user
-	if userData == None : 
+	if userData == None :
 		response['status'] = "Invalid token"
 		response['description'] = "Token is not assigned to any user"
 		response['status_code'] = 401
@@ -73,7 +65,7 @@ def story():
 
 
 	#check we have a friendship for specified friendship id
-	if ids == None : 
+	if ids == None :
 		response['status'] = "No friendships found for this id"
 		response['description'] = "Please provide a valid friendship id"
 		response['status_code'] = 400
@@ -87,7 +79,7 @@ def story():
 	query = "SELECT text,feel,image,date FROM story WHERE user_id = '%d'" % (friendId)
 	cursor.execute(query)
 	story = cursor.fetchone()
-	
+
 	response['status'] = "ok"
 
 	if story == None :
@@ -99,11 +91,11 @@ def story():
 	image = story[2]
 	date = story[3]
 
-	if  text != None and text != "" : 
+	if text != None and text != "" :
 		response['text'] = text
-	if feel != None and feel != "" : 
+	if feel != None and feel != "" :
 		response['feel'] = feel
-	if image != None and image != "" : 
+	if image != None and image != "":
 		response['image'] = image
 
 	response['date'] = date

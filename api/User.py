@@ -40,7 +40,8 @@ class User(UserMixin):
 			return user
 		else:
 			return None
-			
+
+	@staticmethod
 	def get_chat_token_from_id(id):
 		db = DbHandler.get_instance().get_connection()
 		query = "SELECT chat_token FROM users WHERE id = '%s' " % (id)
@@ -48,7 +49,8 @@ class User(UserMixin):
 		cursor.execute(query)
 		data = cursor.fetchone()
 		return data[0]
-		
+
+	@staticmethod
 	def get_chat_token_from_email(email):
 		db = DbHandler.get_instance().get_connection()
 		query = "SELECT chat_token FROM users WHERE email = '%s' " % (email)
@@ -56,7 +58,8 @@ class User(UserMixin):
 		cursor.execute(query)
 		data = cursor.fetchone()
 		return data[0]
-		
+
+	@staticmethod
 	def get_id_from_email(email):
 		db = DbHandler.get_instance().get_connection()
 		query = "SELECT id FROM users WHERE email = '%s' " % (email)
@@ -64,14 +67,16 @@ class User(UserMixin):
 		cursor.execute(query)
 		data = cursor.fetchone()
 		return data[0]
-		
+
+	@staticmethod
 	def get_id_and_chat_token_from_email(email):
 		db = DbHandler.get_instance().get_connection()
 		query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(email)
 		cursor.execute(query)
 		data = cursor.fetchone()
 		return data
-		
+
+	@staticmethod
 	def get_id_email_name_avatar_from(chat_token):
 		db = DbHandler.get_instance().get_connection()
 		query = "SELECT id,email,name,avatar FROM users WHERE chat_token = '%s'" % (chat_token)

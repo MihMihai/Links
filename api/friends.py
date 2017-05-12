@@ -2,6 +2,7 @@
 
 from flask import Blueprint, Response, request
 from db_handler import DbHandler
+from error_response import ErrorResponse
 import json
 import jwt
 
@@ -19,10 +20,7 @@ def friends():
 	user1Token = request.headers.get("Authorization")
 
 	if user1Token == None:
-		response["error"] = "Request does not contain an access token"
-		response["description"] = "Authorization required"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return ErrorResponse.authorization_required()
 
 	#get key to code/decode the token
 	f = open('server.conf','r')
@@ -32,15 +30,9 @@ def friends():
 	try:
 		user1Acc = jwt.decode(user1Token,key)
 	except jwt.ExpiredSignatureError:
-		response["error"] = "Invalid token"
-		response["description"] = "Token has expired"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return ErrorResponse.token_expired()
 	except jwt.InvalidTokenError:
-		response["error"] = "Invalid token"
-		response["description"] = "Invalid token"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return ErrorResponse.invalid_token()
 
 	query = "SELECT id FROM users WHERE auth_token ='%s' " % (user1Token)
 	cursor = db.cursor()
@@ -49,10 +41,7 @@ def friends():
 	user1Id = cursor.fetchone()
 
 	if user1Id == None:
-		response["error"] = "Invalid token"
-		response["description"] = "Authorization required"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return ErrorResponse.authorization_required()
 
 	#get current user from db
 	user1Id = user1Id[0]

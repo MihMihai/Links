@@ -1707,3 +1707,5 @@ random user id: 21
 random user id: 26
 random user id: 1
 random user id: 4
+{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@test.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}random user id: 1
+{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":":("}

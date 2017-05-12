@@ -3,6 +3,7 @@
 from flask import Response,request,Blueprint
 from db_handler import DbHandler
 from datetime import datetime
+from error_response import ErrorResponse
 import jwt
 import json
 
@@ -15,10 +16,7 @@ def update():
 	userToken = request.headers.get("Authorization")
 
 	if userToken == None:
-		response["error"] = "Request does not contain an acces token"
-		response["description"] = "Authorization required"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return ErrorResponse.authorization_required()
 
 	f = open('server.conf','r')
 	key = f.readline()
@@ -26,15 +24,9 @@ def update():
 	try:
 		userAcc = jwt.decode(userToken,key)
 	except jwt.ExpiredSignatureError:
-		response["error"] = "Invalid token"
-		response["description"] = "Token has expired"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return ErrorResponse.token_expired()
 	except jwt.InvalidTokenError:
-		response["error"] = "Invalid token"
-		response["description"] = "Invalid token"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return ErrorResponse.invalid_token()
 
 	name = request.form.get("name")
 	birthDay = request.form.get("birth_day")

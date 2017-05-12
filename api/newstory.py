@@ -2,6 +2,7 @@
 
 from flask import Blueprint, Response, request
 from db_handler import DbHandler
+from error_response import ErrorResponse
 
 import json
 import jwt
@@ -12,17 +13,13 @@ appNewStory = Blueprint('api_newstory',__name__)
 @appNewStory.route("/api/new_story",methods=['POST'])
 def newStory() :
 
-
 	response = {}
 
-	#get user authentification 
+	#get user authentification
 
 	userToken = request.headers.get('Authorization')
 	if userToken == None:
-		response['error'] = "Request does not contain an access token"
-		response['description'] =  "Authorization required"
-		response['status_code'] = 401
-		return Response(json.dumps(response, sort_keys=True), mimetype = 'application/json'),401
+		return ErrorResponse.authorization_required()
 
 	#check user authentification
 
@@ -32,16 +29,10 @@ def newStory() :
 	try:
 		userAcc = jwt.decode(userToken,key)
 	except jwt.ExpiredSignatureError:
-		response['error'] = "Invalid Token"
-		response['description'] = "Token has expired"
-		response['status_code'] = 401
-		return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'), 401
+		return ErrorResponse.token_expired()
 	except jwt.InvalidTokenError:
-		response['error'] = "Invalid token"
-		response['description'] = "Invalid token"
-		response['status_code'] = 401
-		return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'), 401
-	
+		return ErrorResponse.invalid_token()
+
 	#connect to db
 	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
@@ -53,7 +44,7 @@ def newStory() :
 
 
 	#chech if token is assigned to user, so if query returned something
-	if userData == None : 
+	if userData == None :
 		response['status'] = "Invalid token"
 		response['description'] = "Token is not assigned to any user"
 		response['status_code'] = 401
@@ -71,13 +62,13 @@ def newStory() :
 	#get story image
 	storyImage = request.form.get('image')
 
-	#get story status 
+	#get story status
 	storyFeel = request.form.get('feel')
 
 	#get current time
 	curdate = time.strftime("%Y-%m-%d %H:%M:%S")
 	response['date'] = curdate
-	
+
 
 	#check if user had a story posted
 	query ="SELECT user_id FROM story WHERE user_id = '%d'" % (userId)

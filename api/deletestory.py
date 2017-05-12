@@ -2,25 +2,23 @@
 
 from flask  import Blueprint, Response, request
 from db_handler import DbHandler
+from error_response import ErrorResponse
 
 import jwt
 import json
 
 appDeleteStory = Blueprint("api_deletestory",__name__)
 
-@appDeleteStory.route('/api/delete_story')
+@appDeleteStory.route('/api/delete_story', methods=['POST'])
 def deleteStory() :
 
 	response = {}
 
-	#get user authentification 
+	#get user authentification
 
 	userToken = request.headers.get('Authorization')
 	if userToken == None:
-		response['error'] = "Request does not contain an access token"
-		response['description'] =  "Authorization required"
-		response['status_code'] = 401
-		return Response(json.dumps(response, sort_keys=True), mimetype = 'application/json'),401
+		return ErrorResponse.authorization_required()
 
 	#check user authentification
 
@@ -30,16 +28,10 @@ def deleteStory() :
 	try:
 		userAcc = jwt.decode(userToken,key)
 	except jwt.ExpiredSignatureError:
-		response['error'] = "Invalid Token"
-		response['description'] = "Token has expired"
-		response['status_code'] = 401
-		return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'), 401
+		return ErrorResponse.token_expired()
 	except jwt.InvalidTokenError:
-		response['error'] = "Invalid token"
-		response['description'] = "Invalid token"
-		response['status_code'] = 401
-		return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'), 401
-	
+		return ErrorResponse.invalid_token()
+
 	#connect to db
 	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
@@ -50,7 +42,7 @@ def deleteStory() :
 	userData = cursor.fetchone()
 
 	#chech if token is assigned to user, so if query returned something
-	if userData == None : 
+	if userData == None :
 		response['status'] = "Invalid token"
 		response['description'] = "Token is not assigned to any user"
 		response['status_code'] = 401

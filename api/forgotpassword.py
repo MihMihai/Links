@@ -40,7 +40,7 @@ def forgotPassword():
 	query = "SELECT name FROM users WHERE email = '%s'" % (userEmail)
 	cursor = db.cursor()
 	cursor.execute(query)
-	
+
 	userData = cursor.fetchone()
 
 	#check if given email is registered, so in db
@@ -63,7 +63,7 @@ def forgotPassword():
 	#we generate the token based on user Mail
 	resetToken = str(encode_reset_token(userEmail))
 
-	#why not just auth_token[2:len(auth_token) - 1] ?? 
+	#why not just auth_token[2:len(auth_token) - 1] ??
 
 	resetToken = resetToken[2:]
 	resetToken = resetToken[:len(resetToken) - 1]

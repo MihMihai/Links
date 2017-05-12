@@ -4,6 +4,7 @@ from flask import Blueprint,Response,request
 import json
 import jwt
 from db_handler import DbHandler
+from error_response import ErrorResponse
 
 appProfile = Blueprint('api_profile',__name__)
 
@@ -16,10 +17,7 @@ def friendRequests():
 	userToken = request.headers.get("Authorization")
 
 	if userToken == None:
-		response["error"] = "Request does not contain an access token"
-		response["description"] = "Authorization required"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
+		return ErrorResponse.authorization_required()
 
 	f = open('server.conf','r')
 	key = f.readline()
@@ -27,15 +25,9 @@ def friendRequests():
 	try:
 		userAcc = jwt.decode(userToken,key)
 	except jwt.ExpiredSignatureError:
-		response["error"] = "Invalid token"
-		response["description"] = "Token has expired"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return ErrorResponse.token_expired()
 	except jwt.InvalidTokenError:
-		response["error"] = "Invalid token"
-		response["description"] = "Invalid token"
-		response["status_code"] = 401
-		return Reponse(json.dumps(response,sort_keys=True),mimetype="application/json"),401
+		return ErrorResponse.invalid_token()
 
 	query = " SELECT name, email, birthday_date,chat_token,avatar FROM users where id = '%s'" % (userAcc["sub"])
 

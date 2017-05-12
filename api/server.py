@@ -26,6 +26,8 @@ from messages import appMessages
 from delete import appDelete
 from activate import appActivate
 from newstory import appNewStory
+from deletestory import appDeleteStory
+from story import appStory
 #eventlet.monkey_patch()
 
 app = Flask(__name__,template_folder='/var/www/html',static_folder='/var/www/html/static')
@@ -60,6 +62,8 @@ app.register_blueprint(appMessages)
 app.register_blueprint(appDelete)
 app.register_blueprint(appActivate)
 app.register_blueprint(appNewStory)
+app.register_blueprint(appDeleteStory)
+app.register_blueprint(appStory)
 
 #@app.route("/api/hello")
 #def hello():

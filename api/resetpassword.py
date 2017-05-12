@@ -20,7 +20,7 @@ def resetPassword():
 	#chech if parameters are good
 	if password == None or resetToken == None:
 		response["error"] = "Bad paramaters"
-		response["description"] = "Missing paramaters"
+		response["description"] = "Missing parameters"
 		response["status_code"] = 400
 		return Response(json.dumps(response,sort_keys = True),mimetype = "application/json"), 400
 

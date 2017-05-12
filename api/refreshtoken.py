@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from flask import Blueprint,request,Response
 from db_handler import DbHandler
+from error_response import ErrorResponse
 import jwt
 import json
 import datetime
@@ -14,10 +15,7 @@ def refreshToken():
 	userToken = request.headers.get('Authorization')
 
 	if userToken == None:
-		response["error"] = "Request does not contain an access token"
-		response["description"] = "Authorization required"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype = "application/json"), 401
+		return ErrorResponse.authorization_required()
 
 	f = open('server.conf')
 	key = f.readline()
@@ -30,10 +28,7 @@ def refreshToken():
 	except jwt.ExpiredSignatureError:
 		pass
 	except jwt.InvalidTokenError:
-		response["error"] = "Invalid token"
-		response["description"] = "Invalid token"
-		response["status_code"] = 401
-		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"), 401
+		return ErrorResponse.invalid_token()
 
 	db = DbHandler.get_instance().get_connection()
 
