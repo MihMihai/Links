@@ -29,7 +29,7 @@ function createFriend(socket,imgSrc,name,friendshipId,place){
 		event.stopPropagation();
 	});
 	var img = $('<img />', {
-		src: ''+imgSrc,
+		src: '' + imageEndpoint + data.avatar + imgSrc, //imageEndpoint is declared in chat.js
 		alt: 'User Avatar',
 		class: 'img-circle'
 		

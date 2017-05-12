@@ -4,6 +4,7 @@ var months = ["January", "February", "March", "April", "May", "June",
 ];
 var friendRequestsArray = [];
 var ip = "86.121.87.213";
+var imageEndpoint = "http://linkspeople.ddns.net/image/";
 var currentTab;
 var base64Image;
 
@@ -195,7 +196,7 @@ window.onload = function() {
         success: function(data) {
             $("#profile_name").text(data.name);
             $("#settings_name").val(data.name);
-            $("#profile_image").attr('src', data.avatar);
+            $("#profile_image").attr('src', imageEndpoint + data.avatar);
             var birthDate = data.birthday_date.split("-");
             $("#birthDay option:contains(" + birthDate[2] + ")").attr('selected', 'selected');
             $("#birthMonth option:contains(" + months[parseInt(birthDate[1]) - 1] + ")").attr('selected', 'selected');
