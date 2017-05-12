@@ -2,8 +2,9 @@
 from flask_socketio import join_room, leave_room, send
 from flask import Blueprint, Response, request
 from flask_socketio import SocketIO,emit,send,join_room,leave_room
+from db_handler import DbHandler
+from User import User
 import json
-import MySQLdb
 import time
 import jwt
 import random
@@ -19,7 +20,8 @@ socketio = SocketIO(app)
 @socketio.on('msg user',namespace='/chat')
 def message(msg):
 	dict = json.loads(str(msg))
-	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
+	cursor = db.cursor()
 
 	f = open('socketio-error.log','a')
 	f.write(str(msg))
@@ -41,33 +43,19 @@ def message(msg):
 			userAcc = jwt.decode(randomToken,key)
 		except jwt.ExpiredSignatureError:
 			pass
-#			response["error"] = "Invalid token"
-#			response["description"] = "Token has expired"
-#			response["status_code"] = 401
-#			return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 		except jwt.InvalidTokenError:
 			pass
-#			response["error"] = "Invalid token"
-#			response["description"] = "Invalid token"
-#			response["status_code"] = 401
-#			return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
-		query = "SELECT chat_token FROM users WHERE id = '%s' " % (userAcc['sub'])
+		chatToken = User.get_chat_token_from_id(userAcc['sub'])
 	else:
 		to = dict['to']
-		query = "SELECT chat_token FROM users WHERE email = '%s' " % (str(to))
+		chatToken = User.get_chat_token_from_email(str(to))
 
-	cursor = db.cursor()
-	cursor.execute(query)
-	data = cursor.fetchone()
-	chatToken = data[0]
 
 	if 'random' in dict:
 		dict.pop('random')
-		query = "SELECT id FROM users WHERE email = '%s'" % (dict['from'])
-		cursor.execute(query)
-		fromUserId = cursor.fetchone()
-		fromUserToken = str(encode_random_token(fromUserId[0]))
+		fromUserId = User.get_id_from_email(dict['from'])
+		fromUserToken = str(encode_random_token(fromUserId))
 		fromUserToken = fromUserToken[2:]
 		fromUserToken = fromUserToken[:len(fromUserToken)-1]
 		dict['from'] = fromUserToken
@@ -75,55 +63,36 @@ def message(msg):
 		dict.pop('to')
 
 		#STORE MESSAGES INTO DB
-		query = "SELECT id FROM users WHERE email = '%s'" % (dict['from'])
-		cursor.execute(query)
-		data = cursor.fetchone()
-		uid1 = data[0]
-		query = "SELECT id FROM users WHERE email = '%s'" % (to)
-		cursor.execute(query)
-		data = cursor.fetchone()
-		uid2 = data[0]
+		uid1 = User.get_id_from_email(dict['from'])
+		uid2 = User.get_id_from_email(to)
 		query = "INSERT INTO messages (user_1, user_2, message) VALUES('%i','%i','%s')" % (uid1, uid2, str(dict["msg"]))
 		cursor.execute(query)
 		db.commit()
 
-	#db.close()
 	emit('msg server',json.dumps(dict), room=chatToken)
 	#emit('msg server', json.dumps(dict))
 
 @socketio.on('join', namespace='/chat')
 def on_join(data):
-	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
 	email = data['email']
-	query = "SELECT chat_token FROM users WHERE email = '%s' " % (email)
-	cursor = db.cursor()
-	cursor.execute(query)
-	token = cursor.fetchone()
-	room = token[0]
+	room = User.get_chat_token_from_email(email)
 
-	db.close()
 	join_room(room)
 	emit('msg server',email + ' has entered the room.', room=room)
 
 
 @socketio.on('leave', namespace='/chat')
 def on_leave(data):
-	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
 	email = data['email']
-	query = "SELECT chat_token FROM users WHERE email = '%s' " % (email)
-	cursor = db.cursor()
-	cursor.execute(query)
-	token = cursor.fetchone()
-	room = token[0]
+	room = User.get_chat_token_from_email(email)
 
-	db.close()
 	leave_room(room)
 	emit('msg server',email + ' has left the room.', room=room)
 
 
 @socketio.on('friend request', namespace='/chat')
 def friend_request(data):
-	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
 
 	f = open('socketio-error.log','a')
@@ -132,9 +101,7 @@ def friend_request(data):
 
 
 	if "email" in data:
-		query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(data['email'])
-		cursor.execute(query)
-		userId = cursor.fetchone()
+		userId = User.get_id_and_chat_token_from_email(data['email'])
 	else:
 		f = open('server.conf','r')
 		key = f.readline()
@@ -152,9 +119,7 @@ def friend_request(data):
 		cursor.execute(query)
 		userId = cursor.fetchone()
 
-	query = "SELECT id,email,name,avatar FROM users WHERE chat_token = '%s'" % (data['chat_token'])
-	cursor.execute(query)
-	user1 = cursor.fetchone()
+	user1 = User.get_id_email_name_avatar_from_chat_token(data['chat_token'])
 	uid1 = user1[0]
 	email = user1[1]
 	name = user1[2]
@@ -200,19 +165,14 @@ def friend_request(data):
 		room = data['chat_token']
 		emit('bad friend request','Invalid email',room=room)
 
-	db.close()
 
 @socketio.on('response friend request',namespace='/chat')
 def accept_friend_request(data):
-	db = MySQLdb.connect(host="localhost", user="root", passwd="QAZxsw1234", db="linksdb")
+	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
 
-	query = "SELECT id,chat_token FROM users WHERE email ='%s'" %(data['email'])
-	cursor.execute(query)
-	userId = cursor.fetchone()
-	query = "SELECT id,email,name,avatar FROM users WHERE chat_token = '%s'" % (data['chat_token'])
-	cursor.execute(query)
-	user1 = cursor.fetchone()
+	userId = User.get_id_and_chat_token_from_email(data['email'])
+	user1 = User.get_id_email_name_avatar_from_chat_token(data['chat_token'])
 	uid1 = user1[0]
 
 	if userId != None:
@@ -248,8 +208,6 @@ def accept_friend_request(data):
 		room = data['chat_token']
 		emit('bad friend request','Invalid email',room=room)
 
-	db.close()
-
 
 @socketio.on('json')
 def handle_json(jsonData):
@@ -270,8 +228,7 @@ def handle_json(jsonData):
 
 @socketio.on('remove friend',namespace='/chat')
 def remove_friend(data):
-	db = MySQLdb.connect(host = "localhost", user = "root", passwd="QAZxsw1234", db="linksdb")
-
+	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
 
 	friendshipIdString = data['friendship_id']
@@ -327,13 +284,11 @@ def remove_friend(data):
 			emit('bad remove friend','Invalid chat token',room=data['chat_token'])
 	else:
 		emit('bad remove friend','Friendship id not provided',room=data['chat_token'])
-	db.close()
 
 @socketio.on('random chat',namespace='/chat')
 def random_chat(data):
 
-	db = MySQLdb.connect(host="localhost",user="root",passwd="QAZxsw1234",db="linksdb")
-
+	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
 
 	dict = json.loads(str(data))
@@ -388,8 +343,6 @@ def random_chat(data):
 
 	emit('random chat token',json.dumps(rnd),room=dict['chat_token'])
 	emit('random chat token',json.dumps(rndSender),room=roomR)
-
-	db.close()
 
 
 @socketio.on_error_default

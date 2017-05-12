@@ -9,7 +9,7 @@ import jwt
 
 appStory = Blueprint("api_story",__name__)
 
-@appStory.route("api/story",methods = ['POST'])
+@appStory.route("/api/story",methods = ['POST'])
 def story():
 
 	response = {}

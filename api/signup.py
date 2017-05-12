@@ -66,11 +66,11 @@ def signup():
 		#SEND ACTIVATION LINK
 		LinksEmail = "linkspeople.chat@gmail.com"
 		LinksPassword = "Qw3R$mimaB*"
-		
+
 		validationToken = str(encode_chat_token(email))
 		validationToken = validationToken[2:]
 		validationToken = validationToken[:len(validationToken)-1]
-		
+
 		#get template text for email, open file
 		with open('templates/activation_email.txt', 'r', encoding='utf-8') as template_file:
 			template_file_content = template_file.read()
@@ -79,10 +79,10 @@ def signup():
 		query = "UPDATE users SET validation_token = '%s' WHERE email = '%s'" %(validationToken,email)
 		cur.execute(query)
 		db.commit()
-		
+
 		# insert user info inside email
 		message = message_template.substitute(USER_NAME = name, TOKEN = validationToken)
-		
+
 		mailServer = smtplib.SMTP ( 'smtp.gmail.com', 587)
 		mailServer.starttls()
 		mailServer.login(LinksEmail, LinksPassword)
@@ -94,10 +94,10 @@ def signup():
 		mail.attach(MIMEText( message, 'plain'))
 
 		mailServer.sendmail(LinksEmail, email, mail.as_string())
-		
+
 		#tidy up
 		mailServer.quit()
-		
+
 		response["status"] = 'ok'
 
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")

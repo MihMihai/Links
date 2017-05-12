@@ -1708,4 +1708,19 @@ random user id: 26
 random user id: 1
 random user id: 4
 {'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@test.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}random user id: 1
-{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":":("}
+{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":":("}{"to":"mihai@android.com","from":"andrei96v@gmail.com","msg":"Sal"}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Iml1bGlhb3RpbGlhMjZAeWFob28uY29tIn0.r0xrELzQLZN7XtVf51pj7lhusOpQsGpZLzFqXkBGcnk', 'email': 'mihai@test.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Iml1bGlhb3RpbGlhMjZAeWFob28uY29tIn0.r0xrELzQLZN7XtVf51pj7lhusOpQsGpZLzFqXkBGcnk', 'email': 'mihai@test.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Iml1bGlhb3RpbGlhMjZAeWFob28uY29tIn0.r0xrELzQLZN7XtVf51pj7lhusOpQsGpZLzFqXkBGcnk', 'email': 'mihai@test.com'}{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Iml1bGlhb3RpbGlhMjZAeWFob28uY29tIn0.r0xrELzQLZN7XtVf51pj7lhusOpQsGpZLzFqXkBGcnk', 'email': 'mihai@android.com'}friend_request() takes 1 positional argument but 3 were given pare rau
+friend_request() takes 1 positional argument but 2 were given pare rau
+friend_request() takes 1 positional argument but 2 were given pare rau
+name 'MySQLdb' is not defined pare rau
+{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":"hello"}name 'uid1' is not defined pare rau
+{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":"hello"}name 'cursor' is not defined pare rau
+{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":"asdad"}{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":"adsad"}{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":"asdada"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"helllooooo"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"testing"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"1"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"2"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"3"}{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":":("}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"asda"}random user id: 30
+random user id: 1
+name 'cursor' is not defined pare rau
+name 'cursor' is not defined pare rau
+<MySQLdb.cursors.Cursor object at 0x7fa2069d04a8>
+name 'cursor' is not defined pare rau
+name 'cursor' is not defined pare rau
+name 'cursor' is not defined pare rau
+type object 'User' has no attribute 'get_id_email_name_avatar_from_chat_token' pare rau
+{"to":"mihai@testing.com","from":"mihai@android.com","msg":"hello"}{"to":"mihai@android.com","from":"mihai@testing.com","msg":"whatsup :)"}{"to":"mihai@testing.com","from":"mihai@android.com","msg":"just testing the chat after refactoring"}{"to":"mihai@android.com","from":"mihai@testing.com","msg":"nice"}{"to":"mihai@android.com","from":"mihai@testing.com","msg":"and is it working well?"}{"to":"mihai@testing.com","from":"mihai@android.com","msg":"seems so"}{"to":"mihai@android.com","from":"mihai@testing.com","msg":"cum ti se pare rot?"}{"to":"mihai@testing.com","from":"mihai@android.com","msg":"amuzant"}{"to":"mihai@testing.com","from":"mihai@android.com","msg":":)"}{"to":"mihai@android.com","from":"mihai@testing.com","msg":"vezi ca trebuie sa pui emoticoane"}{"to":"mihai@testing.com","from":"mihai@android.com","msg":"stiu :("}

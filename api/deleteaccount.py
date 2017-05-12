@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 from string import Template #templating email
 from flask import Blueprint, Response, request
 from db_handler import DbHandler
+from error_response import ErrorResponse
 
 import json
 import jwt
@@ -23,16 +24,12 @@ def deleteAccount():
 	response = {}
 
 	#connect to db
-#	db= MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
 	db = DbHandler.get_instance().get_connection()
 
 
 	userToken = request.headers.get("Authorization")
 	if userToken == None:
-		response["error"] = "Request does not contain an access token"
-		response["description"] =  "Authorization required"
-		response["status_code"] = 401
-		return Response(json.dumps(response, sort_keys=True), mimetype = "application/json"),401
+		return ErrorResponse.authorization_required()
 
 	f = open('server.conf','r')
 	key = f.readline()
@@ -40,15 +37,9 @@ def deleteAccount():
 	try:
 		userAcc = jwt.decode(userToken,key)
 	except jwt.ExpiredSignatureError:
-		response["error"] = "Invalid Token"
-		response["description"] = "Token has expired"
-		response["status_code"] = 401
-		return Response(json.dumps(response, sort_keys = True), mimetype = "application/json"), 401
+		return ErrorResponse.token_expired()
 	except jwt.InvalidTokenError:
-		response["error"] = "Invalid token"
-		response["description"] = "Invalid token"
-		response["status_code"] = 401
-		return Response(json.dumps(response, sort_keys = True), mimetype = "application/json"), 401
+		return ErrorResponse.invalid_token()
 
 	#get email from request
 	userEmail = request.form.get("email")
@@ -119,7 +110,6 @@ def deleteAccount():
 	mailServer.sendmail(LinksEmail, userEmail, mail.as_string())
 
 	#tidy up
-#	db.close()
 	mailServer.quit()
 
 
