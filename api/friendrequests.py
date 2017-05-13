@@ -71,7 +71,9 @@ def friendRequests():
 				avatarBase64 = avatarBase64[1:]
 			if avatarBase64[0] == "'":
 				avatarBase64 = avatarBase64[1:]
-				avatarbase64 = avatarBase64[:len(avatarBase64)-1]
+#				avatarbase64 = avatarBase64[:len(avatarBase64)-1]
+			if avatarBase64[len(avatarBase64)-1] == "'":
+				avatarBase64 = avatarBase64[:len(avatarBase64)-1]
 			user["avatar"] = avatarBase64
 		i+=1
 		users.append(user)
