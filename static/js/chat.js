@@ -289,30 +289,30 @@ window.onload = function() {
             // handle the invalid form...
 			} else {
             event.preventDefault();
-			convertAndResizeImage("settings_photo",50,50,function(b){base64Image=b;
-				$.ajax({
-					method: "POST",
-					url: "http://" + ip + "/api/update",
-					headers: { Authorization: localStorage.TOKEN },
-					data: {
-						name: $("#settings_name").val(),
-						birth_day: $("#birthDay").find(":selected").text(),
-						birth_month: $("#birthMonth").find(":selected").text(),
-						birth_year: $("#birthYear").find(":selected").text(),
-						avatar: base64Image
-					},
-					dataType: "json",
-					success: function(data) {
-						$('#updateAccount').modal('hide');
-						$("#profile_name").html($("#settings_name").val());
-						
-						if (base64Image !== undefined) {
-							$("#profile_image").attr('src', base64Image);
-						}
-						base64Image = undefined;
+			convertAndResizeImage("settings_photo",50,50);
+			$.ajax({
+				method: "POST",
+				url: "http://" + ip + "/api/update",
+				headers: { Authorization: localStorage.TOKEN },
+				data: {
+					name: $("#settings_name").val(),
+					birth_day: $("#birthDay").find(":selected").text(),
+					birth_month: $("#birthMonth").find(":selected").text(),
+					birth_year: $("#birthYear").find(":selected").text(),
+					avatar: base64Image
+				},
+				dataType: "json",
+				success: function(data) {
+					$('#updateAccount').modal('hide');
+					$("#profile_name").html($("#settings_name").val());
+					
+					if (base64Image !== undefined) {
+						$("#profile_image").attr('src', base64Image);
 					}
-				});
-				});
+					base64Image = undefined;
+				}
+			});
+			
 		}
 	});
 	
@@ -329,8 +329,8 @@ window.onload = function() {
 				dataType: "json",
 				success: function(data) {
 					$("#settings_password").val("");
-				$("#settings_password2").val("");
-				$('#changePass').modal('hide');
+					$("#settings_password2").val("");
+					$('#changePass').modal('hide');
 				}
 			});
 		}
@@ -398,8 +398,9 @@ function getAllMessagesRequest() {
 }
 
 
-function convertAndResizeImage(inputFileId,width,height,callback){
-	if(document.getElementById(inputFileId).files.length > 0){
+function convertAndResizeImage(inputFileId,width,height){
+	
+	if(document.getElementById(inputFileId).files.length>0){
 		let file = document.getElementById(inputFileId).files[0];
 		let img = document.createElement("img");
 		let canvas = document.createElement('canvas');
@@ -419,10 +420,9 @@ function convertAndResizeImage(inputFileId,width,height,callback){
 				//console.log(base64Image);
 				let conv = canvas.toDataURL("image/png");
 				//console.log(conv);
-				callback(conv);
+				base64Image = conv;
 			};
 		};
 		reader.readAsDataURL(file);
-		
-	} else return undefined;
+	} else base64Image=undefined;
 }
