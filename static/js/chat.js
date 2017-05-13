@@ -289,30 +289,31 @@ window.onload = function() {
             // handle the invalid form...
 			} else {
             event.preventDefault();
-			convertAndResizeImage("settings_photo",50,50);
-			$.ajax({
-				method: "POST",
-				url: "http://" + ip + "/api/update",
-				headers: { Authorization: localStorage.TOKEN },
-				data: {
-					name: $("#settings_name").val(),
-					birth_day: $("#birthDay").find(":selected").text(),
-					birth_month: $("#birthMonth").find(":selected").text(),
-					birth_year: $("#birthYear").find(":selected").text(),
-					avatar: base64Image
-				},
-				dataType: "json",
-				success: function(data) {
-					$('#updateAccount').modal('hide');
-					$("#profile_name").html($("#settings_name").val());
-					
-					if (base64Image !== undefined) {
-						$("#profile_image").attr('src', base64Image);
+			convertAndResizeImage("settings_photo",50,50,function(b) {
+				base64Image=b;
+				console.log(base64Image);
+				$.ajax({
+					method: "POST",
+					url: "http://" + ip + "/api/update",
+					headers: { Authorization: localStorage.TOKEN },
+					data: {
+						name: $("#settings_name").val(),
+						birth_day: $("#birthDay").find(":selected").text(),
+						birth_month: $("#birthMonth").find(":selected").text(),
+						birth_year: $("#birthYear").find(":selected").text(),
+						avatar: base64Image
+					},
+					dataType: "json",
+					success: function(data) {
+						$('#updateAccount').modal('hide');
+						$("#profile_name").html($("#settings_name").val());
+						if (base64Image !== undefined) {
+							$("#profile_image").attr('src', base64Image);
+						}
+						base64Image = undefined;
 					}
-					base64Image = undefined;
-				}
+				});
 			});
-			
 		}
 	});
 	
@@ -398,7 +399,7 @@ function getAllMessagesRequest() {
 }
 
 
-function convertAndResizeImage(inputFileId,width,height){
+function convertAndResizeImage(inputFileId,width,height,callback){
 	
 	if(document.getElementById(inputFileId).files.length>0){
 		let file = document.getElementById(inputFileId).files[0];
@@ -420,9 +421,11 @@ function convertAndResizeImage(inputFileId,width,height){
 				//console.log(base64Image);
 				let conv = canvas.toDataURL("image/png");
 				//console.log(conv);
-				base64Image = conv;
+				//base64Image = conv;
+				//console.log(base64Image);
+				callback(conv);
 			};
 		};
 		reader.readAsDataURL(file);
-	} else base64Image=undefined;
+	} else callback(undefined);
 }
