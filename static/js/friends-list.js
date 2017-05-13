@@ -63,6 +63,10 @@ function remove(socket,name,friendshipId,random){
 			socket.emit("remove friend",{"chat_token":localStorage.CHAT_TOKEN,"friendship_id":friendshipId});
 			delete friends[friendshipId];
 			$("#removeFriend").modal("hide");
+			$("#friendName").text("CHAT");
+			$("#messages").html("");
+			document.getElementById("sendMessageButton").disabled = true;
+			document.getElementById("messageInputBox").disabled = true;
 		});
 	}
 	else {
@@ -71,6 +75,10 @@ function remove(socket,name,friendshipId,random){
 			$("[id='" + random + "']").remove(); //Complicatii cu $("#" + random) :((
 			delete friends[random];
 			$("#removeFriend").modal("hide");
+			$("#friendName").text("");
+			$("#messages").html("");
+			document.getElementById("sendMessageButton").disabled = true;
+			document.getElementById("messageInputBox").disabled = true;
 		});
 	}
 
