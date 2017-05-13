@@ -1733,4 +1733,10 @@ random user id: 50
 friend removed 108
 random user id: 46
 random user id: 23
-{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}
+{'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6Im1paGFpQGFuZHJvaWQuY29tIn0.zAvqz3cjs5PVYfyF2aoKB4uRsa8J8_EElAzAtxdFTmk', 'email': 'mihai@testing.com'}random user id: 35
+random user id: 6
+{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":"vezi ca ti-am pus imaginea default :("}{"to":"iuliaotilia26@yahoo.com","from":"mihai@android.com","msg":"Daca vrei, poti sa iti pui imaginea de profil pe care o aveai inainte :) . Am schimbat felul cum primiti imaginile pe frontend"}{"to":"iuliaotilia26@yahoo.com","from":"mihai@android.com","msg":"Si acum toata lumea o are pe cea default"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"this is a {:)} "}{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":"{:)}"}{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":":)"}{"to":"andrei96v@gmail.com","from":"mihai@android.com","msg":":)"}{"to":"mihai@android.com","from":"bogdanalexandrescu96@gmail.com","msg":"tralalalal"}friend removed 80
+{"to":"andrei96v@gmail.com","from":"bogdanalexandrescu96@gmail.com","msg":"dada"}friend removed 22
+friend removed 70
+{"to":"iuliaotilia26@yahoo.com","from":"bogdanalexandrescu96@gmail.com","msg":"dada"}friend removed 73
+{'email': 'mihai@android.com', 'chat_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbSI6ImJvZ2RhbmFsZXhhbmRyZXNjdTk2QGdtYWlsLmNvbSJ9.Jp53Pdue5Su6RmZmlF-shMUgDJGiI4SOcgWZgl7aRDE'}2222191919191919191919191919191919191919191919191919191919191919
