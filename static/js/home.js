@@ -21,8 +21,8 @@ window.onload = function(){
 					localStorage.setItem("TOKEN",data["access_token"]);
 					localStorage.setItem("EMAIL",$("#login_email").val());
 					
-					window.location.replace("http://linkspeople.ddns.net/chat");
-					//window.location.replace("file:///D:/documente/GitHub/Links/chat.html");
+					//window.location.replace("http://linkspeople.ddns.net/chat");
+					window.location.replace("file:///D:/documente/GitHub/Links/chat.html");
 				}, "json")
 				.fail(function() {
 					$("#login_error").html("<p style='color:red;'>Invalid email or password!</p>");

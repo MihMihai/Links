@@ -40,6 +40,7 @@ window.onload = function() {
     $("#randomFriendButton").click(function() {
         findRandomFriend(socket);
 	});
+
 	
     socket.on("msg server", function(msg) {
         try {
@@ -195,8 +196,10 @@ window.onload = function() {
         dataType: "json",
         success: function(data) {
             $("#profile_name").text(data.name);
+			$("#profile_nameStory").text(data.name);
             $("#settings_name").val(data.name);
-            $("#profile_image").attr('src', imageEndpoint + data.avatar);
+			 $("#profile_image").attr('src', imageEndpoint + data.avatar);
+            $("#profile_imageStory").attr('src', imageEndpoint + data.avatar);
             var birthDate = data.birthday_date.split("-");
             $("#birthDay option:contains(" + birthDate[2] + ")").attr('selected', 'selected');
             $("#birthMonth option:contains(" + months[parseInt(birthDate[1]) - 1] + ")").attr('selected', 'selected');
@@ -258,31 +261,7 @@ window.onload = function() {
 		});
 	});
 	
-    /*document.getElementById('settings_photo').addEventListener('change', function(e) {
-        let file = this.files[0];
-		let img = document.createElement("img");
-		let canvas = document.createElement('canvas');
-        let reader = new FileReader();
-        reader.onload = function() {
-		//console.log('RESULT', reader.result);
-		img.src = reader.result;
-		//base64Image = reader.result;
-		img.onload = function(){
-		let ctx = canvas.getContext("2d");
-		ctx.drawImage(img, 0, 0);
-		canvas.width = 50;
-		canvas.height = 50;
-		ctx = canvas.getContext("2d");
-		ctx.drawImage(img, 0, 0, 50, 50);
-		
-		base64Image = canvas.toDataURL("image/png");
-		console.log(base64Image);
-		}
-		};
-        reader.readAsDataURL(file);
-		});
-		
-	*/
+    
 	
     $('#form_update').validator().on('submit', function(event) {
         if (event.isDefaultPrevented()) {
@@ -291,7 +270,7 @@ window.onload = function() {
             event.preventDefault();
 			convertAndResizeImage("settings_photo",50,50,function(b) {
 				base64Image=b;
-				console.log(base64Image);
+
 				$.ajax({
 					method: "POST",
 					url: "http://" + ip + "/api/update",
@@ -313,6 +292,37 @@ window.onload = function() {
 						base64Image = undefined;
 					}
 				});
+			});
+		}
+	});
+
+	  $('#form_story').on('submit', function(event) {
+        if (event.isDefaultPrevented()) {
+			} else {
+            event.preventDefault();
+			convertAndResizeImage("story_photo",50,50,function(b) {
+				base64Image=b;
+				
+				$.ajax({
+					method: "POST",
+					url: "http://" + ip + "/api/new_story",
+					headers: { Authorization: localStorage.TOKEN },
+					data: {
+						text: $("#story_status").val(),
+						birth_day: $("#story_feel").find(":selected").text(),
+						image: base64Image
+					},
+					dataType: "json",
+					success: function(data) {
+						$("#story_status").val("");
+						$("#story_feel").val([]);
+						base64Image = undefined;
+					}
+				});
+
+				$('#editStory').modal('toggle');
+
+
 			});
 		}
 	});
