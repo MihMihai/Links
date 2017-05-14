@@ -124,9 +124,7 @@ window.onload = function() {
 		}
 	});
 	
-    socket.on("bad friend request", function(msg) {
-        alert(msg);
-	});
+    
 	
     socket.on("status friend request", function(msg) {
         try {
