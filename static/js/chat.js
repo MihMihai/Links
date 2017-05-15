@@ -451,7 +451,7 @@ window.onload = function() {
 					{
 
 						
-						showStory(null,$('#form_story'));
+						addElementsToStoryPanel(data,$('#form_story'));
 
 						var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
 
