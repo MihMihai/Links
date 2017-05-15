@@ -198,6 +198,7 @@ window.onload = function() {
             $("#settings_name").val(data.name);
 			 $("#profile_image").attr('src', imageEndpoint + data.avatar);
             $("#profile_imageStory").attr('src', imageEndpoint + data.avatar);
+			
             var birthDate = data.birthday_date.split("-");
             $("#birthDay option:contains(" + birthDate[2] + ")").attr('selected', 'selected');
             $("#birthMonth option:contains(" + months[parseInt(birthDate[1]) - 1] + ")").attr('selected', 'selected');
