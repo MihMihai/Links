@@ -16,11 +16,11 @@ function findFriendshipIdByEmail(email) {
     return;
 }
 // place is friends-list or random-list
-<<<<<<< HEAD
+
 function createFriend(socket, imgSrc, name, friendshipId, place, online) {
     var friendsList = place || "friends-list";
     var h6 = $("<h6></h6>").html("<strong>" + name + "</strong>");
-    var button = $("#button_remove_friend").clone(true);
+    var button = $('<button data-toggle="modal" data-target="#removeFriend" type="button" class="close pull-right clearfix">&times;</button>');
 
     button.click(function(event) {
         //personalize modal
@@ -49,8 +49,8 @@ function createFriend(socket, imgSrc, name, friendshipId, place, online) {
         $("#profile_imageFriend").attr('src', imageEndpoint + imgSrc);
 
         $('#showStory').modal('show');
-
-        showStory(friendshipId);
+        $("#storyPost").empty();
+        showStory(friendshipId, $("#storyPost"));
     });
 
     var span = $("<span class='chat-img pull-left'></span>");
@@ -64,62 +64,11 @@ function createFriend(socket, imgSrc, name, friendshipId, place, online) {
     a.append(button);
     a.click(function() {
         connectToChat(name, friendshipId);
-    });
+    })
     if (online == 1)
         $("#" + friendsList).prepend(a);
-    else if (online == 0)
-        $("#" + friendsList).append(a);
-=======
-function createFriend(socket,imgSrc,name,friendshipId,place){
-	var friendsList = place || "friends-list";
-	var h6 = $("<h6></h6>").text(name);
-	var button = $("#button_remove_friend").clone(true);
-	
-	button.click(function(event){
-		//personalize modal
-		$("#removeFriend.modal_title").text("Delete" + name + "?");
-		if(place !== "random-list")
-			remove(socket,name,friendshipId,0);
-		else
-			remove(socket,name,0,friendshipId);
-		$("#removeFriend").modal("show");
-		event.stopPropagation();
-	});
-	var imageFriend;
-	if(place !== "random-list")
-		imageFriend = imageEndpoint + imgSrc;
-	else
-		imageFriend = imgSrc;
-	var img = $('<img />', {
-		src: '' + imageFriend, //imageEndpoint is declared in chat.js
-		alt: 'User Avatar',
-		class: 'img-circle'
-	});
-	
-	img.click(function(){
-		
-		$("#profile_nameFriend").text(name);
-		$("#profile_imageFriend").attr('src',imageEndpoint + imgSrc);
-		
-		$('#showStory').modal('show');
-		$("#storyPost").empty();
-		showStory(friendshipId,$("#storyPost"));
-	});
+    else $("#" + friendsList).append(a);
 
-	var span = $("<span class='chat-img pull-left'></span>");
-	span.append(img);
-	var a = $("<a id="+friendshipId+" href='#'' class='list-group-item'></a>");
-	let notificationMessage = $("<span class='glyphicon glyphicon-envelope messageNotification'></span>");
-	span.append(img);
-	a.append(span);
-	a.append(h6);
-	a.append(notificationMessage);
-	a.append(button);
-	a.click(function(){
-		connectToChat(name,friendshipId);
-	})
-	$("#"+friendsList).prepend(a);
->>>>>>> 6ebf8803d555b731b4e71c9c2638d952c5dd38fe
 }
 
 function remove(socket, name, friendshipId, random) {

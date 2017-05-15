@@ -349,87 +349,6 @@ window.onload = function() {
             // handle the invalid form...
         } else {
             event.preventDefault();
-<<<<<<< HEAD
-            convertAndResizeImage("settings_photo", 50, 50, function(b) {
-                base64Image = b;
-
-                $.ajax({
-                    method: "POST",
-                    url: "http://" + ip + "/api/update",
-                    headers: { Authorization: localStorage.TOKEN },
-                    data: {
-                        name: $("#settings_name").val(),
-                        birth_day: $("#birthDay").find(":selected").text(),
-                        birth_month: $("#birthMonth").find(":selected").text(),
-                        birth_year: $("#birthYear").find(":selected").text(),
-                        avatar: base64Image
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $('#updateAccount').modal('hide');
-                        $("#profile_name").html($("#settings_name").val());
-                        if (base64Image !== undefined) {
-                            $("#profile_image").attr('src', base64Image);
-                        }
-                        base64Image = undefined;
-                    }
-                });
-            });
-        }
-    });
-
-    $('#form_story').on('submit', function(event) {
-        if (event.isDefaultPrevented()) {} else {
-            event.preventDefault();
-            convertAndResizeImage("story_photo", 50, 50, function(b) {
-                base64Image = b;
-
-                $.ajax({
-                    method: "POST",
-                    url: "http://" + ip + "/api/new_story",
-                    headers: { Authorization: localStorage.TOKEN },
-                    data: {
-                        text: $("#story_status").val(),
-                        birth_day: $("#story_feel").find(":selected").text(),
-                        image: base64Image
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $("#story_status").val("");
-                        $("#story_feel").val([]);
-                        base64Image = undefined;
-                    }
-                });
-
-                $('#editStory').modal('toggle');
-
-
-            });
-        }
-    });
-
-    $('#form_password').validator().on('submit', function(event) {
-        if (event.isDefaultPrevented()) {
-            // handle the invalid form...
-        } else {
-            event.preventDefault();
-            $.ajax({
-                method: "POST",
-                url: "http://" + ip + "/api/update",
-                headers: { Authorization: localStorage.TOKEN },
-                data: { password: $("#settings_password").val() },
-                dataType: "json",
-                success: function(data) {
-                    $("#settings_password").val("");
-                    $("#settings_password2").val("");
-                    $('#changePass').modal('hide');
-                }
-            });
-        }
-    });
-
-    $('#form_deleteAccount').validator().on('submit', function(event) {
-=======
 			convertAndResizeImage("settings_photo",50,50,function(b) {
 				base64Image=b;
 
@@ -461,30 +380,10 @@ window.onload = function() {
 	
 
 	  $('#form_story').on('submit', function(event) {
->>>>>>> 6ebf8803d555b731b4e71c9c2638d952c5dd38fe
         if (event.isDefaultPrevented()) {
             // handle the invalid form...
         } else {
             event.preventDefault();
-<<<<<<< HEAD
-            $.ajax({
-                method: "POST",
-                url: "http://" + ip + "/api/delete_account",
-                headers: { Authorization: localStorage.TOKEN },
-                data: { email: localStorage.EMAIL },
-                dataType: "json",
-                success: function(data) {
-                    var alert = document.createElement("div");
-                    alert.innerHTML = '<div class="alert alert-warning" role="alert"><strong>Warning!</strong> This account will be deleted. Please check your e-mail.</div>';
-                    document.getElementsByTagName('body')[0].append(alert);
-                    $('#deleteAccount').modal('hide');
-                }
-            });
-        }
-    });
-
-
-=======
 			convertAndResizeImage("story_photo",50,50,function(b) {
 				base64Image=b;
 				
@@ -626,7 +525,6 @@ window.onload = function() {
 	});
 	
 	
->>>>>>> 6ebf8803d555b731b4e71c9c2638d952c5dd38fe
 }
 
 function refreshTokenRequest() {
