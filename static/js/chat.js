@@ -20,6 +20,11 @@ function updateFriendReq()
 	else  $("#friendRequests>a").text("Friend requests");
 }
 
+
+$(document).ready(function() {
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+});
+
 window.onload = function() {
 	
 	$(".modal").on("show.bs.modal",function() {
@@ -59,11 +64,12 @@ window.onload = function() {
             if ('random_token' in obj) {
                 let from = obj.from;
                 let msg = obj.msg;
+				let date = obj.date;
 				
                 friends[from].messages.push(new Message(msg, "left"));
                 let friendshipID = from;
                 if (currentFriend == from) {
-                    createMessage(msg, "left");
+                    createMessage(msg, "left",date);
 					} else if (!(messagesNotificationsIntervals.hasOwnProperty(friendshipID))) {
                     messagesNotificationsIntervals[friendshipID] = setInterval(function() {
                         createMessageNotification(friendshipID);
@@ -80,7 +86,7 @@ window.onload = function() {
                 friendshipID = findFriendshipIdByEmail(email);
                 friends[friendshipID].messages.push(new Message(mesaj, "left"));
                 if (currentFriend == friendshipID)
-				createMessage(mesaj, "left");
+				createMessage(mesaj, "left",date);
                 //create message notification in friends list
                 else if (!(messagesNotificationsIntervals.hasOwnProperty(friendshipID))) {
                     messagesNotificationsIntervals[friendshipID] = setInterval(function() {
@@ -489,7 +495,7 @@ function sendMessage(socket) {
 	let jsonObj;
 	let jsonString;
 	if (!(/^\s*$/.test($("#messageInputBox").val()))) {
-		createMessage($("#messageInputBox").val(), "right");
+		createMessage($("#messageInputBox").val(), "right"); //nu are al 3-lea param => undefined. E ok
 		if (currentFriend.length > 100) {
 			jsonObj = { "random_token": currentFriend, "from": localStorage.EMAIL, "random": "1", "msg": $("#messageInputBox").val() };
 			jsonString = JSON.stringify(jsonObj);
@@ -521,8 +527,10 @@ function getAllMessagesRequest() {
 					let friendshipID = findFriendshipIdByEmail(data.conversations[index].with);
 					for (let j = 0; j < data.conversations[index].messages.length; j++)
 					friends[friendshipID].messages.push(new Message(data.conversations[index].messages[j].message,
-					data.conversations[index].messages[j].sender));
+					data.conversations[index].messages[j].sender,
+					data.conversations[index].messages[j].date));
 				}
+				$('[data-toggle="tooltip"]').tooltip();
 			}
 		}
 	});

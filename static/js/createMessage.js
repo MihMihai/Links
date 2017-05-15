@@ -1,10 +1,29 @@
-function Message(msg,sender){
+function Message(msg,sender,date){
 	this.msg = msg;
 	this.sender = sender;
+	this.date = date;
 }
 
-function createMessage(message, sender){
-	let mesaj = $("<p>"+resizeMessage(message)+"</p>");
+// For todays date;
+Date.prototype.today = function () { 
+    return ((this.getDate() < 10)?"0":"") + this.getDate() +"-"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"-"+ this.getFullYear();
+}
+
+// For the time now
+Date.prototype.timeNow = function () {
+     return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+}
+
+function createMessage(message, sender, date){
+	
+	if(date === null || date === undefined) {
+		let currentDate = new Date();
+		date = currentDate.today() + " " + currentDate.timeNow();
+		console.log(date);
+	}
+	
+	let mesaj = $("<p data-toggle='tooltip'" +
+		"data-placement='" + (sender === "left" ? "right" : "left") + "' title='" + date + "'>"+resizeMessage(message)+"</p>");
 	let messageDiv = $("<div class='chat-body clearfix'></div>");
 	let li = $("<li class='"+sender+" clearfix'></li>");
 	messageDiv.append(mesaj);
