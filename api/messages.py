@@ -70,7 +70,7 @@ def messages():
 		for entry in data:
 			message = {}
 			message['message'] = entry[1]
-			message['date'] =str( entry[2])
+			message['date'] = str( entry[2].strftime("%d-%m-%Y %H:%M:%S"))
 			if entry[0] == uid1:
 				message['sender'] = 'right'
 			else:

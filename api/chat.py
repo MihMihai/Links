@@ -9,6 +9,7 @@ import json
 import time
 import jwt
 import random
+import datetime
 from server import app
 import eventlet
 
@@ -69,6 +70,7 @@ def message(msg):
 		query = "INSERT INTO messages (user_1, user_2, message) VALUES('%i','%i','%s')" % (uid1, uid2, str(dict["msg"]))
 		cursor.execute(query)
 		db.commit()
+	dict['date'] = datetime.datetime.utcnow().strftime("%d-%m-%Y %H:%M:%S")
 
 	emit('msg server',json.dumps(dict), room=chatToken)
 	#emit('msg server', json.dumps(dict))
@@ -77,6 +79,12 @@ def message(msg):
 def on_join(data):
 	email = data['email']
 	room = User.get_chat_token_from_email(email)
+
+	message = {}
+	message['action'] = "join"
+
+	userId = User.get_id_from_email(email)
+	tellEveryone(message,userId,'user join')
 
 	join_room(room)
 	emit('msg server',email + ' has entered the room.', room=room)
@@ -87,9 +95,36 @@ def on_leave(data):
 	email = data['email']
 	room = User.get_chat_token_from_email(email)
 
+	message = {}
+	message['action'] = "leave"
+
+	userId = User.get_id_from_email(email)
+	tellEveryone(message,userId,'user left')
+
+	query = "UPDATE users SET auth_token = null WHERE ID = '%s'" % (userId)
+
+	db = DbHandler.get_instance().get_connection()
+	cursor = db.cursor()
+	cursor.execute(query)
+	db.commit()
+	
 	leave_room(room)
 	emit('msg server',email + ' has left the room.', room=room)
 
+def tellEveryone(message,userId,where):
+	db = DbHandler.get_instance().get_connection()
+	cursor = db.cursor()
+
+	query = """SELECT f.id,chat_token FROM users u JOIN friendships f
+			ON ((u.id = f.user_1 AND f.user_2 = '%s') OR
+			(u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)""" % (userId,userId)
+
+	cursor.execute(query)
+	friends = cursor.fetchall()
+
+	for friend in friends:
+		message['friendship_id'] = friend[0]
+		emit(where,message,room=friend[1])
 
 @socketio.on('friend request', namespace='/chat')
 def friend_request(data):

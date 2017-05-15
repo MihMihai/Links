@@ -62,7 +62,7 @@ def story():
 	if friendshipId != None:
 
 		#get friend id by excluding user id
-		query = "SELECT user_1, user_2 from friendships WHERE id = '%d'" % (friendshipId)
+		query = "SELECT user_1, user_2 from friendships WHERE id = '%s'" % (friendshipId)
 		cursor.execute(query)
 		ids = cursor.fetchone()
 
@@ -72,11 +72,11 @@ def story():
 			response['description'] = "Please provide a valid friendship id"
 			response['status_code'] = 400
 			return Response(json.dumps(response,sort_keys = True), mimetype = 'application/json'), 400
-
-		if ids[0] == userId[0] :
-			friendId = ids[0]
-		else :
-			friendId = ids[1]
+		else:
+			if ids[0] == userId[0] :
+				friendId = ids[0]
+			else :
+				friendId = ids[1]
 	else:
 		friendId = userAcc["sub"] # daca nu a dat un friendship id, atunci ii intoarcem story-ul lui
 

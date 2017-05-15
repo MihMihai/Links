@@ -447,6 +447,7 @@ window.onload = function() {
         dataType: "json",
         success: function(data) {
 
+<<<<<<< HEAD
             if (data.text != null || data.image != null || data.feel != null) {
 
 
@@ -525,6 +526,86 @@ window.onload = function() {
     });
 
 
+=======
+				if(data.text!=null || data.image!=null || data.feel!=null)
+					{
+
+						
+						addElementsToStoryPanel(data,$('#form_story'));
+
+						var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
+
+						 setTimeout(function(){
+							 
+							$('#form_story').append(deleteButton).css("width:auto");
+						 },100);
+						
+						deleteButton.on('click', '', function() {
+
+
+								 $.ajax({
+            					method: "POST",
+           						 url: "http://" + ip + "/api/delete_story",
+           						 headers: { Authorization: localStorage.TOKEN },
+           						 dataType: "json",
+            					success: function(data) {
+
+									
+									$('#editStory').modal('toggle');
+
+									document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+									document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+									}
+							});
+
+						});
+					}
+
+		}});
+
+	$('#form_password').validator().on('submit', function(event) {
+		if (event.isDefaultPrevented()) {
+			// handle the invalid form...
+			} else {
+			event.preventDefault();
+			$.ajax({
+				method: "POST",
+				url: "http://" + ip + "/api/update",
+				headers: { Authorization: localStorage.TOKEN },
+				data: { password: $("#settings_password").val() },
+				dataType: "json",
+				success: function(data) {
+					$("#settings_password").val("");
+					$("#settings_password2").val("");
+					$('#changePass').modal('hide');
+				}
+			});
+		}
+	});
+	
+	$('#form_deleteAccount').validator().on('submit', function(event) {
+		if (event.isDefaultPrevented()) {
+			// handle the invalid form...
+			} else {
+			event.preventDefault();
+			$.ajax({
+				method: "POST",
+				url: "http://" + ip + "/api/delete_account",
+				headers: { Authorization: localStorage.TOKEN },
+				data: { email: localStorage.EMAIL },
+				dataType: "json",
+				success: function(data) {
+					var alert = document.createElement("div");
+					alert.innerHTML='<div class="alert alert-warning" role="alert"><strong>Warning!</strong> This account will be deleted. Please check your e-mail.</div>';
+					document.getElementsByTagName('body')[0].append(alert);
+					$('#deleteAccount').modal('hide');
+				}
+			});
+		}
+	});
+	
+	
+>>>>>>> 757874290a33997065cf90fcaaedffef42a995bb
 }
 
 function refreshTokenRequest() {
