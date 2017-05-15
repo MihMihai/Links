@@ -79,10 +79,10 @@ def message(msg):
 def on_join(data):
 	email = data['email']
 	room = User.get_chat_token_from_email(email)
-	
+
 	message = {}
 	message['action'] = "join"
-	
+
 	userId = User.get_id_from_email(email)
 	tellEveryone(message,userId,'user join')
 
@@ -94,28 +94,27 @@ def on_join(data):
 def on_leave(data):
 	email = data['email']
 	room = User.get_chat_token_from_email(email)
-	
+
 	message = {}
 	message['action'] = "leave"
-	
+
 	userId = User.get_id_from_email(email)
 	tellEveryone(message,userId,'user left')
-	
+
 	leave_room(room)
 	emit('msg server',email + ' has left the room.', room=room)
 
 def tellEveryone(message,userId,where):
 	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
-	
+
 	query = """SELECT f.id,chat_token FROM users u JOIN friendships f
-			ON ((u.id = f.user_1 AND f.user_2 = '%s') OR 
-			(u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)"""
-			% (userId,userId)
-	
+			ON ((u.id = f.user_1 AND f.user_2 = '%s') OR
+			(u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)""" % (userId,userId)
+
 	cursor.execute(query)
 	friends = cursor.fetchall()
-	
+
 	for friend in friends:
 		message['friendship_id'] = friend[0]
 		emit(where,message,room=friend[1])
