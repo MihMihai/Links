@@ -4,7 +4,7 @@ function showStory(friendshipId, panelToAttach){
         method: "GET",
         url: "http://" + ip + "/api/story",
         headers: { Authorization: localStorage.TOKEN },
-        data : friendshipId,
+        data : {"friendship_id": friendshipId},
         dataType: "json",
         success: function(data) {
             
