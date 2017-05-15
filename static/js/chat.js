@@ -345,6 +345,26 @@ window.onload = function() {
 		}
 	});
 	
+	$('#form_deleteAccount').validator().on('submit', function(event) {
+		if (event.isDefaultPrevented()) {
+			// handle the invalid form...
+			} else {
+			event.preventDefault();
+			$.ajax({
+				method: "POST",
+				url: "http://" + ip + "/api/delete_account",
+				headers: { Authorization: localStorage.TOKEN },
+				data: { email: localStorage.EMAIL },
+				dataType: "json",
+				success: function(data) {
+					var alert = document.createElement("div");
+					alert.innerHTML='<div class="alert alert-warning" role="alert"><strong>Warning!</strong> This account will be deleted. Please check your e-mail.</div>';
+					document.getElementsByTagName('body')[0].append(alert);
+					$('#deleteAccount').modal('hide');
+				}
+			});
+		}
+	});
 	
 	
 }

@@ -55,6 +55,7 @@
                             <li><a data-toggle="modal" data-target="#updateAccount">Update Account</a></li>
                             <li><a data-toggle="modal" data-target="#changePass">Change Password</a></li>
                             <li><a data-toggle="modal" data-target="#editStory">Edit my story</a></li>
+							<li><a data-toggle="modal" data-target="#deleteAccount">Delete Account</a></li>
                         </ul>
                     </li>
                     <li><a id="logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
@@ -402,6 +403,35 @@
                 </div>
             </div>
         </div>
+		<!-- Delete Account modal -->
+        <div class="modal fade" id="deleteAccount" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Modal Header  -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Delete Account</h3>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form role="form" id="form_deleteAccount">
+                            <div class="form-group">
+                                <h3 class="text-center">You are about to delete your Links Account. Are you sure? </h3>
+                                <div class="row ">
+                                    <div class="col-xs-6 ">
+                                        <input type="submit" value="Delete" id="button_confirm_deleteAccount" class="btn btn-danger btn-lg btn-block">
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-default  btn-lg btn-block pull-right" data-dismiss="modal">I've changed my mind.</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 </body>
 
