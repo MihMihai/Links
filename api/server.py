@@ -95,6 +95,10 @@ def sendFont():
 def get_avatar(avatar):
 	return send_from_directory('/var/www/avatars',avatar)
 
+@app.route("/stories/<story>")
+def get_story_image(story):
+	return send_from_directory('/var/www/stories',story)
+
 if __name__ == "__main__":
 #	app.run(debug=True)
 	chat.socketio.run(app,debug=True)

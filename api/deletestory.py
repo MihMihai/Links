@@ -52,6 +52,7 @@ def deleteStory() :
 
 	query = "DELETE FROM story WHERE user_id = '%d'" % (userId)
 	cursor.execute(query)
+	db.commit()
 
 	response['status'] = "ok"
 	return Response(json.dumps(response,sort_keys = True), mimetype = 'application/json'), 200

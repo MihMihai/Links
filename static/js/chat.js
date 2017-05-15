@@ -8,6 +8,8 @@ var imageEndpoint = "http://linkspeople.ddns.net/image/";
 var currentTab;
 var base64Image;
 
+var successFrRequest = "The friend request was send to acceptance/rejection! ";
+
 function updateFriendReq()
 {
     if(friendRequestsArray.length > 0)
@@ -20,6 +22,14 @@ function updateFriendReq()
 
 window.onload = function() {
 	
+	$(".modal").on("show.bs.modal",function() {
+		$("body").css("overflow-y","hidden");
+	});
+	
+	$(".modal").on("hide.bs.modal",function() {
+		$("body").css("overflow-y","initial");
+	});
+
     
     updateFriendReq();
 	
@@ -137,7 +147,24 @@ window.onload = function() {
             console.log("ERROR -- status fr req");
 		}
 	});
-	
+
+	socket.on("friend request sent", function(msg) {
+//		let successFrRequest = "The friend request was send to acceptance/rejection!";
+		$("#frRequestResponse").html(successFrRequest);
+		$("#sendFriendReq").modal("show");
+
+	});
+
+	socket.on("bad friend request", function(msg) {
+		$("#frRequestResponse").html(msg);
+		$('#sendFriendReq').modal('show');
+	});
+/*	
+	$('#sendFriendReq').on("hidden.bs.modal",function() {
+		$("#frRequestResponse").html(successFrRequest);
+	});
+
+*/	
     socket.on("friend removed", function(msg) {
         try {
             let obj = JSON.parse(msg);
@@ -346,6 +373,26 @@ window.onload = function() {
 		}
 	});
 	
+	$('#form_deleteAccount').validator().on('submit', function(event) {
+		if (event.isDefaultPrevented()) {
+			// handle the invalid form...
+			} else {
+			event.preventDefault();
+			$.ajax({
+				method: "POST",
+				url: "http://" + ip + "/api/delete_account",
+				headers: { Authorization: localStorage.TOKEN },
+				data: { email: localStorage.EMAIL },
+				dataType: "json",
+				success: function(data) {
+					var alert = document.createElement("div");
+					alert.innerHTML='<div class="alert alert-warning" role="alert"><strong>Warning!</strong> This account will be deleted. Please check your e-mail.</div>';
+					document.getElementsByTagName('body')[0].append(alert);
+					$('#deleteAccount').modal('hide');
+				}
+			});
+		}
+	});
 	
 	
 }

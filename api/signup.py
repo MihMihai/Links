@@ -9,6 +9,7 @@ from db_handler import DbHandler
 import json
 import jwt
 import smtplib
+import token_encoder
 
 #how to retrieve parameters depending on request type:
 #email = request.form.get("email") -- if request is POST
@@ -59,7 +60,7 @@ def signup():
 		chatToken = chatToken[2:]
 		chatToken = chatToken[:len(chatToken)-1]
 
-		query = "INSERT INTO users (email,password,name,birthday_date,chat_token) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'),'%s')" % (email, password, name, birthday_date,chatToken)
+		query = "INSERT INTO users (email,password,name,birthday_date,chat_token,avatar) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'),'%s','default.png')" % (email, password, name, birthday_date,chatToken)
 		cur.execute(query)
 		db.commit()
 

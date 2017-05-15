@@ -49,12 +49,6 @@ function AddFriend(socket, friendRequestsArray, panelContent) {
             "email": value
         });
 
-         socket.on("bad friend request", function(msg) {
-            alert(msg);
-            addFrOK = false;
-	    });
-
-        if(addFrOK === true) $('#sendFriendReq').modal('show');
         
     });
 }
