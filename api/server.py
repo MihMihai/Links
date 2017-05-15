@@ -9,7 +9,7 @@ from signup import appSignup
 from friendrequests import appFriendRequests
 from profile import appProfile
 from update import appUpdate
-from logout import appLogout
+#from logout import appLogout
 from friends import appFriends
 from refreshtoken import appRefresh
 from forgotpassword import appForgotPassword
@@ -43,7 +43,7 @@ app.register_blueprint(appSignup)
 app.register_blueprint(appFriendRequests)
 app.register_blueprint(appProfile)
 app.register_blueprint(appUpdate)
-app.register_blueprint(appLogout)
+#app.register_blueprint(appLogout)
 app.register_blueprint(appFriends)
 app.register_blueprint(appRefresh)
 app.register_blueprint(appForgotPassword)

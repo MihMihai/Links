@@ -101,6 +101,13 @@ def on_leave(data):
 	userId = User.get_id_from_email(email)
 	tellEveryone(message,userId,'user left')
 
+	query = "UPDATE users SET auth_token = null WHERE ID = '%s'" % (userId)
+
+	db = DbHandler.get_instance().get_connection()
+	cursor = db.cursor()
+	cursor.execute(query)
+	db.commit()
+	
 	leave_room(room)
 	emit('msg server',email + ' has left the room.', room=room)
 
