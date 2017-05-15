@@ -322,6 +322,8 @@ window.onload = function() {
 		}
 	});
 
+	
+
 	  $('#form_story').on('submit', function(event) {
         if (event.isDefaultPrevented()) {
 			} else {
@@ -343,6 +345,35 @@ window.onload = function() {
 						$("#story_status").val("");
 						$("#story_feel").val([]);
 						base64Image = undefined;
+
+						showStory(null,$('#form_story'));
+						var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
+
+						 setTimeout(function(){
+							 
+							$('#form_story').append(deleteButton).css("width:auto");
+						 },500);
+						
+						deleteButton.on('click', '', function() {
+
+
+								 $.ajax({
+            					method: "POST",
+           						 url: "http://" + ip + "/api/delete_story",
+           						 headers: { Authorization: localStorage.TOKEN },
+           						 dataType: "json",
+            					success: function(data) {
+
+									$('#editStory').modal('toggle');
+       							    document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+									document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+    							}
+								
+	
+							});
+
+						});
+
 					}
 				});
 
@@ -353,6 +384,49 @@ window.onload = function() {
 		}
 	});
 	
+	 $.ajax({
+        method: "GET",
+        url: "http://" + ip + "/api/story",
+        headers: { Authorization: localStorage.TOKEN },
+        dataType: "json",
+        success: function(data) {
+
+				if(data.text!=null || data.image!=null || data.feel!=null)
+					{
+
+						
+						showStory(null,$('#form_story'));
+
+						var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
+
+						 setTimeout(function(){
+							 
+							$('#form_story').append(deleteButton).css("width:auto");
+						 },100);
+						
+						deleteButton.on('click', '', function() {
+
+
+								 $.ajax({
+            					method: "POST",
+           						 url: "http://" + ip + "/api/delete_story",
+           						 headers: { Authorization: localStorage.TOKEN },
+           						 dataType: "json",
+            					success: function(data) {
+
+									
+									$('#editStory').modal('toggle');
+
+									document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+									document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+									}
+							});
+
+						});
+					}
+
+		}});
+
 	$('#form_password').validator().on('submit', function(event) {
 		if (event.isDefaultPrevented()) {
 			// handle the invalid form...

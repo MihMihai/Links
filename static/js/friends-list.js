@@ -46,8 +46,8 @@ function createFriend(socket,imgSrc,name,friendshipId,place){
 		$("#profile_imageFriend").attr('src',imageEndpoint + imgSrc);
 		
 		$('#showStory').modal('show');
-		
-		showStory(friendshipId);
+		$("#storyPost").empty();
+		showStory(friendshipId,$("#storyPost"));
 	});
 
 	var span = $("<span class='chat-img pull-left'></span>");
