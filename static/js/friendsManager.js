@@ -40,10 +40,22 @@ function AddFriend(socket, friendRequestsArray, panelContent) {
 
     addButton.on('click', '', function() {
         var value = $('#emailValue').val();
+        $("#emailValue").val('');
+
+        addFrOK = true;
+
         socket.emit("friend request", {
             "chat_token": localStorage.CHAT_TOKEN,
             "email": value
         });
+
+         socket.on("bad friend request", function(msg) {
+            alert(msg);
+            addFrOK = false;
+	    });
+
+        if(addFrOK === true) $('#sendFriendReq').modal('show');
+        
     });
 }
 
@@ -87,8 +99,10 @@ function createFriendRequest(imgSrc, name, friendshipId) {
 
     var acceptButton = $('<button id=btna' + friendshipId + ' type="button" class="btn btn-success">Accept</button>');
     acceptButton.css("margin-right", "20px");
+    acceptButton.css("border-radius", "20px");
 
     var declineButton = $('<button id=btnd' + friendshipId + ' type="button" class="btn btn-danger">Decline</button>');
+    declineButton.css("border-radius", "20px");
 
     containerForButtons.append(acceptButton)
         .append(declineButton)
@@ -129,7 +143,7 @@ function createFriendRequestManager(socket, name, from, friendship_id, avatar) {
 
     $('#btnd' + friendship_id).on('click', '', function() {
 
-        var answer = confirm("Are you want to decline the friend request?")
+        var answer = confirm("Are you sure want to decline the friend request?")
         if (answer) {
             socket.emit("response friend request", {
                 "chat_token": localStorage.CHAT_TOKEN,
