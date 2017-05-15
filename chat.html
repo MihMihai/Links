@@ -32,7 +32,7 @@
     </style>
 </head>
 
-<body>
+<body style="overflow-x: hidden">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -337,7 +337,7 @@
                     <div class="modal-body">
                         <form role="form">
                             <div class="form-group">
-                                <h3 class="text-center">The friend request was send to acceptance/rejection! </h3>
+                                <h3 class="text-center" id="frRequestResponse">The friend request was send to acceptance/rejection! </h3>
                             </div>
                         </form>
                     </div>
@@ -422,7 +422,7 @@
                                         <input type="submit" value="Delete" id="button_confirm_deleteAccount" class="btn btn-danger btn-lg btn-block">
                                     </div>
                                     <div class="col-xs-6">
-                                        <button class="btn btn-default  btn-lg btn-block pull-right" data-dismiss="modal">I've changed my mind.</button>
+                                        <button class="btn btn-default  btn-lg btn-block pull-right" data-dismiss="modal" style="white-space: normal">I've changed my mind.</button>
                                     </div>
                                 </div>
                             </div>

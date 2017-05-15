@@ -162,6 +162,7 @@ def friend_request(data):
 						avatarBase64 = avatarBase64[:len(avatarBase64)-1]
 					frReqDict['avatar'] = avatarBase64
 				emit('new friend request',json.dumps(frReqDict),room=room)
+				emit('friend request sent','Successfully sent the friend request',room=data['chat_token'])
 			else:
 				room = data['chat_token']
 				if row[0] == 0:
