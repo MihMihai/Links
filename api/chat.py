@@ -9,6 +9,7 @@ import json
 import time
 import jwt
 import random
+import datetime
 from server import app
 import eventlet
 
@@ -69,6 +70,7 @@ def message(msg):
 		query = "INSERT INTO messages (user_1, user_2, message) VALUES('%i','%i','%s')" % (uid1, uid2, str(dict["msg"]))
 		cursor.execute(query)
 		db.commit()
+	dict['date'] = datetime.datetime.utcnow().strftime("%d-%m-%Y %H:%M:%S")
 
 	emit('msg server',json.dumps(dict), room=chatToken)
 	#emit('msg server', json.dumps(dict))
