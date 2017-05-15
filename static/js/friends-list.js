@@ -39,6 +39,16 @@ function createFriend(socket,imgSrc,name,friendshipId,place){
 		alt: 'User Avatar',
 		class: 'img-circle'
 	});
+	
+	img.click(function(){
+		
+		$("#profile_nameFriend").text(name);
+		$("#profile_imageFriend").attr('src',imageEndpoint + imgSrc);
+		
+		$('#showStory').modal('show');
+		
+		showStory(friendshipId);
+	});
 
 	var span = $("<span class='chat-img pull-left'></span>");
 	span.append(img);
@@ -108,7 +118,8 @@ function connectToChat(name,friendshipId){
 
 function loadMessagesInChatBox(friendshipId){
 	for(let i=0;i<friends[friendshipId].messages.length;i++){
-		createMessage(friends[friendshipId].messages[i].msg,friends[friendshipId].messages[i].sender)
+		createMessage(friends[friendshipId].messages[i].msg,friends[friendshipId].messages[i].sender,
+			friends[friendshipId].messages[i].date)
 	}
 }
 
