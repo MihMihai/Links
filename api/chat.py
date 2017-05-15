@@ -126,42 +126,48 @@ def friend_request(data):
 	name = user1[2]
 	avatar = user1[3]
 
+
 	if userId != None:
 		uid2 = userId[0]
-		room = userId[1]
-		query = "SELECT status FROM friendships WHERE (user_1 = '%d' AND user_2 = '%d') OR (user_1 = '%d' AND user_2 = '%d')" %(uid1,uid2,uid2,uid1)
-		cursor.execute(query)
-		row = cursor.fetchone()
-		if row == None:
-			curdate = time.strftime("%Y-%m-%d")
-			query = "INSERT INTO friendships (user_1,user_2,date,status) VALUES('%d','%d',str_to_date('%s','%%Y-%%m-%%d') ,'%d')" % (uid1, uid2,curdate, 0)
-			cursor.execute(query)
-			db.commit()
 
-
-			query = "SELECT id FROM friendships WHERE user_1 ='%d' AND user_2 = '%d'" % (uid1,uid2)
-			cursor.execute(query)
-			frId = cursor.fetchone()
-
-			frReqDict = {}
-			frReqDict['from'] = email
-			frReqDict['name'] = name
-			frReqDict['friendship_id'] = frId[0]
-			if avatar != None:
-				avatarBase64 = str(avatar)
-				if avatarBase64[0] == 'b':
-					avatarBase64 = avatarBase64[1:]
-				if avatarBase64[0] == "'":
-					avatarBase64 = avatarBase64[1:]
-					avatarBase64 = avatarBase64[:len(avatarBase64)-1]
-				frReqDict['avatar'] = avatarBase64
-			emit('new friend request',json.dumps(frReqDict),room=room)
-		else:
+		if uid1 == uid2:
 			room = data['chat_token']
-			if row[0] == 0:
-				emit('bad friend request','Request already sent',room=room)
+			emit('bad friend request','You cannot befriend yourself, sorrrryy..',room=room)
+		else:
+			room = userId[1]
+			query = "SELECT status FROM friendships WHERE (user_1 = '%d' AND user_2 = '%d') OR (user_1 = '%d' AND user_2 = '%d')" %(uid1,uid2,uid2,uid1)
+			cursor.execute(query)
+			row = cursor.fetchone()
+			if row == None:
+				curdate = time.strftime("%Y-%m-%d")
+				query = "INSERT INTO friendships (user_1,user_2,date,status) VALUES('%d','%d',str_to_date('%s','%%Y-%%m-%%d') ,'%d')" % (uid1, uid2,curdate, 0)
+				cursor.execute(query)
+				db.commit()
+
+
+				query = "SELECT id FROM friendships WHERE user_1 ='%d' AND user_2 = '%d'" % (uid1,uid2)
+				cursor.execute(query)
+				frId = cursor.fetchone()
+
+				frReqDict = {}
+				frReqDict['from'] = email
+				frReqDict['name'] = name
+				frReqDict['friendship_id'] = frId[0]
+				if avatar != None:
+					avatarBase64 = str(avatar)
+					if avatarBase64[0] == 'b':
+						avatarBase64 = avatarBase64[1:]
+					if avatarBase64[0] == "'":
+						avatarBase64 = avatarBase64[1:]
+						avatarBase64 = avatarBase64[:len(avatarBase64)-1]
+					frReqDict['avatar'] = avatarBase64
+				emit('new friend request',json.dumps(frReqDict),room=room)
 			else:
-				emit('bad friend request','User is already linked to you',room=room)
+				room = data['chat_token']
+				if row[0] == 0:
+					emit('bad friend request','Request already sent',room=room)
+				else:
+					emit('bad friend request','User is already linked to you',room=room)
 	else:
 		room = data['chat_token']
 		emit('bad friend request','Invalid email',room=room)
