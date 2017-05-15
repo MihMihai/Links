@@ -22,6 +22,7 @@
     <script src="static/js/messageNotifications.js" type="text/javascript"></script>
     <script src="static/js/friendsManager.js" type="text/javascript"></script>
     <script src="static/js/random-friend.js" type="text/javascript"></script>
+    <script src="static/js/story.js" type="text/javascript"></script>
     <title>Links</title>
     <style>
     body {
@@ -53,6 +54,8 @@
                         <ul class="dropdown-menu">
                             <li><a data-toggle="modal" data-target="#updateAccount">Update Account</a></li>
                             <li><a data-toggle="modal" data-target="#changePass">Change Password</a></li>
+                            <li><a data-toggle="modal" data-target="#editStory">Edit my story</a></li>
+							<li><a data-toggle="modal" data-target="#deleteAccount">Delete Account</a></li>
                         </ul>
                     </li>
                     <li><a id="logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
@@ -320,6 +323,116 @@
                 </div>
             </div>
         </div>
+
+        <!--Send friend request-->
+        <div class="modal fade" id="sendFriendReq" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Modal Header  -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Friend request</h3>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <h3 class="text-center">The friend request was send to acceptance/rejection! </h3>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Edit story modal #editStory-->
+
+         <div class="modal fade" id="editStory" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <img id="profile_imageStory" src="http://placehold.it/50/FA6F57/fff&text=ME" alt="poza" style="border-radius: 100%; width:50px; height:50px;float:left;margin:15px;"/>
+                        <h3 id="profile_nameStory"  class="modal-title" style="float:left"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <form data-toggle="validator" role="form" id="form_story">
+                            <div class="form-group">
+                                <label for="story_status"><span class="glyphicon glyphicon-globe"></span> Status</label>
+                    
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="story_status" placeholder="New Status"></textarea>
+                                       
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="story_feel"><span class="glyphicon glyphicon-heart-empty"></span>Choose a feel</label>
+                                        <select class="form-control" id="story_feel" required>
+                                            <option value="">None</option>
+                                            <option>happy</option>
+                                            <option>sad</option>
+                                            <option>grateful</option>
+                                            <option>awesome</option>
+                                            <option>thankful</option>
+                                            <option>sick</option>
+                                            <option>grumpy</option>
+                                            <option>incredible</option>
+                                            <option>exhausted</option>
+                                            <option>childish</option>
+                                            <option>special</option>
+                                            <option>lovely</option>
+                                            <option>artsy</option>
+                                            <option>lonely</option>
+                                        </select>
+                                       
+                                    </div>
+
+                                     <div class="form-group">
+                                        <label for="story_photo"><span class="glyphicon glyphicon-picture"></span> Set a story photo</label>
+                                        <input type="file" class="form-control" name="name" id="story_photo" placeholder="Select a photo" accept="image/x-png,image/gif,image/jpeg">
+                                    </div>
+
+                
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Submit" id="save_story_button" class="btn btn-success btn-block btn-lg">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- Delete Account modal -->
+        <div class="modal fade" id="deleteAccount" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Modal Header  -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Delete Account</h3>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form role="form" id="form_deleteAccount">
+                            <div class="form-group">
+                                <h3 class="text-center">You are about to delete your Links Account. Are you sure? </h3>
+                                <div class="row ">
+                                    <div class="col-xs-6 ">
+                                        <input type="submit" value="Delete" id="button_confirm_deleteAccount" class="btn btn-danger btn-lg btn-block">
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-default  btn-lg btn-block pull-right" data-dismiss="modal">I've changed my mind.</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 </body>
 
 </html>
