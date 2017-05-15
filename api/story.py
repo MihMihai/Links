@@ -72,11 +72,11 @@ def story():
 			response['description'] = "Please provide a valid friendship id"
 			response['status_code'] = 400
 			return Response(json.dumps(response,sort_keys = True), mimetype = 'application/json'), 400
-		else:
-			if ids[0] == userId[0] :
-				friendId = ids[0]
-			else :
-				friendId = ids[1]
+
+		if ids[0] == userId :
+			friendId = ids[1]
+		else :
+			friendId = ids[0]
 	else:
 		friendId = userAcc["sub"] # daca nu a dat un friendship id, atunci ii intoarcem story-ul lui
 
