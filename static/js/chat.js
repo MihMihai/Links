@@ -135,12 +135,7 @@ window.onload = function() {
 
 
 
-    $('#rightPanel>li>a').each(function() {
-        $(this).css("height", "100%")
-            .css("color", "white")
-            .css("margin", 0);
-        //la hover trebuie pus: #428bca;
-    });
+   
 
     var panelContent = document.getElementById("panelContent");
     AddFriend(socket, friendRequestsArray, panelContent);
