@@ -87,6 +87,10 @@ def home():
 def chat():
 	return render_template("chat.html")
 
+@app.route("/forgotpassword")
+def forgot_password():
+	return render_template("forgot_password.html")
+
 @app.route("/js/Roboto-Black.ttf")
 def sendFont():
 	return send_from_directory('/var/www/html/static/js','Roboto-Black.ttf')

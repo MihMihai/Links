@@ -8,7 +8,7 @@ window.onload = function(){
 	});
 
 	$("#forgot_pass").click(function(){
-		window.location.replace("http://linkspeople.ddns.net/forgot_password");
+		window.location.replace("http://linkspeople.ddns.net/forgotpassword");
 	});
 	
 		

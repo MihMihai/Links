@@ -86,9 +86,14 @@ def on_join(data):
 	userId = User.get_id_from_email(email)
 	tellEveryone(message,userId,'user join')
 
+	query = "UPDATE users set online = 1 WHERE id = '%s'" % (userId)
+	db = DbHandler.get_instance().get_connection()
+	cursor = db.cursor()
+	cursor.execute(query)
+	db.commit()
+
 	join_room(room)
 	emit('msg server',email + ' has entered the room.', room=room)
-
 
 @socketio.on('leave', namespace='/chat')
 def on_leave(data):
@@ -101,13 +106,13 @@ def on_leave(data):
 	userId = User.get_id_from_email(email)
 	tellEveryone(message,userId,'user left')
 
-	query = "UPDATE users SET auth_token = null WHERE ID = '%s'" % (userId)
+	query = "UPDATE users SET online = 0 WHERE ID = '%s'" % (userId)
 
 	db = DbHandler.get_instance().get_connection()
 	cursor = db.cursor()
 	cursor.execute(query)
 	db.commit()
-	
+
 	leave_room(room)
 	emit('msg server',email + ' has left the room.', room=room)
 

@@ -74,7 +74,7 @@ def friends():
 
 
 	#do the BIG query
-	query = """SELECT f.id, u.name, u.email, u.avatar, u.auth_token
+	query = """SELECT f.id, u.name, u.email, u.avatar, u.online
 		 FROM  users u JOIN friendships f
 		 ON ( (u.id = f.user_1 AND f.user_2 = '%s') OR (u.id = f.user_2 AND f.user_1 = '%s') AND status = 1)
  	WHERE """ % (user1Id,user1Id)
@@ -110,7 +110,7 @@ def friends():
 				avatarBase64 = avatarBase64[1:]
 				avatarBase64 = avatarBase64[:len(avatarBase64)-1]
 			friend["avatar"] = avatarBase64
-		if data[4] != None:
+		if data[4] != 0:
 			friend["online"] = 1
 		else:
 			friend["online"] = 0

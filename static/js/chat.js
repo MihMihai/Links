@@ -41,6 +41,8 @@ window.onload = function() {
         });
     });
 
+    //refreshTokenRequest();
+
     $(".modal").on("show.bs.modal", function() {
         $("body").css("overflow-y", "hidden");
     });
@@ -384,7 +386,7 @@ window.onload = function() {
             // handle the invalid form...
         } else {
             event.preventDefault();
-			convertAndResizeImage("story_photo",50,50,function(b) {
+			convertAndResizeImage("story_photo",500,500,function(b) {
 				base64Image=b;
 				
 				$.ajax({
