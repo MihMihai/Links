@@ -137,12 +137,7 @@ window.onload = function() {
 
 
 
-    $('#rightPanel>li>a').each(function() {
-        $(this).css("height", "100%")
-            .css("color", "white")
-            .css("margin", 0);
-        //la hover trebuie pus: #428bca;
-    });
+   
 
     var panelContent = document.getElementById("panelContent");
     AddFriend(socket, friendRequestsArray, panelContent);
@@ -351,104 +346,104 @@ window.onload = function() {
             // handle the invalid form...
         } else {
             event.preventDefault();
-			convertAndResizeImage("settings_photo",50,50,function(b) {
-				base64Image=b;
+            convertAndResizeImage("settings_photo", 50, 50, function(b) {
+                base64Image = b;
 
-				$.ajax({
-					method: "POST",
-					url: "http://" + ip + "/api/update",
-					headers: { Authorization: localStorage.TOKEN },
-					data: {
-						name: $("#settings_name").val(),
-						birth_day: $("#birthDay").find(":selected").text(),
-						birth_month: $("#birthMonth").find(":selected").text(),
-						birth_year: $("#birthYear").find(":selected").text(),
-						avatar: base64Image
-					},
-					dataType: "json",
-					success: function(data) {
-						$('#updateAccount').modal('hide');
-						$("#profile_name").html($("#settings_name").val());
-						if (base64Image !== undefined) {
-							$("#profile_image").attr('src', base64Image);
-						}
-						base64Image = undefined;
-					}
-				});
-			});
-		}
-	});
+                $.ajax({
+                    method: "POST",
+                    url: "http://" + ip + "/api/update",
+                    headers: { Authorization: localStorage.TOKEN },
+                    data: {
+                        name: $("#settings_name").val(),
+                        birth_day: $("#birthDay").find(":selected").text(),
+                        birth_month: $("#birthMonth").find(":selected").text(),
+                        birth_year: $("#birthYear").find(":selected").text(),
+                        avatar: base64Image
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        $('#updateAccount').modal('hide');
+                        $("#profile_name").html($("#settings_name").val());
+                        if (base64Image !== undefined) {
+                            $("#profile_image").attr('src', base64Image);
+                        }
+                        base64Image = undefined;
+                    }
+                });
+            });
+        }
+    });
 
-	
 
-	  $('#form_story').on('submit', function(event) {
+
+    $('#form_story').on('submit', function(event) {
         if (event.isDefaultPrevented()) {
             // handle the invalid form...
         } else {
             event.preventDefault();
-			convertAndResizeImage("story_photo",500,500,function(b) {
-				base64Image=b;
-				
-				$.ajax({
-					method: "POST",
-					url: "http://" + ip + "/api/new_story",
-					headers: { Authorization: localStorage.TOKEN },
-					data: {
-						text: $("#story_status").val(),
-						birth_day: $("#story_feel").find(":selected").text(),
-						image: base64Image
-					},
-					dataType: "json",
-					success: function(data) {
-						$("#story_status").val("");
-						$("#story_feel").val([]);
-						base64Image = undefined;
 
-						showStory(null,$('#form_story'));
-						var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
+            convertAndResizeImage("story_photo", 50, 50, function(b) {
+                base64Image = b;
 
-						 setTimeout(function(){
-							 
-							$('#form_story').append(deleteButton).css("width:auto");
-						 },500);
-						
-						deleteButton.on('click', '', function() {
+                $.ajax({
+                    method: "POST",
+                    url: "http://" + ip + "/api/new_story",
+                    headers: { Authorization: localStorage.TOKEN },
+                    data: {
+                        text: $("#story_status").val(),
+                        birth_day: $("#story_feel").find(":selected").text(),
+                        image: base64Image
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        $("#story_status").val("");
+                        $("#story_feel").val([]);
+                        base64Image = undefined;
 
+                        showStory(null, $('#form_story'));
+                        var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
 
-								 $.ajax({
-            					method: "POST",
-           						 url: "http://" + ip + "/api/delete_story",
-           						 headers: { Authorization: localStorage.TOKEN },
-           						 dataType: "json",
-            					success: function(data) {
+                        setTimeout(function() {
 
-									$('#editStory').modal('toggle');
-       							    document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
-									document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
-    							}
-								
-	
-							});
+                            $('#form_story').append(deleteButton).css("width:auto");
+                        }, 500);
 
-						});
-
-					}
-				});
-
-				$('#editStory').modal('toggle');
+                        deleteButton.on('click', '', function() {
 
 
-			});
-		}
-	});
-	
-	 $.ajax({
+                            $.ajax({
+                                method: "POST",
+                                url: "http://" + ip + "/api/delete_story",
+                                headers: { Authorization: localStorage.TOKEN },
+                                dataType: "json",
+                                success: function(data) {
+
+                                    $('#editStory').modal('toggle');
+                                    document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+                                    document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+                                }
+
+
+                            });
+
+                        });
+
+                    }
+                });
+
+                $('#editStory').modal('toggle');
+
+
+            });
+        }
+    });
+
+    $.ajax({
         method: "GET",
         url: "http://" + ip + "/api/story",
         headers: { Authorization: localStorage.TOKEN },
         dataType: "json",
         success: function(data) {
-
 				if(data.text!=null || data.image!=null || data.feel!=null)
 					{
 
@@ -527,6 +522,7 @@ window.onload = function() {
 	});
 	
 	
+
 }
 
 function refreshTokenRequest() {

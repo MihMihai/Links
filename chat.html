@@ -29,6 +29,19 @@
         padding: 0;
         margin: 0;
     }
+    
+    .nav>li>a:hover {
+        background-color: #16A085;
+        border: 0;
+        border-radius: 0px;
+    }
+    
+    #rightPanel>li>a {
+        color: white;
+        margin: 0;
+        border: 0;
+        height: 96%;
+    }
     </style>
 </head>
 
@@ -41,21 +54,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img id="profile_image" src="http://placehold.it/50/FA6F57/fff&text=ME" alt="poza" style="border-radius: 100%; width:50px; height:50px;float:left;margin:15px;"/>
+                <img id="profile_image" src="http://placehold.it/50/FA6F57/fff&text=ME" alt="poza" style="border-radius: 100%; width:50px; height:50px;float:left;margin:15px;" />
                 <p id="profile_name" class="navbar-text">
                 </p>
-              
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>
-							<span class="caret"></span></a>
+                            <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a data-toggle="modal" data-target="#updateAccount">Update Account</a></li>
                             <li><a data-toggle="modal" data-target="#changePass">Change Password</a></li>
                             <li><a data-toggle="modal" data-target="#editStory">Edit my story</a></li>
-							<li><a data-toggle="modal" data-target="#deleteAccount">Delete Account</a></li>
+                            <li><a data-toggle="modal" data-target="#deleteAccount">Delete Account</a></li>
                         </ul>
                     </li>
                     <li><a id="logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
@@ -74,10 +86,8 @@
                         <button type="button" class="btn btn-success btn-lg btn-block" style="margin-bottom: 15px;" id="randomFriendButton">Get a random friend!</button>
                         <input type="text" class="form-control" placeholder="Search a friend" id="searchFriendInput" style="margin-bottom: 15px;">
                         <div class="list-group" id="random-list" style="margin:0; padding:0;">
-                           
                         </div>
                         <div class="list-group" id="friends-list" style="margin:0; padding:0;">
-                            
                         </div>
                     </div>
                     <div class="panel-footer">
@@ -98,9 +108,9 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Send your message!" id="messageInputBox" disabled>
                             <span class="input-group-btn">
-												<button class="btn btn-success" type="submit"
-												id="sendMessageButton" disabled>SEND</button>
-											</span>
+                                                <button class="btn btn-success" type="submit"
+                                                id="sendMessageButton" disabled>SEND</button>
+                                            </span>
                         </div>
                     </div>
                 </div>
@@ -115,7 +125,6 @@
                         </li>
                         <li id="widgets" role="presentation"><a href="#">Widgets</a></li>
                     </ul>
-                 
                     <div class="panel-body">
                         <div id="panelContent">
                         </div>
@@ -318,7 +327,6 @@
                 </div>
             </div>
         </div>
-
         <!--Send friend request-->
         <div class="modal fade" id="sendFriendReq" role="dialog">
             <div class="modal-dialog">
@@ -339,56 +347,47 @@
                 </div>
             </div>
         </div>
-
         <!--Edit story modal #editStory-->
-
-         <div class="modal fade" id="editStory" role="dialog">
+        <div class="modal fade" id="editStory" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <img id="profile_imageStory" src="http://placehold.it/50/FA6F57/fff&text=ME" alt="poza" style="border-radius: 100%; width:50px; height:50px;float:left;margin:15px;"/>
-                        <h3 id="profile_nameStory"  class="modal-title" style="float:left"></h3>
+                        <img id="profile_imageStory" src="http://placehold.it/50/FA6F57/fff&text=ME" alt="poza" style="border-radius: 100%; width:50px; height:50px;float:left;margin:15px;" />
+                        <h3 id="profile_nameStory" class="modal-title" style="float:left"></h3>
                     </div>
                     <div class="modal-body">
                         <form data-toggle="validator" role="form" id="form_story">
                             <div class="form-group">
                                 <label for="story_status"><span class="glyphicon glyphicon-globe"></span> Status</label>
-                    
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="story_status" placeholder="New Status"></textarea>
-                                       
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="story_feel"><span class="glyphicon glyphicon-heart-empty"></span>Choose a feel</label>
-                                        <select class="form-control" id="story_feel" required>
-                                            <option value="">None</option>
-                                            <option>happy</option>
-                                            <option>sad</option>
-                                            <option>grateful</option>
-                                            <option>awesome</option>
-                                            <option>thankful</option>
-                                            <option>sick</option>
-                                            <option>grumpy</option>
-                                            <option>incredible</option>
-                                            <option>exhausted</option>
-                                            <option>childish</option>
-                                            <option>special</option>
-                                            <option>lovely</option>
-                                            <option>artsy</option>
-                                            <option>lonely</option>
-                                        </select>
-                                       
-                                    </div>
-
-                                     <div class="form-group">
-                                        <label for="story_photo"><span class="glyphicon glyphicon-picture"></span> Set a story photo</label>
-                                        <input type="file" class="form-control" name="name" id="story_photo" placeholder="Select a photo" accept="image/x-png,image/gif,image/jpeg">
-                                    </div>
-
-                
+                                <div class="form-group">
+                                    <textarea class="form-control" id="story_status" placeholder="New Status"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="story_feel"><span class="glyphicon glyphicon-heart-empty"></span>Choose a feel</label>
+                                    <select class="form-control" id="story_feel" required>
+                                        <option value="">None</option>
+                                        <option>happy</option>
+                                        <option>sad</option>
+                                        <option>grateful</option>
+                                        <option>awesome</option>
+                                        <option>thankful</option>
+                                        <option>sick</option>
+                                        <option>grumpy</option>
+                                        <option>incredible</option>
+                                        <option>exhausted</option>
+                                        <option>childish</option>
+                                        <option>special</option>
+                                        <option>lovely</option>
+                                        <option>artsy</option>
+                                        <option>lonely</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="story_photo"><span class="glyphicon glyphicon-picture"></span> Set a story photo</label>
+                                    <input type="file" class="form-control" name="name" id="story_photo" placeholder="Select a photo" accept="image/x-png,image/gif,image/jpeg">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Submit" id="save_story_button" class="btn btn-success btn-block btn-lg">
@@ -398,7 +397,7 @@
                 </div>
             </div>
         </div>
-		<!-- Delete Account modal -->
+        <!-- Delete Account modal -->
         <div class="modal fade" id="deleteAccount" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -426,30 +425,23 @@
                 </div>
             </div>
         </div>
-
-
-
-
-         <!--Show story modal #showStory-->
-
-         <div class="modal fade" id="showStory" role="dialog">
+        <!--Show story modal #showStory-->
+        <div class="modal fade" id="showStory" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <img id="profile_imageFriend" src="http://placehold.it/50/FA6F57/fff&text=ME" alt="poza" style="border-radius: 100%; width:50px; height:50px;float:left;margin:15px;"/>
-                        <h3 id="profile_nameFriend"  class="modal-title" style="float:left"></h3>
+                        <img id="profile_imageFriend" src="http://placehold.it/50/FA6F57/fff&text=ME" alt="poza" style="border-radius: 100%; width:50px; height:50px;float:left;margin:15px;" />
+                        <h3 id="profile_nameFriend" class="modal-title" style="float:left"></h3>
                     </div>
                     <div class="modal-body">
                         <div id="storyPost">
-                       </div>
-                        
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
 </body>
 
 </html>
