@@ -122,7 +122,7 @@ function createFriendRequestManager(socket, name, from, friendship_id, avatar) {
                 "status": 1
             });
 
-            updateFriendReq();
+           
             createFriend(socket, avatar, name, friendship_id);
 
             $("#fr" + friendship_id).remove();
@@ -131,6 +131,8 @@ function createFriendRequestManager(socket, name, from, friendship_id, avatar) {
             let posOfNewFriend = friendRequestsArray.map(friend => friend.email).indexOf(from);
             friendRequestsArray.splice(posOfNewFriend, 1);
             friends[friendship_id] = new Friend(name, from);
+
+             updateFriendReq();
         }
 
     });
@@ -149,7 +151,7 @@ function createFriendRequestManager(socket, name, from, friendship_id, avatar) {
             let posOfDeletedFriendReq = friendRequestsArray.map(friend => friend.email).indexOf(from);
             friendRequestsArray.splice(posOfDeletedFriendReq, 1);
            
-           updateFriendReq();
+             updateFriendReq();
         }
 
     });
