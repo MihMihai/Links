@@ -42,17 +42,17 @@ function createFriend(socket, imgSrc, name, friendshipId, place, online) {
         alt: 'User Avatar',
         class: 'img-circle'
     });
+    if (place === "friends-list") {
+        img.click(function() {
 
-    img.click(function() {
+            $("#profile_nameFriend").text(name);
+            $("#profile_imageFriend").attr('src', imageEndpoint + imgSrc);
 
-        $("#profile_nameFriend").text(name);
-        $("#profile_imageFriend").attr('src', imageEndpoint + imgSrc);
-
-        $('#showStory').modal('show');
-        $("#storyPost").empty();
-        showStory(friendshipId, $("#storyPost"));
-    });
-
+            $('#showStory').modal('show');
+            $("#storyPost").empty();
+            showStory(friendshipId, $("#storyPost"));
+        });
+    }
     var span = $("<span class='chat-img pull-left'></span>");
     span.append(img);
     var a = $("<a id=" + friendshipId + " href='#' class='list-group-item' style='color:" + (online == 1 ? "#5cb85c;'" : "black;'") + "></a>");
@@ -97,16 +97,16 @@ function remove(socket, name, friendshipId, random) {
         });
     }
 
-    /*		$.ajax({
-    			method: "POST",
-    			url: "http://" + ip + "/api/remove_friend",
-    			headers: {Authorization: localStorage.TOKEN},
-    			data: {friendship_id: friendshipId},
-    			dataType: "json",
-    			success:  function(data){
-    				$("#"+friendshipId).remove();
-    			}
-    		});*/
+    /*      $.ajax({
+                method: "POST",
+                url: "http://" + ip + "/api/remove_friend",
+                headers: {Authorization: localStorage.TOKEN},
+                data: {friendship_id: friendshipId},
+                dataType: "json",
+                success:  function(data){
+                    $("#"+friendshipId).remove();
+                }
+            });*/
     //}
 }
 
