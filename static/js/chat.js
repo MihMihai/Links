@@ -92,12 +92,12 @@ window.onload = function() {
             if ('random_token' in obj) {
                 let from = obj.from;
                 let msg = obj.msg;
-                let date = obj.date;
+                //let date = obj.date; --- nu are date
 
                 friends[from].messages.push(new Message(msg, "left"));
                 let friendshipID = from;
                 if (currentFriend == from) {
-                    createMessage(msg, "left", date);
+                    createMessage(msg, "left");
                 } else if (!(messagesNotificationsIntervals.hasOwnProperty(friendshipID))) {
                     messagesNotificationsIntervals[friendshipID] = setInterval(function() {
                         createMessageNotification(friendshipID);
@@ -111,10 +111,11 @@ window.onload = function() {
             } else {
                 let email = obj.from;
                 let mesaj = obj.msg;
+				let date = obj.date;
                 friendshipID = findFriendshipIdByEmail(email);
-                friends[friendshipID].messages.push(new Message(mesaj, "left"));
+                friends[friendshipID].messages.push(new Message(mesaj, "left",date));
                 if (currentFriend == friendshipID)
-                    createMessage(mesaj, "left", date);
+                    createMessage(mesaj, "left",date);
                 //create message notification in friends list
                 else if (!(messagesNotificationsIntervals.hasOwnProperty(friendshipID))) {
                     messagesNotificationsIntervals[friendshipID] = setInterval(function() {
