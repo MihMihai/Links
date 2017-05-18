@@ -3,7 +3,7 @@ var months = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
 var friendRequestsArray = [];
-var ip = "86.121.87.213";
+var ip = "188.25.131.242";
 var imageEndpoint = "http://linkspeople.ddns.net/image/";
 var currentTab;
 var base64Image;
@@ -36,7 +36,7 @@ window.onload = function() {
                 localStorage.removeItem('TOKEN');
                 localStorage.removeItem('CHAT_TOKEN');
                 localStorage.removeItem('EMAIL');
-                //indow.location.replace("http://linkspeople.ddns.net/");
+                
             }
         });
     });
