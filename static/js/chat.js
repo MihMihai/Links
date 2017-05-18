@@ -379,8 +379,9 @@ window.onload = function() {
             // handle the invalid form...
         } else {
             event.preventDefault();
-            convertAndResizeImage("story_photo", 50, 50, function(b) {
+            convertAndResizeImage("story_photoMy", 100, 100, function(b) {
                 base64Image = b;
+                console.log(base64Image);
 
                 $.ajax({
                     method: "POST",
@@ -388,21 +389,25 @@ window.onload = function() {
                     headers: { Authorization: localStorage.TOKEN },
                     data: {
                         text: $("#story_status").val(),
-                        birth_day: $("#story_feel").find(":selected").text(),
+                        feel: $("#story_feel").find(":selected").text(),
                         image: base64Image
                     },
                     dataType: "json",
                     success: function(data) {
+
+                        
                         $("#story_status").val("");
                         $("#story_feel").val([]);
+                        $("#story_photoMy").val("");
                         base64Image = undefined;
 
-                        showStory(null, $('#form_story'));
-                        var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
+                         $("#addedStory").empty();
+                        showStory(null, $('#addedStory'));
+                        var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg">Delete story</button></div>');
 
                         setTimeout(function() {
 
-                            $('#form_story').append(deleteButton).css("width:auto");
+                            $('#addedStory').append(deleteButton).css("width:auto");
                         }, 500);
 
                         deleteButton.on('click', '', function() {
@@ -416,8 +421,7 @@ window.onload = function() {
                                 success: function(data) {
 
                                     $('#editStory').modal('toggle');
-                                    document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
-                                    document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+                                    $("#addedStory").empty();
                                 }
 
 
@@ -444,14 +448,14 @@ window.onload = function() {
 				if(data.text!=null || data.image!=null || data.feel!=null)
 					{
 
-						
-						addElementsToStoryPanel(data,$('#form_story'));
+						 $("#addedStory").empty();
+						addElementsToStoryPanel(data,$('#addedStory'));
 
 						var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
 
 						 setTimeout(function(){
 							 
-							$('#form_story').append(deleteButton).css("width:auto");
+							$('#addedStory').append(deleteButton).css("width:auto");
 						 },100);
 						
 						deleteButton.on('click', '', function() {
@@ -466,9 +470,7 @@ window.onload = function() {
 
 									
 									$('#editStory').modal('toggle');
-
-									document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
-									document.getElementById("form_story").removeChild(document.getElementById("form_story").lastElementChild);
+									 $("#addedStory").empty();
 									}
 							});
 
