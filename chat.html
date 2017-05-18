@@ -90,8 +90,6 @@
                         <div class="list-group" id="friends-list" style="margin:0; padding:0;">
                         </div>
                     </div>
-                    <div class="panel-footer">
-                    </div>
                 </div>
             </div>
             <div class="col-md-5">
@@ -99,7 +97,7 @@
                     <div class="panel-heading">
                         <h3 id="friendName">CHAT</h3>
                     </div>
-                    <div class="panel-body" id="chat_box">
+                    <div class="panel-body" id="chat_box" style="overflow-y:scroll;min-height:50%; min-height:65vh;max-height:50%;max-height:65vh;">
                         <ul class="chat" id="messages">
                             Select a friend and start chatting!!!
                         </ul>
@@ -128,8 +126,6 @@
                     <div class="panel-body">
                         <div id="panelContent">
                         </div>
-                    </div>
-                    <div class="panel-footer">
                     </div>
                 </div>
             </div>
@@ -392,11 +388,9 @@
                             <div class="form-group">
                                 <input type="submit" value="Submit" id="save_story_button" class="btn btn-success btn-block btn-lg">
                             </div>
-
                             <div id="addedStory">
                             </div>
                         </form>
-                               
                     </div>
                 </div>
             </div>
@@ -437,7 +431,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <img id="profile_imageFriend" src="http://placehold.it/50/FA6F57/fff&text=ME" alt="poza" style="border-radius: 100%; width:50px; height:50px;float:left;margin:15px;" />
-                        <h3 id="profile_nameFriend" class="modal-title" style="float:left"></h3>
+                        <h3 id="profile_nameFriend" class="modal-title" style="float:left; padding:22px;" ></h3>
                     </div>
                     <div class="modal-body">
                         <div id="storyPost">
