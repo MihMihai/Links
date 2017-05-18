@@ -26,18 +26,7 @@ window.onload = function() {
 
     $(window).unload(function() {
         socket.emit("leave", { "email": localStorage.EMAIL });
-        $.ajax({
-            method: "POST",
-            url: "http://" + ip + "/api/logout",
-            headers: { Authorization: localStorage.TOKEN },
-            dataType: "json",
-            success: function(data) {
-                localStorage.removeItem('TOKEN');
-                localStorage.removeItem('CHAT_TOKEN');
-                localStorage.removeItem('EMAIL');
-                
-            }
-        });
+        
     });
 
     //refreshTokenRequest();
@@ -326,18 +315,7 @@ window.onload = function() {
         localStorage.removeItem('TOKEN');
         localStorage.removeItem('CHAT_TOKEN');
         localStorage.removeItem('EMAIL');
-        $.ajax({
-            method: "POST",
-            url: "http://" + ip + "/api/logout",
-            headers: { Authorization: localStorage.TOKEN },
-            dataType: "json",
-            success: function(data) {
-                localStorage.removeItem('TOKEN');
-                localStorage.removeItem('CHAT_TOKEN');
-                localStorage.removeItem('EMAIL');
-                window.location.replace("http://linkspeople.ddns.net/");
-            }
-        });
+        
     });
 
 
