@@ -8,7 +8,7 @@
               event.preventDefault();
               $.ajax({
                   method: "POST",
-                  url: "http://86.121.87.213/api/reset_password",
+                  url: "http://"+ip+"/api/reset_password",
                   headers: {
                       Authorization: url.substring(45, url.length)
                      

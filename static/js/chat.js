@@ -3,11 +3,10 @@ var months = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
 var friendRequestsArray = [];
-var ip = "188.25.131.242";
 var imageEndpoint = "http://linkspeople.ddns.net/image/";
 var currentTab;
 var base64Image;
-
+const ip = "188.25.131.242";
 var successFrRequest = "The friend request was send to acceptance/rejection! ";
 
 function updateFriendReq() {
