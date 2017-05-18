@@ -24,7 +24,7 @@ function createMessage(message, sender, date){
 	if(date === null || date === undefined) {
 		let currentDate = new Date();
 		date = currentDate.today() + " " + currentDate.timeNow();
-		console.log(date);
+//		console.log(date);
 	}
 	
 	let mesaj = $("<p data-toggle='tooltip'" +
