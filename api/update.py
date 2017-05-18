@@ -8,6 +8,8 @@ import token_encoder
 import base64
 import jwt
 import json
+import os
+import uuid
 
 appUpdate = Blueprint('api_update',__name__)
 
@@ -61,15 +63,28 @@ def update():
 		query = "UPDATE users SET name = '%s' WHERE auth_token = '%s'" % (name,userToken)
 		cursor.execute(query)
 		db.commit()
+
+	query = "SELECT avatar FROM users WHERE auth_token = '%s'" % (userToken)
+	cursor.execute(query)
+	data = cursor.fetchone()
+	image_from_db = str(data[0])
+	image_from_db = image_from_db[2:len(image_from_db)-1]
+
 	if avatar != None:
 		if "jpeg" in avatar:
 			type = "jpeg"
 		else:
 			type = "png"
 		avatar = avatar[avatar.index(",") + 1:]
-		with open("/var/www/avatars/avatar" + str(userAcc["sub"]) + "." + type,'wb') as f:
+
+		if image_from_db != "default.png" and os.path.exists("/var/www/avatars/" + image_from_db):
+			os.remove("/var/www/avatars/" + image_from_db)
+
+		unique_image_identifier = uuid.uuid4()
+
+		with open("/var/www/avatars/" + str(unique_image_identifier)  + "." + type,'wb') as f:
 			f.write(base64.b64decode(avatar))
-		query = "UPDATE users SET avatar = '%s' WHERE auth_token = '%s'" % ("avatar" + str(userAcc["sub"]) + "." + type,userToken)
+		query = "UPDATE users SET avatar = '%s' WHERE auth_token = '%s'" % (str(unique_image_identifier) + "." + type,userToken)
 		cursor.execute(query)
 		db.commit()
 

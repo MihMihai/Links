@@ -382,7 +382,7 @@ window.onload = function() {
         } else {
             event.preventDefault();
 
-            convertAndResizeImage("story_photoMy", 100, 100, function(b) {
+            convertAndResizeImage("story_photoMy", 500, 500, function(b) {
 
                 base64Image = b;
                 console.log(base64Image);

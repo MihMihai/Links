@@ -10,6 +10,7 @@ import jwt
 import time
 import base64
 import os
+import uuid
 
 appNewStory = Blueprint('api_newstory',__name__)
 
@@ -69,7 +70,7 @@ def newStory() :
 
 
 	#check if user had a story posted
-	query ="SELECT user_id FROM story WHERE user_id = '%d'" % (userId)
+	query ="SELECT user_id,image FROM story WHERE user_id = '%d'" % (userId)
 	cursor.execute(query)
 	storyPresent = cursor.fetchone()
 
@@ -91,13 +92,15 @@ def newStory() :
 			response["status_code"] = 400
 			return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'),200
 
-		if os.path.exists("/var/www/stories/story" + str(userId) + ".jpeg"):
-			os.remove("/var/www/stories/story" + str(userId) + ".jpeg")
+		if storyPresent[1] != None and storyPresent[1] != "" and storyPresent[1] != "None":
+			story_from_db = str(storyPresent[1])
+			story_from_db = story_from_db[2:len(story_from_db)-1]
+			if os.path.exists("/var/www/stories/" + story_from_db):
+				os.remove("/var/www/stories/" + story_from_db)
 
-		if os.path.exists("/var/www/stories/story" + str(userId) + ".png"):
-			os.remove("/var/www/stories/story" + str(userId) + ".png")
+		unique_image_identifier = uuid.uuid4()
 
-		with open("/var/www/stories/story" + str(userId) + "." + type,'wb') as f:
+		with open("/var/www/stories/" + str(unique_image_identifier) + "." + type,'wb') as f:
 			f.write(base64.b64decode(storyImage))
 
 	#get current time
@@ -116,7 +119,7 @@ def newStory() :
 		if add == True :
 			if storyImage != None:
 				query = "INSERT INTO story (user_id, text, feel, image, date) VALUES ('%d', '%s', '%s', '%s', '%s')" \
-				% (userId, storyText, storyFeel, "story" + str(userId) + "." + type, curdate)
+				% (userId, storyText, storyFeel, str(unique_image_identifier) + "." + type, curdate)
 			else:
 				query = "INSERT INTO story (user_id, text, feel, image, date) VALUES ('%d', '%s', '%s', '%s', '%s')" \
 				% (userId, storyText, storyFeel, storyImage, curdate)
@@ -128,7 +131,7 @@ def newStory() :
 		if add == True :
 			if storyImage != None:
 				query = "UPDATE story SET text = '%s', feel = '%s', image = '%s', date = '%s' WHERE user_id = '%d'" \
-				%(storyText, storyFeel, "story" + str(userId) + "." + type, curdate, userId)
+				%(storyText, storyFeel, str(unique_image_identifier) + "." + type, curdate, userId)
 			else:
 				query = "UPDATE story SET text = '%s', feel = '%s', image = '%s', date = '%s' WHERE user_id = '%d'" \
 				%(storyText, storyFeel, storyImage, curdate, userId)
