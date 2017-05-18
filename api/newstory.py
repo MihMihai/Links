@@ -9,6 +9,7 @@ import json
 import jwt
 import time
 import base64
+import os
 
 appNewStory = Blueprint('api_newstory',__name__)
 
@@ -89,6 +90,13 @@ def newStory() :
 			response["description"] = "Please provide the image in a base64 format"
 			response["status_code"] = 400
 			return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'),200
+
+		if os.path.exists("/var/www/stories/story" + str(userId) + ".jpeg"):
+			os.remove("/var/www/stories/story" + str(userId) + ".jpeg")
+
+		if os.path.exists("/var/www/stories/story" + str(userId) + ".png"):
+			os.remove("/var/www/stories/story" + str(userId) + ".png")
+
 		with open("/var/www/stories/story" + str(userId) + "." + type,'wb') as f:
 			f.write(base64.b64decode(storyImage))
 
