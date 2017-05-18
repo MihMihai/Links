@@ -135,8 +135,9 @@ window.onload = function() {
 
 
 
+   //
    
-
+//
     var panelContent = document.getElementById("panelContent");
     AddFriend(socket, friendRequestsArray, panelContent);
     currentTab = "#addFriend";
