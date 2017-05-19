@@ -27,18 +27,24 @@ function createMessage(message, sender, date){
 //		console.log(date);
 	}
 	
-	let mesaj = $("<p data-toggle='tooltip'" +
+	let mesaj = $("<p data-toggle='tooltip' style='display: flex;' " +
 		"data-placement='" + (sender === "left" ? "right" : "left") + "' title='" + date + "'>"+resizeMessage(message)+"</p>");
 	let messageDiv = $("<div class='chat-body clearfix'></div>");
 	let li = $("<li class='"+sender+" clearfix'></li>");
 
 	//set up emojis
-	emojify.setConfig({tag_type:'div'});
-	emojify.run(mesaj);
+//	emojify.setConfig({tag_type:'div'});
 
 	messageDiv.append(mesaj);
 	li.append(messageDiv);
 	$("#messages").append(li);
+
+	emojify.run();
+	emojify.replace(message);
+
+//	$("p[data-toggle='tooltip']").css("displa","right")
+//					.css("margin-left","5px");
+
 	var chatBox = document.getElementById("chat_box");
 	chatBox.scrollTop = chatBox.scrollHeight;
 }

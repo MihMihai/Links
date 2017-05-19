@@ -103,6 +103,10 @@ def get_avatar(avatar):
 def get_story_image(story):
 	return send_from_directory('/var/www/stories',story)
 
+@app.route("/images/emoji/<name>")
+def get_emoji_image(name):
+	return send_from_directory('/var/www/html/static/emojis',name)
+
 if __name__ == "__main__":
 #	app.run(debug=True)
 	chat.socketio.run(app,debug=True)
