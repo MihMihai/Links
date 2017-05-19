@@ -42,9 +42,6 @@ function createMessage(message, sender, date){
 	emojify.run();
 	emojify.replace(message);
 
-//	$("p[data-toggle='tooltip']").css("displa","right")
-//					.css("margin-left","5px");
-
 	var chatBox = document.getElementById("chat_box");
 	chatBox.scrollTop = chatBox.scrollHeight;
 }
