@@ -92,7 +92,7 @@ def newStory() :
 			response["status_code"] = 400
 			return Response(json.dumps(response, sort_keys = True), mimetype = 'application/json'),200
 
-		if storyPresent[1] != None and storyPresent[1] != "" and storyPresent[1] != "None":
+		if storyPresent!= None and storyPresent[1] != None and storyPresent[1] != "" and storyPresent[1] != "None":
 			story_from_db = str(storyPresent[1])
 			story_from_db = story_from_db[2:len(story_from_db)-1]
 			if os.path.exists("/var/www/stories/" + story_from_db):
