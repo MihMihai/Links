@@ -5,6 +5,7 @@ from flask_socketio import SocketIO,emit,send,join_room,leave_room
 from db_handler import DbHandler
 from User import User
 import token_encoder
+from aes_cipher import AESCipher
 import json
 import time
 import jwt
@@ -64,11 +65,17 @@ def message(msg):
 	else:
 		dict.pop('to')
 
+		with open('../../cipher_key.conf','r') as f:
+			cipher_key = f.read()
+		cipher = AESCipher(cipher_key)
+
+		message_enc = cipher.encrypt(str(dict["msg"]))
+
 		#STORE MESSAGES INTO DB
 		uid1 = User.get_id_from_email(dict['from'])
 		uid2 = User.get_id_from_email(to)
-		query = "INSERT INTO messages (user_1, user_2, message) VALUES('%i','%i','%s')" % (uid1, uid2, str(dict["msg"]))
-		cursor.execute(query)
+		query = "INSERT INTO messages (user_1, user_2, message) VALUES(%s,%s,%s)"
+		cursor.execute(query,(uid1,uid2,message_enc))
 		db.commit()
 	dict['date'] = datetime.datetime.utcnow().strftime("%d-%m-%Y %H:%M:%S")
 

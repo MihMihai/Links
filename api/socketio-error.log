@@ -1932,4 +1932,119 @@ random user id: 27
 random user id: 26
 {"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6NDB9.PqKGSXF67SCfvWhERO89u9B0-ji_uCGuv6NF8s5xr0s","from":"mihai@android.com","random":"1","msg":"asdada"}[Errno 2] No such file or directory: 'server.conf' pare rau
 {"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MjZ9.8aCqbb0RDZNHf8u77ma2aCwZMM_kFT5ypdzlT4o0_F0","from":"mihai@android.com","random":"1","msg":"asdad"}[Errno 2] No such file or directory: 'server.conf' pare rau
-{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"test"}
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"test"}random user id: 30
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MzB9.cCHNvEEsQ-QGIIJ7auzegPJKqtoEmQ5qLgGkm8-oZQg","from":"mihai@android.com","random":"1","msg":"asdadad"}[Errno 2] No such file or directory: 'server.conf' pare rau
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MzB9.cCHNvEEsQ-QGIIJ7auzegPJKqtoEmQ5qLgGkm8-oZQg","from":"mihai@android.com","random":"1","msg":"sda"}[Errno 2] No such file or directory: 'server.conf' pare rau
+{"random_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybmQiOjEsInN1YiI6MzB9.cCHNvEEsQ-QGIIJ7auzegPJKqtoEmQ5qLgGkm8-oZQg","from":"mihai@android.com","random":"1","msg":"asda"}[Errno 2] No such file or directory: 'server.conf' pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"testing"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"pfff"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"mda..."}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"ce se mai schimba lucrurile intre timp"}{"to":"thido@thido.com","from":"ghido@ghido.com","msg":":) :) <3 :D "}[Errno 2] No such file or directory: '../../aes_cipher.conf' pare rau
+pbkdf2:sha256:50000$c7piptRa$cf96da172f087ce56f7dcc5a87860c1ae809ae18c322b3567f8645258c3556ec
+yes
+pbkdf2:sha256:50000$uyLVbWVC$578954204c10817c7a8dbb1a7b9f6f8356a7556c628d890143062a3693ce47b9
+yes
+pbkdf2:sha256:50000$pdm7KbPc$f01b93335739eb337da325166b9a125e1bc3a274662f54dc33a540dec4e51e74
+yes
+pbkdf2:sha256:50000$oo3nQ6Hm$87aa83c62523ed47f9eabe9613d498f6aa85dc4a09082c1d49203f640a736c8c
+yes
+pbkdf2:sha256:50000$oQbyRSDR$1db5e9e4d0bc360cd8bad2e36544b2abea276e34a51386e32c54197507af2a92
+pbkdf2:sha256:50000$EbTpbJjH$7a8fa2c11199d85ce8db1941b6776eca5abaf2421a048a256ffe96d31d75d614
+pbkdf2:sha256:50000$4OQGUiUA$fb956b0fc064f51c9e0020a855cb5557e1af065dc07ded62fbbd269ea2143db1
+pbkdf2:sha256:50000$pdaiKCQt$dc0803ff8b5077f25108b766773596d076fb9cd85d7c0f2af939e8ae68a475a5
+{"to":"thido@thido.com","from":"ghido@ghido.com","msg":"<3 <3 <3"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''')' at line 1") pare rau
+{"to":"thido@thido.com","from":"ghido@ghido.com","msg":":smile:"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BEsIQnC6yndEP81OgzZLOiLJ/koaRLIPHuUG7M0Z6lG389dO1CVBsXchOxDKu37X'')' at line 1") pare rau
+{"to":"thido@thido.com","from":"ghido@ghido.com","msg":":D"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UVG+kPcmabqMGhuV2GLPu3/LVYgnoXuAGS468rb/a0M7G+K92B3BUiVwlRuYZPxB'')' at line 1") pare rau
+{"to":"thido@thido.com","from":"ghido@ghido.com","msg":"</3"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FXFVJGbWxDypanwhOzZmkWiFz/7r+xLVhU4CEFF+WP52BXVeS5baAePk2y0uWgCx'')' at line 1") pare rau
+pbkdf2:sha256:50000$8onKEuvX$143119a79cbb270f288b59f07af3f9746fb8a7a622e822404d06c4d85f7b0e87
+{"to":"ghidome@gmail.com","from":"ghido@ghido.com","msg":"<3 <3 "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TNqsl4CMjwGirack9jDG+bkdO5c6hXWlX5a8XkiOacZzYjZKPS5T4leSNEZTXy0u'')' at line 1") pare rau
+{"to":"ghidome@gmail.com","from":"ghido@ghido.com","msg":"<3 "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'e6Z/PA9VFL9Fbo1qmC1Sjgw7BtVUqhl1muykmP8KqVhDwC+sFW8z6mYyhYZby3DJ'')' at line 1") pare rau
+{"to":"ghidome@gmail.com","from":"ghido@ghido.com","msg":"<3 "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'G2Rs+9Sxz5z09MPjptPBQhDOkrLEnp1gy//EI19Mfk918XM1bEnHkBejd9xDc1qz'')' at line 1") pare rau
+random user id: 37
+{"random_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM3LCJybmQiOjF9.B6QY3pZiyfe6HjjneCw_W1tbHCBMPW431PiD2MzBmqY","from":"ghido@ghido.com","random":"1","msg":"hooow"}[Errno 2] No such file or directory: 'server.conf' pare rau
+random user id: 60
+random user id: 35
+pbkdf2:sha256:50000$ZyrQ2hLJ$85594a2f62390056f0d90de5b3ac8a7691863d67ce3576d982fa8d3d6375123c
+pbkdf2:sha256:50000$Tgw2n0n3$ffae63b5358999a3d2e4b1632897b064fc081fa43853fd1f464f3bf9dc5549fa
+
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"<3 <3 <3"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'pPvLGb3enhl1vWDDzYf/kMzQw+ZSfOuCGI6FRrvLJmeOS/VdWy4NXhJaRUh0x9bp'')' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"Hai la mare, FLorin ! <3 Rupem tot :) "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'XZltL3fjlKyLZRpwVUEmKtIqbNRtduyIXhB3c2vrAJSLqdSoR7+uqbAN6CgzogeAUof16OtrBdr5aMYd' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"<3"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Rpr+/tD6Nj/KHg9bcZO9PY0So++PV8/xockqctfnls1q7FTx67bSfMZf3jxqLLHv'')' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":":heart:"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ZEx1nvaTHKpPDTsXcvYXjG/5QfEYf1HHiL4i6oYSftfHBApDZI8mJ8ssUUVEvvKs'')' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"<3"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'g/Ntkwp97ZT8kCWar0ZPqyKfHUJ8u5ctWNR+hY5WdA6WBjKFpQeE51eDnd6YjFhe'')' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":":)"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TrCumbolDbY58PGGKzpDFui1/MmaRQBB4+GoKJea3Vq+LhVwr7ZxS15xQkr12g7L'')' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"Hai la mare, Florin <3 :) "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UbuhQMKXZhBYpJGOl0BaqnhTC5L2A9dM/sMFe1E42T+uxeFxqq6ZBmfFSsSpxxMI'')' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"Hai la mare, Florin <3 Rupem tot :) "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '67ejCGU7zj38h9Moi+dw6eM6rj2znSQ6tj4ki1qsMoqyKRf8lM+YOr2TGr+goQIXaqTpbB9vgSWD/QMN' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"asda <3 "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OnyMZEGpMNwHjOAfBHS3qFJu0RHUeswePREjkhjplAn5xrBDn348T3x86AGgWkrN'')' at line 1") pare rau
+pbkdf2:sha256:50000$Ndepmgvb$b8ac5d1749ce89b78fa3a9bbb771bb8051912ceba816b89a1c6b6c462043cfc9
+pbkdf2:sha256:50000$u7muRuu1$6d1a321dbc64089feb1355448d2673b530c48f9b15cc5d57383410c100c410ac
+
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"<3 Gasa :) "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BQApRcyVy4A//7Ztg3vfkDjx9C6Gib2RsHytFTXEBDNJnQjiI4M7uUYaw6kneRbB'')' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"<3 "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ssusJCu8hrZl0nDhlskpFHU0ekYA9W5A1Y/kPcaMWKcBOg1MollKpjMl9Ldjf363'')' at line 1") pare rau
+pbkdf2:sha256:50000$5Lpt6qSg$6519edf23215d1cad730afcbe4f970cb3bc6e64b765d7f1f1d6fb7b05f84a467
+pbkdf2:sha256:50000$u7muRuu1$6d1a321dbc64089feb1355448d2673b530c48f9b15cc5d57383410c100c410ac
+
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":":) :) :) "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Hw9qjl59JXSWcYwkjSDvPslvnUtrewv3sTAzu2KPOqti5xrAEzPmHYVqQYQcIlOH'')' at line 1") pare rau
+pbkdf2:sha256:50000$0S5c9lSo$8c03c77843e0fe6a1f5f053c2abb3b50b388a43b9905902e9620b22efe14c112
+pbkdf2:sha256:50000$u7muRuu1$6d1a321dbc64089feb1355448d2673b530c48f9b15cc5d57383410c100c410ac
+
+pbkdf2:sha256:50000$J2z3eS7j$cded5f371837b35ee77e4186c0bc46e5591c1a027a4d8ea704f71a939b731c39
+pbkdf2:sha256:50000$u7muRuu1$6d1a321dbc64089feb1355448d2673b530c48f9b15cc5d57383410c100c410ac
+
+pbkdf2:sha256:50000$CuNoqUWz$ff1a8ba1bf2a1b1a563c55f4a8cdb4063cac7ab0bdf5b63ed0a69a4610a1fc0e
+pbkdf2:sha256:50000$MPFBMCdW$cf370b689087f9dc8cfebf7194ef67808a46a852b946de04fadafdfeac53307d
+pbkdf2:sha256:50000$okpdz74A$1193c099a15b05097fbfe3b67ac9ca0a6f8a9c0d8b45a121f976442c9430c40d
+
+pbkdf2:sha256:50000$46QhbuQz$c99b0c42f6ceebe538136d728f35622889d693234477bf91362743782cd17b7b
+pbkdf2:sha256:50000$okpdz74A$1193c099a15b05097fbfe3b67ac9ca0a6f8a9c0d8b45a121f976442c9430c40d
+
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"aa"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'F4KSCwaIkB84qc612mdzgaVlrllH95PwkGtcF/ef9Ucfs4Y2DmtN+ePJfDsFQgcV'')' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"as"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'zl4P+CLxXfKDD1+b+SeTZUWCqaUehmEsgceh9DINT4nIo9N/lfyD2GjUqOsonAie'')' at line 1") pare rau
+{"to":"ghido@ghido.com","from":"ghido@ghido.com","msg":"<3"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2wot1JgV6vONqCkq1TyW/CnE+GoyIRpQM9MSA1VxGBkNQQrseBFzS8NkAEPbM8KX'')' at line 1") pare rau
+{"to":"thido@thido.com","from":"ghido@ghido.com","msg":"sa"}(1054, "Unknown column 'xcMrmx7oyO' in 'field list'") pare rau
+{"to":"thido@thido.com","from":"ghido@ghido.com","msg":"<3 "}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'kJRnskfFa35f0HsRoQlu8yE6e4ojfNmMZHo5RnccanBFgIORTEkjRFWW68h8D5hS'')' at line 1") pare rau
+{"to":"ghidome@gmail.com","from":"ghido@ghido.com","msg":"<3 :)"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nAjE1fxricFNT+XULqcNd27fpCu3UFWYvl2w9lU4j1teP6U5YUFdCF/tMHv+hiuh'')' at line 1") pare rau
+'email' pare rau
+test
+test
+
+test
+test
+
+123456
+pbkdf2:sha256:50000$okpdz74A$1193c099a15b05097fbfe3b67ac9ca0a6f8a9c0d8b45a121f976442c9430c40d
+
+yes
+'email' pare rau
+'email' pare rau
+1234
+pbkdf2:sha256:50000$okpdz74A$1193c099a15b05097fbfe3b67ac9ca0a6f8a9c0d8b45a121f976442c9430c40d
+
+123456
+pbkdf2:sha256:50000$okpdz74A$1193c099a15b05097fbfe3b67ac9ca0a6f8a9c0d8b45a121f976442c9430c40d
+
+yes
+mihaiqwer
+mihaiqwer
+
+mihaiqwer
+mihaiqwer
+
+'email' pare rau
+parolamea
+parolamea
+
+test
+test
+
+mihaiqwer
+mihaiqwer
+
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"Noile mesaje"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GjzPHX4rU5hJ0VVS8JZaPSFHYMIozZhmeWZdTFJDVZlXVDfPlZk/2l5/a7+HWDCt'')' at line 1") pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"am curatat baza de date"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CqHB7lTBwZn317sRWEbJBLBYC849kfl06FrRJzXetXX/6u1L3DUJCY/11GuZhlzr'')' at line 1") pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"pentru ca am implementat encriptie :)"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't0db7qIbkGLhhmgvDgWUCaZh6eqH3TCU5IAPIWV/CthHXrIE5w2jUf7E/vdGj2+raG3WAK6Dp92byL2l' at line 1") pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"sper sa mearga"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'gLjeSc7bEdIVXrASfgDRSjB7wV2OzmGIbG3BuE2PD3kAejPDYFHnVlpy8wgzImr2'')' at line 1") pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"ia sa dau un refresh"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''')' at line 1") pare rau
+'email' pare rau
+'email' pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"teeeeeeest"}%i format: a number is required, not str pare rau
+{"to":"ghido@ghido.com","from":"ghidome@gmail.com","msg":"<3"}%i format: a number is required, not str pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"qwer"}(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CYKXZnuZ0dQEkXm9zZWg95AsZ97rkWXbIWkdgunAvrzxdKR+KvHSYLIKLrdav46q'')' at line 1") pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"Salut"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"heeeeeey"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"testareeeee"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":":O"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"'"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":":O"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"merge '"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"sa pui '"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"\"\""}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":":O"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"Acesta este un text foarte lung, incerc sa vad cat de mult pot sa scriu si cat de lung o sa fie sirul din baza de date criptat. Daca lungimea nu e aceeasi atunci mi se pare ceva gresit :O :O :O"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"ieeeeei"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"mesajele criptate au lungimi diferite :O"}{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"suuuuper :O"}{"to":"mihai@android.com","from":"bogdanalexandrescu96@gmail.com","msg":"b"}{"to":"mihai@android.com","from":"bogdanalexandrescu96@gmail.com","msg":"hjghjg"}{"to":"mihai@android.com","from":"bogdanalexandrescu96@gmail.com","msg":"trarararsdfsd"}{"to":"mihai@android.com","from":"bogdanalexandrescu96@gmail.com","msg":":)"}{"to":"mihai@android.com","from":"bogdanalexandrescu96@gmail.com","msg":":P"}'NoneType' object is not subscriptable pare rau

@@ -6,6 +6,7 @@ from error_response import ErrorResponse
 import token_encoder
 import json
 import jwt
+from aes_cipher import AESCipher
 
 appMessages = Blueprint('api_messages',__name__)
 
@@ -54,6 +55,10 @@ def messages():
 		response["conversations"] = []
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json")
 
+	with open('../../cipher_key.conf','r') as f:
+		cipher_key = f.read()
+	cipher = AESCipher(cipher_key)
+
 	#Go get some messages
 	conversations = []
 	for ID in friendIDs:
@@ -69,7 +74,8 @@ def messages():
 		messages = []
 		for entry in data:
 			message = {}
-			message['message'] = entry[1]
+			message_dec = cipher.decrypt(entry[1])
+			message['message'] = message_dec
 			message['date'] = str( entry[2].strftime("%d-%m-%Y %H:%M:%S"))
 			if entry[0] == uid1:
 				message['sender'] = 'right'

@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 from string import Template #templating email
 from flask import Blueprint,Response,request
 from datetime import datetime
+from werkzeug.security import generate_password_hash,check_password_hash
 from db_handler import DbHandler
 import json
 import jwt
@@ -59,6 +60,8 @@ def signup():
 		chatToken = str(token_encoder.encode_chat_token(email))
 		chatToken = chatToken[2:]
 		chatToken = chatToken[:len(chatToken)-1]
+
+		password = generate_password_hash(password)
 
 		query = "INSERT INTO users (email,password,name,birthday_date,chat_token,avatar) VALUES('%s','%s','%s',str_to_date('%s','%%Y-%%m-%%d'),'%s','default.png')" % (email, password, name, birthday_date,chatToken)
 		cur.execute(query)

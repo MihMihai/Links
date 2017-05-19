@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from flask import Blueprint,Response,request,redirect,url_for,render_template
 from flask_login import login_user,current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 from db_handler import DbHandler
 import token_encoder
 import json
@@ -22,8 +23,9 @@ def login():
 	password = request.form.get("password")
 	rememberMe = request.form.get("remember_me")
 
+
 	#SQL cmd
-	query =  "SELECT id, name, active  FROM users WHERE email='%s' AND password ='%s'" % (email, password)
+	query =  "SELECT id, name, active,password  FROM users WHERE email='%s'" % (email)
 
 	#execute SQL cmd
 	cursor = db.cursor()
@@ -33,15 +35,22 @@ def login():
 	data = cursor.fetchone()
 
 	if data != None:
-#		user = User(data[0],data[1],data[2])
-		active = data[2]
-		if active == 0:
-			return render_template("account_NotVerified.html")
-		response["status"] = 'ok'
-#		if rememberMe == "true":
-#			login_user(user,remember = True)
-#		else:
-#			login_user(user)
+
+		pass_from_db = str(data[3])
+
+		if check_password_hash(pass_from_db,password):
+#			user = User(data[0],data[1],data[2])
+			active = data[2]
+			if active == 0:
+				return render_template("account_NotVerified.html")
+			response["status"] = 'ok'
+#			if rememberMe == "true":
+#				login_user(user,remember = True)
+#			else:
+#				login_user(user)
+		else:
+			response["error"] = 'Invalid email or password'
+			response["status_code"] = 401
 	else:
 		response["error"] = 'Invalid email or password'
 		response["status_code"] = 401

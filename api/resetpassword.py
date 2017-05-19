@@ -1,5 +1,6 @@
 #!usr/bin/python3
 from flask import Blueprint, Response, request
+from werkzeug.security import generate_password_hash, check_password_hash
 from db_handler import DbHandler
 import json
 import jwt
@@ -38,9 +39,10 @@ def resetPassword():
 		response["status_code"] = 401
 		return Response(json.dumps(response,sort_keys=True),mimetype="application/json"),401
 
+	hashed_pass = generate_password_hash(password)
 
 	#make the query to update password in database
-	query = "UPDATE users SET password = '%s' WHERE reset_pass_token = '%s' " % (password, dbToken[0])
+	query = "UPDATE users SET password = '%s' WHERE reset_pass_token = '%s' " % (hashed_pass, dbToken[0])
 
 	#commit the query
 	cursor = db.cursor()
