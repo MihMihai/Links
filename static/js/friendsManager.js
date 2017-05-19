@@ -114,8 +114,9 @@ function createFriendRequestManager(socket, name, from, friendship_id, avatar) {
 
     $('#btna' + friendship_id).on('click', '', function() {
 
-        var answer = confirm("Are you want to accept the friend request?")
-        if (answer) {
+       
+        $('#acceptFriend').modal('show');
+        $("#button_confirm_acceptFriend").click(function(){
             socket.emit("response friend request", {
                 "chat_token": localStorage.CHAT_TOKEN,
                 "email": from,
@@ -133,14 +134,16 @@ function createFriendRequestManager(socket, name, from, friendship_id, avatar) {
             friends[friendship_id] = new Friend(name, from);
 
              updateFriendReq();
-        }
+             $('#acceptFriend').modal('hide');
+        })
 
     });
 
     $('#btnd' + friendship_id).on('click', '', function() {
 
-        var answer = confirm("Are you sure want to decline the friend request?")
-        if (answer) {
+       
+         $('#rejectFriend').modal('show');
+         $("#button_confirm_rejectFriend").click(function(){
             socket.emit("response friend request", {
                 "chat_token": localStorage.CHAT_TOKEN,
                 "email": from,
@@ -152,7 +155,8 @@ function createFriendRequestManager(socket, name, from, friendship_id, avatar) {
             friendRequestsArray.splice(posOfDeletedFriendReq, 1);
            
              updateFriendReq();
-        }
+            $('#rejectFriend').modal('hide');
+        })
 
     });
 
