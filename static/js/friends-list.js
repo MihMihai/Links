@@ -42,7 +42,17 @@ function createFriend(socket, imgSrc, name, friendshipId, place, online) {
         alt: 'User Avatar',
         class: 'img-circle'
     });
-    
+    if (place === "friends-list") {
+        $("#img").on("click",function() {
+
+            $("#profile_nameFriend").text(name);
+            $("#profile_imageFriend").attr('src', imageEndpoint + imgSrc);
+
+            $('#showStory').modal('show');
+            $("#storyPost").empty();
+            showStory(friendshipId, $("#storyPost"));
+        });
+    }
     var span = $("<span class='chat-img pull-left'></span>");
     span.append(img);
     var a = $("<a id=" + friendshipId + " href='#' class='list-group-item' style='color:" + (online == 1 ? "#5cb85c;'" : "black;'") + "></a>");
@@ -59,17 +69,7 @@ function createFriend(socket, imgSrc, name, friendshipId, place, online) {
         $("#" + friendsList).prepend(a);
     else $("#" + friendsList).append(a);
 
-	if (place === "friends-list") {
-        $("#img").on("click",function() {
-
-            $("#profile_nameFriend").text(name);
-            $("#profile_imageFriend").attr('src', imageEndpoint + imgSrc);
-
-            $('#showStory').modal('show');
-            $("#storyPost").empty();
-            showStory(friendshipId, $("#storyPost"));
-        });
-    }
+	
 }
 
 function remove(socket, name, friendshipId, random) {
