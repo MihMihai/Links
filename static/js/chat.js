@@ -83,10 +83,12 @@ window.onload = function() {
                 let msg = obj.msg;
                 //let date = obj.date; --- nu are date
 
-                friends[from].messages.push(new Message(msg, "left"));
+				let currentDate = new Date();
+				date = currentDate.today() + " " + currentDate.timeNow();
+                friends[from].messages.push(new Message(msg, "left",date));
                 let friendshipID = from;
                 if (currentFriend == from) {
-                    createMessage(msg, "left");
+                    createMessage(msg, "left",date);
                 } else if (!(messagesNotificationsIntervals.hasOwnProperty(friendshipID))) {
                     messagesNotificationsIntervals[friendshipID] = setInterval(function() {
                         createMessageNotification(friendshipID);
@@ -526,11 +528,14 @@ function sendMessage(socket) {
     let jsonString;
     if (!(/^\s*$/.test($("#messageInputBox").val()))) {
         createMessage($("#messageInputBox").val(), "right"); //nu are al 3-lea param => undefined. E ok
-        if (currentFriend.length > 100) {
+        let currentDate = new Date();
+		date = currentDate.today() + " " + currentDate.timeNow();
+		if (currentFriend.length > 100) {
+			
             jsonObj = { "random_token": currentFriend, "from": localStorage.EMAIL, "random": "1", "msg": $("#messageInputBox").val() };
             jsonString = JSON.stringify(jsonObj);
             socket.emit("msg user", jsonString);
-            friends[currentFriend].messages.push(new Message($("#messageInputBox").val(), "right"));
+            friends[currentFriend].messages.push(new Message($("#messageInputBox").val(), "right",date));
             $("#messageInputBox").val("");
             $(document.getElementById("random-list").getElementsByTagName("a")[0]).before($("#" + currentFriend));
 
@@ -538,7 +543,7 @@ function sendMessage(socket) {
             jsonObj = { "to": friends[currentFriend].email, "from": localStorage.EMAIL, "msg": $("#messageInputBox").val() };
             jsonString = JSON.stringify(jsonObj);
             socket.emit("msg user", jsonString);
-            friends[currentFriend].messages.push(new Message($("#messageInputBox").val(), "right"));
+            friends[currentFriend].messages.push(new Message($("#messageInputBox").val(), "right",date));
             $("#messageInputBox").val("");
             $(document.getElementById("friends-list").getElementsByTagName("a")[0]).before($("#" + currentFriend));
         }
