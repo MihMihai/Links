@@ -31,6 +31,11 @@ function createMessage(message, sender, date){
 		"data-placement='" + (sender === "left" ? "right" : "left") + "' title='" + date + "'>"+resizeMessage(message)+"</p>");
 	let messageDiv = $("<div class='chat-body clearfix'></div>");
 	let li = $("<li class='"+sender+" clearfix'></li>");
+
+	//set up emojis
+	emojify.setConfig({tag_type:'div'});
+	emojify.run(mesaj);
+
 	messageDiv.append(mesaj);
 	li.append(messageDiv);
 	$("#messages").append(li);
