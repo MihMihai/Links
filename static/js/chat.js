@@ -7,6 +7,7 @@ var imageEndpoint = "http://linkspeople.ddns.net/image/";
 var currentTab;
 var base64Image;
 const ip = "188.25.131.242";
+const linksDNS = "linkspeople.ddns.net"
 var successFrRequest = "The friend request was send to acceptance/rejection! ";
 
 function updateFriendReq() {
@@ -44,8 +45,24 @@ window.onload = function() {
 
     setInterval(refreshTokenRequest, 45000);
 
-    let socket = io.connect("http://" + ip + "/chat");
-    socket.emit("join", { "email": localStorage.EMAIL });
+    let socket = io.connect("http://" + linksDNS + "/chat");
+	
+	
+	socket.on("details", function(data) {
+        	let obj = JSON.parse(data);
+			localStorage.setItem("TOKEN",obj.access_token);
+			localStorage.setItem("EMAIL",obj.email);
+			console.log(localStorage.TOKEN);
+
+			socket.emit("join",{"email":localStorage.EMAIL});
+			getProfile();
+			getFriends();
+			setTimeout(getAllMessagesRequest,200);
+
+   	 });
+	
+	
+    //socket.emit("join", { "email": localStorage.EMAIL });
 
     socket.on("user join", function(data) {
 

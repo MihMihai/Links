@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 from flask_socketio import join_room, leave_room, send
 from flask import Blueprint, Response, request
-from flask_socketio import SocketIO,emit,send,join_room,leave_room
+from flask_socketio import SocketIO,emit,send,join_room,leave_room,disconnect
+from flask_login import current_user
 from db_handler import DbHandler
 from User import User
 import token_encoder
@@ -19,6 +20,29 @@ eventlet.monkey_patch()
 #appChat = Blueprint('api_chat',__name__)
 
 socketio = SocketIO(app)
+
+@socketio.on('connect',namespace='/chat')
+def connect():
+
+	if not current_user.is_authenticated:
+		disconnect()
+	else:
+		db = DbHandler.get_instance().get_connection()
+		cursor = db.cursor()
+
+		query = "SELECT auth_token FROM users WHERE email = '%s'" % (current_user.email)
+		cursor.execute(query)
+		data = cursor.fetchone()
+
+		f = open('socketio-error.log','a')
+		f.write(current_user.email + "\n")
+		f.close()
+
+		details = {}
+		details["access_token"] = data[0]
+		details["email"] = current_user.email
+
+		emit('details',json.dumps(details))
 
 @socketio.on('msg user',namespace='/chat')
 def message(msg):
