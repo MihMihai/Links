@@ -56,7 +56,7 @@ window.onload = function() {
 
 			socket.emit("join",{"email":localStorage.EMAIL});
 			getProfile();
-			getFriends();
+			getFriends(socket);
 			getFriendsRequests();
 			getStory();
 			setTimeout(getAllMessagesRequest,200);
@@ -140,7 +140,7 @@ window.onload = function() {
             }
 
         } catch (e) {
-            console.log("ERROR");
+	     console.log("ERROR");
         }
 
     });
@@ -465,7 +465,7 @@ function getProfile() {
     });
 }
 
-function getFriends() {
+function getFriends(socket) {
 	$.ajax({
         method: "GET",
         url: "http://" + ip + "/api/friends",

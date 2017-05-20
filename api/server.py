@@ -9,7 +9,7 @@ from signup import appSignup
 from friendrequests import appFriendRequests
 from profile import appProfile
 from update import appUpdate
-#from logout import appLogout
+from logout import appLogout
 from friends import appFriends
 from refreshtoken import appRefresh
 from forgotpassword import appForgotPassword
@@ -44,7 +44,7 @@ app.register_blueprint(appSignup)
 app.register_blueprint(appFriendRequests)
 app.register_blueprint(appProfile)
 app.register_blueprint(appUpdate)
-#app.register_blueprint(appLogout)
+app.register_blueprint(appLogout)
 app.register_blueprint(appFriends)
 app.register_blueprint(appRefresh)
 app.register_blueprint(appForgotPassword)
@@ -75,7 +75,7 @@ app.register_blueprint(appStory)
 @login_manager.user_loader
 def load_user(user_id):
 	f = open('remember_testing.log','a')
-	f.write('in server main file')
+	f.write('in server main file: ')
 	f.close()
 	return User.get(user_id)
 
@@ -97,7 +97,7 @@ def chat():
 	f = open('remember_testing.log','a')
 	f.write('current user: ' + current_user.name + ' ' + current_user.email + '\n')
 	f.close()
-	
+
 	return render_template("chat.html")
 
 @app.route("/forgotpassword")

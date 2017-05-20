@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 from flask_socketio import join_room, leave_room, send
-from flask import Blueprint, Response, request
+from flask import Blueprint, Response, request,redirect
 from flask_socketio import SocketIO,emit,send,join_room,leave_room,disconnect
-from flask_login import current_user
+from flask_login import current_user, logout_user
 from db_handler import DbHandler
 from User import User
 import token_encoder
@@ -144,8 +144,8 @@ def on_leave(data):
 	cursor.execute(query)
 	db.commit()
 
-	leave_room(room)
 	emit('msg server',email + ' has left the room.', room=room)
+	leave_room(room)
 
 def tellEveryone(message,userId,where):
 	db = DbHandler.get_instance().get_connection()
