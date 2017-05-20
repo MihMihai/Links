@@ -12,7 +12,7 @@ window.onload = function(){
 	});
 	
 		
-		$('#form_login').validator().on('submit', function (event) {
+/*		$('#form_login').validator().on('submit', function (event) {
 			if (event.isDefaultPrevented()) {
 				// handle the invalid form...
 			} else {
@@ -29,7 +29,7 @@ window.onload = function(){
 				});
 			}
 		});
-		
+*/		
 		$('#form_register').validator().on('submit', function (event) {
 			if (event.isDefaultPrevented()) {
 				// handle the invalid form...

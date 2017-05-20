@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Flask, render_template,Response,send_from_directory
+from flask import Flask, render_template,Response,send_from_directory, redirect
 from flask_login import LoginManager, login_required, current_user
 import json
 from User import *
@@ -34,6 +34,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 #login_manager.session_protection = 'strong'
 login_manager.login_view = '/'
+login_manager.anonymous_user = Anonymous
 
 #cors = CORS(app,resources={r"/*":{"origins":"*"}})
 #socketio = SocketIO(app)

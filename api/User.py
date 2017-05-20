@@ -25,7 +25,7 @@ class User(UserMixin):
 
 	@staticmethod
 	def get(id):
-		db = MySQLdb.connect(host="localhost",user="root", passwd="QAZxsw1234", db="linksdb")
+		db = DbHandler.get_instance().get_connection()
 		query = "SELECT name,email FROM users where id = '%s'" % (id)
 		cursor = db.cursor()
 		cursor.execute(query)
@@ -88,3 +88,4 @@ class User(UserMixin):
 
 class Anonymous(AnonymousUserMixin):
 	name = u"Anonymous"
+	email = u"anonymous@gues.com"
