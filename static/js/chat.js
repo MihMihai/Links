@@ -57,6 +57,8 @@ window.onload = function() {
 			socket.emit("join",{"email":localStorage.EMAIL});
 			getProfile();
 			getFriends();
+			getFriendsRequests();
+			getStory();
 			setTimeout(getAllMessagesRequest,200);
 
    	 });
@@ -253,58 +255,11 @@ window.onload = function() {
     });
 
 
-    $.ajax({
-        method: "GET",
-        url: "http://" + ip + "/api/profile",
-        headers: { Authorization: localStorage.TOKEN },
-        dataType: "json",
-        success: function(data) {
-            $("#profile_name").text(data.name);
-            $("#profile_nameStory").text(data.name);
-            $("#settings_name").val(data.name);
-            $("#profile_image").attr('src', imageEndpoint + data.avatar);
-            $("#profile_imageStory").attr('src', imageEndpoint + data.avatar);
+    //MOVED: Profile Request, Friends Request and FriendsRequests Request below, each in its function
 
-            var birthDate = data.birthday_date.split("-");
-            $("#birthDay option:contains(" + birthDate[2] + ")").attr('selected', 'selected');
-            $("#birthMonth option:contains(" + months[parseInt(birthDate[1]) - 1] + ")").attr('selected', 'selected');
-            $("#birthYear option:contains(" + birthDate[0] + ")").attr('selected', 'selected');
-            localStorage.CHAT_TOKEN = data.chat_token;
-        }
-    });
+    
 
-    $.ajax({
-        method: "GET",
-        url: "http://" + ip + "/api/friend_requests",
-        headers: { Authorization: localStorage.TOKEN },
-        dataType: "json",
-        success: function(data) {
-            if (data.total > 0) {
-                for (let i = 0; i < data.requests.length; i++) {
-                    friendRequestsArray.push(new FriendReq(data.requests[i].name, data.requests[i].email, data.requests[i].friendship_id, data.requests[i].avatar));
-                }
-                updateFriendReq();
-            }
-        }
-    });
-
-    $.ajax({
-        method: "GET",
-        url: "http://" + ip + "/api/friends",
-        headers: { Authorization: localStorage.TOKEN },
-        dataType: "json",
-        success: function(data) {
-            if (data.total > 0) {
-                for (let i = 0; i < data.friends.length; i++) {
-                    friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name, data.friends[i].email, data.friends[i].online);
-                    if (data.friends[i].avatar === undefined)
-                        createFriend(socket, "http://placehold.it/50/FA6F57/fff&text=ME", data.friends[i].name, data.friends[i].friendship_id, "friends-list", data.friends[i].online);
-                    else createFriend(socket, data.friends[i].avatar, data.friends[i].name, data.friends[i].friendship_id, "friends-list", data.friends[i].online);
-                }
-
-            }
-        }
-    });
+    
 
     socket.on("join", function(msg) {
         try {
@@ -327,7 +282,7 @@ window.onload = function() {
 
     document.getElementById("searchFriendInput").addEventListener("input", searchInFriendsList);
 
-    setTimeout(getAllMessagesRequest, 200);
+    //setTimeout(getAllMessagesRequest, 200);
 
     $("#logout").click(function() {
         socket.emit("leave", { "email": localStorage.EMAIL });
@@ -441,45 +396,7 @@ window.onload = function() {
         }
     });
 
-    $.ajax({
-        method: "GET",
-        url: "http://" + ip + "/api/story",
-        headers: { Authorization: localStorage.TOKEN },
-        dataType: "json",
-        success: function(data) {
-				if(data.text!=null || data.image!=null || data.feel!=null)
-					{
-
-						 $("#addedStory").empty();
-						addElementsToStoryPanel(data,$('#addedStory'));
-
-						var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
-
-						 setTimeout(function(){
-							 
-							$('#addedStory').append(deleteButton).css("width:auto");
-						 },100);
-						
-						deleteButton.on('click', '', function() {
-
-
-								 $.ajax({
-            					method: "POST",
-           						 url: "http://" + ip + "/api/delete_story",
-           						 headers: { Authorization: localStorage.TOKEN },
-           						 dataType: "json",
-            					success: function(data) {
-
-									
-									$('#editStory').modal('toggle');
-									 $("#addedStory").empty();
-									}
-							});
-
-						});
-					}
-
-		}});
+    //MOVED: Story Requests down below in its function
 
 	$('#form_password').validator().on('submit', function(event) {
 		if (event.isDefaultPrevented()) {
@@ -524,6 +441,108 @@ window.onload = function() {
 	
 	
 
+}
+
+function getProfile() {
+	$.ajax({
+        method: "GET",
+        url: "http://" + ip + "/api/profile",
+        headers: { Authorization: localStorage.TOKEN },
+        dataType: "json",
+        success: function(data) {
+            $("#profile_name").text(data.name);
+            $("#profile_nameStory").text(data.name);
+            $("#settings_name").val(data.name);
+            $("#profile_image").attr('src', imageEndpoint + data.avatar);
+            $("#profile_imageStory").attr('src', imageEndpoint + data.avatar);
+
+            var birthDate = data.birthday_date.split("-");
+            $("#birthDay option:contains(" + birthDate[2] + ")").attr('selected', 'selected');
+            $("#birthMonth option:contains(" + months[parseInt(birthDate[1]) - 1] + ")").attr('selected', 'selected');
+            $("#birthYear option:contains(" + birthDate[0] + ")").attr('selected', 'selected');
+            localStorage.CHAT_TOKEN = data.chat_token;
+        }
+    });
+}
+
+function getFriends() {
+	$.ajax({
+        method: "GET",
+        url: "http://" + ip + "/api/friends",
+        headers: { Authorization: localStorage.TOKEN },
+        dataType: "json",
+        success: function(data) {
+            if (data.total > 0) {
+                for (let i = 0; i < data.friends.length; i++) {
+                    friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name, data.friends[i].email, data.friends[i].online);
+                    if (data.friends[i].avatar === undefined)
+                        createFriend(socket, "http://placehold.it/50/FA6F57/fff&text=ME", data.friends[i].name, data.friends[i].friendship_id, "friends-list", data.friends[i].online);
+                    else createFriend(socket, data.friends[i].avatar, data.friends[i].name, data.friends[i].friendship_id, "friends-list", data.friends[i].online);
+                }
+
+            }
+        }
+    });
+}
+
+function getFriendsRequests() {
+	$.ajax({
+        method: "GET",
+        url: "http://" + ip + "/api/friend_requests",
+        headers: { Authorization: localStorage.TOKEN },
+        dataType: "json",
+        success: function(data) {
+            if (data.total > 0) {
+                for (let i = 0; i < data.requests.length; i++) {
+                    friendRequestsArray.push(new FriendReq(data.requests[i].name, data.requests[i].email, data.requests[i].friendship_id, data.requests[i].avatar));
+                }
+                updateFriendReq();
+            }
+        }
+    });
+}
+
+function getStory() {
+	$.ajax({
+        method: "GET",
+        url: "http://" + ip + "/api/story",
+        headers: { Authorization: localStorage.TOKEN },
+        dataType: "json",
+        success: function(data) {
+				if(data.text!=null || data.image!=null || data.feel!=null)
+					{
+
+						 $("#addedStory").empty();
+						addElementsToStoryPanel(data,$('#addedStory'));
+
+						var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
+
+						 setTimeout(function(){
+							 
+							$('#addedStory').append(deleteButton).css("width:auto");
+						 },100);
+						
+						deleteButton.on('click', '', function() {
+
+
+								 $.ajax({
+            					method: "POST",
+           						 url: "http://" + ip + "/api/delete_story",
+           						 headers: { Authorization: localStorage.TOKEN },
+           						 dataType: "json",
+            					success: function(data) {
+
+									
+									$('#editStory').modal('toggle');
+									 $("#addedStory").empty();
+									}
+							});
+
+						});
+					}
+
+		}
+	});
 }
 
 function refreshTokenRequest() {
