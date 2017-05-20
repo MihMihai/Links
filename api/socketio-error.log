@@ -2094,3 +2094,10 @@ mihai@android.com
 mihai@android.com
 {"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"test"}mihai@android.com
 'email' pare rau
+mihai@android.com
+mihai@android.com
+name 'email' is not defined pare rau
+{"to":"bogdanalexandrescu96@gmail.com","from":"mihai@android.com","msg":"acesta este un test"}mihai@android.com
+name 'email' is not defined pare rau
+mihai@android.com
+name 'email' is not defined pare rau

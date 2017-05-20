@@ -30,7 +30,7 @@ def connect():
 		db = DbHandler.get_instance().get_connection()
 		cursor = db.cursor()
 
-		query = "SELECT auth_token FROM users WHERE email = '%s'" % (current_user.email)
+		query = "SELECT auth_token,chat_token FROM users WHERE email = '%s'" % (current_user.email)
 		cursor.execute(query)
 		data = cursor.fetchone()
 
@@ -40,6 +40,7 @@ def connect():
 
 		details = {}
 		details["access_token"] = data[0]
+		details["chat_token"] = data[1]
 		details["email"] = current_user.email
 
 		emit('details',json.dumps(details))
@@ -108,13 +109,14 @@ def message(msg):
 
 @socketio.on('join', namespace='/chat')
 def on_join(data):
-	email = data['email']
-	room = User.get_chat_token_from_email(email)
+	room = data['chat_token']
+#	room = User.get_chat_token_from_email(email)
 
 	message = {}
 	message['action'] = "join"
 
-	userId = User.get_id_from_email(email)
+#	userId = User.get_id_from_email(email)
+	userId = current_user.id
 	tellEveryone(message,userId,'user join')
 
 	query = "UPDATE users set online = 1 WHERE id = '%s'" % (userId)

@@ -52,9 +52,10 @@ window.onload = function() {
         	let obj = JSON.parse(data);
 			localStorage.setItem("TOKEN",obj.access_token);
 			localStorage.setItem("EMAIL",obj.email);
+			localStorage.CHAT_TOKEN = obj.chat_token;
 			console.log(localStorage.TOKEN);
 
-			socket.emit("join",{"email":localStorage.EMAIL});
+			socket.emit("join",{"chat_token":localStorage.CHAT_TOKEN});
 			getProfile();
 			getFriends(socket);
 			getFriendsRequests();
