@@ -21,8 +21,12 @@ def login():
 	#get the info from request
 	email = request.form.get("email")
 	password = request.form.get("password")
-	rememberMe = request.form.get("remember_me")
+#	rememberMe = request.form.get("remember_me")
 
+	if "remember_me" in request.form:
+		rememberMe = True
+	else:
+		rememberMe = False
 
 	#SQL cmd
 	query =  "SELECT id, name, active,password  FROM users WHERE email='%s'" % (email)
@@ -39,15 +43,15 @@ def login():
 		pass_from_db = str(data[3])
 
 		if check_password_hash(pass_from_db,password):
-#			user = User(data[0],data[1],data[2])
+			user = User(data[0],data[1],email)
 			active = data[2]
 			if active == 0:
 				return render_template("account_NotVerified.html")
 			response["status"] = 'ok'
-#			if rememberMe == "true":
-#				login_user(user,remember = True)
-#			else:
-#				login_user(user)
+			if rememberMe == "true":
+				login_user(user,remember = True)
+			else:
+				login_user(user)
 		else:
 			response["error"] = 'Invalid email or password'
 			response["status_code"] = 401
@@ -71,8 +75,9 @@ def login():
 	cursor.execute(query)
 	db.commit()
 
+	return redirect("/chat")
 	#return redirect(url_for("chat"))
-	return Response(json.dumps(response, sort_keys=True), mimetype="application/json")
+#	return Response(json.dumps(response, sort_keys=True), mimetype="application/json")
 
 #@appLogin.route("/chat")
 #def chat():

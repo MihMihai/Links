@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from flask import Flask, render_template,Response,send_from_directory
-#from flask_login import LoginManager, login_required
+from flask_login import LoginManager, login_required, current_user
 import json
 from User import *
 from login import appLogin
@@ -28,12 +28,12 @@ from story import appStory
 
 app = Flask(__name__,template_folder='/var/www/html',static_folder='/var/www/html/static')
 
-#app.secret_key  = "q12safj!@#!skdafka"
+app.secret_key  = "q12safj!@#!skdafka"
 
-#login_manager = LoginManager()
-#login_manager.init_app(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 #login_manager.session_protection = 'strong'
-#login_manager.login_view = '/'
+login_manager.login_view = '/'
 
 #cors = CORS(app,resources={r"/*":{"origins":"*"}})
 #socketio = SocketIO(app)
@@ -71,20 +71,32 @@ app.register_blueprint(appStory)
 #	userJson = json.dumps(user)
 #	return Response(userJson,mimetype='application/json')
 
-#@login_manager.user_loader
-#def load_user(user_id):
-#	f = open('remember_testing.log','a')
-#	f.write('in server main file')
-#	f.close()
-#	return User.get(user_id)
+@login_manager.user_loader
+def load_user(user_id):
+	f = open('remember_testing.log','a')
+	f.write('in server main file')
+	f.close()
+	return User.get(user_id)
 
 
 @app.route("/")
 def home():
+	f = open('remember_testing.log','a')
+	f.write(current_user.name + " " + current_user.email + "\n")
+	f.close()
+
+	if current_user.name != "Anonymous":
+		return redirect("/chat")
+
 	return render_template("index.html")
 
 @app.route("/chat")
+@login_required
 def chat():
+	f = open('remember_testing.log','a')
+	f.write('current user: ' + current_user.name + ' ' + current_user.email + '\n')
+	f.close()
+	
 	return render_template("chat.html")
 
 @app.route("/forgotpassword")
