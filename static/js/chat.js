@@ -10,6 +10,8 @@ const ip = "188.25.131.242";
 const linksDNS = "linkspeople.ddns.net"
 var successFrRequest = "The friend request was send to acceptance/rejection! ";
 
+var firstTime = 0;
+
 function updateFriendReq() {
     if (friendRequestsArray.length > 0) {
         var number = friendRequestsArray.length.toString();
@@ -49,7 +51,8 @@ window.onload = function() {
 	
 	
 	socket.on("details", function(data) {
-        	let obj = JSON.parse(data);
+        	if(firstTime == 0) {
+			let obj = JSON.parse(data);
 			localStorage.setItem("TOKEN",obj.access_token);
 			localStorage.setItem("EMAIL",obj.email);
 			localStorage.CHAT_TOKEN = obj.chat_token;
@@ -61,7 +64,8 @@ window.onload = function() {
 			getFriendsRequests();
 			getStory();
 			setTimeout(getAllMessagesRequest,200);
-
+			firstTime = 1;
+		}
    	 });
 	
 	
