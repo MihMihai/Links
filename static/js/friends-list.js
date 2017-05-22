@@ -43,7 +43,7 @@ function createFriend(socket, imgSrc, name, friendshipId, place, online) {
         class: 'img-circle'
     });
     if (place === "friends-list") {
-        img.on("click",function() {
+        img.on("click", function() {
 
             $("#profile_nameFriend").text(name);
             $("#profile_imageFriend").attr('src', imageEndpoint + imgSrc);
@@ -69,7 +69,6 @@ function createFriend(socket, imgSrc, name, friendshipId, place, online) {
         $("#" + friendsList).prepend(a);
     else $("#" + friendsList).append(a);
 
-	
 }
 
 function remove(socket, name, friendshipId, random) {
@@ -141,6 +140,4 @@ function searchInFriendsList() {
         else
             friends[index].style.display = "flex";
     }
-
-
 }

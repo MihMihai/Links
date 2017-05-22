@@ -6,7 +6,7 @@
               event.preventDefault();
               $.ajax({
                   method: "POST",
-                  url: "http://"+ip+"/api/forgot_password",
+                  url: "http://" + ip + "/api/forgot_password",
                   data: {
                       email: $("#forgot_email").val()
                   },

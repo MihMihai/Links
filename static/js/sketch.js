@@ -4,7 +4,7 @@ var canvas;
 
 function preload() {
     font = loadFont('js/Roboto-Black.ttf');
-    
+
 }
 
 function windowResized() {
@@ -16,7 +16,7 @@ function windowResized() {
         , {
             sampleFactor: 0.2,
         }
-        );
+    );
 
     for (var i = 0; i < points.length; i++) {
         var pt = points[i];
@@ -36,7 +36,7 @@ function setup() {
         , {
             sampleFactor: 0.25
         }
-        );
+    );
 
     for (var i = 0; i < points.length; i++) {
         var pt = points[i];

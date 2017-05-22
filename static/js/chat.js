@@ -23,13 +23,10 @@ $(document).ready(function() {
 
 
 window.onload = function() {
-
     $(window).unload(function() {
         socket.emit("leave", { "email": localStorage.EMAIL });
-        
-    });
 
-    //refreshTokenRequest();
+    });
 
     $(".modal").on("show.bs.modal", function() {
         $("body").css("overflow-y", "hidden");
@@ -39,28 +36,29 @@ window.onload = function() {
         $("body").css("overflow-y", "initial");
     });
 
-
     updateFriendReq();
 
     setInterval(refreshTokenRequest, 45000);
 
     let socket = io.connect("http://" + ip + "/chat");
+    //used when user joins for the first time
     socket.emit("join", { "email": localStorage.EMAIL });
 
+    //used to find when a user comes online
     socket.on("user join", function(data) {
-
         let friend = document.getElementById(data.friendship_id);
         friend.style.color = "#5cb85c";
         $(document.getElementById("friends-list").getElementsByTagName("a")[0]).before(friend);
     });
 
+    //used to find when a user leaves the chat
     socket.on("user left", function(data) {
         let friend = document.getElementById(data.friendship_id);
         friend.style.color = "black";
         $(document.getElementById("friends-list").getElementsByTagName("a")[document.getElementById("friends-list").getElementsByTagName("a").length - 1]).after(friend);
     });
 
-
+    //to get a random token used for talking with random unknown persons
     socket.on("random chat token", function(msg) {
         numberOfRandomFriends++;
 
@@ -72,8 +70,7 @@ window.onload = function() {
     $("#randomFriendButton").click(function() {
         findRandomFriend(socket);
     });
-
-
+    //here all the messages that a user receives are handled
     socket.on("msg server", function(msg) {
         try {
             let obj = JSON.parse(msg);
@@ -83,12 +80,12 @@ window.onload = function() {
                 let msg = obj.msg;
                 //let date = obj.date; --- nu are date
 
-				let currentDate = new Date();
-				date = currentDate.today() + " " + currentDate.timeNow();
-                friends[from].messages.push(new Message(msg, "left",date));
+                let currentDate = new Date();
+                date = currentDate.today() + " " + currentDate.timeNow();
+                friends[from].messages.push(new Message(msg, "left", date));
                 let friendshipID = from;
                 if (currentFriend == from) {
-                    createMessage(msg, "left",date);
+                    createMessage(msg, "left", date);
                 } else if (!(messagesNotificationsIntervals.hasOwnProperty(friendshipID))) {
                     messagesNotificationsIntervals[friendshipID] = setInterval(function() {
                         createMessageNotification(friendshipID);
@@ -102,11 +99,11 @@ window.onload = function() {
             } else {
                 let email = obj.from;
                 let mesaj = obj.msg;
-				let date = obj.date;
+                let date = obj.date;
                 friendshipID = findFriendshipIdByEmail(email);
-                friends[friendshipID].messages.push(new Message(mesaj, "left",date));
+                friends[friendshipID].messages.push(new Message(mesaj, "left", date));
                 if (currentFriend == friendshipID)
-                    createMessage(mesaj, "left",date);
+                    createMessage(mesaj, "left", date);
                 //create message notification in friends list
                 else if (!(messagesNotificationsIntervals.hasOwnProperty(friendshipID))) {
                     messagesNotificationsIntervals[friendshipID] = setInterval(function() {
@@ -127,16 +124,10 @@ window.onload = function() {
     });
 
 
-
-   //
-   
-//
     var panelContent = document.getElementById("panelContent");
     AddFriend(socket, friendRequestsArray, panelContent);
     currentTab = "#addFriend";
-
-
-
+    //to get a new friend request
     socket.on("new friend request", function(msg) {
         try {
             //alert("new friend request");
@@ -156,8 +147,6 @@ window.onload = function() {
         }
     });
 
-
-
     socket.on("status friend request", function(msg) {
         try {
             let obj = JSON.parse(msg);
@@ -169,7 +158,7 @@ window.onload = function() {
             console.log("ERROR -- status fr req");
         }
     });
-
+    //to send a friend request
     socket.on("friend request sent", function(msg) {
         //      let successFrRequest = "The friend request was send to acceptance/rejection!";
         $("#frRequestResponse").html(successFrRequest);
@@ -187,6 +176,7 @@ window.onload = function() {
         });
 
     */
+    //to remove a friend
     socket.on("friend removed", function(msg) {
         try {
             let obj = JSON.parse(msg);
@@ -218,76 +208,24 @@ window.onload = function() {
             sendMessage(socket);
     });
 
-
-
-
     $("#addFriend").click(function() {
-
         AddFriend(socket, friendRequestsArray, panelContent);
-
     });
+
     $("#friendRequests").click(function() {
         ViewFriendRequests(socket, friendRequestsArray, panelContent);
-
     });
 
     $("#widgets").click(function() {
         Widgets(panelContent);
     });
 
+    getProfileRequest();
 
-    $.ajax({
-        method: "GET",
-        url: "http://" + ip + "/api/profile",
-        headers: { Authorization: localStorage.TOKEN },
-        dataType: "json",
-        success: function(data) {
-            $("#profile_name").text(data.name);
-            $("#profile_nameStory").text(data.name);
-            $("#settings_name").val(data.name);
-            $("#profile_image").attr('src', imageEndpoint + data.avatar);
-            $("#profile_imageStory").attr('src', imageEndpoint + data.avatar);
+    getFriendRequests();
 
-            var birthDate = data.birthday_date.split("-");
-            $("#birthDay option:contains(" + birthDate[2] + ")").attr('selected', 'selected');
-            $("#birthMonth option:contains(" + months[parseInt(birthDate[1]) - 1] + ")").attr('selected', 'selected');
-            $("#birthYear option:contains(" + birthDate[0] + ")").attr('selected', 'selected');
-            localStorage.CHAT_TOKEN = data.chat_token;
-        }
-    });
+    getFriends();
 
-    $.ajax({
-        method: "GET",
-        url: "http://" + ip + "/api/friend_requests",
-        headers: { Authorization: localStorage.TOKEN },
-        dataType: "json",
-        success: function(data) {
-            if (data.total > 0) {
-                for (let i = 0; i < data.requests.length; i++) {
-                    friendRequestsArray.push(new FriendReq(data.requests[i].name, data.requests[i].email, data.requests[i].friendship_id, data.requests[i].avatar));
-                }
-                updateFriendReq();
-            }
-        }
-    });
-
-    $.ajax({
-        method: "GET",
-        url: "http://" + ip + "/api/friends",
-        headers: { Authorization: localStorage.TOKEN },
-        dataType: "json",
-        success: function(data) {
-            if (data.total > 0) {
-                for (let i = 0; i < data.friends.length; i++) {
-                    friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name, data.friends[i].email, data.friends[i].online);
-                    if (data.friends[i].avatar === undefined)
-                        createFriend(socket, "http://placehold.it/50/FA6F57/fff&text=ME", data.friends[i].name, data.friends[i].friendship_id, "friends-list", data.friends[i].online);
-                    else createFriend(socket, data.friends[i].avatar, data.friends[i].name, data.friends[i].friendship_id, "friends-list", data.friends[i].online);
-                }
-
-            }
-        }
-    });
 
     socket.on("join", function(msg) {
         try {
@@ -307,21 +245,21 @@ window.onload = function() {
             console.log("ERROR");
         }
     });
-
+    //search bar for friends list
     document.getElementById("searchFriendInput").addEventListener("input", searchInFriendsList);
 
     setTimeout(getAllMessagesRequest, 200);
 
+    //this happens when a user clicks the logout button
     $("#logout").click(function() {
         socket.emit("leave", { "email": localStorage.EMAIL });
         localStorage.removeItem('TOKEN');
         localStorage.removeItem('CHAT_TOKEN');
         localStorage.removeItem('EMAIL');
-        
+
     });
 
-
-
+    //used to update user informations(name, birthday date, photo)
     $('#form_update').validator().on('submit', function(event) {
         if (event.isDefaultPrevented()) {
             // handle the invalid form...
@@ -354,9 +292,7 @@ window.onload = function() {
             });
         }
     });
-
-
-
+    //used to set a story
     $('#form_story').on('submit', function(event) {
         if (event.isDefaultPrevented()) {
             // handle the invalid form...
@@ -380,13 +316,13 @@ window.onload = function() {
                     dataType: "json",
                     success: function(data) {
 
-                        
+
                         $("#story_status").val("");
                         $("#story_feel").val([]);
                         $("#story_photoMy").val("");
                         base64Image = undefined;
 
-                         $("#addedStory").empty();
+                        $("#addedStory").empty();
                         showStory(null, $('#addedStory'));
                         var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg">Delete story</button></div>');
 
@@ -416,97 +352,55 @@ window.onload = function() {
 
                     }
                 });
-
                 $('#editStory').modal('toggle');
-
-
             });
         }
     });
 
-    $.ajax({
-        method: "GET",
-        url: "http://" + ip + "/api/story",
-        headers: { Authorization: localStorage.TOKEN },
-        dataType: "json",
-        success: function(data) {
-				if(data.text!=null || data.image!=null || data.feel!=null)
-					{
+    getStoryRequest();
 
-						 $("#addedStory").empty();
-						addElementsToStoryPanel(data,$('#addedStory'));
+    //used to change user password
+    $('#form_password').validator().on('submit', function(event) {
+        if (event.isDefaultPrevented()) {
+            // handle the invalid form...
+        } else {
+            event.preventDefault();
+            $.ajax({
+                method: "POST",
+                url: "http://" + ip + "/api/update",
+                headers: { Authorization: localStorage.TOKEN },
+                data: { password: $("#settings_password").val() },
+                dataType: "json",
+                success: function(data) {
+                    $("#settings_password").val("");
+                    $("#settings_password2").val("");
+                    $('#changePass').modal('hide');
+                }
+            });
+        }
+    });
 
-						var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
-
-						 setTimeout(function(){
-							 
-							$('#addedStory').append(deleteButton).css("width:auto");
-						 },100);
-						
-						deleteButton.on('click', '', function() {
-
-
-								 $.ajax({
-            					method: "POST",
-           						 url: "http://" + ip + "/api/delete_story",
-           						 headers: { Authorization: localStorage.TOKEN },
-           						 dataType: "json",
-            					success: function(data) {
-
-									
-									$('#editStory').modal('toggle');
-									 $("#addedStory").empty();
-									}
-							});
-
-						});
-					}
-
-		}});
-
-	$('#form_password').validator().on('submit', function(event) {
-		if (event.isDefaultPrevented()) {
-			// handle the invalid form...
-			} else {
-			event.preventDefault();
-			$.ajax({
-				method: "POST",
-				url: "http://" + ip + "/api/update",
-				headers: { Authorization: localStorage.TOKEN },
-				data: { password: $("#settings_password").val() },
-				dataType: "json",
-				success: function(data) {
-					$("#settings_password").val("");
-					$("#settings_password2").val("");
-					$('#changePass').modal('hide');
-				}
-			});
-		}
-	});
-	
-	$('#form_deleteAccount').validator().on('submit', function(event) {
-		if (event.isDefaultPrevented()) {
-			// handle the invalid form...
-			} else {
-			event.preventDefault();
-			$.ajax({
-				method: "POST",
-				url: "http://" + ip + "/api/delete_account",
-				headers: { Authorization: localStorage.TOKEN },
-				data: { email: localStorage.EMAIL },
-				dataType: "json",
-				success: function(data) {
-					var alert = document.createElement("div");
-					alert.innerHTML='<div class="alert alert-warning" role="alert"><strong>Warning!</strong> This account will be deleted. Please check your e-mail.</div>';
-					document.getElementsByTagName('body')[0].append(alert);
-					$('#deleteAccount').modal('hide');
-				}
-			});
-		}
-	});
-	
-	
-
+    //used by a user to delete account
+    $('#form_deleteAccount').validator().on('submit', function(event) {
+        if (event.isDefaultPrevented()) {
+            // handle the invalid form...
+        } else {
+            event.preventDefault();
+            $.ajax({
+                method: "POST",
+                url: "http://" + ip + "/api/delete_account",
+                headers: { Authorization: localStorage.TOKEN },
+                data: { email: localStorage.EMAIL },
+                dataType: "json",
+                success: function(data) {
+                    var alert = document.createElement("div");
+                    alert.innerHTML = '<div class="alert alert-warning" role="alert"><strong>Warning!</strong> This account will be deleted. Please check your e-mail.</div>';
+                    document.getElementsByTagName('body')[0].append(alert);
+                    $('#deleteAccount').modal('hide');
+                }
+            });
+        }
+    });
 }
 
 function refreshTokenRequest() {
@@ -520,7 +414,6 @@ function refreshTokenRequest() {
 
         }
     });
-
 }
 
 function sendMessage(socket) {
@@ -529,13 +422,13 @@ function sendMessage(socket) {
     if (!(/^\s*$/.test($("#messageInputBox").val()))) {
         createMessage($("#messageInputBox").val(), "right"); //nu are al 3-lea param => undefined. E ok
         let currentDate = new Date();
-		date = currentDate.today() + " " + currentDate.timeNow();
-		if (currentFriend.length > 100) {
-			
+        date = currentDate.today() + " " + currentDate.timeNow();
+        if (currentFriend.length > 100) {
+
             jsonObj = { "random_token": currentFriend, "from": localStorage.EMAIL, "random": "1", "msg": $("#messageInputBox").val() };
             jsonString = JSON.stringify(jsonObj);
             socket.emit("msg user", jsonString);
-            friends[currentFriend].messages.push(new Message($("#messageInputBox").val(), "right",date));
+            friends[currentFriend].messages.push(new Message($("#messageInputBox").val(), "right", date));
             $("#messageInputBox").val("");
             $(document.getElementById("random-list").getElementsByTagName("a")[0]).before($("#" + currentFriend));
 
@@ -543,7 +436,7 @@ function sendMessage(socket) {
             jsonObj = { "to": friends[currentFriend].email, "from": localStorage.EMAIL, "msg": $("#messageInputBox").val() };
             jsonString = JSON.stringify(jsonObj);
             socket.emit("msg user", jsonString);
-            friends[currentFriend].messages.push(new Message($("#messageInputBox").val(), "right",date));
+            friends[currentFriend].messages.push(new Message($("#messageInputBox").val(), "right", date));
             $("#messageInputBox").val("");
             $(document.getElementById("friends-list").getElementsByTagName("a")[0]).before($("#" + currentFriend));
         }
@@ -573,7 +466,6 @@ function getAllMessagesRequest() {
 
 
 function convertAndResizeImage(inputFileId, width, height, callback) {
-
     if (document.getElementById(inputFileId).files.length > 0) {
         let file = document.getElementById(inputFileId).files[0];
         let img = document.createElement("img");
@@ -601,4 +493,103 @@ function convertAndResizeImage(inputFileId, width, height, callback) {
         };
         reader.readAsDataURL(file);
     } else callback(undefined);
+}
+
+function getProfileRequest() {
+    $.ajax({
+        method: "GET",
+        url: "http://" + ip + "/api/profile",
+        headers: { Authorization: localStorage.TOKEN },
+        dataType: "json",
+        success: function(data) {
+            $("#profile_name").text(data.name);
+            $("#profile_nameStory").text(data.name);
+            $("#settings_name").val(data.name);
+            $("#profile_image").attr('src', imageEndpoint + data.avatar);
+            $("#profile_imageStory").attr('src', imageEndpoint + data.avatar);
+
+            var birthDate = data.birthday_date.split("-");
+            $("#birthDay option:contains(" + birthDate[2] + ")").attr('selected', 'selected');
+            $("#birthMonth option:contains(" + months[parseInt(birthDate[1]) - 1] + ")").attr('selected', 'selected');
+            $("#birthYear option:contains(" + birthDate[0] + ")").attr('selected', 'selected');
+            localStorage.CHAT_TOKEN = data.chat_token;
+        }
+    });
+}
+
+function getFriendRequests() {
+    $.ajax({
+        method: "GET",
+        url: "http://" + ip + "/api/friend_requests",
+        headers: { Authorization: localStorage.TOKEN },
+        dataType: "json",
+        success: function(data) {
+            if (data.total > 0) {
+                for (let i = 0; i < data.requests.length; i++) {
+                    friendRequestsArray.push(new FriendReq(data.requests[i].name, data.requests[i].email, data.requests[i].friendship_id, data.requests[i].avatar));
+                }
+                updateFriendReq();
+            }
+        }
+    });
+}
+
+function getFriends() {
+    $.ajax({
+        method: "GET",
+        url: "http://" + ip + "/api/friends",
+        headers: { Authorization: localStorage.TOKEN },
+        dataType: "json",
+        success: function(data) {
+            if (data.total > 0) {
+                for (let i = 0; i < data.friends.length; i++) {
+                    friends[data.friends[i].friendship_id] = new Friend(data.friends[i].name, data.friends[i].email, data.friends[i].online);
+                    if (data.friends[i].avatar === undefined)
+                        createFriend(socket, "http://placehold.it/50/FA6F57/fff&text=ME", data.friends[i].name, data.friends[i].friendship_id, "friends-list", data.friends[i].online);
+                    else createFriend(socket, data.friends[i].avatar, data.friends[i].name, data.friends[i].friendship_id, "friends-list", data.friends[i].online);
+                }
+
+            }
+        }
+    });
+}
+
+function getStoryRequest() {
+    $.ajax({
+        method: "GET",
+        url: "http://" + ip + "/api/story",
+        headers: { Authorization: localStorage.TOKEN },
+        dataType: "json",
+        success: function(data) {
+            if (data.text != null || data.image != null || data.feel != null) {
+
+                $("#addedStory").empty();
+                addElementsToStoryPanel(data, $('#addedStory'));
+
+                var deleteButton = $('<div class="wrapper"><button type="button" class="btn btn-danger btn-lg" class="form-group">Delete story</button></div>');
+
+                setTimeout(function() {
+
+                    $('#addedStory').append(deleteButton).css("width:auto");
+                }, 100);
+
+                deleteButton.on('click', '', function() {
+                    $.ajax({
+                        method: "POST",
+                        url: "http://" + ip + "/api/delete_story",
+                        headers: { Authorization: localStorage.TOKEN },
+                        dataType: "json",
+                        success: function(data) {
+
+
+                            $('#editStory').modal('toggle');
+                            $("#addedStory").empty();
+                        }
+                    });
+
+                });
+            }
+
+        }
+    });
 }
